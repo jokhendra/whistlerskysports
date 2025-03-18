@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 @include("common.header")
-<body class="bg-gradient-to-b from-sky-50 to-blue-100 min-h-screen">
+<body class="bg-gradient-to-b from-sky-50 to-blue-100 min-h-screen pt-15">
   @include("common.nav")
   <div class="container mx-auto px-4 py-8">
     <div class="max-w-5xl mx-auto">

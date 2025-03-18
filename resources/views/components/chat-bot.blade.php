@@ -24,13 +24,14 @@
 
     <!-- Chat Window -->
     <div 
-        x-show="isChatOpen" 
-        x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0 transform translate-y-4"
-        x-transition:enter-end="opacity-100 transform translate-y-0"
-        x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100 transform translate-y-0"
-        x-transition:leave-end="opacity-0 transform translate-y-4"
+        x-show="isChatOpen"
+        x-cloak
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-95"
         class="fixed bottom-14 right-4 bg-white rounded-2xl shadow-2xl w-96 h-[700px] flex flex-col overflow-hidden border border-gray-200"
         @click.away="closeChat()"
     >
@@ -207,6 +208,7 @@ document.addEventListener('alpine:init', () => {
         chatMessages: [],
         newMessage: '',
         isTyping: false,
+        isPageLoaded: false,
         bookingData: {
             service_type: '',
             booking_date: '',
@@ -310,8 +312,69 @@ document.addEventListener('alpine:init', () => {
         },
 
         init() {
-            this.chatMessages = [];
-            console.log('Chat component initialized');
+            // Set page loaded state
+            this.isPageLoaded = true;
+            
+            // Load state from localStorage
+            const savedState = localStorage.getItem('chatBotState');
+            if (savedState) {
+                const state = JSON.parse(savedState);
+                // Don't immediately set isChatOpen to prevent flash
+                setTimeout(() => {
+                    this.isChatOpen = state.isChatOpen;
+                    this.chatMessages = state.chatMessages || [];
+                    this.bookingData = state.bookingData;
+                    this.showBookingForm = state.showBookingForm;
+                }, 50);
+            } else {
+                this.chatMessages = [];
+            }
+
+            // Watch for changes and save to localStorage
+            this.$watch('isChatOpen', (value) => {
+                if (this.isPageLoaded) {
+                    this.saveState();
+                }
+            });
+
+            this.$watch('chatMessages', (value) => {
+                if (this.isPageLoaded) {
+                    this.saveState();
+                }
+            });
+
+            this.$watch('bookingData', (value) => {
+                if (this.isPageLoaded) {
+                    this.saveState();
+                }
+            });
+
+            this.$watch('showBookingForm', (value) => {
+                if (this.isPageLoaded) {
+                    this.saveState();
+                }
+            });
+
+            // Handle page visibility changes
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden && this.isPageLoaded) {
+                    const savedState = localStorage.getItem('chatBotState');
+                    if (savedState) {
+                        const state = JSON.parse(savedState);
+                        this.isChatOpen = state.isChatOpen;
+                    }
+                }
+            });
+        },
+
+        saveState() {
+            const state = {
+                isChatOpen: this.isChatOpen,
+                chatMessages: this.chatMessages,
+                bookingData: this.bookingData,
+                showBookingForm: this.showBookingForm
+            };
+            localStorage.setItem('chatBotState', JSON.stringify(state));
         },
 
         openChat() {

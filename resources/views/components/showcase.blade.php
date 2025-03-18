@@ -52,8 +52,8 @@
       x-init="init()"
       @keydown.right.window="next()"
       @keydown.left.window="prev()"
-      class="relative w-full mx-auto overflow-hidden rounded-lg shadow-lg"
-      style="height: 500px;"
+      class="relative w-full mx-auto overflow-hidden shadow-lg"
+      style="height: 750px;"
     >
       <!-- Slides Container -->
       <div class="relative h-full">

@@ -6,11 +6,38 @@
 @include("common.header")
 <body>
   @include("common.nav")
-  <div class="container mx-auto px-4 py-8">
+  <div class="container mx-auto px-4 py-8 pt-15">
     <div class="max-w-5xl mx-auto">
       <h1 class="text-3xl md:text-5xl font-bold text-center mb-2 text-blue-900 drop-shadow-sm">Weather Information</h1>
-      <p class="text-center text-gray-700 mb-8 text-lg">Check the weather conditions before your power hang gliding session</p>
-    
+
+      <!-- Weather Information Box -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <h2 class="text-2xl font-semibold text-blue-800 mb-4">Pemberton Weather</h2>
+        <div class="prose max-w-none text-gray-600">
+          <p class="mb-4">The weather is important, few clouds and light winds are ideal for skydiving but are not always the case.</p>
+          
+          <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-4">
+            <p class="font-medium">We do not skydive in:</p>
+            <ul class="list-disc list-inside mt-2">
+              <li>Strong, gusting winds</li>
+              <li>Low solid cloud ceiling</li>
+              <li>Rain conditions</li>
+            </ul>
+          </div>
+
+          <p class="mb-4">If we need to cancel due to the weather you can reschedule for another time and date or you will get a full refund.</p>
+          
+          <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
+            <p>The weather can change so quickly here in the mountains and we cannot confidently rely on the weather forecast. Our qualified staff will make a weather evaluation on the day of the jump.</p>
+          </div>
+
+          <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4">
+            <p><strong>Important:</strong> If you are concerned about the weather forecast for the day of your booking and wish to reschedule or get a refund, our normal cancellation policy applies.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Current Weather -->
       <div class="bg-white rounded-lg shadow-md p-6 mb-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Current Weather -->
