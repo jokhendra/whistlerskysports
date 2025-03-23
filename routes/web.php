@@ -248,6 +248,14 @@ Route::get('/weather', function() {
     return view('weather', $data);
 });
 
+Route::get('/waiver', function () {
+    return view('waiver');
+})->name('waiver');
+
+Route::get('/terms', function () {
+    return view('terms');
+})->name('terms');
+
 Route::middleware('api')->group(function () {
     // Chat Bot Routes
     Route::prefix('chat')->group(function () {

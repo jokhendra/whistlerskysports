@@ -19,7 +19,6 @@
     
     @yield('content')
     
-    @include('common.footer')
     <x-chat-bot />
     
     @stack('scripts')

@@ -1,4 +1,4 @@
-<div class="bg-gray-800 text-white">
+<div class="bg-black text-white">
   <div class="container mx-auto py-12 px-4">
     <!-- Footer Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -65,7 +65,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
-            <span class="text-gray-300">info@example.com</span>
+            <span class="text-gray-300">info@whistlerskysports.ca</span>
           </li>
         </ul>
       </div>

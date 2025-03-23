@@ -18,9 +18,9 @@ class DatabaseServiceProvider extends ServiceProvider
         try {
             DB::connection()->getPdo();
             $dbName = DB::connection()->getDatabaseName();
-            echo "\033[32mDatabase Connected Successfully! Database Name: ".$dbName."\033[0m\n";
+            // echo "\033[32mDatabase Connected Successfully! Database Name: ".$dbName."\033[0m\n";
         } catch (Exception $e) {
-            echo "\033[31mDatabase Connection Failed! Error: ".$e->getMessage()."\033[0m\n";
+            // echo "\033[31mDatabase Connection Failed! Error: ".$e->getMessage()."\033[0m\n";
         }
     }
 }

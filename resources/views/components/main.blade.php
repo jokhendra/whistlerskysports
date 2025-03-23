@@ -2,8 +2,8 @@
   <div class="container mx-auto px-4">
     <!-- Hero Section -->
     <div class="py-12">
-      <h1 class="text-4xl font-bold text-center mb-4">Welcome to Alpine Air Adventures</h1>
-      <p class="text-lg text-center mb-8">Experience the thrill of power hang gliding in the Canadian Rockies</p>
+      <h1 class="text-4xl font-bold text-center mb-4">Welcome to WhistlerSkySports</h1>
+      <p class="text-lg text-center mb-8">A person who has never flown in a microlight may think of it as an extreme sport, like Skydiving. Thats a good thing, however they may have reservations, think it’s dangerous so it takes a bit of bravado, maybe imagination and a lot of wanting to show off to friends tgat they did this thing. Hence Reach for the Sky. Not sure if Toy Story ever tried to copyright that!</p>
       
       <div class="relative h-96 rounded-xl overflow-hidden shadow-xl mb-12">
         <img src="https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=600&q=80" 
@@ -13,8 +13,8 @@
           <div class="text-white p-8">
             <h2 class="text-3xl font-bold mb-4">Soar Above the Rockies</h2>
             <p class="text-xl mb-6">Book your adventure today and experience Canada from a whole new perspective</p>
-            <a href="#book-now" class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-3 px-6 rounded-lg transition duration-300">
-              Book Your Flight
+            <a href="{{ route('booking') }}" class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-3 px-6 rounded-lg transition duration-300">
+            Book Your Million Dollar Smile
             </a>
           </div>
         </div>
@@ -23,7 +23,7 @@
     
     <!-- Features Section -->
     <div class="py-12">
-      <h2 class="text-3xl font-bold text-center mb-12">Why Choose Alpine Air Adventures?</h2>
+      <h2 class="text-3xl font-bold text-center mb-12">Why Choose WhistlerSkySports?</h2>
       
       <div class="grid md:grid-cols-3 gap-8">
         <div class="bg-white p-6 rounded-lg shadow-md">
@@ -102,7 +102,7 @@
     </div>
     
     <!-- Power Hang Gliding Technology -->
-    <div class="py-12">
+    <!-- <div class="py-12">
       <h2 class="text-3xl font-bold text-center mb-12">Our Power Hang Gliding Technology</h2>
       
       <div class="grid md:grid-cols-2 gap-12">
@@ -163,7 +163,7 @@
         </div>
       </div>
       
-      <!-- <div class="mt-12 bg-blue-100 p-6 rounded-lg">
+      <div class="mt-12 bg-blue-100 p-6 rounded-lg">
         <h3 class="text-xl font-bold mb-3">Safety Features</h3>
         <p class="text-gray-700 mb-4">At Alpine Air Adventures, safety is our top priority. Our power hang gliders are equipped with multiple redundant safety systems designed specifically for the challenging conditions of the Canadian Rockies:</p>
         <div class="grid md:grid-cols-3 gap-4">
@@ -180,11 +180,11 @@
             <p class="text-sm text-gray-600">Real-time weather data systems to track changing conditions in the mountains.</p>
           </div>
         </div>
-      </div> -->
-    </div>
+      </div>
+    </div> -->
     
     <!-- Call to Action -->
-    <div id="book-now" class="py-12 bg-blue-900 text-white rounded-xl p-8 my-12">
+    <!-- <div id="book-now" class="py-12 bg-blue-900 text-white rounded-xl p-8 my-12">
       <div class="text-center">
         <h2 class="text-3xl font-bold mb-4">Ready for Your Canadian Adventure?</h2>
         <p class="text-xl mb-8">Book your power hang gliding experience today and create memories that will last a lifetime.</p>
@@ -197,13 +197,13 @@
           </a>
         </div>
       </div>
-    </div>
+    </div> -->
     
     <!-- Canadian Weather Notice -->
-    <div class="bg-blue-50 p-6 rounded-lg mb-12">
+    <!-- <div class="bg-blue-50 p-6 rounded-lg mb-12">
       <h3 class="text-xl font-bold mb-2">Canadian Weather Advisory</h3>
       <p class="text-gray-700">Please note that all flights are weather-dependent. The Canadian Rockies can experience rapid weather changes, especially during spring and fall. We prioritize your safety and will reschedule if conditions are not optimal.</p>
       <p class="text-gray-700 mt-2">All prices are in Canadian Dollars (CAD) and include applicable taxes.</p>
-    </div>
+    </div> -->
   </div>
 </div>

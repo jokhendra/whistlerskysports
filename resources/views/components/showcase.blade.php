@@ -5,16 +5,15 @@
       x-data="{ 
         activeSlide: 0,
         slides: [
-          { type: 'image', src: 'https://dam.destination.one/806001/7b8b4f94048385dcc3e9779db40e400bbe43c1f57a8af663ca1a8d6e3ade7b58/.jpg', alt: 'Power Hang Glider Soaring Above Mountains' },
-          { type: 'image', src: 'https://cdn.freedome.it/t/categories/landing/01J32ZFH844CNC7FX4PNRD46DE.jpg?width=1920', alt: 'Power Hang Glider Sunset Flight' },
-          { type: 'video', src: 'https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f62a23f76d2ad1ee63c9817ef0f346104b&profile_id=139&oauth2_token_id=57447761', poster: 'https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=600&q=80' },
-          { type: 'image', src: 'https://skyjam-aircraft.com/wp-content/uploads/2015/12/Skyjam-Deltatrike-ST-Freestyle_15.jpg', alt: 'Power Hang Glider Equipment Close-up' },
-          { type: 'image', src: 'https://southernoceanblog.com/wp-content/uploads/2023/03/screenshot-2023-03-03-at-7.07.24-pm.jpg?w=1024', alt: 'Aerial View from Power Hang Glider' },
-          { type: 'image', src: 'https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=600&q=80', alt: 'Power Hang Glider Launch Preparation' },
-          { type: 'video', src: 'https://player.vimeo.com/external/434045526.sd.mp4?s=ef9b3f9fcc0f05c7b1c7a5f7d4126a07be0564c7&profile_id=139&oauth2_token_id=57447761', poster: 'https://images.unsplash.com/photo-1473773508845-188df298d2d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=600&q=80' },
-          { type: 'image', src: 'https://images.unsplash.com/photo-1526285849717-482456cd7436?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=600&q=80', alt: 'Power Hang Glider Over Canadian Rocky Mountains' },
-          { type: 'image', src: 'https://images.unsplash.com/photo-1465311530779-5241f5a29892?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=600&q=80', alt: 'Coastal Power Hang Gliding Adventure' },
-          { type: 'image', src: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&h=600&q=80', alt: 'Power Hang Glider Forest Expedition View' }
+          { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7021.jpg') }}', alt: 'Power Hang Glider Flight' },
+          { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7017 2.jpg') }}', alt: 'Power Hang Glider Adventure' },
+          { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7016 2.jpg') }}', alt: 'Power Hang Glider Experience' },
+          { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7013.jpg') }}', alt: 'Power Hang Glider Scenery' },
+          { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7010.jpg') }}', alt: 'Power Hang Glider Action' },
+          { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7009.jpg') }}', alt: 'Power Hang Glider Adventure' },
+          { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7007.jpg') }}', alt: 'Power Hang Glider Experience' },
+          { type: 'image', src: '{{ asset('images/image000001.JPG') }}', alt: 'Power Hang Glider View' },
+          { type: 'image', src: '{{ asset('images/image000000.JPG') }}', alt: 'Power Hang Glider Scenery' }
         ],
         autoplay: true,
         autoplaySpeed: 5000,
@@ -24,29 +23,22 @@
               this.next();
             }, this.autoplaySpeed);
           }
+          // Preload images
+          this.slides.forEach(slide => {
+            if (slide.type === 'image') {
+              const img = new Image();
+              img.src = slide.src;
+            }
+          });
         },
         next() {
           this.activeSlide = (this.activeSlide + 1) % this.slides.length;
-          this.resetVideoIfActive();
         },
         prev() {
           this.activeSlide = (this.activeSlide - 1 + this.slides.length) % this.slides.length;
-          this.resetVideoIfActive();
         },
         goToSlide(index) {
           this.activeSlide = index;
-          this.resetVideoIfActive();
-        },
-        resetVideoIfActive() {
-          if (this.slides[this.activeSlide].type === 'video') {
-            setTimeout(() => {
-              const video = document.getElementById(`carousel-video-${this.activeSlide}`);
-              if (video) {
-                video.currentTime = 0;
-                video.play();
-              }
-            }, 50);
-          }
         }
       }"
       x-init="init()"
@@ -60,7 +52,7 @@
         <template x-for="(slide, index) in slides" :key="index">
           <div 
             x-show="activeSlide === index" 
-            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter="transition ease-out duration-500"
             x-transition:enter-start="opacity-0 transform scale-95"
             x-transition:enter-end="opacity-100 transform scale-100"
             x-transition:leave="transition ease-in duration-300"
@@ -74,7 +66,8 @@
                 :src="slide.src" 
                 :alt="slide.alt" 
                 class="object-cover w-full h-full"
-                onerror="this.onerror=null; this.src='https://placehold.co/1200x600/3b82f6/ffffff?text=Power+Hang+Glider'; this.alt='Power Hang Glider placeholder'"
+                loading="lazy"
+                onerror="this.onerror=null; this.src='{{ asset('images/pwg1.jpg') }}'; this.alt='Power Hang Glider placeholder'"
               >
             </template>
             
