@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ChatBotController;
 use App\Http\Controllers\BookingController;
-
+use App\Http\Controllers\WeatherController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -52,6 +52,8 @@ Route::prefix('product')->group(function(){
         return view("product_hang_glider");
     });
 });
+
+Route::get('/current-weather', [WeatherController::class, 'getCurrentWeather'])->name('current-weather');
 
 Route::get('/weather', function() {
     // Dummy data for weather display
@@ -262,5 +264,37 @@ Route::middleware('api')->group(function () {
         Route::post('/start', [ChatBotController::class, 'startChat']);
         Route::post('/message', [ChatBotController::class, 'sendMessage']);
         Route::get('/history/{sessionId}', [ChatBotController::class, 'getChatHistory']);
+    });
+});
+
+// Admin Routes
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Guest routes
+    Route::middleware('guest')->group(function () {
+        Route::get('login', [App\Http\Controllers\Admin\AuthController::class, 'showLoginForm'])->name('login');
+        Route::post('login', [App\Http\Controllers\Admin\AuthController::class, 'login']);
+    });
+
+    // Protected admin routes
+    Route::middleware(['auth', 'admin'])->group(function () {
+        Route::post('logout', [App\Http\Controllers\Admin\AuthController::class, 'logout'])->name('logout');
+        
+        // Dashboard
+        Route::get('dashboard', [App\Http\Controllers\Admin\AdminController::class, 'dashboard'])->name('dashboard');
+        
+        // Bookings
+        Route::get('bookings', [App\Http\Controllers\Admin\AdminController::class, 'bookings'])->name('bookings');
+        
+        // Contacts
+        Route::get('contacts', [App\Http\Controllers\Admin\AdminController::class, 'contacts'])->name('contacts');
+        
+        // Users
+        Route::get('users', [App\Http\Controllers\Admin\AdminController::class, 'users'])->name('users');
+        
+        // Promotional Emails
+        Route::get('promotional-emails', [App\Http\Controllers\Admin\AdminController::class, 'promotionalEmails'])->name('promotional-emails');
+        
+        // Settings
+        Route::get('settings', [App\Http\Controllers\Admin\AdminController::class, 'settings'])->name('settings');
     });
 }); 

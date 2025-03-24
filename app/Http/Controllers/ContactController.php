@@ -63,15 +63,25 @@ class ContactController extends Controller
                 'consent' => $request->has('consent')
             ]);
             
+            // Send email
+            Mail::to('info@whistlerskysports.ca')
+                ->send(new ContactFormMail([
+                    'name' => $name,
+                    'email' => $email,
+                    'phone' => $phone,
+                    'subject' => $subject,
+                    'message' => $message
+                ]));
+            
             // Return with success message
             return redirect()->back()->with('success', 'Thank you for your message! Your information has been saved and we will get back to you soon.');
         } catch (\Exception $e) {
             // Log the error for administrators
-            Log::error('Contact form database error: ' . $e->getMessage());
+            Log::error('Contact form error: ' . $e->getMessage());
             
             // Return with error message
             return redirect()->back()
-                ->with('error', 'There was a problem saving your message. Please try again or contact us directly.')
+                ->with('error', 'There was a problem processing your message. Please try again or contact us directly.')
                 ->withInput();
         }
     }

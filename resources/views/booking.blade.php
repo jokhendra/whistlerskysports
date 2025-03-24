@@ -11,6 +11,16 @@
       <h1 class="text-3xl md:text-5xl font-bold text-center mb-2 text-blue-900 drop-shadow-sm">Experience the Thrill at WhistlerSkySports</h1>
       <p class="text-center text-gray-700 mb-8 text-lg">Join us for an unforgettable aerial adventure in the majestic skies of Whistler</p>
       
+      <!-- Early Bird Discount Banner -->
+      <div class="bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg shadow-lg p-4 mb-8">
+        <div class="flex items-center justify-center space-x-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span class="text-white font-semibold">Book 30 days in advance and get 20% off! Use code: <span class="bg-white text-green-600 px-2 py-1 rounded">EARLYBIRD20</span></span>
+        </div>
+      </div>
+      
       <div id="booking-form" class="bg-white rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:shadow-blue-200 border border-blue-50">
         <!-- Booking Form Header -->
         <div class="bg-gradient-to-r from-sky-800 via-blue-700 to-indigo-800 p-8 relative overflow-hidden">
@@ -21,7 +31,7 @@
         </div>
         
         <!-- Booking Form -->
-        <form action="{{ route('booking.preview') }}" method="POST" class="p-8">
+        <form action="{{ route('booking.preview') }}" method="POST" class="p-8" id="bookingForm">
           @csrf
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Personal Information -->
@@ -69,6 +79,17 @@
               </h3>
 
               <div class="space-y-2">
+                <label for="package" class="block text-sm font-medium text-gray-700">Select Package *</label>
+                <select id="package" name="package" required class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
+                  <option value="">Choose a package</option>
+                  <option value="intro" data-price="150">Introductory Flight - $150</option>
+                  <option value="basic" data-price="299">Basic Training - $299</option>
+                  <option value="advanced" data-price="599">Advanced Training - $599</option>
+                  <option value="certification" data-price="1499">Certification Course - $1,499</option>
+                </select>
+              </div>
+
+              <div class="space-y-2">
                 <label for="flyer_details" class="block text-sm font-medium text-gray-700">Participant Details (Name & Weight) *</label>
                 <textarea id="flyer_details" name="flyer_details" required rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Please list each participant's name and weight for safety requirements"></textarea>
               </div>
@@ -76,11 +97,6 @@
               <div class="space-y-2">
                 <label for="underage_flyers" class="block text-sm font-medium text-gray-700">Junior Adventurers (Under 18) *</label>
                 <textarea id="underage_flyers" name="underage_flyers" rows="2" class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="List names of any participants under 18 years old"></textarea>
-              </div>
-
-              <div class="space-y-2">
-                <label for="oahu_dates" class="block text-sm font-medium text-gray-700">Your Whistler Visit Dates *</label>
-                <input type="text" id="oahu_dates" name="oahu_dates" required class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="e.g., December 15-22, 2024">
               </div>
 
               <div class="space-y-2">
@@ -122,6 +138,40 @@
               <label for="additional_info" class="block text-sm font-medium text-gray-700">Additional Notes for Our Team *</label>
               <textarea id="additional_info" name="additional_info" required rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Any other details we should know to make your experience perfect"></textarea>
             </div>
+
+            <!-- Discount Code Section -->
+            <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+              <div class="flex items-center space-x-4">
+                <div class="flex-grow">
+                  <label for="discount_code" class="block text-sm font-medium text-gray-700">Have a discount code?</label>
+                  <input type="text" id="discount_code" name="discount_code" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Enter your code">
+                </div>
+                <button type="button" onclick="applyDiscount()" class="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+                  Apply
+                </button>
+              </div>
+            </div>
+
+            <!-- Price Summary -->
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+              <h4 class="text-lg font-semibold text-gray-800 mb-4">Price Summary</h4>
+              <div class="space-y-2">
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Base Price:</span>
+                  <span id="basePrice" class="font-medium">$0.00</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Discount:</span>
+                  <span id="discountAmount" class="font-medium text-green-600">-$0.00</span>
+                </div>
+                <div class="border-t border-gray-200 pt-2 mt-2">
+                  <div class="flex justify-between">
+                    <span class="text-gray-800 font-semibold">Total:</span>
+                    <span id="totalPrice" class="font-bold text-lg">$0.00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
             
             <div class="flex items-start p-4 bg-blue-50 rounded-lg border border-blue-100">
               <div class="flex items-center h-5">
@@ -134,43 +184,6 @@
               </div>
             </div>
 
-            <!-- Waiver Modal -->
-            <div id="waiverModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full" style="z-index: 100;">
-              <div class="relative top-20 mx-auto p-5 border w-11/12 max-w-4xl shadow-lg rounded-md bg-white">
-                <div class="flex justify-between items-center mb-4">
-                  <h3 class="text-xl font-bold text-gray-900">AVIATION RELEASE OF LIABILITY, WAIVER OF LEGAL RIGHTS, ASSUMPTION OF RISK AND DECLARATION OF FITNESS</h3>
-                  <button onclick="hideWaiverModal()" class="text-gray-400 hover:text-gray-500">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-                <div class="mt-2 max-h-[70vh] overflow-y-auto">
-                  <div class="space-y-4 text-sm text-gray-600">
-                    <p>In consideration for the renting, purchasing or leasing of Weight Shift Control Special Light Sport Aircraft (hereinafter collectively called "WSC Aircraft") from PARADISE AIR HAWAII, INC and or utilizing the facilities, ground school, instruction, premises, and equipment of PARADISE AIR HAWAII, INC in engaging in WSC Aircraft ground instruction, flight instruction and related activities, I hereby understand and agree to this Release of Liability, Waiver of Legal Rights, Assumption of Risk and Declaration of Fitness and to the terms hereof as follows:</p>
-                    
-                    <div class="space-y-2">
-                      <p>1. I understand that this is a long and boring, yet very important legal document that can affect my legal rights and that even though it is long, boring, and for the most part written by lawyers with no sense of humor I still must and will read and understand every word of it before participating in the activity of Aviation (herein referred to as "Aviation activities").</p>
-                      <p>2. I acknowledge that Aviation is an action sport and recreational activity involving travel in three dimensions and such activity is subject to mishap and even injury to participants. I understand I may suffer a broken limb, paralysis, or fatal injury while participating in Aviation activities.</p>
-                      <p>3. I further acknowledge that there are no warranties applicable to my purchasing, renting or leasing of WSC Aircraft and that all warranties, whether expressed or implied are excluded. THERE IS NO WARRANTY OF MERCHANTABILITY OR THAT THE SAID WSC AIRCRAFT IS FIT FOR ANY PURPOSE and that I am accepting the said WSC Aircraft as is and I hereby acknowledge that I will personally examine the said WSC Aircraft prior to my using the same.</p>
-                      <!-- Add all other paragraphs similarly -->
-                    </div>
-
-                    <div class="mt-6 space-y-4">
-                      <div class="flex items-center space-x-2">
-                        <input type="checkbox" id="waiverRead" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                        <label for="waiverRead" class="text-sm text-gray-700">I have read and understood the entire waiver document</label>
-                      </div>
-                      <div class="flex items-center space-x-2">
-                        <input type="checkbox" id="waiverAccept" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                        <label for="waiverAccept" class="text-sm text-gray-700">I accept and agree to all terms and conditions of this waiver</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             <div class="flex items-start p-4 bg-blue-50 rounded-lg border border-blue-100">
               <div class="flex items-center h-5">
                 <input id="terms" name="terms" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" required>
@@ -179,68 +192,6 @@
                 <label for="terms" class="font-medium text-gray-900">
                     I have read and agree to the <a href="{{ route('terms') }}" target="_blank" class="text-blue-600 hover:text-blue-800">terms and conditions</a>
                 </label>
-              </div>
-            </div>
-
-            <!-- Terms and Conditions Modal -->
-            <div id="termsModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full" style="z-index: 100;">
-              <div class="relative top-20 mx-auto p-5 border w-11/12 max-w-4xl shadow-lg rounded-md bg-white">
-                <div class="flex justify-between items-center mb-4">
-                  <h3 class="text-xl font-bold text-gray-900">Terms and Conditions</h3>
-                  <button onclick="hideTermsModal()" class="text-gray-400 hover:text-gray-500">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-                <div class="mt-2 max-h-[70vh] overflow-y-auto">
-                  <div class="space-y-4 text-gray-700">
-                    <p>By booking a session with WhistlerSkySports, you agree to the following terms and conditions:</p>
-                    
-                    <h4 class="font-semibold">1. Booking and Payment</h4>
-                    <p>• All bookings require a deposit to secure your spot</p>
-                    <p>• Full payment is required 24 hours before your scheduled session</p>
-                    <p>• Prices are subject to change without notice</p>
-                    
-                    <h4 class="font-semibold">2. Cancellation Policy</h4>
-                    <p>• Cancellations made 48 hours or more before the scheduled session will receive a full refund</p>
-                    <p>• Cancellations made within 48 hours of the scheduled session will be charged 50% of the total fee</p>
-                    <p>• No-shows will be charged the full amount</p>
-                    
-                    <h4 class="font-semibold">3. Weather Conditions</h4>
-                    <p>• Sessions are weather-dependent</p>
-                    <p>• We reserve the right to cancel or reschedule sessions due to unsafe weather conditions</p>
-                    <p>• In case of weather-related cancellation, you will be offered a rescheduled session or full refund</p>
-                    
-                    <h4 class="font-semibold">4. Safety Requirements</h4>
-                    <p>• All participants must be at least 18 years old</p>
-                    <p>• Participants must be in good physical condition</p>
-                    <p>• Weight restrictions apply (maximum 245 lbs)</p>
-                    <p>• No alcohol consumption 24 hours before the session</p>
-                    
-                    <h4 class="font-semibold">5. Equipment and Training</h4>
-                    <p>• All equipment is provided by WhistlerSkySports</p>
-                    <p>• Participants must follow all safety instructions and guidelines</p>
-                    <p>• Training sessions are required for all first-time participants</p>
-                    
-                    <h4 class="font-semibold">6. Liability and Insurance</h4>
-                    <p>• All participants must sign a liability waiver</p>
-                    <p>• Personal insurance is recommended but not required</p>
-                    <p>• WhistlerSkySports is not responsible for personal injury or property damage</p>
-                    
-                    <h4 class="font-semibold">7. Photography and Media</h4>
-                    <p>• We may take photos and videos during sessions</p>
-                    <p>• By participating, you consent to the use of these materials for marketing purposes</p>
-                    <p>• Personal photography is allowed but must not interfere with the session</p>
-                  </div>
-
-                  <div class="mt-6 space-y-4">
-                    <div class="flex items-center space-x-2">
-                      <input type="checkbox" id="termsRead" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                      <label for="termsRead" class="text-sm text-gray-700">I have read and understood the entire terms and conditions document</label>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -530,14 +481,52 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
         const form = document.querySelector('form');
+        const packageSelect = document.getElementById('package');
+        const discountCode = document.getElementById('discount_code');
+        let discountApplied = false;
         
+        // Update price when package is selected
+        packageSelect.addEventListener('change', function() {
+            updatePrice();
+        });
+
+        // Function to update price
+        function updatePrice() {
+            const selectedOption = packageSelect.options[packageSelect.selectedIndex];
+            const basePrice = selectedOption.dataset.price ? parseFloat(selectedOption.dataset.price) : 0;
+            
+            document.getElementById('basePrice').textContent = `$${basePrice.toFixed(2)}`;
+            
+            if (discountApplied) {
+                const discountAmount = basePrice * 0.2;
+                document.getElementById('discountAmount').textContent = `-$${discountAmount.toFixed(2)}`;
+                document.getElementById('totalPrice').textContent = `$${(basePrice - discountAmount).toFixed(2)}`;
+            } else {
+                document.getElementById('discountAmount').textContent = '-$0.00';
+                document.getElementById('totalPrice').textContent = `$${basePrice.toFixed(2)}`;
+            }
+        }
+
+        // Function to apply discount
+        window.applyDiscount = function() {
+            const code = discountCode.value.trim().toUpperCase();
+            if (code === 'EARLYBIRD20') {
+                discountApplied = true;
+                updatePrice();
+                alert('20% discount applied successfully!');
+            } else {
+                alert('Invalid discount code. Please try again.');
+            }
+        }
+
+        // Form validation
         form.addEventListener('submit', function(event) {
             const name = document.getElementById('name').value;
-            const date = document.getElementById('date').value;
+            const package = document.getElementById('package').value;
             const terms = document.getElementById('terms').checked;
             const waiver = document.getElementById('waiver').checked;
             
-            if (!name || !date || !terms || !waiver) {
+            if (!name || !package || !terms || !waiver) {
                 event.preventDefault();
                 alert('Please fill in all required fields and accept both the terms and conditions and waiver.');
             }
