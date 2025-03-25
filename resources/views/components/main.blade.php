@@ -1,7 +1,7 @@
-<div>
-  <div class="container mx-auto px-4 mt-5">
+<div class="mt-[-15px]">
+  <div class="container mx-auto">
     <!-- Hero Section -->
-    <div class="py-12 relative overflow-hidden rounded-xl">
+    <div class="py-12 relative overflow-hidden">
       <div class="mountain-bg"></div>
       <div class="clouds"></div>
       <div class="relative z-10">
@@ -28,39 +28,58 @@
     <div class="py-12">
       <h2 class="text-3xl font-bold text-center mb-12">Why Choose WhistlerSkySports?</h2>
       
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-white p-6 rounded-lg shadow-md">
+      <!-- First Feature -->
+      <div class="feature-section flex flex-col md:flex-row items-center mb-16">
+        <div class="md:w-1/2 feature-image">
           <img src="{{ asset('images/image000000 2.JPG') }}"
                alt="Experienced Pilots" 
-               class="w-full h-48 object-cover rounded-md mb-4">
-          <h3 class="text-xl font-bold mb-2">Experienced Pilots</h3>
-          <p class="text-gray-700">Our certified pilots have thousands of flight hours and know the Canadian Rockies like the back of their hand.</p>
+               class="w-full h-[400px] object-cover shadow-lg">
         </div>
-        
-        <div class="bg-white p-6 rounded-lg shadow-md">
+        <div class="md:w-1/2 h-[400px] px-30 flex items-center p-6 feature-content bg-[#f8f8f8]">
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Experienced Pilots</h3>
+            <p class="text-gray-700 text-lg leading-relaxed">Our certified pilots have thousands of flight hours and know the Canadian Rockies like the back of their hand. With years of experience in power hang gliding, they ensure your safety while providing an unforgettable adventure.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Second Feature -->
+      <div class="feature-section flex flex-col-reverse md:flex-row items-center mb-16">
+        <div class="md:w-1/2 h-[400px] px-30 flex items-center p-6 feature-content bg-[#f8f8f8]">
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Top-Notch Equipment</h3>
+            <p class="text-gray-700 text-lg leading-relaxed">We use only the latest power hang gliders with rigorous safety inspections before every flight. Our equipment is maintained to the highest standards, ensuring your safety and comfort throughout your journey.</p>
+          </div>
+        </div>
+        <div class="md:w-1/2 feature-image">
           <img src="{{ asset('images/ecupment.jpg') }}" 
                alt="Top-Notch Equipment" 
-               class="w-full h-48 object-cover rounded-md mb-4">
-          <h3 class="text-xl font-bold mb-2">Top-Notch Equipment</h3>
-          <p class="text-gray-700">We use only the latest power hang gliders with rigorous safety inspections before every flight.</p>
+               class="w-full h-[400px] object-cover shadow-lg">
         </div>
-        
-        <div class="bg-white p-6 rounded-lg shadow-md">
+      </div>
+
+      <!-- Third Feature -->
+      <div class="feature-section flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 feature-image">
           <img src="{{ asset('images/Airport.jpg') }}" 
                alt="Breathtaking Views" 
-               class="w-full h-48 object-cover rounded-md mb-4">
-          <h3 class="text-xl font-bold mb-2">Breathtaking Views</h3>
-          <p class="text-gray-700">Soar over pristine lakes, majestic mountains, and lush forests that only Canada can offer.</p>
+               class="w-full h-[400px] object-cover shadow-lg">
+        </div>
+        <div class="md:w-1/2 h-[400px] px-30 flex items-center p-6 feature-content bg-[#f8f8f8]">
+          <div>
+            <h3 class="text-2xl font-bold mb-4">Breathtaking Views</h3>
+            <p class="text-gray-700 text-lg leading-relaxed">Soar over pristine lakes, majestic mountains, and lush forests that only Canada can offer. Experience the stunning beauty of the Canadian Rockies from a unique perspective that few get to witness.</p>
+          </div>
         </div>
       </div>
     </div>
     
     <!-- Tour Packages -->
-    <div class="py-12 rounded-xl p-8">
+    <!-- <div class="py-12 rounded-xl p-8">
       <h2 class="text-3xl font-bold text-center mb-12">Our Adventure Packages</h2>
       
       <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+        <div class="bg-white rounded-lg overflow-hidden transition-transform duration-300">
           <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250&q=80" 
                alt="Beginner's Flight" 
                class="w-full h-48 object-cover">
@@ -74,7 +93,7 @@
           </div>
         </div>
         
-        <div class="bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+        <div class="bg-white rounded-lg overflow-hidden transition-transform duration-300">
           <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250&q=80" 
                alt="Mountain Explorer" 
                class="w-full h-48 object-cover">
@@ -88,7 +107,7 @@
           </div>
         </div>
         
-        <div class="bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+        <div class="bg-white rounded-lg overflow-hidden transition-transform duration-300">
           <img src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250&q=80" 
                alt="Ultimate Experience" 
                class="w-full h-48 object-cover">
@@ -102,16 +121,19 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="relative h-96 rounded-xl overflow-hidden shadow-xl mb-12 mt-5">
         <img src="{{ asset('images/hero-section.png') }}" alt="Hang gliding over mountains" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent flex items-center">
           <div class="text-white p-8">
             <h2 class="text-3xl font-bold mb-4">Soar Above the Rockies</h2>
-            <p class="text-xl mb-6">Book your adventure today and experience Canada from a whole new perspective</p>
-            <a href="{{ route('booking') }}" class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-3 px-6 rounded-lg transition duration-300">
-            Book Your Million Dollar Smile
+            <p class="text-xl mb-6">Book your adventure today and experience WhistlerSkySports from a whole new perspective</p>
+            <a href="{{ route('booking') }}" class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-3 px-6 rounded-lg transition duration-300 relative group">
+                <span class="animate-text-on-hover">Book Your Million Dollar Smile</span>
+                <svg class="absolute inset-0 w-full h-full">
+                    <rect class="border-animation" x="0" y="0" width="100%" height="100%" fill="none" stroke="#1e40af" stroke-width="2"/>
+                </svg>
             </a>
           </div>
         </div>
@@ -234,7 +256,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(180deg, #1a365d 0%, #2c5282 50%, #2b6cb0 100%);
+    background: linear-gradient(180deg, #005CBB 0%, #004a96 50%, #003b7a 100%);
     z-index: 0;
 }
 
@@ -246,9 +268,9 @@
     right: 0;
     height: 100%;
     background-image: 
-        linear-gradient(to right, #2d3748 0%, #2d3748 20%, transparent 20%),
-        linear-gradient(to right, #2d3748 40%, #2d3748 60%, transparent 60%),
-        linear-gradient(to right, #2d3748 80%, #2d3748 100%, transparent 100%);
+        linear-gradient(to right, #004a96 0%, #004a96 20%, transparent 20%),
+        linear-gradient(to right, #004a96 40%, #004a96 60%, transparent 60%),
+        linear-gradient(to right, #004a96 80%, #004a96 100%, transparent 100%);
     background-size: 100% 100%;
     background-position: 0 0;
     clip-path: polygon(0 100%, 100% 100%, 100% 50%, 75% 30%, 50% 50%, 25% 30%, 0 50%);
@@ -314,7 +336,7 @@
 }
 
 .highlight-text {
-    color: #90cdf4;
+    color: #FED600;
     font-weight: 600;
     position: relative;
     display: inline-block;
@@ -327,7 +349,7 @@
     left: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, #90cdf4, transparent);
+    background: linear-gradient(90deg, #FED600, transparent);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease;
@@ -338,7 +360,7 @@
 }
 
 .accent-text {
-    color: #bee3f8;
+    color: #FED600;
     font-style: italic;
     font-weight: 500;
 }
@@ -354,7 +376,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(144, 205, 244, 0.1), rgba(190, 227, 248, 0.1));
+    background: linear-gradient(135deg, rgba(254, 214, 0, 0.1), rgba(0, 92, 187, 0.1));
     z-index: 0;
 }
 
@@ -389,4 +411,173 @@
         background-position: 0% 50%;
     }
 }
+
+.animate-text-on-hover {
+    position: relative;
+    z-index: 1;
+}
+
+.border-animation {
+    stroke-dasharray: 150 480;
+    stroke-dashoffset: 150;
+    transition: 1s ease-in-out;
+}
+
+.group:hover .border-animation {
+    stroke-dashoffset: -480;
+}
+
+/* Animation Classes */
+.animate-fade-in-left {
+  animation: fadeInLeft 1s ease-out forwards;
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 1s ease-out forwards;
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Feature Animation Styles */
+.feature-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.feature-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feature-image {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.8s ease-out 0.3s;
+}
+
+.feature-content {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.8s ease-out 0.3s;
+}
+
+.feature-section.visible .feature-image,
+.feature-section.visible .feature-content {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Reverse animation for even sections */
+.feature-section:nth-child(even) .feature-image {
+  transform: translateX(50px);
+}
+
+.feature-section:nth-child(even) .feature-content {
+  transform: translateX(-50px);
+}
+
+.feature-section:nth-child(even).visible .feature-image,
+.feature-section:nth-child(even).visible .feature-content {
+  transform: translateX(0);
+}
+
+/* Update button styles */
+.bg-yellow-500 {
+    background-color: #FED600 !important;
+}
+
+.hover\:bg-yellow-600:hover {
+    background-color: #e6c000 !important;
+}
+
+.text-blue-900 {
+    color: #005CBB !important;
+}
+
+/* Update gradient overlay */
+.bg-gradient-to-r {
+    background: linear-gradient(to right, rgba(0, 92, 187, 0.9), transparent) !important;
+}
+
+/* Update border animation color */
+.border-animation {
+    stroke: #005CBB !important;
+}
+
+/* Update feature section headings */
+.feature-content h3 {
+    color: #005CBB;
+}
+
+/* Update text colors */
+.text-gray-700 {
+    color: #2d3748;
+}
+
+/* Add hover effects */
+.feature-section:hover .feature-image {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+}
+
+.feature-section:hover .feature-content h3 {
+    color: #FED600;
+    transition: color 0.3s ease;
+}
+
+/* Update animation colors */
+.feature-section.visible .feature-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* border: 2px solid #FED600; */
+    /* border-radius: 0.5rem; */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.feature-section:hover .feature-image::after {
+    opacity: 1;
+}
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.2,
+    rootMargin: '0px'
+  });
+
+  // Observe all feature sections
+  document.querySelectorAll('.feature-section').forEach((section) => {
+    observer.observe(section);
+  });
+});
+</script>

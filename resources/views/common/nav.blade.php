@@ -2,7 +2,7 @@
 <html lang="en">
 @include('common.header')
 <body>
-    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-black border-b border-gray-800 shadow-lg h-32">
+    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#005CBB] h-32">
         <div class="flex flex-wrap items-center justify-between p-4 w-full h-full">
             <div class="sm:w-[20%] md:w-[25%] lg:w-[15%] flex items-center">
                 <a href="/" class="flex items-center pl-[15px] sm:pl-[25px] md:pl-[50px] lg:pl-[75px]">
@@ -21,22 +21,13 @@
                     </svg>
                 </button>
                 <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                    <ul class="font-medium flex flex-col p-4 md:p-0 mt-3 rounded-lg bg-black md:flex-row md:space-x-4 lg:space-x-8 md:mt-0 md:border-0 absolute md:relative left-0 right-0 top-[60px] md:top-0 md:shadow-none shadow-lg z-40 md:items-center">
+                    <ul class="font-medium flex flex-col p-4 md:p-0 mt-3 rounded-lg md:flex-row md:space-x-4 lg:space-x-8 md:mt-0 md:border-0 absolute md:relative left-0 right-0 top-[60px] md:top-0 md:shadow-none shadow-lg z-40 md:items-center">
                         <li>
-                            <a href="/" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded relative overflow-hidden group transition-all duration-300" aria-current="page">
-                                <span class="absolute inset-0 bg-black"></span>
-                                <span class="animation-cloud-btn-inner">
-                                    <span class="animation-cloud-parts">
-                                        <span class="animation-cloud-part"></span>
-                                        <span class="animation-cloud-part"></span>
-                                        <span class="animation-cloud-part"></span>
-                                        <span class="animation-cloud-part"></span>
-                                    </span>
+                            <a href="/" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300" aria-current="page">
+                                <span class="relative inline-block group">
+                                    Welcome
+                                    <span class="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
                                 </span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                </svg>
-                                <span class="relative z-10">Welcome</span>
                             </a>
                         </li>
                         <!-- <li class="relative group">
@@ -86,97 +77,59 @@
                                 </ul>
                             </div>
                         </li> -->
-                        <li class="relative group">
-                            <a href="#" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded relative overflow-hidden group transition-all duration-300">
-                                <span class="absolute inset-0 bg-black"></span>
-                                <span class="animation-cloud-btn-inner">
-                                    <span class="animation-cloud-parts">
-                                        <span class="animation-cloud-part"></span>
-                                        <span class="animation-cloud-part"></span>
-                                        <span class="animation-cloud-part"></span>
-                                        <span class="animation-cloud-part"></span>
-                                    </span>
-                                </span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5m0 0l9-5m-9 5v6.5m0 0l-9-5m9 5l9-5" />
-                                </svg>
-                                <span class="flex items-center relative z-10">
+                        <!-- <li class="relative group">
+                            <a href="#" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300">
+                                <span class="relative inline-block group flex items-center">
                                     Training
                                     <svg class="w-4 h-4 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                                     </svg>
+                                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                                 </span>
                             </a>
                             <div class="z-10 hidden group-hover:block md:group-hover:block absolute font-normal bg-black divide-y divide-gray-800 rounded-lg shadow-lg w-48 border border-gray-700 transition-all duration-300">
                                 <ul class="py-2 text-sm text-gray-300">
                                     <li>
-                                        <a href="/training/beginner" class="flex items-center px-4 py-2 font-bold hover:bg-gradient-to-r hover:from-gray-800 hover:via-gray-700 hover:to-gray-800 hover:text-white relative overflow-hidden group transition-all duration-300">
-                                            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
-                                            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-full group-hover:-translate-x-full transition-transform duration-1000 delay-200"></span>
-                                            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 delay-400"></span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                            </svg>
-                                            <span class="relative z-10">Beginner Courses</span>
+                                        <a href="/training/beginner" class="flex items-center px-4 py-2 font-bold hover:bg-gray-800 hover:text-white transition-all duration-300">
+                                            <span class="relative inline-block group">
+                                                Beginner Courses
+                                                <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                                            </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/training/advanced" class="flex items-center px-4 py-2 font-bold hover:bg-gradient-to-r hover:from-gray-800 hover:via-gray-700 hover:to-gray-800 hover:text-white relative overflow-hidden group transition-all duration-300">
-                                            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
-                                            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-full group-hover:-translate-x-full transition-transform duration-1000 delay-200"></span>
-                                            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 delay-400"></span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                                            </svg>
-                                            <span class="relative z-10">Advanced Training</span>
+                                        <a href="/training/advanced" class="flex items-center px-4 py-2 font-bold hover:bg-gray-800 hover:text-white transition-all duration-300">
+                                            <span class="relative inline-block group">
+                                                Advanced Training
+                                                <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                                            </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/training/certification" class="flex items-center px-4 py-2 font-bold hover:bg-gradient-to-r hover:from-gray-800 hover:via-gray-700 hover:to-gray-800 hover:text-white relative overflow-hidden group transition-all duration-300">
-                                            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
-                                            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-full group-hover:-translate-x-full transition-transform duration-1000 delay-200"></span>
-                                            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 delay-400"></span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                                            </svg>
-                                            <span class="relative z-10">Certification</span>
+                                        <a href="/training/certification" class="flex items-center px-4 py-2 font-bold hover:bg-gray-800 hover:text-white transition-all duration-300">
+                                            <span class="relative inline-block group">
+                                                Certification
+                                                <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                                            </span>
                                         </a>
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> -->
                         <li>
-                            <a href="/gallery" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded relative overflow-hidden group transition-all duration-300">
-                                <span class="absolute inset-0 bg-black"></span>
-                                <span class="animation-cloud-btn-inner">
-                                    <span class="animation-cloud-parts">
-                                        <span class="animation-cloud-part"></span>
-                                        <span class="animation-cloud-part"></span>
-                                        <span class="animation-cloud-part"></span>
-                                        <span class="animation-cloud-part"></span>
-                                    </span>
+                            <a href="/gallery" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300">
+                                <span class="relative inline-block group">
+                                    Gallery
+                                    <span class="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
                                 </span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                <span class="relative z-10">Gallery</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/contact" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded relative overflow-hidden group transition-all duration-300">
-                                <span class="absolute inset-0 bg-black"></span>
-                                <span class="animation-cloud-btn-inner">
-                                    <span class="animation-cloud-parts">
-                                        <span class="animation-cloud-part"></span>
-                                        <span class="animation-cloud-part"></span>
-                                        <span class="animation-cloud-part"></span>
-                                        <span class="animation-cloud-part"></span>
-                                    </span>
+                            <a href="/contact" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300">
+                                <span class="relative inline-block group">
+                                    Contact Us
+                                    <span class="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
                                 </span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                </svg>
-                                <span class="relative z-10">Contact Us</span>
                             </a>
                         </li>
                         <!-- <li>
@@ -188,36 +141,17 @@
                             </a>
                         </li> -->
                         <li>
-                            <a href="/weather" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded relative overflow-hidden group transition-all duration-300">
-                                <span class="absolute inset-0 bg-black"></span>
-                                <span class="animation-cloud-btn-inner">
-                                    <span class="animation-cloud-parts">
-                                        <span class="animation-cloud-part"></span>
-                                        <span class="animation-cloud-part"></span>
-                                        <span class="animation-cloud-part"></span>
-                                        <span class="animation-cloud-part"></span>
-                                    </span>
+                            <a href="/weather" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300">
+                                <span class="relative inline-block group">
+                                    Weather
+                                    <span class="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
                                 </span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                                </svg>
-                                <span class="relative z-10">Weather</span>
                             </a>
                         </li>
                         <li class="md:ml-4">
-                            <a href="/booking" class="flex items-center py-3 pl-5 pr-4 text-white font-bold rounded-full bg-orange-600 hover:bg-orange-700 relative overflow-hidden group">
-                                <span class="animation-cloud-btn-inner">
-                                    <span class="animation-cloud-parts">
-                                        <span class="animation-cloud-part"></span>
-                                        <span class="animation-cloud-part"></span>
-                                        <span class="animation-cloud-part"></span>
-                                        <span class="animation-cloud-part"></span>
-                                    </span>
-                                </span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                <span class="relative z-10 font-bold">Book Now</span>
+                            <a href="/booking" class="flex items-center py-3 pl-5 pr-4 text-[#005CBB] font-bold rounded-full bg-[#FED600] hover:bg-[#b78b4d] hover:text-gray-200 transform hover:scale-102 transition-all duration-300 shadow-md hover:shadow-xl relative overflow-hidden group">
+                                <span class="relative z-10">Book Now</span>
+                                <div class="absolute inset-0 bg-[#c05300] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                             </a>
                         </li>
                     </ul>
@@ -282,108 +216,7 @@
     </script>
 
     <style>
-    .animation-cloud-parts {
-        position: relative;
-        display: block;
-        height: 100%;
-    }
-
-    .animation-cloud-btn-inner {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        z-index: 0;
-    }
-
-    .animation-cloud-part {
-        position: absolute;
-        background: rgba(255, 255, 255, 0.15);
-        border-radius: 50%;
-        transform: translate3d(0, 150%, 0) scale(1.5);
-        transition: transform 0.45s;
-    }
-
-    /* Main cloud body */
-    .animation-cloud-part:nth-child(1) {
-        left: 20%;
-        top: 20%;
-        width: 60%;
-        height: 60%;
-        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    }
-
-    /* Left bump */
-    .animation-cloud-part:nth-child(2) {
-        left: 0;
-        top: 30%;
-        width: 40%;
-        height: 40%;
-        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    }
-
-    /* Right bump */
-    .animation-cloud-part:nth-child(3) {
-        left: 50%;
-        top: 25%;
-        width: 45%;
-        height: 45%;
-        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    }
-
-    /* Top bump */
-    .animation-cloud-part:nth-child(4) {
-        left: 30%;
-        top: 0;
-        width: 50%;
-        height: 50%;
-        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    }
-
-    /* Animation delays */
-    .animation-cloud-part:nth-child(1) { transition-delay: 0s; }
-    .animation-cloud-part:nth-child(2) { transition-delay: 80ms; }
-    .animation-cloud-part:nth-child(3) { transition-delay: 0.16s; }
-    .animation-cloud-part:nth-child(4) { transition-delay: 0.24s; }
-
-    .group:hover .animation-cloud-part {
-        transform: translate3d(0, 0%, 0) scale(1.5);
-    }
-
-    .group:hover {
-        color: white;
-    }
-
-    /* Special styling for the Book Now button */
-    .group:hover .animation-cloud-part {
-        background: rgba(255, 255, 255, 0.25);
-    }
-
-    /* Add a subtle shadow to the cloud parts */
-    .animation-cloud-part {
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-    }
-
-    /* Add a subtle blur effect */
-    .animation-cloud-part {
-        backdrop-filter: blur(3px);
-        -webkit-backdrop-filter: blur(3px);
-    }
-
-    /* Add a subtle gradient to make it more cloud-like */
-    .animation-cloud-part::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), transparent 70%);
-        border-radius: inherit;
-        pointer-events: none;
-    }
+    /* Remove all cloud animation styles */
     </style>
 </body>
 </html>

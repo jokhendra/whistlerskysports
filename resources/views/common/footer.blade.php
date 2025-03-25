@@ -1,4 +1,4 @@
-<div class="bg-black text-white">
+<div class="bg-[#005CBB] text-white">
   <div class="container mx-auto py-12 px-4">
     <!-- Footer Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -76,7 +76,7 @@
         <p class="mb-4 text-gray-300">Subscribe to our newsletter to receive updates and news.</p>
         <form class="flex flex-col space-y-2">
           <input type="email" placeholder="Your Email" class="px-4 py-2 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">Subscribe</button>
+          <button type="submit" class="px-4 py-2 bg-[#FED600] text-white rounded hover:bg-blue-700 transition-colors">Subscribe</button>
         </form>
       </div>
     </div>

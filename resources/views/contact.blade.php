@@ -6,33 +6,44 @@
 @include('common.header')
 <body>
   @include('common.nav')
-  
-  <!-- Hero Section with Parallax Effect -->
-  <div class="relative h-80 bg-blue-700 overflow-hidden">
+  <!-- Hero Section with Google Maps -->
+  <div class="relative h-[500px] bg-blue-700 overflow-hidden mt-10">
     <div class="absolute inset-0 z-0">
-      <img src="https://dam.destination.one/806001/7b8b4f94048385dcc3e9779db40e400bbe43c1f57a8af663ca1a8d6e3ade7b58/.jpg" alt="Hang glider in the sky" class="w-full h-full object-cover opacity-40">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.639290621064!2d-122.08401492392031!3d37.4219998326378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fba02425dad8f%3A0x29cdf01a44fc687f!2sGoogle%20Building%2040!5e0!3m2!1sen!2sus!4v1649285324079!5m2!1sen!2sus" 
+        width="100%" 
+        height="100%" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
     </div>
-    <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-blue-700/50"></div>
     <div class="relative z-10 container mx-auto px-4 h-full flex items-center">
       <div class="max-w-2xl">
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">Get In Touch</h1>
-        <p class="text-xl text-blue-100 max-w-xl leading-relaxed">We're here to answer your questions and help you take flight. Reach out to our team of passionate hang gliding experts.</p>
+       
+        <!-- <div class="mt-6">
+          <a href="https://maps.google.com" target="_blank" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300 shadow-lg hover:shadow-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Get Directions
+          </a>
+        </div> -->
       </div>
     </div>
   </div>
   
   <!-- Contact Section -->
-  <div class="bg-gradient-to-b from-blue-50 to-white py-16">
+  <div class="bg-gradient-to-b from-blue-50 bg-gray-200 py-16">
     <div class="container mx-auto px-4">
-      <div class="text-center mb-12 max-w-3xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-4">Contact Us</h2>
-        <p class="text-lg text-gray-600">Have questions about our power hang gliders or training programs? We're here to help! Reach out to our team using the form below or visit us at our location.</p>
-      </div>
+      
       
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <!-- Contact Information and Map -->
         <div>
-          <div class="bg-white rounded-xl shadow-xl p-8 mb-8 transform transition duration-300 hover:shadow-2xl hover:-translate-y-1">
+          <div class="p-8 mb-8 transform transition duration-300">
             <h2 class="text-2xl font-bold text-blue-800 mb-6 flex items-center">
               <span class="inline-block mr-3 p-2 bg-blue-100 rounded-full">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -115,7 +126,7 @@
           </div>
           
           <!-- Map -->
-          <div class="bg-white rounded-xl shadow-xl p-8 transform transition duration-300 hover:shadow-2xl hover:-translate-y-1">
+          <!-- <div class="bg-white rounded-xl shadow-xl p-8 transform transition duration-300 hover:shadow-2xl hover:-translate-y-1">
             <h2 class="text-2xl font-bold text-blue-800 mb-6 flex items-center">
               <span class="inline-block mr-3 p-2 bg-blue-100 rounded-full">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -144,11 +155,11 @@
                 Get Directions
               </a>
             </div>
-          </div>
+          </div> -->
         </div>
         
         <!-- Contact Form -->
-        <div class="bg-white rounded-xl shadow-xl h-[800px] p-8 transform transition duration-300 hover:shadow-2xl hover:-translate-y-1">
+        <div class="h-[800px] p-8 transform transition duration-300">
           <h2 class="text-2xl font-bold text-blue-800 mb-6 flex items-center">
             <span class="inline-block mr-3 p-2 bg-blue-100 rounded-full">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -262,11 +273,14 @@
             </div>
             
             <div>
-              <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 shadow-lg hover:shadow-xl flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <button type="submit" class="w-full bg-[#005CBB] hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 shadow-lg hover:shadow-xl flex items-center justify-center group cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                 </svg>
-                Send Message
+                <span class="relative inline-block overflow-hidden">
+                  <span class="block transition-transform duration-300 group-hover:-translate-y-full">Send Message</span>
+                  <span class="absolute top-0 left-0 transition-transform duration-300 translate-y-full group-hover:translate-y-0">Send Message</span>
+                </span>
               </button>
             </div>
           </form>
