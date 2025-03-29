@@ -14,15 +14,16 @@ Route::get('/', function () {
 //     return view('about');
 // });
 
-Route::get('/contact', [ContactController::class, 'index']);
-Route::post('/contact', [ContactController::class, 'contact']);
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 
 Route::get('/gallery', function () {
     return view('gallery');
 });
 
 // Booking routes without auth middleware
-Route::get('/booking', function() {
+Route::get('/booking', function () {
     return view('booking');
 })->name('booking');
 

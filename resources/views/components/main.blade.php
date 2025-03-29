@@ -5,7 +5,10 @@
       <div class="mountain-bg"></div>
       <div class="clouds"></div>
       <div class="relative z-10">
-        <h1 class="text-4xl md:text-5xl font-bold text-center mb-4 rocky-ice-text">Welcome to WhistlerSkySports</h1>
+        <div class="welcome-container">
+          <h1 class="welcome-text">Welcome to <span class="company-name">WhistlerSkySports</span></h1>
+          <div class="welcome-underline"></div>
+        </div>
         <div class="max-w-3xl mx-auto mt-10">
           <div class="modern-tagline">
             <div class="tagline-content">
@@ -26,16 +29,15 @@
     
     <!-- Features Section -->
     <div class="py-12">
-      <h2 class="text-3xl font-bold text-center mb-12">Why Choose WhistlerSkySports?</h2>
-      
+      <h2 class="text-3xl font-bold text-center text-amber-400">Why Choose WhistlerSkySports?</h2>
       <!-- First Feature -->
-      <div class="feature-section flex flex-col md:flex-row items-center mb-16">
+      <div class="feature-section flex flex-col md:flex-row items-center">
         <div class="md:w-1/2 feature-image">
           <img src="{{ asset('images/image000000 2.JPG') }}"
                alt="Experienced Pilots" 
                class="w-full h-[400px] object-cover shadow-lg">
         </div>
-        <div class="md:w-1/2 h-[400px] px-30 flex items-center p-6 feature-content bg-[#f8f8f8]">
+        <div class="md:w-1/2 h-[400px] px-30 flex items-center p-6 mt-72 feature-content bg-[#f8f8f8]">
           <div>
             <h3 class="text-2xl font-bold mb-4">Experienced Pilots</h3>
             <p class="text-gray-700 text-lg leading-relaxed">Our certified pilots have thousands of flight hours and know the Canadian Rockies like the back of their hand. With years of experience in power hang gliding, they ensure your safety while providing an unforgettable adventure.</p>
@@ -44,8 +46,8 @@
       </div>
 
       <!-- Second Feature -->
-      <div class="feature-section flex flex-col-reverse md:flex-row items-center mb-16">
-        <div class="md:w-1/2 h-[400px] px-30 flex items-center p-6 feature-content bg-[#f8f8f8]">
+      <div class="feature-section flex flex-col-reverse  md:flex-row items-center">
+        <div class="md:w-1/2 h-[400px] px-30 flex items-center p-6 mt-72 feature-content bg-[#f8f8f8]">
           <div>
             <h3 class="text-2xl font-bold mb-4">Top-Notch Equipment</h3>
             <p class="text-gray-700 text-lg leading-relaxed">We use only the latest power hang gliders with rigorous safety inspections before every flight. Our equipment is maintained to the highest standards, ensuring your safety and comfort throughout your journey.</p>
@@ -65,7 +67,7 @@
                alt="Breathtaking Views" 
                class="w-full h-[400px] object-cover shadow-lg">
         </div>
-        <div class="md:w-1/2 h-[400px] px-30 flex items-center p-6 feature-content bg-[#f8f8f8]">
+        <div class="md:w-1/2 h-[400px] px-30 flex items-center mt-72 p-6 feature-content bg-[#f8f8f8]">
           <div>
             <h3 class="text-2xl font-bold mb-4">Breathtaking Views</h3>
             <p class="text-gray-700 text-lg leading-relaxed">Soar over pristine lakes, majestic mountains, and lush forests that only Canada can offer. Experience the stunning beauty of the Canadian Rockies from a unique perspective that few get to witness.</p>
@@ -74,62 +76,216 @@
       </div>
     </div>
     
-    <!-- Tour Packages -->
-    <!-- <div class="py-12 rounded-xl p-8">
-      <h2 class="text-3xl font-bold text-center mb-12">Our Adventure Packages</h2>
-      
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-white rounded-lg overflow-hidden transition-transform duration-300">
-          <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250&q=80" 
-               alt="Beginner's Flight" 
-               class="w-full h-48 object-cover">
-          <div class="p-6">
-            <h3 class="text-xl font-bold mb-2">Beginner's Flight</h3>
-            <p class="text-gray-600 mb-4">Perfect for first-timers. A 30-minute flight with basic maneuvers.</p>
-            <div class="flex justify-between items-center">
-              <span class="text-2xl font-bold text-blue-900">$199 CAD</span>
-              <a href="#book-now" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">Book Now</a>
+    <!-- Pricing Section -->
+    <div id="pricing" class="pricing-section bg-gradient-to-b from-blue-900/90 via-blue-800/85 to-blue-900/90 backdrop-blur-md py-16 mt-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="sm:flex sm:flex-col sm:align-center">
+          <h2 class="text-3xl font-extrabold text-white/95 sm:text-center">Introductory Pricing</h2>
+          <p class="mt-5 text-xl text-blue-200/90 sm:text-center">Experience the thrill of power hang gliding with our special promotional offers!</p>
+          
+          <!-- Promotional Timer -->
+          <div class="mt-6 bg-blue-800/70 backdrop-blur-sm rounded-lg p-4 sm:w-fit sm:mx-auto border border-white/10">
+            <p class="text-blue-200/90 text-sm">Limited Time Offer Ends In:</p>
+            <div class="flex space-x-4 mt-2">
+              <div class="flex-1 text-center">
+                <span class="text-2xl font-bold text-white/95" id="days">05</span>
+                <p class="text-blue-300/90 text-xs">Days</p>
+              </div>
+              <div class="flex-1 text-center">
+                <span class="text-2xl font-bold text-white/95" id="hours">23</span>
+                <p class="text-blue-300/90 text-xs">Hours</p>
+              </div>
+              <div class="flex-1 text-center">
+                <span class="text-2xl font-bold text-white/95" id="minutes">59</span>
+                <p class="text-blue-300/90 text-xs">Minutes</p>
+              </div>
+              <div class="flex-1 text-center">
+                <span class="text-2xl font-bold text-white/95" id="seconds">59</span>
+                <p class="text-blue-300/90 text-xs">Seconds</p>
+              </div>
             </div>
           </div>
         </div>
-        
-        <div class="bg-white rounded-lg overflow-hidden transition-transform duration-300">
-          <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250&q=80" 
-               alt="Mountain Explorer" 
-               class="w-full h-48 object-cover">
-          <div class="p-6">
-            <h3 class="text-xl font-bold mb-2">Mountain Explorer</h3>
-            <p class="text-gray-600 mb-4">A 1-hour adventure flying through valleys and over peaks.</p>
-            <div class="flex justify-between items-center">
-              <span class="text-2xl font-bold text-blue-900">$349 CAD</span>
-              <a href="#book-now" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">Book Now</a>
+
+        <div class="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-3">
+          <!-- Basic Package -->
+          <div class="bg-white/95 backdrop-blur-sm border border-blue-200/30 rounded-lg shadow-xl transform hover:scale-105 transition-all duration-300">
+            <div class="p-6">
+              <h3 class="text-2xl font-semibold text-blue-900">Basic Experience</h3>
+              <p class="mt-4 text-gray-500">Perfect for first-time flyers</p>
+              <p class="mt-8">
+                <span class="text-4xl font-extrabold text-blue-600">$199</span>
+                <span class="text-base font-medium text-gray-500">/person</span>
+              </p>
+              <p class="mt-2 text-sm text-red-600 font-semibold">Save $50 - Limited Time!</p>
+              <ul class="mt-6 space-y-4">
+                <li class="flex space-x-3">
+                  <svg class="flex-shrink-0 h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span class="text-gray-600">30-minute scenic flight</span>
+                </li>
+                <li class="flex space-x-3">
+                  <svg class="flex-shrink-0 h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span class="text-gray-600">Professional instructor</span>
+                </li>
+                <li class="flex space-x-3">
+                  <svg class="flex-shrink-0 h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span class="text-gray-600">Basic maneuvers training</span>
+                </li>
+              </ul>
+              <a href="/booking" class="mt-8 block w-full bg-blue-600 text-white text-center px-6 py-3 rounded-md text-base font-medium hover:bg-blue-700 transition-colors duration-300">
+                Book Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Premium Package -->
+          <div class="bg-gradient-to-b from-blue-600/95 to-blue-800/95 backdrop-blur-sm border border-blue-500/30 rounded-lg shadow-xl transform hover:scale-105 transition-all duration-300">
+            <div class="p-6">
+              <h3 class="text-2xl font-semibold text-white">Mountain Explorer</h3>
+              <p class="mt-4 text-blue-200">Most Popular Choice</p>
+              <p class="mt-8">
+                <span class="text-4xl font-extrabold text-white">$349</span>
+                <span class="text-base font-medium text-blue-200">/person</span>
+              </p>
+              <p class="mt-2 text-sm text-yellow-300 font-semibold">Save $100 - Best Value!</p>
+              <ul class="mt-6 space-y-4">
+                <li class="flex space-x-3">
+                  <svg class="flex-shrink-0 h-5 w-5 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span class="text-white">1-hour mountain adventure</span>
+                </li>
+                <li class="flex space-x-3">
+                  <svg class="flex-shrink-0 h-5 w-5 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span class="text-white">4K Video & Photos included</span>
+                </li>
+                <li class="flex space-x-3">
+                  <svg class="flex-shrink-0 h-5 w-5 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span class="text-white">Valley & peak exploration</span>
+                </li>
+                <li class="flex space-x-3">
+                  <svg class="flex-shrink-0 h-5 w-5 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span class="text-white">Souvenir package</span>
+                </li>
+              </ul>
+              <a href="/booking" class="mt-8 block w-full bg-white text-blue-600 text-center px-6 py-3 rounded-md text-base font-medium hover:bg-blue-50 transition-colors duration-300">
+                Book Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Ultimate Package -->
+          <div class="bg-white/95 backdrop-blur-sm border border-blue-200/30 rounded-lg shadow-xl transform hover:scale-105 transition-all duration-300">
+            <div class="p-6">
+              <h3 class="text-2xl font-semibold text-blue-900">Ultimate Experience</h3>
+              <p class="mt-4 text-gray-500">For the adventure seekers</p>
+              <p class="mt-8">
+                <span class="text-4xl font-extrabold text-blue-600">$599</span>
+                <span class="text-base font-medium text-gray-500">/person</span>
+              </p>
+              <p class="mt-2 text-sm text-red-600 font-semibold">Save $150 - Limited Time!</p>
+              <ul class="mt-6 space-y-4">
+                <li class="flex space-x-3">
+                  <svg class="flex-shrink-0 h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span class="text-gray-600">2-hour premium flight</span>
+                </li>
+                <li class="flex space-x-3">
+                  <svg class="flex-shrink-0 h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span class="text-gray-600">4K Video, Photos & Drone footage</span>
+                </li>
+                <li class="flex space-x-3">
+                  <svg class="flex-shrink-0 h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span class="text-gray-600">Advanced maneuvers</span>
+                </li>
+                <li class="flex space-x-3">
+                  <svg class="flex-shrink-0 h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span class="text-gray-600">Luxury souvenir package</span>
+                </li>
+                <li class="flex space-x-3">
+                  <svg class="flex-shrink-0 h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span class="text-gray-600">Priority booking</span>
+                </li>
+              </ul>
+              <a href="/booking" class="mt-8 block w-full bg-blue-600 text-white text-center px-6 py-3 rounded-md text-base font-medium hover:bg-blue-700 transition-colors duration-300">
+                Book Now
+              </a>
             </div>
           </div>
         </div>
-        
-        <div class="bg-white rounded-lg overflow-hidden transition-transform duration-300">
-          <img src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=250&q=80" 
-               alt="Ultimate Experience" 
-               class="w-full h-48 object-cover">
-          <div class="p-6">
-            <h3 class="text-xl font-bold mb-2">Ultimate Experience</h3>
-            <p class="text-gray-600 mb-4">A 2-hour premium flight with photography and advanced maneuvers.</p>
-            <div class="flex justify-between items-center">
-              <span class="text-2xl font-bold text-blue-900">$599 CAD</span>
-              <a href="#book-now" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">Book Now</a>
-            </div>
+
+        <!-- Additional Information -->
+        <div class="mt-10 text-center">
+          <p class="text-blue-200/90 max-w-2xl mx-auto backdrop-blur-sm">
+            All packages include essential safety equipment and training. Group discounts available for bookings of 4 or more people.
+          </p>
+          <div class="mt-6">
+            <a href="/contact" class="text-blue-200/90 hover:text-white transition-colors duration-300">
+              Contact us for group bookings →
+            </a>
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
 
-    <div class="relative h-96 rounded-xl overflow-hidden shadow-xl mb-12 mt-5">
+    <!-- Add countdown timer JavaScript -->
+    <script>
+      // Set the date we're counting down to (7 days from now)
+      const countDownDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).getTime();
+
+      // Update the countdown every 1 second
+      const x = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = countDownDate - now;
+
+        // Calculate days, hours, minutes and seconds
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the result
+        document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+        document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+        document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+        document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+
+        // If the countdown is finished, display expired message
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("countdown").innerHTML = "OFFER EXPIRED";
+        }
+      }, 1000);
+    </script>
+
+    <div class="relative h-96 overflow-hidden mb-12 mt-5">
         <img src="{{ asset('images/hero-section.png') }}" alt="Hang gliding over mountains" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent flex items-center">
           <div class="text-white p-8">
             <h2 class="text-3xl font-bold mb-4">Soar Above the Rockies</h2>
             <p class="text-xl mb-6">Book your adventure today and experience WhistlerSkySports from a whole new perspective</p>
-            <a href="{{ route('booking') }}" class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-3 px-6 rounded-lg transition duration-300 relative group">
+            <a href="/booking" class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-3 px-6 rounded-lg transition duration-300 relative group">
                 <span class="animate-text-on-hover">Book Your Million Dollar Smile</span>
                 <svg class="absolute inset-0 w-full h-full">
                     <rect class="border-animation" x="0" y="0" width="100%" height="100%" fill="none" stroke="#1e40af" stroke-width="2"/>
@@ -559,6 +715,201 @@
 
 .feature-section:hover .feature-image::after {
     opacity: 1;
+}
+
+/* Enhanced Pricing Section Styles */
+.pricing-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, rgba(0, 92, 187, 0.1), rgba(254, 214, 0, 0.1));
+    opacity: 0.5;
+    z-index: 0;
+}
+
+.pricing-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Glass effect for pricing cards */
+.pricing-section .bg-white\/95,
+.pricing-section .bg-gradient-to-b {
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.pricing-section .bg-white\/95:hover,
+.pricing-section .bg-gradient-to-b:hover {
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.2),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px) scale(1.02);
+}
+
+/* Enhanced timer styles */
+.pricing-section .bg-blue-800\/70 {
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Smooth transitions */
+.pricing-section * {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.welcome-container {
+  text-align: center;
+  padding: 2rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-text {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(255, 255, 255, 0.8) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: welcomeFadeIn 1.5s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@media (min-width: 640px) {
+  .welcome-text {
+    font-size: 3.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .welcome-text {
+    font-size: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .welcome-text {
+    font-size: 4.5rem;
+  }
+}
+
+.company-name {
+  display: inline-block;
+  background: linear-gradient(135deg, #FED600 0%, #FFB800 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+  animation: companyNameShine 3s infinite;
+}
+
+.company-name::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  animation: shimmerEffect 3s infinite;
+}
+
+.welcome-underline {
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #FED600, #FFB800);
+  margin: 1rem auto;
+  animation: underlineExpand 1.5s ease-out 0.5s forwards;
+  box-shadow: 0 2px 4px rgba(254, 214, 0, 0.3);
+  border-radius: 2px;
+}
+
+@keyframes welcomeFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes companyNameShine {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes shimmerEffect {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes underlineExpand {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 80%;
+  }
+}
+
+/* Add hover effect */
+.welcome-container:hover .welcome-text {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+.welcome-container:hover .welcome-underline {
+  filter: brightness(1.2);
+  transition: filter 0.3s ease;
+}
+
+/* Add floating effect to the company name */
+.company-name {
+  animation: floatEffect 3s ease-in-out infinite;
+}
+
+@keyframes floatEffect {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 </style>
 

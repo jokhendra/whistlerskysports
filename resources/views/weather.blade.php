@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 <html lang="en">
 @include("common.header")
-<body class="bg-gradient-to-br from-blue-50 to-gray-50">
+<body class="bg-gradient-to-br">
   @include("common.nav")
   <div class="container mx-auto px-4 py-12 mt-10">
     <div class="max-w-5xl mx-auto">
-      <h1 class="text-4xl md:text-6xl font-bold text-center mb-4 text-blue-900 bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-blue-600">Weather Information</h1>
+      <h1 class="text-4xl md:text-6xl font-bold text-center mb-4 text-blue-900 bg-clip-text bg-gradient-to-r from-blue-900 to-blue-600">Weather Information</h1>
       <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Stay informed about current conditions and forecasts for optimal flying experiences</p>
 
       

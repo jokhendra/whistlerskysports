@@ -8,20 +8,10 @@
   @include("common.nav")
   <div class="container mx-auto px-4 py-8">
     <div class="max-w-5xl mx-auto">
-      <h1 class="text-3xl md:text-5xl font-bold text-center mb-2 text-blue-900 drop-shadow-sm">Experience the Thrill at WhistlerSkySports</h1>
+      <h1 class="text-3xl md:text-5xl font-bold text-center mb-2 text-blue-900">Experience the Thrill at WhistlerSkySports</h1>
       <p class="text-center text-gray-700 mb-8 text-lg">Join us for an unforgettable aerial adventure in the majestic skies of Whistler</p>
       
-      <!-- Early Bird Discount Banner -->
-      <div class="bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg shadow-lg p-4 mb-8">
-        <div class="flex items-center justify-center space-x-2">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span class="text-white font-semibold">Book 30 days in advance and get 20% off! Use code: <span class="bg-white text-green-600 px-2 py-1 rounded">EARLYBIRD20</span></span>
-        </div>
-      </div>
-      
-      <div id="booking-form" class="bg-white rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:shadow-blue-200 border border-blue-50">
+      <div id="booking-form" class="bg-white rounded-sm overflow-hidden transform transition-all duration-300 hover:shadow-blue-200 border border-blue-50">
         <!-- Booking Form Header -->
         <div class="bg-gradient-to-r from-sky-800 via-blue-700 to-indigo-800 p-8 relative overflow-hidden">
           <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32 blur-2xl"></div>
@@ -139,40 +129,6 @@
               <textarea id="additional_info" name="additional_info" required rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Any other details we should know to make your experience perfect"></textarea>
             </div>
 
-            <!-- Discount Code Section -->
-            <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
-              <div class="flex items-center space-x-4">
-                <div class="flex-grow">
-                  <label for="discount_code" class="block text-sm font-medium text-gray-700">Have a discount code?</label>
-                  <input type="text" id="discount_code" name="discount_code" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Enter your code">
-                </div>
-                <button type="button" onclick="applyDiscount()" class="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
-                  Apply
-                </button>
-              </div>
-            </div>
-
-            <!-- Price Summary -->
-            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-              <h4 class="text-lg font-semibold text-gray-800 mb-4">Price Summary</h4>
-              <div class="space-y-2">
-                <div class="flex justify-between">
-                  <span class="text-gray-600">Base Price:</span>
-                  <span id="basePrice" class="font-medium">$0.00</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-gray-600">Discount:</span>
-                  <span id="discountAmount" class="font-medium text-green-600">-$0.00</span>
-                </div>
-                <div class="border-t border-gray-200 pt-2 mt-2">
-                  <div class="flex justify-between">
-                    <span class="text-gray-800 font-semibold">Total:</span>
-                    <span id="totalPrice" class="font-bold text-lg">$0.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
             <div class="flex items-start p-4 bg-blue-50 rounded-lg border border-blue-100">
               <div class="flex items-center h-5">
                 <input id="waiver" name="waiver" type="checkbox" required class="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
@@ -482,43 +438,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         const form = document.querySelector('form');
         const packageSelect = document.getElementById('package');
-        const discountCode = document.getElementById('discount_code');
-        let discountApplied = false;
         
-        // Update price when package is selected
-        packageSelect.addEventListener('change', function() {
-            updatePrice();
-        });
-
-        // Function to update price
-        function updatePrice() {
-            const selectedOption = packageSelect.options[packageSelect.selectedIndex];
-            const basePrice = selectedOption.dataset.price ? parseFloat(selectedOption.dataset.price) : 0;
-            
-            document.getElementById('basePrice').textContent = `$${basePrice.toFixed(2)}`;
-            
-            if (discountApplied) {
-                const discountAmount = basePrice * 0.2;
-                document.getElementById('discountAmount').textContent = `-$${discountAmount.toFixed(2)}`;
-                document.getElementById('totalPrice').textContent = `$${(basePrice - discountAmount).toFixed(2)}`;
-            } else {
-                document.getElementById('discountAmount').textContent = '-$0.00';
-                document.getElementById('totalPrice').textContent = `$${basePrice.toFixed(2)}`;
-            }
-        }
-
-        // Function to apply discount
-        window.applyDiscount = function() {
-            const code = discountCode.value.trim().toUpperCase();
-            if (code === 'EARLYBIRD20') {
-                discountApplied = true;
-                updatePrice();
-                alert('20% discount applied successfully!');
-            } else {
-                alert('Invalid discount code. Please try again.');
-            }
-        }
-
         // Form validation
         form.addEventListener('submit', function(event) {
             const name = document.getElementById('name').value;
