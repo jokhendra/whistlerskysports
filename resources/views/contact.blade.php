@@ -35,6 +35,77 @@
     </div>
   </div>
   
+  <!-- How To Reach Section -->
+  <div class="bg-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8 border-l-4 border-blue-600 pl-4">How To Reach</h2>
+        
+        <div class="space-y-8">
+          <!-- Location -->
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0">
+              <div class="p-2 bg-blue-100 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">Lonavala, Maharashtra</h3>
+            </div>
+          </div>
+
+          <!-- By Air -->
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0">
+              <div class="p-2 bg-blue-100 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">By Air:</h3>
+              <p class="text-gray-600">The nearest airport is Lohegaon Airport(PNQ), Pune. You can hire a cab from there to reach the location.</p>
+            </div>
+          </div>
+
+          <!-- By Road -->
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0">
+              <div class="p-2 bg-blue-100 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                </svg>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">By Road:</h3>
+              <p class="text-gray-600">The best mode to reach Lonavala is by road. You can board a bus or a taxi from Mumbai, Thane, Pune to reach Lonavala. One can travel without any problem.</p>
+            </div>
+          </div>
+
+          <!-- By Train -->
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0">
+              <div class="p-2 bg-blue-100 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                </svg>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">By Train:</h3>
+              <p class="text-gray-600">As Lonavala Railway Station(LNL) is situated between the Mumbai-Pune railway line, Lonavala is well connected to all the major trains that run from Mumbai to Pune.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <!-- Contact Section -->
   <div class="bg-gradient-to-b from-blue-50 bg-gray-200 py-16">
     <div class="container mx-auto px-4">

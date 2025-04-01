@@ -28,16 +28,16 @@
     
     
     <!-- Features Section -->
-    <div class="py-12">
+    <div class="">
       <h2 class="text-3xl font-bold text-center text-amber-400">Why Choose WhistlerSkySports?</h2>
       <!-- First Feature -->
       <div class="feature-section flex flex-col md:flex-row items-center">
         <div class="md:w-1/2 feature-image">
           <img src="{{ asset('images/image000000 2.JPG') }}"
                alt="Experienced Pilots" 
-               class="w-full h-[400px] object-cover shadow-lg">
+               class="w-full h-[400px] object-cover"/>
         </div>
-        <div class="md:w-1/2 h-[400px] px-30 flex items-center p-6 mt-72 feature-content bg-[#f8f8f8]">
+        <div class="md:w-1/2 h-[400px] px-30 flex items-center p-6 feature-content bg-[#f8f8f8]">
           <div>
             <h3 class="text-2xl font-bold mb-4">Experienced Pilots</h3>
             <p class="text-gray-700 text-lg leading-relaxed">Our certified pilots have thousands of flight hours and know the Canadian Rockies like the back of their hand. With years of experience in power hang gliding, they ensure your safety while providing an unforgettable adventure.</p>
@@ -47,7 +47,7 @@
 
       <!-- Second Feature -->
       <div class="feature-section flex flex-col-reverse  md:flex-row items-center">
-        <div class="md:w-1/2 h-[400px] px-30 flex items-center p-6 mt-72 feature-content bg-[#f8f8f8]">
+        <div class="md:w-1/2 h-[400px] px-30 flex items-center p-6 feature-content bg-[#f8f8f8]">
           <div>
             <h3 class="text-2xl font-bold mb-4">Top-Notch Equipment</h3>
             <p class="text-gray-700 text-lg leading-relaxed">We use only the latest power hang gliders with rigorous safety inspections before every flight. Our equipment is maintained to the highest standards, ensuring your safety and comfort throughout your journey.</p>
@@ -56,7 +56,7 @@
         <div class="md:w-1/2 feature-image">
           <img src="{{ asset('images/ecupment.jpg') }}" 
                alt="Top-Notch Equipment" 
-               class="w-full h-[400px] object-cover shadow-lg">
+               class="w-full h-[400px] object-cover"/>
         </div>
       </div>
 
@@ -65,9 +65,9 @@
         <div class="md:w-1/2 feature-image">
           <img src="{{ asset('images/Airport.jpg') }}" 
                alt="Breathtaking Views" 
-               class="w-full h-[400px] object-cover shadow-lg">
+               class="w-full h-[400px] object-cover"/>
         </div>
-        <div class="md:w-1/2 h-[400px] px-30 flex items-center mt-72 p-6 feature-content bg-[#f8f8f8]">
+        <div class="md:w-1/2 h-[400px] px-30 flex items-center p-6 feature-content bg-[#f8f8f8]">
           <div>
             <h3 class="text-2xl font-bold mb-4">Breathtaking Views</h3>
             <p class="text-gray-700 text-lg leading-relaxed">Soar over pristine lakes, majestic mountains, and lush forests that only Canada can offer. Experience the stunning beauty of the Canadian Rockies from a unique perspective that few get to witness.</p>
@@ -77,14 +77,14 @@
     </div>
     
     <!-- Pricing Section -->
-    <div id="pricing" class="pricing-section bg-gradient-to-b from-blue-900/90 via-blue-800/85 to-blue-900/90 backdrop-blur-md py-16 mt-10">
+    <div id="pricing" class="pricing-section bg-gradient-to-b from-blue-900/70 via-blue-800/65 to-blue-900/70 backdrop-blur-md py-16 mt-5">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="sm:flex sm:flex-col sm:align-center">
           <h2 class="text-3xl font-extrabold text-white/95 sm:text-center">Introductory Pricing</h2>
           <p class="mt-5 text-xl text-blue-200/90 sm:text-center">Experience the thrill of power hang gliding with our special promotional offers!</p>
           
           <!-- Promotional Timer -->
-          <div class="mt-6 bg-blue-800/70 backdrop-blur-sm rounded-lg p-4 sm:w-fit sm:mx-auto border border-white/10">
+          <div class="mt-6 bg-blue-800/40 backdrop-blur-sm rounded-lg p-4 sm:w-fit sm:mx-auto border border-white/20">
             <p class="text-blue-200/90 text-sm">Limited Time Offer Ends In:</p>
             <div class="flex space-x-4 mt-2">
               <div class="flex-1 text-center">
@@ -109,7 +109,7 @@
 
         <div class="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-3">
           <!-- Basic Package -->
-          <div class="bg-white/95 backdrop-blur-sm border border-blue-200/30 rounded-lg shadow-xl transform hover:scale-105 transition-all duration-300">
+          <div class="bg-white/75 backdrop-blur-md border border-white/30 rounded-lg shadow-xl transform hover:scale-105 transition-all duration-300">
             <div class="p-6">
               <h3 class="text-2xl font-semibold text-blue-900">Basic Experience</h3>
               <p class="mt-4 text-gray-500">Perfect for first-time flyers</p>
@@ -145,7 +145,7 @@
           </div>
 
           <!-- Premium Package -->
-          <div class="bg-gradient-to-b from-blue-600/95 to-blue-800/95 backdrop-blur-sm border border-blue-500/30 rounded-lg shadow-xl transform hover:scale-105 transition-all duration-300">
+          <div class="bg-gradient-to-b from-blue-600/75 to-blue-800/75 backdrop-blur-md border border-blue-300/30 rounded-lg shadow-xl transform hover:scale-105 transition-all duration-300">
             <div class="p-6">
               <h3 class="text-2xl font-semibold text-white">Mountain Explorer</h3>
               <p class="mt-4 text-blue-200">Most Popular Choice</p>
@@ -187,7 +187,7 @@
           </div>
 
           <!-- Ultimate Package -->
-          <div class="bg-white/95 backdrop-blur-sm border border-blue-200/30 rounded-lg shadow-xl transform hover:scale-105 transition-all duration-300">
+          <div class="bg-white/75 backdrop-blur-md border border-white/30 rounded-lg shadow-xl transform hover:scale-105 transition-all duration-300">
             <div class="p-6">
               <h3 class="text-2xl font-semibold text-blue-900">Ultimate Experience</h3>
               <p class="mt-4 text-gray-500">For the adventure seekers</p>
@@ -237,11 +237,11 @@
 
         <!-- Additional Information -->
         <div class="mt-10 text-center">
-          <p class="text-blue-200/90 max-w-2xl mx-auto backdrop-blur-sm">
+          <p class="text-blue-200/95 max-w-2xl mx-auto bg-blue-900/30 backdrop-blur-sm p-4 rounded-lg border border-white/10">
             All packages include essential safety equipment and training. Group discounts available for bookings of 4 or more people.
           </p>
           <div class="mt-6">
-            <a href="/contact" class="text-blue-200/90 hover:text-white transition-colors duration-300">
+            <a href="/contact" class="text-blue-200/95 hover:text-white transition-colors duration-300">
               Contact us for group bookings →
             </a>
           </div>
@@ -279,7 +279,7 @@
       }, 1000);
     </script>
 
-    <div class="relative h-96 overflow-hidden mb-12 mt-5">
+    <div class="relative h-96 overflow-hidden mb-5 mt-5">
         <img src="{{ asset('images/hero-section.png') }}" alt="Hang gliding over mountains" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent flex items-center">
           <div class="text-white p-8">
@@ -727,9 +727,8 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(45deg, rgba(0, 92, 187, 0.1), rgba(254, 214, 0, 0.1));
-    opacity: 0.5;
-    z-index: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    pointer-events: none;
 }
 
 .pricing-section > * {
@@ -737,16 +736,16 @@
     z-index: 1;
 }
 
-/* Glass effect for pricing cards */
-.pricing-section .bg-white\/95,
-.pricing-section .bg-gradient-to-b {
+/* Enhanced glass effect for pricing cards */
+.pricing-section [class*="bg-white"],
+.pricing-section [class*="bg-gradient"] {
     box-shadow: 
         0 8px 32px rgba(0, 0, 0, 0.1),
         inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
-.pricing-section .bg-white\/95:hover,
-.pricing-section .bg-gradient-to-b:hover {
+.pricing-section [class*="bg-white"]:hover,
+.pricing-section [class*="bg-gradient"]:hover {
     box-shadow: 
         0 12px 48px rgba(0, 0, 0, 0.2),
         inset 0 0 0 2px rgba(255, 255, 255, 0.2);
@@ -754,7 +753,7 @@
 }
 
 /* Enhanced timer styles */
-.pricing-section .bg-blue-800\/70 {
+.pricing-section .bg-blue-800\/40 {
     box-shadow: 
         0 4px 16px rgba(0, 0, 0, 0.1),
         inset 0 0 0 1px rgba(255, 255, 255, 0.05);

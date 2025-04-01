@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="bg-gray-100 py-16">
+<section class="bg-gray-100 py-16 mt-10">
     <div class="container mx-auto px-4">
       <div class="flex flex-col items-center text-center">
         <h1 class="text-5xl font-bold text-amber-600 mb-6">About Power Hang Glider</h1>
@@ -15,7 +15,7 @@
 </section>
 
 <!-- Our Story Section -->
-<section class="py-16">
+<section class="py-16 bg-amber-50">
   <div class="container mx-auto px-4">
     <div class="flex flex-col md:flex-row items-center gap-12">
       <div class="md:w-1/2">
@@ -91,7 +91,7 @@
 </section>
 
 <!-- Team Section -->
-<section class="py-16">
+<section class="py-16 bg-amber-50">
   <div class="container mx-auto px-4">
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold text-gray-800 mb-4">Meet Our Team</h2>
@@ -232,7 +232,7 @@
 </section>
 
 <!-- CTA Section -->
-<section class="py-16">
+<section class="py-16 bg-white">
   <div class="container mx-auto px-4">
     <div class="bg-gray-100 rounded-lg p-8 md:p-12 text-center">
       <h2 class="text-3xl font-bold text-gray-800 mb-4">Ready to Soar with Us?</h2>

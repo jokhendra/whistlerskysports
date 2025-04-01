@@ -34,7 +34,7 @@
               </h3>
               
               <div class="space-y-2">
-                <label for="name" class="block text-sm font-medium text-gray-700">Lead Adventurer's Name *</label>
+                <label for="name" class="block text-sm font-medium text-gray-700">Lead Adventurer's Full Name *</label>
                 <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
               </div>
               
@@ -68,7 +68,7 @@
                 Adventure Details
               </h3>
 
-              <div class="space-y-2">
+              <!-- <div class="space-y-2">
                 <label for="package" class="block text-sm font-medium text-gray-700">Select Package *</label>
                 <select id="package" name="package" required class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
                   <option value="">Choose a package</option>
@@ -77,7 +77,7 @@
                   <option value="advanced" data-price="599">Advanced Training - $599</option>
                   <option value="certification" data-price="1499">Certification Course - $1,499</option>
                 </select>
-              </div>
+              </div> -->
 
               <div class="space-y-2">
                 <label for="flyer_details" class="block text-sm font-medium text-gray-700">Participant Details (Name & Weight) *</label>
@@ -102,6 +102,123 @@
                   <option value="no">No - I prefer later in the day</option>
                 </select>
               </div>
+            </div>
+          </div>
+          
+          <!-- Memories Section -->
+          <div class="mt-8 space-y-6">
+            <h3 class="text-xl font-semibold text-gray-800 border-b border-blue-100 pb-2 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Add Memories
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Photo Package -->
+              <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-300">
+                <div class="flex justify-between items-start mb-4">
+                  <div>
+                    <h4 class="text-lg font-semibold text-gray-800">Photo Package</h4>
+                    <p class="text-gray-600 text-sm">High-quality digital photos of your adventure</p>
+                    <p class="text-blue-600 font-semibold mt-1">$99</p>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <button type="button" onclick="updateQuantity('photo_package', -1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
+                      <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                      </svg>
+                    </button>
+                    <input type="number" name="photo_package" id="photo_package" class="w-16 text-center border-gray-300 rounded-md" value="0" min="0" readonly>
+                    <button type="button" onclick="updateQuantity('photo_package', 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 hover:bg-blue-200 transition-colors duration-200">
+                      <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Video Package -->
+              <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-300">
+                <div class="flex justify-between items-start mb-4">
+                  <div>
+                    <h4 class="text-lg font-semibold text-gray-800">Video Package</h4>
+                    <p class="text-gray-600 text-sm">Professional video coverage of your flight</p>
+                    <p class="text-blue-600 font-semibold mt-1">$149</p>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <button type="button" onclick="updateQuantity('video_package', -1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
+                      <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                      </svg>
+                    </button>
+                    <input type="number" name="video_package" id="video_package" class="w-16 text-center border-gray-300 rounded-md" value="0" min="0" readonly>
+                    <button type="button" onclick="updateQuantity('video_package', 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 hover:bg-blue-200 transition-colors duration-200">
+                      <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Deluxe Package -->
+              <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-300">
+                <div class="flex justify-between items-start mb-4">
+                  <div>
+                    <h4 class="text-lg font-semibold text-gray-800">Deluxe Package</h4>
+                    <p class="text-gray-600 text-sm">Photos + Video with premium editing</p>
+                    <p class="text-blue-600 font-semibold mt-1">$229</p>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <button type="button" onclick="updateQuantity('deluxe_package', -1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
+                      <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                      </svg>
+                    </button>
+                    <input type="number" name="deluxe_package" id="deluxe_package" class="w-16 text-center border-gray-300 rounded-md" value="0" min="0" readonly>
+                    <button type="button" onclick="updateQuantity('deluxe_package', 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 hover:bg-blue-200 transition-colors duration-200">
+                      <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Merchandise -->
+              <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-300">
+                <div class="flex justify-between items-start mb-4">
+                  <div>
+                    <h4 class="text-lg font-semibold text-gray-800">Merchandise Package</h4>
+                    <p class="text-gray-600 text-sm">T-shirt, cap, and souvenir photos</p>
+                    <p class="text-blue-600 font-semibold mt-1">$79</p>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <button type="button" onclick="updateQuantity('merch_package', -1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
+                      <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                      </svg>
+                    </button>
+                    <input type="number" name="merch_package" id="merch_package" class="w-16 text-center border-gray-300 rounded-md" value="0" min="0" readonly>
+                    <button type="button" onclick="updateQuantity('merch_package', 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 hover:bg-blue-200 transition-colors duration-200">
+                      <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Total Section -->
+            <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
+              <div class="flex justify-between items-center">
+                <h4 class="text-lg font-semibold text-gray-800">Total Memories Package:</h4>
+                <p class="text-xl font-bold text-blue-600" id="total_price">$0</p>
+              </div>
+              <p class="text-sm text-gray-600 mt-2">* All packages include digital delivery within 48 hours</p>
             </div>
           </div>
           
@@ -451,6 +568,38 @@
                 alert('Please fill in all required fields and accept both the terms and conditions and waiver.');
             }
         });
+    });
+
+    // Package prices
+    const prices = {
+      photo_package: 99,
+      video_package: 149,
+      deluxe_package: 229,
+      merch_package: 79
+    };
+
+    // Function to update quantity
+    function updateQuantity(packageId, change) {
+      const input = document.getElementById(packageId);
+      const currentValue = parseInt(input.value);
+      const newValue = Math.max(0, currentValue + change);
+      input.value = newValue;
+      updateTotalPrice();
+    }
+
+    // Function to update total price
+    function updateTotalPrice() {
+      let total = 0;
+      for (const [packageId, price] of Object.entries(prices)) {
+        const quantity = parseInt(document.getElementById(packageId).value);
+        total += quantity * price;
+      }
+      document.getElementById('total_price').textContent = `$${total}`;
+    }
+
+    // Initialize total price
+    document.addEventListener('DOMContentLoaded', function() {
+      updateTotalPrice();
     });
   </script>
 </body>

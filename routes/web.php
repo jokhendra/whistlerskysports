@@ -10,9 +10,9 @@ Route::get('/', function () {
 });
 
 
-// Route::get('/about', function () {
-//     return view('about');
-// });
+Route::get('/about', function () {
+    return view('about');
+});
 
 Route::get('/contact', function () {
     return view('contact');
@@ -258,6 +258,10 @@ Route::get('/waiver', function () {
 Route::get('/terms', function () {
     return view('terms');
 })->name('terms');
+
+Route::get('/pricing', function () {
+    return view('pricing');
+})->name('pricing');
 
 Route::middleware('api')->group(function () {
     // Chat Bot Routes

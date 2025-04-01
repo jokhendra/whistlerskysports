@@ -22,14 +22,14 @@
                 </button>
                 <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                     <ul class="font-medium flex flex-col p-4 md:p-0 mt-3 rounded-lg md:flex-row md:space-x-4 lg:space-x-8 md:mt-0 md:border-0 absolute md:relative left-0 right-0 top-[60px] md:top-0 md:shadow-none shadow-lg z-40 md:items-center">
-                        <li>
+                        <!-- <li>
                             <a href="/" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300" aria-current="page">
                                 <span class="relative inline-block group">
                                     Welcome
                                     <span class="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
                                 </span>
                             </a>
-                        </li>
+                        </li> -->
                         <!-- <li class="relative group">
                             <a href="#" class="flex items-center w-full py-2 pl-3 pr-4 text-white rounded hover:bg-blue-700 md:hover:bg-transparent md:border-0 md:hover:text-emerald-300 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -117,9 +117,25 @@
                             </div>
                         </li> -->
                         <li>
+                            <a href="/about" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300">
+                                <span class="relative inline-block group">
+                                    About Us
+                                    <span class="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="/gallery" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300">
                                 <span class="relative inline-block group">
                                     Gallery
+                                    <span class="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/weather" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300">
+                                <span class="relative inline-block group">
+                                    Weather
                                     <span class="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
                                 </span>
                             </a>
@@ -132,27 +148,53 @@
                                 </span>
                             </a>
                         </li>
-                        <!-- <li>
-                            <a href="/about" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-blue-700 md:hover:bg-transparent md:border-0 md:hover:text-emerald-300 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 inline-block mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                About
-                            </a>
-                        </li> -->
                         <li>
-                            <a href="/weather" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300">
+                            <a href="/pricing" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300">
                                 <span class="relative inline-block group">
-                                    Weather
+                                    Pricing
                                     <span class="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
                                 </span>
                             </a>
                         </li>
-                        <li class="md:ml-4">
-                            <a href="/booking" class="flex items-center py-3 pl-5 pr-4 text-[#005CBB] font-bold rounded-full bg-[#FED600] hover:bg-[#b78b4d] hover:text-gray-200 transform hover:scale-102 transition-all duration-300 shadow-md hover:shadow-xl relative overflow-hidden group">
-                                <span class="relative z-10">Book Now</span>
+                        <li class="md:ml-4 relative group">
+                            <a href="#" class="flex items-center py-3 pl-5 pr-4 text-[#005CBB] font-bold rounded-full bg-[#FED600] hover:bg-[#b78b4d] hover:text-gray-200 transform hover:scale-102 transition-all duration-300 shadow-md hover:shadow-xl relative overflow-hidden group">
+                                <span class="relative z-10">Learn To Fly</span>
+                                <svg class="w-4 h-4 ml-2 relative z-10" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                </svg>
                                 <div class="absolute inset-0 bg-[#c05300] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                             </a>
+                            <!-- Added pt-2 to create space for hover and modified the dropdown positioning -->
+                            <div class="hidden group-hover:block absolute right-0 w-64 bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-2xl border border-gray-100 transform transition-all duration-300 mt-1 overflow-hidden">
+                                <div class="absolute -top-2 left-0 right-0 h-2 bg-transparent"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-transparent to-yellow-50/30 opacity-50"></div>
+                                <ul class="py-2 relative z-10">
+                                    <li class="group/item">
+                                        <a href="/booking?type=microlight" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-transparent group-hover/item:text-blue-600 transition-all duration-300">
+                                            <span class="relative overflow-hidden">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3 inline-block transform transition-transform group-hover/item:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                                                </svg>
+                                                <span class="font-bold">Microlight</span>
+                                                <span class="block text-sm text-gray-500 font-normal">Experience the freedom of flight</span>
+                                            </span>
+                                            <span class="ml-auto opacity-0 group-hover/item:opacity-100 transform translate-x-2 group-hover/item:translate-x-0 transition-all duration-300">→</span>
+                                        </a>
+                                    </li>
+                                    <li class="group/item">
+                                        <a href="/booking?type=gyrocopter" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-transparent group-hover/item:text-blue-600 transition-all duration-300">
+                                            <span class="relative overflow-hidden">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3 inline-block transform transition-transform group-hover/item:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.072 0a5 5 0 010 7.07M13 12a1 1 0 11-2 0 1 1 0 012 0z"/>
+                                                </svg>
+                                                <span class="font-bold">Gyrocopter</span>
+                                                <span class="block text-sm text-gray-500 font-normal">Master the art of aviation</span>
+                                            </span>
+                                            <span class="ml-auto opacity-0 group-hover/item:opacity-100 transform translate-x-2 group-hover/item:translate-x-0 transition-all duration-300">→</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                 </div>

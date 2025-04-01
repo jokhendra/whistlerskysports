@@ -171,6 +171,23 @@ Refunds will be made in the same method of payment and at the same location of p
             </div>
           </div>
 
+          <!-- FAQ Item 13 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <button class="flex justify-between items-center w-full px-6 py-4 text-lg font-medium text-left text-blue-800 focus:outline-none">
+              <span>Thing to Carry</span>
+              <svg class="h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="px-6 py-4 text-gray-600">
+              <p>Sunscreen & Sunglasses</p>
+              <p>Snacks</p>
+              <p>Camera</p>
+              <p>Valid ID (Passport, Driver’s License, etc.)</p>
+              <p>VA Voucher</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
