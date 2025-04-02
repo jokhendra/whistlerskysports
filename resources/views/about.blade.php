@@ -94,7 +94,7 @@
 <section class="py-16 bg-amber-50">
   <div class="container mx-auto px-4">
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold text-gray-800 mb-4">Meet Our Team</h2>
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Meet Our Friends</h2>
       <p class="text-gray-600 max-w-2xl mx-auto">
         Our team of experienced pilots and engineers is dedicated to delivering the best hang gliding experiences.
       </p>
@@ -206,25 +206,25 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
       <!-- Stat 1 -->
       <div>
-        <div class="text-4xl font-bold mb-2">10+</div>
-        <div class="text-xl">Years of Experience</div>
+        <div class="text-4xl font-bold mb-2">1000+</div>
+        <div class="text-xl">Hours of Experience</div>
       </div>
       
       <!-- Stat 2 -->
       <div>
-        <div class="text-4xl font-bold mb-2">500+</div>
-        <div class="text-xl">Projects Completed</div>
+        <div class="text-4xl font-bold mb-2">50+</div>
+        <div class="text-xl">Students Trained</div>
       </div>
       
       <!-- Stat 3 -->
       <div>
-        <div class="text-4xl font-bold mb-2">50+</div>
-        <div class="text-xl">Team Members</div>
+        <div class="text-4xl font-bold mb-2">10+</div>
+        <div class="text-xl">Partners</div>
       </div>
       
       <!-- Stat 4 -->
       <div>
-        <div class="text-4xl font-bold mb-2">200+</div>
+        <div class="text-4xl font-bold mb-2">1200+</div>
         <div class="text-xl">Happy Clients</div>
       </div>
     </div>
@@ -237,10 +237,10 @@
     <div class="bg-gray-100 rounded-lg p-8 md:p-12 text-center">
       <h2 class="text-3xl font-bold text-gray-800 mb-4">Ready to Soar with Us?</h2>
       <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
-        Discover the thrill of hang gliding with Power Hang Glider. Contact us today to book your adventure.
+        Discover the thrill of Microlight and Gyrocopter Flying Contact us today to book your first flight lesson!
       </p>
       <a href="#" class="inline-block bg-amber-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-amber-700 transition-colors">
-        Contact Us Today
+        Ready to Learn?
       </a>
     </div>
   </div>

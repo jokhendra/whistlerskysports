@@ -111,6 +111,12 @@
               <span>Contact</span>
             </a>
           </li>
+          <li>
+            <a href="#" class="text-blue-100 hover:text-white transition-colors duration-300 flex items-center space-x-2 group">
+              <span class="w-1 h-1 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              <span>Reviews</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

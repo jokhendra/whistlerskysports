@@ -24,10 +24,10 @@
         <div class="max-w-4xl mx-auto bg-white/40 rounded-2xl shadow-xl overflow-hidden mb-20">
             <div class="p-8 text-center">
                 <h2 class="text-3xl font-bold mb-2">30 Minute Lesson</h2>
-                <div class="text-4xl font-bold text-purple-600 mb-2">$255</div>
+                <div class="text-4xl font-bold text-purple-600 mb-2">CA$199</div>
                 <p class="text-gray-600 mb-4">per person</p>
                 <p class="text-xl text-gray-700 mb-6">Introductory flight lesson</p>
-                <p class="text-lg text-gray-600 mb-8">Spread your wings and give trike flying a try!</p>
+                <p class="text-lg text-gray-600 mb-8">Spread your wings and reach out to the sky!</p>
                 <a href="{{ route('booking') }}" class="inline-block bg-purple-600 text-white font-bold py-3 px-8 rounded-full hover:bg-purple-700 transition duration-300 transform hover:scale-105">
                     RESERVE
                 </a>
@@ -48,7 +48,7 @@
                     <p class="text-gray-600 text-sm mb-6">
                         High resolution photos professionally shot with an SLR camera and nice big, chunky, expensive wide-angle lens.
                     </p>
-                    <div class="text-2xl font-bold text-purple-600">$75</div>
+                    <div class="text-2xl font-bold text-purple-600">CA$110</div>
                 </div>
             </div>
 
@@ -59,7 +59,7 @@
                     <p class="text-gray-600 text-sm mb-6">
                         High definition video of your entire flight with cockpit audio capturing all the excitement and information during your flight.
                     </p>
-                    <div class="text-2xl font-bold text-purple-600">$75</div>
+                    <div class="text-2xl font-bold text-purple-600">CA$110</div>
                 </div>
             </div>
 
@@ -70,7 +70,7 @@
                     <p class="text-gray-600 text-sm mb-6">
                         High resolution photos & High definition video
                     </p>
-                    <div class="text-2xl font-bold text-purple-600">$95</div>
+                    <div class="text-2xl font-bold text-purple-600">CA$130</div>
                 </div>
             </div>
 
@@ -79,9 +79,9 @@
                 <div class="p-6 text-center">
                     <h3 class="text-xl font-bold text-gray-800 mb-4">Deluxe</h3>
                     <p class="text-gray-600 text-sm mb-6">
-                        Photos, Video and a Paradise Air hat or shirt
+                        Photos, Video and a WhistlerSkySports Cap or shirt and Keyring
                     </p>
-                    <div class="text-2xl font-bold text-purple-600">$120</div>
+                    <div class="text-2xl font-bold text-purple-600">CA$160</div>
                 </div>
             </div>
 
@@ -90,9 +90,9 @@
                 <div class="p-6 text-center">
                     <h3 class="text-xl font-bold text-gray-800 mb-4">Merchandise</h3>
                     <p class="text-gray-600 text-sm mb-6">
-                        Paradise Air hat or shirt
+                        WhistlerSkySports Cap or shirt and Keyring
                     </p>
-                    <div class="text-2xl font-bold text-purple-600">$30</div>
+                    <div class="text-2xl font-bold text-purple-600">CA$55</div>
                 </div>
             </div>
         </div>

@@ -133,6 +133,14 @@
                             </a>
                         </li>
                         <li>
+                            <a href="/review" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300">
+                                <span class="relative inline-block group">
+                                    Reviews
+                                    <span class="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="/weather" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300">
                                 <span class="relative inline-block group">
                                     Weather

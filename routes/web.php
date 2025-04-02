@@ -5,6 +5,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ChatBotController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\WeatherController;
+use App\Http\Controllers\ReviewController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -302,4 +304,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Settings
         Route::get('settings', [App\Http\Controllers\Admin\AdminController::class, 'settings'])->name('settings');
     });
-}); 
+});
+
+Route::get('/review', [ReviewController::class, 'index'])->name('reviews.index');
+Route::post('/review', [ReviewController::class, 'store'])->name('reviews.store'); 

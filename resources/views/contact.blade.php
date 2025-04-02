@@ -133,8 +133,8 @@
                 </div>
                 <div class="ml-4">
                   <h3 class="text-lg font-medium text-gray-900">Phone</h3>
-                  <p class="mt-1 text-gray-600">+1 (604) 123-4567</p>
-                  <p class="mt-1 text-gray-600">+1 (604) 987-6543</p>
+                  <p class="mt-1 text-gray-600">+1 216-288-1303</p>
+                  <!-- <p class="mt-1 text-gray-600">+1 (604) 987-6543</p> -->
                   <a href="tel:+16041234567" class="inline-block mt-2 text-blue-600 hover:text-blue-800 font-medium text-sm">Call Us Now →</a>
                 </div>
               </div>
@@ -147,8 +147,8 @@
                 </div>
                 <div class="ml-4">
                   <h3 class="text-lg font-medium text-gray-900">Email</h3>
-                  <p class="mt-1 text-gray-600">info@powerhanggliders.com</p>
-                  <p class="mt-1 text-gray-600">support@powerhanggliders.com</p>
+                  <p class="mt-1 text-gray-600">info@whistlerskysports.ca</p>
+                  <!-- <p class="mt-1 text-gray-600">support@powerhanggliders.com</p> -->
                   <a href="mailto:info@powerhanggliders.com" class="inline-block mt-2 text-blue-600 hover:text-blue-800 font-medium text-sm">Email Us →</a>
                 </div>
               </div>

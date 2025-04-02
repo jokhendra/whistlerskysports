@@ -107,102 +107,144 @@
           
           <!-- Memories Section -->
           <div class="mt-8 space-y-6">
-            <h3 class="text-xl font-semibold text-gray-800 border-b border-blue-100 pb-2 flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              Add Memories
-            </h3>
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-6 shadow-lg relative overflow-hidden">
+              <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32 blur-2xl"></div>
+              <div class="absolute bottom-0 left-0 w-40 h-40 bg-blue-400/20 rounded-full -ml-20 -mb-20 blur-xl"></div>
+              <div class="relative z-10">
+                <h3 class="text-2xl font-bold text-white flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  Capture Your Adventure
+                </h3>
+                <p class="text-blue-100 mt-2 text-lg">Choose from our premium memory packages to preserve your experience forever</p>
+              </div>
+            </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <!-- Photo Package -->
-              <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-300">
+              <div class="group bg-white p-6 rounded-xl border border-gray-100">
                 <div class="flex justify-between items-start mb-4">
                   <div>
-                    <h4 class="text-lg font-semibold text-gray-800">Photo Package</h4>
-                    <p class="text-gray-600 text-sm">High-quality digital photos of your adventure</p>
-                    <p class="text-blue-600 font-semibold mt-1">$99</p>
+                    <div class="flex items-center mb-2">
+                      <div class="bg-blue-100 p-2 rounded-lg mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                      </div>
+                      <h4 class="text-xl font-semibold text-gray-800">Photo Package</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm ml-11">High-quality digital photos of your adventure</p>
+                    <p class="text-blue-600 font-semibold mt-2 ml-11">CA$110</p>
                   </div>
-                  <div class="flex items-center space-x-3">
-                    <button type="button" onclick="updateQuantity('photo_package', -1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
-                      <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
-                      </svg>
-                    </button>
-                    <input type="number" name="photo_package" id="photo_package" class="w-16 text-center border-gray-300 rounded-md" value="0" min="0" readonly>
-                    <button type="button" onclick="updateQuantity('photo_package', 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 hover:bg-blue-200 transition-colors duration-200">
-                      <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                      </svg>
-                    </button>
+                  <div class="flex items-center">
+                    <label class="relative inline-flex items-center cursor-pointer">
+                      <input type="checkbox" name="photo_package" id="photo_package" class="sr-only peer">
+                      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                    </label>
                   </div>
                 </div>
               </div>
 
               <!-- Video Package -->
-              <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-300">
+              <div class="group bg-white p-6 rounded-xl border border-gray-100">
                 <div class="flex justify-between items-start mb-4">
                   <div>
-                    <h4 class="text-lg font-semibold text-gray-800">Video Package</h4>
-                    <p class="text-gray-600 text-sm">Professional video coverage of your flight</p>
-                    <p class="text-blue-600 font-semibold mt-1">$149</p>
+                    <div class="flex items-center mb-2">
+                      <div class="bg-purple-100 p-2 rounded-lg mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                      <h4 class="text-xl font-semibold text-gray-800">Video Package</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm ml-11">Professional video coverage of your flight</p>
+                    <p class="text-purple-600 font-semibold mt-2 ml-11">CA$110</p>
                   </div>
-                  <div class="flex items-center space-x-3">
-                    <button type="button" onclick="updateQuantity('video_package', -1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
-                      <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
-                      </svg>
-                    </button>
-                    <input type="number" name="video_package" id="video_package" class="w-16 text-center border-gray-300 rounded-md" value="0" min="0" readonly>
-                    <button type="button" onclick="updateQuantity('video_package', 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 hover:bg-blue-200 transition-colors duration-200">
-                      <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                      </svg>
-                    </button>
+                  <div class="flex items-center">
+                    <label class="relative inline-flex items-center cursor-pointer">
+                      <input type="checkbox" name="video_package" id="video_package" class="sr-only peer">
+                      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Both Package -->
+              <div class="group bg-white p-6 rounded-xl border border-gray-100">
+                <div class="flex justify-between items-start mb-4">
+                  <div>
+                    <div class="flex items-center mb-2">
+                      <div class="bg-green-100 p-2 rounded-lg mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                      <h4 class="text-xl font-semibold text-gray-800">Both (Photo + Video)</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm ml-11">Complete photo and video coverage</p>
+                    <p class="text-green-600 font-semibold mt-2 ml-11">CA$130</p>
+                  </div>
+                  <div class="flex items-center">
+                    <label class="relative inline-flex items-center cursor-pointer">
+                      <input type="checkbox" name="both_package" id="both_package" class="sr-only peer">
+                      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                    </label>
                   </div>
                 </div>
               </div>
 
               <!-- Deluxe Package -->
-              <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-300">
+              <div class="group bg-white p-6 rounded-xl border border-gray-100">
                 <div class="flex justify-between items-start mb-4">
                   <div>
-                    <h4 class="text-lg font-semibold text-gray-800">Deluxe Package</h4>
-                    <p class="text-gray-600 text-sm">Photos + Video with premium editing</p>
-                    <p class="text-blue-600 font-semibold mt-1">$229</p>
+                    <div class="flex items-center mb-2">
+                      <div class="bg-amber-100 p-2 rounded-lg mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                        </svg>
+                      </div>
+                      <h4 class="text-xl font-semibold text-gray-800">Deluxe Package</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm ml-11">Photos + Video with premium editing</p>
+                    <p class="text-amber-600 font-semibold mt-2 ml-11">CA$160</p>
                   </div>
-                  <div class="flex items-center space-x-3">
-                    <button type="button" onclick="updateQuantity('deluxe_package', -1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
-                      <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
-                      </svg>
-                    </button>
-                    <input type="number" name="deluxe_package" id="deluxe_package" class="w-16 text-center border-gray-300 rounded-md" value="0" min="0" readonly>
-                    <button type="button" onclick="updateQuantity('deluxe_package', 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 hover:bg-blue-200 transition-colors duration-200">
-                      <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                      </svg>
-                    </button>
+                  <div class="flex items-center">
+                    <label class="relative inline-flex items-center cursor-pointer">
+                      <input type="checkbox" name="deluxe_package" id="deluxe_package" class="sr-only peer">
+                      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                    </label>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <!-- Merchandise -->
-              <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-300">
+            <!-- Merchandise Package (Centered) -->
+            <div class="flex justify-center mt-6">
+              <div class="group bg-white p-6 rounded-xl border border-gray-100">
                 <div class="flex justify-between items-start mb-4">
                   <div>
-                    <h4 class="text-lg font-semibold text-gray-800">Merchandise Package</h4>
-                    <p class="text-gray-600 text-sm">T-shirt, cap, and souvenir photos</p>
-                    <p class="text-blue-600 font-semibold mt-1">$79</p>
+                    <div class="flex items-center mb-2">
+                      <div class="bg-red-100 p-2 rounded-lg mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                      </div>
+                      <h4 class="text-xl font-semibold text-gray-800 me-10">Merchandise Package</h4>
+                    </div>
+                    <p class="text-gray-600 text-sm ml-11">T-shirt, cap, and souvenir photos</p>
+                    <p class="text-red-600 font-semibold mt-2 ml-11">CA$55</p>
                   </div>
-                  <div class="flex items-center space-x-3">
-                    <button type="button" onclick="updateQuantity('merch_package', -1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200">
+                  <div class="flex items-center">
+                    <button type="button" onclick="updateQuantity('merch_package', -1)" class="w-8 h-8 flex items-center hover:cursor-pointer justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200 mr-[5px]">
                       <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
                       </svg>
                     </button>
-                    <input type="number" name="merch_package" id="merch_package" class="w-16 text-center border-gray-300 rounded-md" value="0" min="0" readonly>
-                    <button type="button" onclick="updateQuantity('merch_package', 1)" class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 hover:bg-blue-200 transition-colors duration-200">
+                    <input type="number" name="merch_package" id="merch_package" class="w-12 text-center border-gray-300 rounded-md" value="0" min="0" readonly>
+                    <button type="button" onclick="updateQuantity('merch_package', 1)" class="w-8 h-8 flex items-center hover:cursor-pointer justify-center rounded-full bg-blue-100 hover:bg-blue-200 transition-colors duration-200 ml-[5px]">
                       <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                       </svg>
@@ -213,12 +255,21 @@
             </div>
 
             <!-- Total Section -->
-            <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-100 shadow-sm">
               <div class="flex justify-between items-center">
-                <h4 class="text-lg font-semibold text-gray-800">Total Memories Package:</h4>
-                <p class="text-xl font-bold text-blue-600" id="total_price">$0</p>
+                <div class="flex items-center">
+                  <div class="bg-blue-100 p-2 rounded-lg mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-semibold text-gray-800">Total Memories Package</h4>
+                    <p class="text-sm text-gray-600">All packages include digital delivery within 48 hours</p>
+                  </div>
+                </div>
+                <p class="text-2xl font-bold text-blue-600" id="total_price">CA$0</p>
               </div>
-              <p class="text-sm text-gray-600 mt-2">* All packages include digital delivery within 48 hours</p>
             </div>
           </div>
           
@@ -572,33 +623,49 @@
 
     // Package prices
     const prices = {
-      photo_package: 99,
-      video_package: 149,
-      deluxe_package: 229,
-      merch_package: 79
+      photo_package: 110,
+      video_package: 110,
+      both_package: 130,
+      deluxe_package: 160,
+      merch_package: 55
     };
 
-    // Function to update quantity
+    // Function to update quantity (only for merchandise)
     function updateQuantity(packageId, change) {
-      const input = document.getElementById(packageId);
-      const currentValue = parseInt(input.value);
-      const newValue = Math.max(0, currentValue + change);
-      input.value = newValue;
-      updateTotalPrice();
+      if (packageId === 'merch_package') {
+        const input = document.getElementById(packageId);
+        const currentValue = parseInt(input.value);
+        const newValue = Math.max(0, currentValue + change);
+        input.value = newValue;
+        updateTotalPrice();
+      }
     }
 
     // Function to update total price
     function updateTotalPrice() {
       let total = 0;
-      for (const [packageId, price] of Object.entries(prices)) {
-        const quantity = parseInt(document.getElementById(packageId).value);
-        total += quantity * price;
-      }
-      document.getElementById('total_price').textContent = `$${total}`;
+      
+      // Add selected package prices
+      if (document.getElementById('photo_package').checked) total += prices.photo_package;
+      if (document.getElementById('video_package').checked) total += prices.video_package;
+      if (document.getElementById('both_package').checked) total += prices.both_package;
+      if (document.getElementById('deluxe_package').checked) total += prices.deluxe_package;
+      
+      // Add merchandise quantity price
+      const merchQuantity = parseInt(document.getElementById('merch_package').value);
+      total += merchQuantity * prices.merch_package;
+      
+      document.getElementById('total_price').textContent = `CA$${total}`;
     }
 
-    // Initialize total price
+    // Add event listeners for checkboxes
     document.addEventListener('DOMContentLoaded', function() {
+      const checkboxes = ['photo_package', 'video_package', 'both_package', 'deluxe_package'];
+      checkboxes.forEach(id => {
+        document.getElementById(id).addEventListener('change', updateTotalPrice);
+      });
+      
+      // Initial total price calculation
       updateTotalPrice();
     });
   </script>
