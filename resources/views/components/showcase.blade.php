@@ -20,14 +20,9 @@
     class="transition-transform duration-[3000ms] ease-out"
   >
     <div class="relative flex justify-end perspective-text">
-      <h1 class="text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[12rem] xl:text-[16rem] font-black tracking-widest hidden md:block">
-        <span class="we-text">WE</span>
-        <span x-show="showFly" 
-              x-transition:enter="transition ease-out duration-[3000ms]" 
-              x-transition:enter-start="opacity-0 translate-x-32" 
-              x-transition:enter-end="opacity-100 translate-x-0"
-              class="fly-text"
-        >FLY</span>
+    <h1 class="text-[4rem] sm:text-[4rem] md:text-[5rem] lg:text-[9rem] xl:text-[11rem] font-black tracking-widest hidden md:block">
+        <span class="we-text">Reach To The</span>
+        <span class="fly-text"><span class="text-orange-700">S</span>KY</span>
       </h1>
     </div>
   </div>
