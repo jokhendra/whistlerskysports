@@ -109,7 +109,7 @@
                     <p class="text-gray-600 text-sm mb-6">
                         WhistlerSkySports Cap or shirt and Keyring
                     </p>
-                    <div class="text-2xl font-bold text-purple-600">CA$30</div>
+                    <div class="text-2xl font-bold text-purple-600">CA$40</div>
                 </div>
             </div>
         </div>
