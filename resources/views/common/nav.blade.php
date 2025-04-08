@@ -2,11 +2,11 @@
 <html lang="en">
 @include('common.header')
 <body>
-    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 bg-gradient-to-br from-blue-900 via-[#005CBB] to-blue-800 text-white h-32">
+    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 bg-[#0F1B2A] text-white h-32">
         <div class="flex flex-wrap items-center justify-between p-4 w-full h-full">
             <div class="sm:w-[20%] md:w-[25%] lg:w-[15%] flex items-center">
                 <a href="/" class="flex items-center pl-[15px] sm:pl-[25px] md:pl-[50px] lg:pl-[75px]">
-                    <img src="{{ asset('images/logo/Alpine.logo.webp') }}" class="h-8 sm:h-10 md:h-12 mr-3 rounded-4xl" alt="Alpine Air Adventures Logo" />
+                    <img src="{{ asset('images/logo/2Color.png') }}" class="h-8 sm:h-10 md:h-24 mr-3" alt="Alpine Air Adventures Logo" />
                     <!-- <span class="self-center text-2xl font-bold whitespace-nowrap text-white dark:text-white">
                         <span class="text-sky-200">Alpine</span> Air <span class="text-emerald-300">Adventures</span>
                     </span> -->

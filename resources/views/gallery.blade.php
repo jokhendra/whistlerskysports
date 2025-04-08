@@ -28,7 +28,7 @@
         <div class="filter-box cursor-pointer transform transition-all duration-300 hover:scale-105" data-filter="aerial">
           <div class="bg-white rounded-2xl shadow-xl overflow-hidden h-64 relative group border-2 border-transparent hover:border-blue-500">
             <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-10"></div>
-            <img src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
+            <img src="{{ asset('images/aerial_views/aerial_view1.png') }}" 
                  alt="Aerial View" 
                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
             <div class="absolute inset-0 flex flex-col justify-end p-8 z-20">
@@ -50,7 +50,7 @@
         <div class="filter-box cursor-pointer transform transition-all duration-300 hover:scale-105" data-filter="microlite">
           <div class="bg-white rounded-2xl shadow-xl overflow-hidden h-64 relative group border-2 border-transparent hover:border-blue-500">
             <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-10"></div>
-            <img src="https://images.unsplash.com/photo-1531747118685-ca8fa6e08806?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" 
+            <img src="{{ asset('images/microlite/Single_Ultraligh1.jpeg') }}" 
                  alt="Microlite" 
                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
             <div class="absolute inset-0 flex flex-col justify-end p-8 z-20">
@@ -72,13 +72,13 @@
         <div class="filter-box cursor-pointer transform transition-all duration-300 hover:scale-105" data-filter="gyrocopter">
           <div class="bg-white rounded-2xl shadow-xl overflow-hidden h-64 relative group border-2 border-transparent hover:border-blue-500">
             <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-10"></div>
-            <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+            <img src="{{ asset('images/AnyConv.com__IMG_7013.jpg') }}" 
                  alt="Gyrocopter" 
                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
             <div class="absolute inset-0 flex flex-col justify-end p-8 z-20">
               <div class="transform transition-all duration-300 group-hover:translate-y-0 translate-y-4">
-                <h3 class="text-3xl font-bold text-white mb-3">Gyrocopter</h3>
-                <p class="text-white/90 text-lg">Unique rotary-wing aircraft experience</p>
+                <h3 class="text-3xl font-bold text-white mb-3">Fixed Wings</h3>
+                <!-- <p class="text-white/90 text-lg">Unique rotary-wing aircraft experience</p> -->
                 <div class="mt-4 flex items-center text-white/80">
                   <span class="text-sm">Click to explore</span>
                   <svg class="w-5 h-5 ml-2 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,13 +102,13 @@
           <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
-                 data-src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
-                 alt="Aerial view of mountains" 
+                 data-src="{{ asset('images/aerial_views/aerial_view1.png') }}" 
+                 alt="Whistler Aerial View" 
                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
             <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
               <div class="space-y-2">
-                <h3 class="text-2xl font-bold text-white">Mountain Aerial View</h3>
-                <p class="text-white/90 text-sm">Breathtaking views from above</p>
+                <h3 class="text-2xl font-bold text-white">Whistler Aerial View</h3>
+                <p class="text-white/90 text-sm">Breathtaking views of Whistler from above</p>
                 <div class="flex items-center space-x-2 text-white/80">
                   <span class="text-sm">View Details</span>
                   <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -124,13 +124,189 @@
           <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
-                 data-src="https://images.unsplash.com/photo-1507812984078-917a274065be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" 
-                 alt="Lake aerial view" 
+                 data-src="{{ asset('images/aerial_views/aerial_view2.png') }}" 
+                 alt="Whistler Mountain Aerial" 
                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
             <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
               <div class="space-y-2">
-                <h3 class="text-2xl font-bold text-white">Lake Aerial View</h3>
-                <p class="text-white/90 text-sm">Crystal clear waters from above</p>
+                <h3 class="text-2xl font-bold text-white">Whistler Mountain Aerial</h3>
+                <p class="text-white/90 text-sm">Stunning views of Whistler Mountain</p>
+                <div class="flex items-center space-x-2 text-white/80">
+                  <span class="text-sm">View Details</span>
+                  <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item aerial opacity-0 translate-y-8 transition-all duration-700" data-category="aerial">
+          <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                 data-src="{{ asset('images/aerial_views/aerial_view3.png') }}" 
+                 alt="Whistler Skydive Aerial" 
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
+            <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+              <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white">Whistler Skydive Aerial</h3>
+                <p class="text-white/90 text-sm">Aerial view from skydiving experience</p>
+                <div class="flex items-center space-x-2 text-white/80">
+                  <span class="text-sm">View Details</span>
+                  <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item aerial opacity-0 translate-y-8 transition-all duration-700" data-category="aerial">
+          <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                 data-src="{{ asset('images/aerial_views/aerial_view4.png') }}" 
+                 alt="Whistler Valley Aerial" 
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
+            <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+              <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white">Whistler Valley Aerial</h3>
+                <p class="text-white/90 text-sm">Panoramic view of Whistler Valley</p>
+                <div class="flex items-center space-x-2 text-white/80">
+                  <span class="text-sm">View Details</span>
+                  <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item aerial opacity-0 translate-y-8 transition-all duration-700" data-category="aerial">
+          <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                 data-src="{{ asset('images/aerial_views/aerial_view5.png') }}" 
+                 alt="Whistler Lake Aerial" 
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
+            <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+              <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white">Whistler Lake Aerial</h3>
+                <p class="text-white/90 text-sm">Aerial view of Whistler's lakes</p>
+                <div class="flex items-center space-x-2 text-white/80">
+                  <span class="text-sm">View Details</span>
+                  <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item aerial opacity-0 translate-y-8 transition-all duration-700" data-category="aerial">
+          <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                 data-src="{{ asset('images/aerial_views/aerial_view6.png') }}" 
+                 alt="Whistler Forest Aerial" 
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
+            <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+              <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white">Whistler Forest Aerial</h3>
+                <p class="text-white/90 text-sm">Aerial view of Whistler's forests</p>
+                <div class="flex items-center space-x-2 text-white/80">
+                  <span class="text-sm">View Details</span>
+                  <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item aerial opacity-0 translate-y-8 transition-all duration-700" data-category="aerial">
+          <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                 data-src="{{ asset('images/aerial_views/aerial_view7.png') }}" 
+                 alt="Whistler Sunset Aerial" 
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
+            <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+              <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white">Whistler Sunset Aerial</h3>
+                <p class="text-white/90 text-sm">Beautiful sunset view from above</p>
+                <div class="flex items-center space-x-2 text-white/80">
+                  <span class="text-sm">View Details</span>
+                  <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item aerial opacity-0 translate-y-8 transition-all duration-700" data-category="aerial">
+          <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                 data-src="{{ asset('images/aerial_views/Whistler 1.jpg') }}" 
+                 alt="Whistler Mountain Range" 
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
+            <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+              <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white">Whistler Mountain Range</h3>
+                <p class="text-white/90 text-sm">Panoramic view of the mountain range</p>
+                <div class="flex items-center space-x-2 text-white/80">
+                  <span class="text-sm">View Details</span>
+                  <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item aerial opacity-0 translate-y-8 transition-all duration-700" data-category="aerial">
+          <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                 data-src="{{ asset('images/aerial_views/Whistler 2.jpg') }}" 
+                 alt="Whistler Village Aerial" 
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
+            <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+              <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white">Whistler Village Aerial</h3>
+                <p class="text-white/90 text-sm">Aerial view of Whistler Village</p>
+                <div class="flex items-center space-x-2 text-white/80">
+                  <span class="text-sm">View Details</span>
+                  <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item aerial opacity-0 translate-y-8 transition-all duration-700" data-category="aerial">
+          <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                 data-src="{{ asset('images/aerial_views/Whistler Skydive 3.jpg') }}" 
+                 alt="Whistler Panorama" 
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
+            <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+              <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white">Whistler Panorama</h3>
+                <p class="text-white/90 text-sm">360° panoramic view of Whistler</p>
                 <div class="flex items-center space-x-2 text-white/80">
                   <span class="text-sm">View Details</span>
                   <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -147,12 +323,12 @@
           <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
-                 data-src="https://images.unsplash.com/photo-1531747118685-ca8fa6e08806?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" 
-                 alt="Microlite aircraft" 
+                 data-src="{{ asset('images/microlite/Single_Ultraligh1.jpeg') }}" 
+                 alt="Single Ultralight" 
                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
             <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
               <div class="space-y-2">
-                <h3 class="text-2xl font-bold text-white">Microlite Aircraft</h3>
+                <h3 class="text-2xl font-bold text-white">Single Ultralight</h3>
                 <p class="text-white/90 text-sm">Lightweight and agile flying machine</p>
                 <div class="flex items-center space-x-2 text-white/80">
                   <span class="text-sm">View Details</span>
@@ -169,13 +345,123 @@
           <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
-                 data-src="https://images.unsplash.com/photo-1534787238916-9ba6764efd4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
-                 alt="Microlite in flight" 
+                 data-src="{{ asset('images/microlite/Solo_2.jpeg') }}" 
+                 alt="Solo Ultralight" 
                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
             <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
               <div class="space-y-2">
-                <h3 class="text-2xl font-bold text-white">Microlite in Action</h3>
-                <p class="text-white/90 text-sm">Experience the thrill of microlite flying</p>
+                <h3 class="text-2xl font-bold text-white">Solo Ultralight</h3>
+                <p class="text-white/90 text-sm">Experience the thrill of solo flying</p>
+                <div class="flex items-center space-x-2 text-white/80">
+                  <span class="text-sm">View Details</span>
+                  <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item microlite opacity-0 translate-y-8 transition-all duration-700" data-category="microlite">
+          <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                 data-src="{{ asset('images/microlite/Hangar.jpeg') }}" 
+                 alt="Microlite Hangar" 
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
+            <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+              <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white">Microlite Hangar</h3>
+                <p class="text-white/90 text-sm">Our fleet of microlite aircraft</p>
+                <div class="flex items-center space-x-2 text-white/80">
+                  <span class="text-sm">View Details</span>
+                  <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item microlite opacity-0 translate-y-8 transition-all duration-700" data-category="microlite">
+          <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                 data-src="{{ asset('images/microlite/Skypper 2.jpeg') }}" 
+                 alt="Skypper Microlite" 
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
+            <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+              <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white">Skypper Microlite</h3>
+                <p class="text-white/90 text-sm">Our flagship microlite aircraft</p>
+                <div class="flex items-center space-x-2 text-white/80">
+                  <span class="text-sm">View Details</span>
+                  <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item microlite opacity-0 translate-y-8 transition-all duration-700" data-category="microlite">
+          <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                 data-src="{{ asset('images/microlite/Landscape.jpg') }}" 
+                 alt="Microlite Landscape" 
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
+            <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+              <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white">Microlite Landscape</h3>
+                <p class="text-white/90 text-sm">Breathtaking views from above</p>
+                <div class="flex items-center space-x-2 text-white/80">
+                  <span class="text-sm">View Details</span>
+                  <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item microlite opacity-0 translate-y-8 transition-all duration-700" data-category="microlite">
+          <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                 data-src="{{ asset('images/microlite/Landsacpe2.jpg') }}" 
+                 alt="Microlite Landscape 2" 
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
+            <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+              <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white">Microlite Landscape 2</h3>
+                <p class="text-white/90 text-sm">Stunning aerial perspectives</p>
+                <div class="flex items-center space-x-2 text-white/80">
+                  <span class="text-sm">View Details</span>
+                  <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item microlite opacity-0 translate-y-8 transition-all duration-700" data-category="microlite">
+          <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                 data-src="{{ asset('images/microlite/Copy of image000001.JPG') }}" 
+                 alt="Microlite Adventure" 
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
+            <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+              <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white">Microlite Adventure</h3>
+                <p class="text-white/90 text-sm">Experience the freedom of flight</p>
                 <div class="flex items-center space-x-2 text-white/80">
                   <span class="text-sm">View Details</span>
                   <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -191,13 +477,13 @@
         <div class="gallery-item gyrocopter opacity-0 translate-y-8 transition-all duration-700" data-category="gyrocopter">
           <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
-                 data-src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+            <img src="{{ asset('images/fixed_wings/AnyConv.com__IMG_7013.jpg') }}"
+                 data-src="{{ asset('images/fixed_wings/AnyConv.com__IMG_7013.jpg') }}" 
                  alt="Gyrocopter" 
                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
             <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
               <div class="space-y-2">
-                <h3 class="text-2xl font-bold text-white">Gyrocopter</h3>
+                <h3 class="text-2xl font-bold text-white">Fixed Wings</h3>
                 <p class="text-white/90 text-sm">Unique rotary-wing aircraft</p>
                 <div class="flex items-center space-x-2 text-white/80">
                   <span class="text-sm">View Details</span>
@@ -213,13 +499,13 @@
         <div class="gallery-item gyrocopter opacity-0 translate-y-8 transition-all duration-700" data-category="gyrocopter">
           <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
-                 data-src="https://images.unsplash.com/photo-1605540436563-5bca919ae766?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" 
+            <img src="{{ asset('images/fixed_wings/AnyConv.com__IMG_7016 2.jpg') }}"
+                 data-src="{{ asset('images/fixed_wings/AnyConv.com__IMG_7016 2.jpg') }}"
                  alt="Gyrocopter in flight" 
                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
             <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
               <div class="space-y-2">
-                <h3 class="text-2xl font-bold text-white">Gyrocopter Adventure</h3>
+                <h3 class="text-2xl font-bold text-white">Fixed Wings Adventure</h3>
                 <p class="text-white/90 text-sm">Experience the unique gyrocopter flight</p>
                 <div class="flex items-center space-x-2 text-white/80">
                   <span class="text-sm">View Details</span>
@@ -231,12 +517,81 @@
             </div>
           </div>
         </div>
+
+        <div class="gallery-item gyrocopter opacity-0 translate-y-8 transition-all duration-700" data-category="gyrocopter">
+          <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+            <img src="{{ asset('images/fixed_wings/AnyConv.com__IMG_7017 2.jpg') }}"
+                 data-src="{{ asset('images/fixed_wings/AnyConv.com__IMG_7017 2.jpg') }}"
+                 alt="Gyrocopter in flight" 
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
+            <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+              <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white">Fixed Wings Adventure</h3>
+                <p class="text-white/90 text-sm">Experience the unique gyrocopter flight</p>
+                <div class="flex items-center space-x-2 text-white/80">
+                  <span class="text-sm">View Details</span>
+                  <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="gallery-item gyrocopter opacity-0 translate-y-8 transition-all duration-700" data-category="gyrocopter">
+          <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+            <img src="{{ asset('images/fixed_wings/AnyConv.com__IMG_7021.jpg') }}"
+                 data-src="{{ asset('images/fixed_wings/AnyConv.com__IMG_7021.jpg') }}"
+                 alt="Gyrocopter in flight" 
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
+            <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+              <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white">Fixed Wings Adventure</h3>
+                <p class="text-white/90 text-sm">Experience the unique gyrocopter flight</p>
+                <div class="flex items-center space-x-2 text-white/80">
+                  <span class="text-sm">View Details</span>
+                  <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="gallery-item gyrocopter opacity-0 translate-y-8 transition-all duration-700" data-category="gyrocopter">
+          <div class="relative overflow-hidden rounded-2xl shadow-xl group cursor-pointer h-80 transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+            <img src="{{ asset('images/fixed_wings/AnyConv.com__IMG_7022.jpg') }}"
+                 data-src="{{ asset('images/fixed_wings/AnyConv.com__IMG_7022.jpg') }}"
+                 alt="Gyrocopter in flight" 
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image">
+            <div class="absolute inset-0 flex flex-col justify-end p-6 z-20 transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+              <div class="space-y-2">
+                <h3 class="text-2xl font-bold text-white">Fixed Wings Adventure</h3>
+                <p class="text-white/90 text-sm">Experience the unique gyrocopter flight</p>
+                <div class="flex items-center space-x-2 text-white/80">
+                  <span class="text-sm">View Details</span>
+                  <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
   
   <!-- Lightbox Modal -->
-  <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4">
+  <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4">
     <button id="close-lightbox" class="absolute top-4 right-4 text-white text-4xl hover:text-gray-300">&times;</button>
     <button id="prev-image" class="absolute left-4 text-white text-4xl hover:text-gray-300">&lt;</button>
     <button id="next-image" class="absolute right-4 text-white text-4xl hover:text-gray-300">&gt;</button>

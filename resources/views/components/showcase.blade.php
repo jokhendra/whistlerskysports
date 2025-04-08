@@ -20,14 +20,14 @@
     class="transition-transform duration-[3000ms] ease-out"
   >
     <div class="relative flex justify-end perspective-text">
-      <h1 class="text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[12rem] xl:text-[16rem] font-black tracking-widest hidden md:block">
-        <span class="we-text">WE</span>
+      <h1 class="text-[4rem] sm:text-[4rem] md:text-[5rem] lg:text-[9rem] xl:text-[11rem] font-black tracking-widest hidden md:block">
+        <span class="we-text">Reach To The</span>
         <span x-show="showFly" 
               x-transition:enter="transition ease-out duration-[3000ms]" 
               x-transition:enter-start="opacity-0 translate-x-32" 
               x-transition:enter-end="opacity-100 translate-x-0"
               class="fly-text"
-        >FLY</span>
+        ><span class="text-orange-700">S</span>KY</span>
       </h1>
     </div>
   </div>
@@ -44,7 +44,7 @@
         x-data="{ 
           activeSlide: 0,
           slides: [
-            { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7021.jpg') }}', alt: 'Power Hang Glider Flight' },
+            { type: 'image', src: '{{ asset('images/Aircreation_Skypper15.jpeg') }}', alt: 'Power Hang Glider Flight' },
             { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7017 2.jpg') }}', alt: 'Power Hang Glider Adventure' },
             { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7016 2.jpg') }}', alt: 'Power Hang Glider Experience' },
             { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7013.jpg') }}', alt: 'Power Hang Glider Scenery' },
@@ -105,7 +105,7 @@
                   :alt="slide.alt" 
                   class="object-cover w-full h-full"
                   loading="lazy"
-                  onerror="this.onerror=null; this.src='{{ asset('images/pwg1.jpg') }}'; this.alt='Power Hang Glider placeholder'"
+                  @error="$event.target.src = '{{ asset('images/pwg1.jpg') }}'; $event.target.alt = 'Power Hang Glider placeholder'"
                 >
               </template>
               
@@ -119,7 +119,7 @@
                   autoplay
                   muted
                   loop
-                  onerror="this.onerror=null; this.poster='https://placehold.co/1200x600/3b82f6/ffffff?text=Power+Hang+Glider+Video'"
+                  @error="$event.target.poster = 'https://placehold.co/1200x600/3b82f6/ffffff?text=Power+Hang+Glider+Video'"
                 >
                   <source :src="slide.src" type="video/mp4">
                   Your browser does not support the video tag.
@@ -174,17 +174,6 @@
   position: relative;
 }
 
-.we-text::after {
-  content: 'WE';
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: rgba(254, 214, 0, 0.3);
-  transform: translateZ(-10px);
-  filter: blur(8px);
-  animation: shadowMove 3s ease-in-out infinite;
-}
-
 .fly-text {
   background: linear-gradient(135deg, #ffffff, #e0e0e0);
   -webkit-background-clip: text;
@@ -199,17 +188,6 @@
   animation: glowText 3s ease-in-out infinite;
 }
 
-.fly-text::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: -2rem;
-  width: 1.5rem;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #FED600, transparent);
-  transform-origin: left;
-  animation: lineExpand 3s ease-in-out infinite;
-}
 
 @keyframes floatText {
   0%, 100% {

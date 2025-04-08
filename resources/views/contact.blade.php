@@ -53,7 +53,8 @@
               </div>
             </div>
             <div>
-              <h3 class="text-xl font-semibold text-gray-800 mb-2">Lonavala, Maharashtra</h3>
+              <h3 class="text-xl font-semibold text-gray-800 mb-2">Pemberton Airport</h3>
+              <!-- https://maps.app.goo.gl/sbADgPribhsTu5Gt5 -->
             </div>
           </div>
 
@@ -68,7 +69,7 @@
             </div>
             <div>
               <h3 class="text-xl font-semibold text-gray-800 mb-2">By Air:</h3>
-              <p class="text-gray-600">The nearest airport is Lohegaon Airport(PNQ), Pune. You can hire a cab from there to reach the location.</p>
+              <p class="text-gray-600"> Reaching Pemberton Regional Airport (CYPS) in British Columbia, Canada, by air starts with flying into Vancouver International Airport (YVR), about 166 km southwest. From there, since CYPS serves only general aviation, you’d need to charter a flight—such as with Blackcomb Helicopters—or fly privately, taking roughly 30–40 minutes. The small airport has a 3,940 ft runway and basic fuel services, but no commercial flights or tower, so plan accordingly.</p>
             </div>
           </div>
 
@@ -83,7 +84,7 @@
             </div>
             <div>
               <h3 class="text-xl font-semibold text-gray-800 mb-2">By Road:</h3>
-              <p class="text-gray-600">The best mode to reach Lonavala is by road. You can board a bus or a taxi from Mumbai, Thane, Pune to reach Lonavala. One can travel without any problem.</p>
+              <p class="text-gray-600">Driving to Pemberton Airport is straightforward via BC Highway 99 North (Sea to Sky Highway) from Vancouver, a scenic 2.5–3-hour trip covering 166 km. From Pemberton village, it’s just 9 km south on Airport Road, a quick 10–15-minute drive. Public transit is limited—BC Transit connects Pemberton to Whistler, but you’d need a taxi or car for the final stretch to CYPS.</p>
             </div>
           </div>
 
@@ -98,7 +99,7 @@
             </div>
             <div>
               <h3 class="text-xl font-semibold text-gray-800 mb-2">By Train:</h3>
-              <p class="text-gray-600">As Lonavala Railway Station(LNL) is situated between the Mumbai-Pune railway line, Lonavala is well connected to all the major trains that run from Mumbai to Pune.</p>
+              <p class="text-gray-600">Train travel to Pemberton Airport isn’t practical, as no direct passenger rail serves the area. The Rocky Mountaineer offers a seasonal Vancouver-to-Whistler route (3–4 hours), but stops 32 km short of Pemberton. From Whistler, you’d rely on a bus or taxi to reach Pemberton, then drive the last 9 km, making this the least efficient option.</p>
             </div>
           </div>
         </div>

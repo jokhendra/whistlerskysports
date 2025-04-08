@@ -68,16 +68,16 @@
                 Adventure Details
               </h3>
 
-              <!-- <div class="space-y-2">
+              <div class="space-y-2">
                 <label for="package" class="block text-sm font-medium text-gray-700">Select Package *</label>
                 <select id="package" name="package" required class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
                   <option value="">Choose a package</option>
-                  <option value="intro" data-price="150">Introductory Flight - $150</option>
-                  <option value="basic" data-price="299">Basic Training - $299</option>
-                  <option value="advanced" data-price="599">Advanced Training - $599</option>
-                  <option value="certification" data-price="1499">Certification Course - $1,499</option>
+                  <option value="intro" data-price="199">Introductory Flight - CA$199</option>
+                  <option value="basic" data-price="3000">Mountain Flying Course - CA$3000</option>
+                  <!-- <option value="advanced" data-price="599">Advanced Training - $599</option> -->
+                  <!-- <option value="certification" data-price="1499">Certification Course - $1,499</option> -->
                 </select>
-              </div> -->
+              </div>
 
               <div class="space-y-2">
                 <label for="flyer_details" class="block text-sm font-medium text-gray-700">Participant Details (Name & Weight) *</label>
@@ -98,7 +98,7 @@
                 <label for="sunrise_flight" class="block text-sm font-medium text-gray-700">Early Bird Experience? *</label>
                 <select id="sunrise_flight" name="sunrise_flight" required class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
                   <option value="">Select your preference</option>
-                  <option value="yes">Yes - I'd love a sunrise flight</option>
+                  <option value="yes">Yes - I'd love a sunrise flight (CA$99)</option>
                   <option value="no">No - I prefer later in the day</option>
                 </select>
               </div>
@@ -115,7 +115,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  Capture Your Adventure
+                  Capture Your Adventure/Add Memories
                 </h3>
                 <p class="text-blue-100 mt-2 text-lg">Choose from our premium memory packages to preserve your experience forever</p>
               </div>
@@ -136,7 +136,7 @@
                       <h4 class="text-xl font-semibold text-gray-800">Photo Package</h4>
                     </div>
                     <p class="text-gray-600 text-sm ml-11">High-quality digital photos of your adventure</p>
-                    <p class="text-blue-600 font-semibold mt-2 ml-11">CA$110</p>
+                    <p class="text-blue-600 font-semibold mt-2 ml-11">CA$75</p>
                   </div>
                   <div class="flex items-center">
                     <label class="relative inline-flex items-center cursor-pointer">
@@ -160,7 +160,7 @@
                       <h4 class="text-xl font-semibold text-gray-800">Video Package</h4>
                     </div>
                     <p class="text-gray-600 text-sm ml-11">Professional video coverage of your flight</p>
-                    <p class="text-purple-600 font-semibold mt-2 ml-11">CA$110</p>
+                    <p class="text-purple-600 font-semibold mt-2 ml-11">CA$75</p>
                   </div>
                   <div class="flex items-center">
                     <label class="relative inline-flex items-center cursor-pointer">
@@ -185,7 +185,7 @@
                       <h4 class="text-xl font-semibold text-gray-800">Both (Photo + Video)</h4>
                     </div>
                     <p class="text-gray-600 text-sm ml-11">Complete photo and video coverage</p>
-                    <p class="text-green-600 font-semibold mt-2 ml-11">CA$130</p>
+                    <p class="text-green-600 font-semibold mt-2 ml-11">CA$110</p>
                   </div>
                   <div class="flex items-center">
                     <label class="relative inline-flex items-center cursor-pointer">
@@ -208,8 +208,8 @@
                       </div>
                       <h4 class="text-xl font-semibold text-gray-800">Deluxe Package</h4>
                     </div>
-                    <p class="text-gray-600 text-sm ml-11">Photos + Video with premium editing</p>
-                    <p class="text-amber-600 font-semibold mt-2 ml-11">CA$160</p>
+                    <p class="text-gray-600 text-sm ml-11">Photos + Video + WhistlerSkySports T-shirt & Hat and Keyring</p>
+                    <p class="text-amber-600 font-semibold mt-2 ml-11">CA$150</p>
                   </div>
                   <div class="flex items-center">
                     <label class="relative inline-flex items-center cursor-pointer">
@@ -235,7 +235,7 @@
                       <h4 class="text-xl font-semibold text-gray-800 me-10">Merchandise Package</h4>
                     </div>
                     <p class="text-gray-600 text-sm ml-11">T-shirt, cap, and souvenir photos</p>
-                    <p class="text-red-600 font-semibold mt-2 ml-11">CA$55</p>
+                    <p class="text-red-600 font-semibold mt-2 ml-11">CA$60</p>
                   </div>
                   <div class="flex items-center">
                     <button type="button" onclick="updateQuantity('merch_package', -1)" class="w-8 h-8 flex items-center hover:cursor-pointer justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200 mr-[5px]">
@@ -276,9 +276,9 @@
           <!-- Additional Information -->
           <div class="mt-8 space-y-6">
             <h3 class="text-xl font-semibold text-gray-800 border-b border-blue-100 pb-2 flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+              </svg> -->
               Additional Details
             </h3>
 

@@ -12,11 +12,7 @@
         <div class="max-w-3xl mx-auto mt-10">
           <div class="modern-tagline">
             <div class="tagline-content">
-              <span class="highlight-text">A person who has never flown in a microlight</span> may think of it as an extreme sport, like Skydiving. 
-              <span class="accent-text">That's a good thing</span>, however they may have reservations, think it's dangerous so it takes a bit of bravado, 
-              maybe imagination and a lot of wanting to show off to friends that they did this thing. 
-              <span class="highlight-text">Hence Reach for the Sky</span>. 
-              <span class="sub-text">Not sure if Toy Story ever tried to copyright that!</span>
+              <span class="highlight-text">For a person who has never flown in a microlight</span>, it may seem like an extreme sport. The excitement can be comparable, but some may have reservations: maybe it's too dangerous. We say <span class="highlight-text">Reach for the Sky</span>! <span class="sub-text">Wait, did Toy Story copyright that?</span>
             </div>
             <div class="tagline-decoration"></div>
           </div>
