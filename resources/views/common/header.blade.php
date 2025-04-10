@@ -8,15 +8,15 @@
      <!-- Add fonts -->
      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
+        /* body {
             font-family: 'Inter', sans-serif;
             background-image: url("https://npr.brightspotcdn.com/bb/0f/d51269314ac39ea48c89439cd235/jules-marvin-eguilos-xlnl6cwijng-unsplash.jpg");
-            height: 100vh; /* Full-screen height */
-            background-attachment: fixed; /* Keeps background static */
+            height: 100vh;
+            background-attachment: fixed; 
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-        }
+        } */
         
         /* Headings - using Montserrat for strong visual hierarchy */
         h1, h2, h3, h4, h5, h6 {

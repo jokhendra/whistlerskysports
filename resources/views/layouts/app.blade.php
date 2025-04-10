@@ -11,6 +11,7 @@
         }
     </style>
     @vite('resources/css/app.css')
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @stack('styles')
 </head>
@@ -19,8 +20,11 @@
     
     @yield('content')
     
+    @include('common.footer')
+    
     <x-chat-bot />
     
+    <script src="{{ asset('js/smooth-scroll.js') }}"></script>
     @stack('scripts')
 </body>
 </html> 

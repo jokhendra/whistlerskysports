@@ -5,10 +5,10 @@
 <section class="bg-gray-100 py-16 mt-10">
     <div class="container mx-auto px-4">
       <div class="flex flex-col items-center text-center">
-        <h1 class="text-5xl font-bold text-amber-600 mb-6">About Power Hang Glider</h1>
-        <div class="w-24 h-1 bg-amber-600 mb-8"></div>
+        <h1 class="text-5xl font-bold text-primary mb-6">About Whistler Sky Sports</h1>
+        <div class="w-24 h-1 bg-accent mb-8"></div>
         <p class="text-xl text-gray-700 max-w-3xl">
-          At Power Hang Glider, we are passionate about providing exhilarating and safe hang gliding experiences. Our innovative designs and commitment to excellence set us apart in the industry.
+          At Whistler Sky Sports (WSS), we're not just about flying—we're about igniting a passion for flight and empowering aviation enthusiasts to take to the skies with confidence.
         </p>
       </div>
     </div>
@@ -19,18 +19,18 @@
   <div class="container mx-auto px-4">
     <div class="flex flex-col md:flex-row items-center gap-12">
       <div class="md:w-1/2">
-        <img src="https://picsum.photos/600/400?random=20" alt="Our Story" class="rounded-lg shadow-lg w-full h-auto">
+        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Whistler Sky Sports Aircraft" class="rounded-lg shadow-lg w-full h-auto object-cover">
       </div>
       <div class="md:w-1/2">
-        <h2 class="text-3xl font-bold text-gray-800 mb-6">Our Journey</h2>
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Our Mission</h2>
         <p class="text-gray-600 mb-4">
-          Established in 2005, Power Hang Glider started with a vision to make hang gliding accessible and thrilling for everyone. Our founders, avid gliders themselves, have grown the company from a small startup to a leader in the industry.
+          As a premier Flight Training Unit based at Pemberton Airport, British Columbia, WSS specializes in ultralight and advanced ultralight aircraft, delivering top-tier flight training that meets Transport Canada's rigorous standards.
         </p>
         <p class="text-gray-600 mb-4">
-          We have pioneered several innovations in hang glider design, ensuring safety and performance are at the forefront of our products.
+          With a focus on the ultralight category—defined as aircraft with a maximum gross weight of 1,232 lbs (560 kg) and a stall speed of 45 mph or less—we offer a thrilling yet accessible entry into the world of aviation.
         </p>
         <p class="text-gray-600">
-          Today, we are proud to offer unforgettable experiences to adventurers around the world, backed by our dedicated team and cutting-edge technology.
+          Founded by Ishan Tewari, our Chief Flight Instructor, ground instructor, and sole director, WSS embodies a singular vision: exceptional flight training rooted in safety, quality, and hands-on experience.
         </p>
       </div>
     </div>
@@ -43,7 +43,7 @@
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Core Values</h2>
       <p class="text-gray-600 max-w-2xl mx-auto">
-        Safety, innovation, and customer satisfaction are the pillars of our company culture.
+        Safety, transparency, and excellence are the pillars of our company culture.
       </p>
     </div>
     
@@ -57,7 +57,7 @@
         </div>
         <h3 class="text-xl font-bold text-gray-800 mb-2">Safety</h3>
         <p class="text-gray-600">
-          We prioritize safety in every aspect of our operations, ensuring our customers can enjoy their flights with peace of mind.
+          We prioritize safety in every aspect of our operations, with rigorous maintenance, strict protocols, and a focus on risk management.
         </p>
       </div>
       
@@ -65,12 +65,13 @@
       <div class="bg-white p-8 rounded-lg shadow-md text-center">
         <div class="bg-amber-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-gray-800 mb-2">Innovation</h3>
+        <h3 class="text-xl font-bold text-gray-800 mb-2">Transparency</h3>
         <p class="text-gray-600">
-          Our team is dedicated to pushing the boundaries of hang gliding technology, offering the latest advancements to our customers.
+          We maintain 100% transparency, honesty, and integrity in everything we do, ensuring you'll never have regrets.
         </p>
       </div>
       
@@ -81,22 +82,159 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-gray-800 mb-2">Customer Satisfaction</h3>
+        <h3 class="text-xl font-bold text-gray-800 mb-2">Excellence</h3>
         <p class="text-gray-600">
-          We strive to exceed our customers' expectations, providing exceptional service and unforgettable experiences.
+          We strive for excellence in every aspect of our training, from pre-flight inspections to comprehensive student preparation.
         </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Team Section -->
+<!-- Our Fleet Section -->
+<section class="py-16 bg-amber-50">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Fleet</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        With two aircraft in our fleet, we are thrilled to guide you as you take your first steps toward learning how to fly.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Aircraft 1 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Weight-shift Trike" class="w-full h-64 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Weight-shift Trike (Ultralight)</h3>
+          <p class="text-gray-600">
+            Our weight-shift trike offers an intuitive and responsive flying experience, perfect for beginners and experienced pilots alike.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Aircraft 2 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Fixed-wing Aircraft" class="w-full h-64 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Fixed-wing (Advanced Ultralight)</h3>
+          <p class="text-gray-600">
+            Our fixed-wing aircraft provides a traditional flying experience with advanced capabilities for more complex training scenarios.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Training Programs Section -->
+<section class="bg-gray-100 py-16">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Training Programs</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        Our training programs are designed to inspire and equip students, whether you're an aviation enthusiast, a recreational pilot, or someone seeking an affordable way to earn your wings.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Program 1 -->
+      <div class="bg-white p-8 rounded-lg shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Practical Flight Training</h3>
+        <ul class="space-y-3 text-gray-600">
+          <li class="flex items-start">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Takeoff and landing techniques</span>
+          </li>
+          <li class="flex items-start">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Navigation and flight planning</span>
+          </li>
+          <li class="flex items-start">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Emergency procedures</span>
+          </li>
+          <li class="flex items-start">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Mountain flying techniques</span>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Program 2 -->
+      <div class="bg-white p-8 rounded-lg shadow-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Ground School</h3>
+        <ul class="space-y-3 text-gray-600">
+          <li class="flex items-start">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Aerodynamics and aircraft systems</span>
+          </li>
+          <li class="flex items-start">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Meteorology and weather interpretation</span>
+          </li>
+          <li class="flex items-start">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Transport Canada regulations</span>
+          </li>
+          <li class="flex items-start">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Navigation and flight planning</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Our Location Section -->
+<section class="py-16 bg-amber-50">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row items-center gap-12">
+      <div class="md:w-1/2">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Our Location</h2>
+        <p class="text-gray-600 mb-4">
+          Pemberton's stunning terrain and favorable weather provide the perfect backdrop for mastering the art of flight. Mountain flying at Pemberton may seem like a perfect scenic experience, but be mindful that it is not merely a joyride—it's a flight lesson.
+        </p>
+        <p class="text-gray-600 mb-4">
+          You are welcome to take these skills with you anywhere in the world, as we teach you to fly in some of the most demanding conditions. That said, we fly only when the weather is ideal for safe operations.
+        </p>
+        <div class="mt-6">
+          <a href="/contact" class="inline-block bg-accent hover:bg-accent-hover text-primary font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg">
+            Contact Us
+          </a>
+        </div>
+      </div>
+      <div class="md:w-1/2">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Pemberton Airport" class="rounded-lg shadow-lg w-full h-auto object-cover">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Meet Our Friends Section -->
 <section class="py-16 bg-amber-50">
   <div class="container mx-auto px-4">
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold text-gray-800 mb-4">Meet Our Friends</h2>
       <p class="text-gray-600 max-w-2xl mx-auto">
-        Our team of experienced pilots and engineers is dedicated to delivering the best hang gliding experiences.
+        Our team of experienced pilots and engineers is dedicated to delivering the best flying experiences.
       </p>
     </div>
     
@@ -231,20 +369,49 @@
   </div>
 </section>
 
-<!-- CTA Section -->
-<section class="py-16 bg-white">
+<!-- Our Commitment Section -->
+<section class="bg-gray-100 py-16">
   <div class="container mx-auto px-4">
-    <div class="bg-gray-100 rounded-lg p-8 md:p-12 text-center">
-      <h2 class="text-3xl font-bold text-gray-800 mb-4">Ready to Soar with Us?</h2>
-      <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
-        Discover the thrill of Microlight and Gyrocopter Flying Contact us today to book your first flight lesson!
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Commitment</h2>
+      <p class="text-gray-600 max-w-3xl mx-auto">
+        I am proud of Whistler Sky Sports because I believe in maintaining 100% transparency, honesty, and integrity in everything we do. This approach ensures you'll never have regrets.
       </p>
-      <a href="#" class="inline-block bg-amber-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-amber-700 transition-colors">
-        Ready to Learn?
-      </a>
+    </div>
+    
+    <div class="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
+      <div class="flex flex-col md:flex-row items-center gap-8">
+        <div class="md:w-1/3">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ishan Tewari" class="rounded-full w-48 h-48 object-cover mx-auto shadow-lg">
+          <h3 class="text-xl font-bold text-gray-800 text-center mt-4">Ishan Tewari</h3>
+          <p class="text-accent text-center">Chief Flight Instructor</p>
+        </div>
+        <div class="md:w-2/3">
+          <p class="text-gray-600 mb-4">
+            Even when life gets busy, we never cut corners with pre-flight inspections or maintenance. If something isn't right—whether it's the weather, the aircraft, or your health—we cancel the flight. Situational awareness is your best friend.
+          </p>
+          <p class="text-gray-600 mb-4">
+            Sometimes things happen—perhaps a mistake or an event beyond your control—but an inquiry into any incident will always reveal the truth. At WSS, we stand ready to put our hands on our hearts and speak that truth with confidence.
+          </p>
+          <p class="text-gray-600">
+            At WSS, we're more than a flight school—we're a community of dreamers and doers united by a love for aviation. Join us as we take flight, blending adventure with excellence, and discover why the skies are calling your name.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-@include('common.footer')
+<!-- CTA Section -->
+<section class="py-16 bg-accent">
+  <div class="container mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold text-primary mb-6">Ready to Take Flight?</h2>
+    <p class="text-primary text-xl mb-8 max-w-2xl mx-auto">
+      Join us at Whistler Sky Sports and discover the thrill of flying in one of the most beautiful regions in the world.
+    </p>
+    <a href="/booking" class="inline-block bg-primary hover:bg-primary-light text-white font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-md hover:shadow-lg">
+      Book Your Flight
+    </a>
+  </div>
+</section>
 @endsection

@@ -116,7 +116,6 @@
     </div>
 </div>
 
-@include('common.footer')
 
 <style>
 /* Add smooth hover transitions */

@@ -8,12 +8,12 @@
   @include('common.nav')
   
   <!-- Gallery Hero Section -->
-  <!-- <div class="bg-gradient-to-b from-blue-900 to-blue-700 text-white py-16">
+  <div class="bg-gradient-to-b from-blue-900 to-blue-700 text-white py-16">
     <div class="container mx-auto px-4 text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-4">Gallery</h1>
-      <p class="text-lg text-blue-100 max-w-3xl mx-auto">Explore our collection of stunning images showcasing the beauty and excitement of power hang gliding. From breathtaking aerial views to close-up shots of our gliders, these images capture the essence of the sport and the passion of our community.</p>
+      <p class="text-lg text-blue-100 max-w-3xl mx-auto">Welcome to Whistler Sky Sports! Our media gallery brings the thrill of flight to life with a collection of stunning photos and dynamic videos. From breathtaking aerial views over Pemberton's rugged landscapes to glimpses of our ultralight aircraft in action, dive into the adventure and see why the skies are calling you!</p>
     </div>
-  </div> -->
+  </div>
   
   <!-- Gallery Filter Section -->
   <div class="bg-gradient-to-b from-gray-50 to-white py-16">
@@ -33,7 +33,7 @@
                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
             <div class="absolute inset-0 flex flex-col justify-end p-8 z-20">
               <div class="transform transition-all duration-300 group-hover:translate-y-0 translate-y-4">
-                <h3 class="text-3xl font-bold text-white mb-3">Aerial View</h3>
+                <h3 class="text-3xl font-bold text-white mb-3">Aerial Views</h3>
                 <p class="text-white/90 text-lg">Experience breathtaking views from above</p>
                 <div class="mt-4 flex items-center text-white/80">
                   <span class="text-sm">Click to explore</span>
@@ -46,16 +46,16 @@
           </div>
         </div>
 
-        <!-- Microlite Box -->
+        <!-- Open Cockpit Trikes Box -->
         <div class="filter-box cursor-pointer transform transition-all duration-300 hover:scale-105" data-filter="microlite">
           <div class="bg-white rounded-2xl shadow-xl overflow-hidden h-64 relative group border-2 border-transparent hover:border-blue-500">
             <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-10"></div>
             <img src="{{ asset('images/microlite/Single_Ultraligh1.jpeg') }}" 
-                 alt="Microlite" 
+                 alt="Open Cockpit Trikes" 
                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
             <div class="absolute inset-0 flex flex-col justify-end p-8 z-20">
               <div class="transform transition-all duration-300 group-hover:translate-y-0 translate-y-4">
-                <h3 class="text-3xl font-bold text-white mb-3">Microlite</h3>
+                <h3 class="text-3xl font-bold text-white mb-3">Open Cockpit Trikes</h3>
                 <p class="text-white/90 text-lg">Lightweight and agile flying experience</p>
                 <div class="mt-4 flex items-center text-white/80">
                   <span class="text-sm">Click to explore</span>
@@ -68,17 +68,17 @@
           </div>
         </div>
 
-        <!-- Gyrocopter Box -->
+        <!-- Fixed Wing Aircraft Box -->
         <div class="filter-box cursor-pointer transform transition-all duration-300 hover:scale-105" data-filter="gyrocopter">
           <div class="bg-white rounded-2xl shadow-xl overflow-hidden h-64 relative group border-2 border-transparent hover:border-blue-500">
             <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-10"></div>
             <img src="{{ asset('images/AnyConv.com__IMG_7013.jpg') }}" 
-                 alt="Gyrocopter" 
+                 alt="Fixed Wing Aircraft" 
                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
             <div class="absolute inset-0 flex flex-col justify-end p-8 z-20">
               <div class="transform transition-all duration-300 group-hover:translate-y-0 translate-y-4">
-                <h3 class="text-3xl font-bold text-white mb-3">Fixed Wings</h3>
-                <!-- <p class="text-white/90 text-lg">Unique rotary-wing aircraft experience</p> -->
+                <h3 class="text-3xl font-bold text-white mb-3">Fixed Wing Aircraft</h3>
+                <p class="text-white/90 text-lg">Traditional aircraft with advanced capabilities</p>
                 <div class="mt-4 flex items-center text-white/80">
                   <span class="text-sm">Click to explore</span>
                   <svg class="w-5 h-5 ml-2 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -657,7 +657,6 @@
   <!-- Call to Action -->
   
   
-  @include('common.footer')
   
   <!-- Gallery JavaScript -->
   <script>

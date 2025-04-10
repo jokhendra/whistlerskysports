@@ -307,4 +307,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 Route::get('/review', [ReviewController::class, 'index'])->name('reviews.index');
-Route::post('/review', [ReviewController::class, 'store'])->name('reviews.store'); 
+Route::post('/review', [ReviewController::class, 'store'])->name('reviews.store');
+
+// FAQ route
+Route::get('/faq', function () {
+    return view('faq');
+})->name('faq'); 

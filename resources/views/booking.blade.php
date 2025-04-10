@@ -600,7 +600,6 @@
       </div> -->
     </div>
   </div>
-  @include("common.footer")
   
   <script>
     document.addEventListener('DOMContentLoaded', function() {

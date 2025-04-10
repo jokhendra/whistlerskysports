@@ -1,4 +1,4 @@
-<div class="bg-gradient-to-br from-blue-900 via-[#005CBB] to-blue-800 text-white">
+<div class="bg-gradient-to-br bg-[#0F1B2A] via-[#0f1b2ad8] to-[#162639] text-white">
   <div class="container mx-auto py-16 px-4">
     <!-- Main Footer Content -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
@@ -117,7 +117,12 @@
               <span>Contact Us</span>
             </a>
           </li>
-          
+          <li>
+            <a href="/faq" class="text-blue-100 hover:text-white transition-colors duration-300 flex items-center space-x-2 group">
+              <span class="w-1 h-1 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              <span>FAQ</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

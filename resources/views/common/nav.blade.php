@@ -2,7 +2,7 @@
 <html lang="en">
 @include('common.header')
 <body>
-    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 bg-[#0F1B2A] text-white h-32">
+    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 bg-[#ffffff] h-32">
         <div class="flex flex-wrap items-center justify-between p-4 w-full h-full">
             <div class="sm:w-[20%] md:w-[25%] lg:w-[15%] flex items-center">
                 <a href="/" class="flex items-center pl-[15px] sm:pl-[25px] md:pl-[50px] lg:pl-[75px]">
@@ -117,7 +117,7 @@
                             </div>
                         </li> -->
                         <li>
-                            <a href="/about" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300">
+                            <a href="/about" class="flex items-center py-2 pl-3 pr-4 text-[#0F1B2A] font-bold rounded hover:text-[#12161c] transition-all duration-300">
                                 <span class="relative inline-block group">
                                     About Us
                                     <span class="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
@@ -125,7 +125,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/gallery" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300">
+                            <a href="/gallery" class="flex items-center py-2 pl-3 pr-4 text-[#0F1B2A] font-bold rounded hover:text-[#12161c] transition-all duration-300">
                                 <span class="relative inline-block group">
                                     Gallery
                                     <span class="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
@@ -133,7 +133,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/review" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300">
+                            <a href="/review" class="flex items-center py-2 pl-3 pr-4 text-[#0F1B2A] font-bold rounded hover:text-[#12161c] transition-all duration-300">
                                 <span class="relative inline-block group">
                                     Reviews
                                     <span class="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
@@ -141,7 +141,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/weather" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300">
+                            <a href="/weather" class="flex items-center py-2 pl-3 pr-4 text-[#0F1B2A] font-bold rounded hover:text-[#12161c] transition-all duration-300">
                                 <span class="relative inline-block group">
                                     Weather
                                     <span class="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
@@ -149,7 +149,15 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/contact" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300">
+                            <a href="/faq" class="flex items-center py-2 pl-3 pr-4 text-[#0F1B2A] font-bold rounded hover:text-[#12161c] transition-all duration-300">
+                                <span class="relative inline-block group">
+                                    FAQ
+                                    <span class="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/contact" class="flex items-center py-2 pl-3 pr-4 text-[#0F1B2A] font-bold rounded hover:text-[#12161c] transition-all duration-300">
                                 <span class="relative inline-block group">
                                     Contact Us
                                     <span class="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
@@ -157,7 +165,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/pricing" class="flex items-center py-2 pl-3 pr-4 text-gray-300 font-bold rounded hover:text-white transition-all duration-300">
+                            <a href="/pricing" class="flex items-center py-2 pl-3 pr-4 text-[#0F1B2A] font-bold rounded hover:text-[#12161c] transition-all duration-300">
                                 <span class="relative inline-block group">
                                     Pricing
                                     <span class="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
@@ -165,7 +173,7 @@
                             </a>
                         </li>
                         <li class="md:ml-4 relative group">
-                            <a href="#" class="flex items-center py-3 pl-5 pr-4 text-[#005CBB] font-bold rounded-full bg-[#FED600] hover:bg-[#b78b4d] hover:text-gray-200 transform hover:scale-102 transition-all duration-300 shadow-md hover:shadow-xl relative overflow-hidden group">
+                            <a href="#" class="flex items-center py-3 pl-5 pr-4 text-[#0F1B2A]  font-bold rounded-full bg-[#FED600] hover:bg-[#b78b4d] hover:text-gray-200 transform hover:scale-102 transition-all duration-300 shadow-md hover:shadow-xl relative overflow-hidden group">
                                 <span class="relative z-10">Learn To Fly</span>
                                 <svg class="w-4 h-4 ml-2 relative z-10" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -183,7 +191,7 @@
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3 inline-block transform transition-transform group-hover/item:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
                                                 </svg>
-                                                <span class="font-bold">Microlight</span>
+                                                <span class="font-bold">Open Cockpit Ultralight</span>
                                                 <span class="block text-sm text-gray-500 font-normal">Experience the freedom of flight</span>
                                             </span>
                                             <span class="ml-auto opacity-0 group-hover/item:opacity-100 transform translate-x-2 group-hover/item:translate-x-0 transition-all duration-300">→</span>
@@ -195,7 +203,7 @@
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3 inline-block transform transition-transform group-hover/item:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.072 0a5 5 0 010 7.07M13 12a1 1 0 11-2 0 1 1 0 012 0z"/>
                                                 </svg>
-                                                <span class="font-bold">Gyrocopter</span>
+                                                <span class="font-bold">Closed Cockpit Advanced Ultralight</span>
                                                 <span class="block text-sm text-gray-500 font-normal">Master the art of aviation</span>
                                             </span>
                                             <span class="ml-auto opacity-0 group-hover/item:opacity-100 transform translate-x-2 group-hover/item:translate-x-0 transition-all duration-300">→</span>

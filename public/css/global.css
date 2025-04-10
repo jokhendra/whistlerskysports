@@ -1,0 +1,46 @@
+/* Global Styles */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* Adjust based on your navbar height */
+}
+
+/* For Safari and older browsers */
+@media screen and (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0F1B2A;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #12161c;
+}
+
+/* Smooth scroll for anchor links */
+a[href^="#"] {
+    scroll-margin-top: 5rem;
+}
+
+/* Prevent horizontal scroll */
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Smooth transitions */
+* {
+    transition: all 0.3s ease-in-out;
+} 

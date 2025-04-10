@@ -73,7 +73,7 @@
     </div>
     
     <!-- Pricing Section -->
-    <div id="pricing" class="pricing-section bg-gradient-to-b from-blue-900/70 via-blue-800/65 to-blue-900/70 backdrop-blur-md py-16 mt-5">
+    <div id="pricing" class="pricing-section bg-gradient-to-b from-blue-900/70 via-blue-800/65 to-blue-900/70 backdrop-blur-md py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="sm:flex sm:flex-col sm:align-center">
           <h2 class="text-3xl font-extrabold text-white/95 sm:text-center">Introductory Pricing</h2>
@@ -275,7 +275,7 @@
       }, 1000);
     </script>
 
-    <div class="relative h-96 overflow-hidden mb-5 mt-5">
+    <div class="relative h-96 overflow-hidden">
         <img src="{{ asset('images/hero-section.png') }}" alt="Hang gliding over mountains" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent flex items-center">
           <div class="text-white p-8">

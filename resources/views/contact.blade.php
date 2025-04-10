@@ -36,70 +36,72 @@
   </div>
   
   <!-- How To Reach Section -->
-  <div class="bg-white py-12">
+  <div class="bg-white py-1">
     <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-gray-800 mb-8 border-l-4 border-blue-600 pl-4">How To Reach</h2>
+      <div class="w-full">
+        <!-- <h2 class="text-4xl font-bold text-gray-800 mb-12 text-center">How To Reach</h2> -->
         
-        <div class="space-y-8">
-          <!-- Location -->
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0">
-              <div class="p-2 bg-blue-100 rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-semibold text-gray-800 mb-2">Pemberton Airport</h3>
-              <!-- https://maps.app.goo.gl/sbADgPribhsTu5Gt5 -->
-            </div>
-          </div>
-
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <!-- By Air -->
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0">
-              <div class="p-2 bg-blue-100 rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                </svg>
+          <div class="perspective h-[450px] rounded-lg overflow-hidden">
+            <div class="relative w-full h-full transition-transform duration-500 transform-style-3d hover:rotate-y-180 cursor-pointer">
+              <!-- Front of card -->
+              <div class="absolute w-full h-full backface-hidden bg-blue-50 rounded-lg p-8 shadow-lg">
+                <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://images.pexels.com/photos/62623/wing-plane-flying-airplane-62623.jpeg?cs=srgb&dl=pexels-pixabay-62623.jpg&fm=jpg');"></div>
+                <div class="relative z-10 h-full flex flex-col items-center justify-center">
+                  <h3 class="text-4xl font-bold text-blue-700 font-['Poppins']">Air</h3>
+                </div>
               </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-semibold text-gray-800 mb-2">By Air:</h3>
-              <p class="text-gray-600"> Reaching Pemberton Regional Airport (CYPS) in British Columbia, Canada, by air starts with flying into Vancouver International Airport (YVR), about 166 km southwest. From there, since CYPS serves only general aviation, you’d need to charter a flight—such as with Blackcomb Helicopters—or fly privately, taking roughly 30–40 minutes. The small airport has a 3,940 ft runway and basic fuel services, but no commercial flights or tower, so plan accordingly.</p>
+              
+              <!-- Back of card -->
+              <div class="absolute w-full h-full backface-hidden bg-blue-50 rounded-lg p-8 shadow-lg rotate-y-180">
+                <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://images.pexels.com/photos/62623/wing-plane-flying-airplane-62623.jpeg?cs=srgb&dl=pexels-pixabay-62623.jpg&fm=jpg');"></div>
+                <div class="relative z-10 h-full flex flex-col justify-center">
+                  <p class="text-blue-800 text-lg leading-relaxed font-['Inter']">Reaching Pemberton Regional Airport (CYPS) in British Columbia, Canada, by air starts with flying into Vancouver International Airport (YVR), about 166 km southwest. From there, since CYPS serves only general aviation, you'd need to charter a flight—such as with Blackcomb Helicopters—or fly privately, taking roughly 30–40 minutes.</p>
+                </div>
+              </div>
             </div>
           </div>
 
           <!-- By Road -->
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0">
-              <div class="p-2 bg-blue-100 rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                </svg>
+          <div class="perspective h-[450px] rounded-lg overflow-hidden">
+            <div class="relative w-full h-full transition-transform duration-500 transform-style-3d hover:rotate-y-180 cursor-pointer">
+              <!-- Front of card -->
+              <div class="absolute w-full h-full backface-hidden bg-red-50 rounded-lg p-8 shadow-lg">
+                <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/kx2d2Jf/videoblocks-car-passing-very-fastly-cu_rb3lnmfsw_thumbnail-1080_05.png');"></div>
+                <div class="relative z-10 h-full flex flex-col items-center justify-center">
+                  <h3 class="text-4xl font-bold text-red-700 font-['Poppins']">Road</h3>
+                </div>
               </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-semibold text-gray-800 mb-2">By Road:</h3>
-              <p class="text-gray-600">Driving to Pemberton Airport is straightforward via BC Highway 99 North (Sea to Sky Highway) from Vancouver, a scenic 2.5–3-hour trip covering 166 km. From Pemberton village, it’s just 9 km south on Airport Road, a quick 10–15-minute drive. Public transit is limited—BC Transit connects Pemberton to Whistler, but you’d need a taxi or car for the final stretch to CYPS.</p>
+              
+              <!-- Back of card -->
+              <div class="absolute w-full h-full backface-hidden bg-red-50 rounded-lg p-8 shadow-lg rotate-y-180">
+                <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/kx2d2Jf/videoblocks-car-passing-very-fastly-cu_rb3lnmfsw_thumbnail-1080_05.png');"></div>
+                <div class="relative z-10 h-full flex flex-col justify-center">
+                  <p class="text-red-800 text-lg leading-relaxed font-['Inter']">Driving to Pemberton Airport is straightforward via BC Highway 99 North (Sea to Sky Highway) from Vancouver, a scenic 2.5–3-hour trip covering 166 km. From Pemberton village, it's just 9 km south on Airport Road, a quick 10–15-minute drive. Public transit is limited—BC Transit connects Pemberton to Whistler, but you'd need a taxi or car for the final stretch to CYPS.</p>
+                </div>
+              </div>
             </div>
           </div>
 
           <!-- By Train -->
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0">
-              <div class="p-2 bg-blue-100 rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                </svg>
+          <div class="perspective h-[450px] rounded-lg overflow-hidden">
+            <div class="relative w-full h-full transition-transform duration-500 transform-style-3d hover:rotate-y-180 cursor-pointer">
+              <!-- Front of card -->
+              <div class="absolute w-full h-full backface-hidden bg-yellow-100 rounded-lg p-8 shadow-lg">
+                <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://www.adventureworld.com/media/dyiami5o/canada-via-rail-winter.jpg?center=0.4486666755911942%2C0.19423558897243107&format=webp&mode=crop&width=1200&height=1200&quality=80');"></div>
+                <div class="relative z-10 h-full flex flex-col items-center justify-center">
+                  <h3 class="text-4xl font-bold text-yellow-700 font-['Poppins']">Train</h3>
+                </div>
               </div>
-            </div>
-            <div>
-              <h3 class="text-xl font-semibold text-gray-800 mb-2">By Train:</h3>
-              <p class="text-gray-600">Train travel to Pemberton Airport isn’t practical, as no direct passenger rail serves the area. The Rocky Mountaineer offers a seasonal Vancouver-to-Whistler route (3–4 hours), but stops 32 km short of Pemberton. From Whistler, you’d rely on a bus or taxi to reach Pemberton, then drive the last 9 km, making this the least efficient option.</p>
+              
+              <!-- Back of card -->
+              <div class="absolute w-full h-full backface-hidden bg-yellow-100 rounded-lg p-8 shadow-lg rotate-y-180">
+                <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://www.adventureworld.com/media/dyiami5o/canada-via-rail-winter.jpg?center=0.4486666755911942%2C0.19423558897243107&format=webp&mode=crop&width=1200&height=1200&quality=80');"></div>
+                <div class="relative z-10 h-full flex flex-col justify-center">
+                  <p class="text-yellow-800 text-lg leading-relaxed font-['Inter']">Train travel to Pemberton Airport isn't practical, as no direct passenger rail serves the area. The Rocky Mountaineer offers a seasonal Vancouver-to-Whistler route (3–4 hours), but stops 32 km short of Pemberton. From Whistler, you'd rely on a bus or taxi to reach Pemberton, then drive the last 9 km, making this the least efficient option.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -108,7 +110,7 @@
   </div>
   
   <!-- Contact Section -->
-  <div class="bg-gradient-to-b from-blue-50 bg-gray-200 py-16">
+  <div class="py-16">
     <div class="container mx-auto px-4">
       
       
@@ -196,38 +198,6 @@
               </div>
             </div>
           </div>
-          
-          <!-- Map -->
-          <!-- <div class="bg-white rounded-xl shadow-xl p-8 transform transition duration-300 hover:shadow-2xl hover:-translate-y-1">
-            <h2 class="text-2xl font-bold text-blue-800 mb-6 flex items-center">
-              <span class="inline-block mr-3 p-2 bg-blue-100 rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                </svg>
-              </span>
-              Find Us
-            </h2>
-            <div class="h-96 w-full rounded-lg overflow-hidden shadow-md">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.639290621064!2d-122.08401492392031!3d37.4219998326378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fba02425dad8f%3A0x29cdf01a44fc687f!2sGoogle%20Building%2040!5e0!3m2!1sen!2sus!4v1649285324079!5m2!1sen!2sus" 
-                width="100%" 
-                height="100%" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade">
-              </iframe>
-            </div>
-            <div class="mt-4 flex justify-center">
-              <a href="https://maps.google.com" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                Get Directions
-              </a>
-            </div>
-          </div> -->
         </div>
         
         <!-- Contact Form -->
@@ -284,7 +254,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="relative">
                 <label for="name" class="block text-gray-700 font-medium mb-2">Your Name</label>
-                <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" required>
+                <input type="text" id="name" placeholder="Enter your name" name="name" class="w-full px-4 py-3 border bg-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" required>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-blue-600 opacity-0 transition-opacity duration-200 input-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -294,7 +264,7 @@
               
               <div class="relative">
                 <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
-                <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" required>
+                <input type="email" id="email" placeholder="Enter your email" name="email" class="w-full px-4 bg-white py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" required>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-blue-600 opacity-0 transition-opacity duration-200 input-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -305,7 +275,7 @@
             
             <div class="relative">
               <label for="phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
-              <input type="tel" id="phone" name="phone" class="w-full ps-10 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" required>
+              <input type="tel" id="phone" placeholder="Enter your phone number" name="phone" class="w-full ps-10 px-4 bg-white py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" required>
               <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-blue-600 opacity-0 transition-opacity duration-200 input-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -334,7 +304,7 @@
             
             <div>
               <label for="message" class="block text-gray-700 font-medium mb-2">Your Message</label>
-              <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" required></textarea>
+              <textarea id="message" name="message" placeholder="Enter your message..."  rows="5" class="w-full bg-white px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200" required></textarea>
             </div>
             
             <div class="flex items-center">
@@ -345,13 +315,13 @@
             </div>
             
             <div>
-              <button type="submit" class="w-full bg-[#005CBB] hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 shadow-lg hover:shadow-xl flex items-center justify-center group cursor-pointer">
+              <button type="submit" class="w-full bg-[#F05052] hover:bg-[#F05052] text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 shadow-lg hover:shadow-xl flex items-center justify-center group cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                 </svg>
                 <span class="relative inline-block overflow-hidden">
-                  <span class="block transition-transform duration-300 group-hover:-translate-y-full">Send Message</span>
-                  <span class="absolute top-0 left-0 transition-transform duration-300 translate-y-full group-hover:translate-y-0">Send Message</span>
+                  <span class="block transition-transform duration-300 group-hover:-translate-y-full">Submit</span>
+                  <span class="absolute top-0 left-0 transition-transform duration-300 translate-y-full group-hover:translate-y-0">Submit</span>
                 </span>
               </button>
             </div>
@@ -361,10 +331,8 @@
     </div>
   </div>
   
-  <!-- FAQ Section -->
 
   
-  @include('common.footer')
   
   <!-- Add intl-tel-input CSS and JS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
@@ -442,6 +410,24 @@
 
     #phone.error {
       border-color: #EF4444;
+    }
+    
+    /* Card Flip Styles */
+    .perspective {
+      perspective: 1000px;
+    }
+    
+    .transform-style-3d {
+      transform-style: preserve-3d;
+    }
+    
+    .backface-hidden {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    
+    .rotate-y-180 {
+      transform: rotateY(180deg);
     }
   </style>
   
