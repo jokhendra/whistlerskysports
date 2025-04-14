@@ -409,7 +409,7 @@
     <p class="text-primary text-xl mb-8 max-w-2xl mx-auto">
       Join us at Whistler Sky Sports and discover the thrill of flying in one of the most beautiful regions in the world.
     </p>
-    <a href="/booking" class="inline-block bg-primary hover:bg-primary-light text-white font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-md hover:shadow-lg">
+    <a href="/booking" class="inline-block bg-[#F05052] hover:bg-[#f05060] hover:cursor-pointer  text-white font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-md hover:shadow-lg">
       Book Your Flight
     </a>
   </div>

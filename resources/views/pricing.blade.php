@@ -57,18 +57,7 @@
         </div>
 
         <!-- Memory Packages Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
-            <!-- Photos Package -->
-            <div class="bg-white/30 rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-                <div class="p-6 text-center">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Photos</h3>
-                    <p class="text-gray-600 text-sm mb-6">
-                        High resolution photos professionally shot with an SLR camera and nice big, chunky, expensive wide-angle lens.
-                    </p>
-                    <div class="text-2xl font-bold text-purple-600">CA$110</div>
-                </div>
-            </div>
-
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             <!-- Video Package -->
             <div class="bg-white/30 rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
                 <div class="p-6 text-center">
@@ -76,18 +65,7 @@
                     <p class="text-gray-600 text-sm mb-6">
                         High definition video of your entire flight with cockpit audio capturing all the excitement and information during your flight.
                     </p>
-                    <div class="text-2xl font-bold text-purple-600">CA$110</div>
-                </div>
-            </div>
-
-            <!-- Both Package -->
-            <div class="bg-white/30 rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-                <div class="p-6 text-center">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Both</h3>
-                    <p class="text-gray-600 text-sm mb-6">
-                        High resolution photos & High definition video
-                    </p>
-                    <div class="text-2xl font-bold text-purple-600">CA$140</div>
+                    <div class="text-2xl font-bold text-purple-600">CA$90</div>
                 </div>
             </div>
 
@@ -98,7 +76,7 @@
                     <p class="text-gray-600 text-sm mb-6">
                         Photos, Video and a WhistlerSkySports Cap or shirt and Keyring
                     </p>
-                    <div class="text-2xl font-bold text-purple-600">CA$150</div>
+                    <div class="text-2xl font-bold text-purple-600">CA$120</div>
                 </div>
             </div>
 

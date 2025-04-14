@@ -72,8 +72,8 @@
                 <label for="package" class="block text-sm font-medium text-gray-700">Select Package *</label>
                 <select id="package" name="package" required class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200">
                   <option value="">Choose a package</option>
-                  <option value="intro" data-price="199">Introductory Flight - CA$199</option>
-                  <option value="basic" data-price="3000">Mountain Flying Course - CA$3000</option>
+                  <option value="intro" data-price="199">Open Cockpit Weight Shift Trike- CA$229 (30 min)</option>
+                  <option value="basic" data-price="3000">Fixed Wing Advanced Ultralight- CA$199 (30 min)</option>
                   <!-- <option value="advanced" data-price="599">Advanced Training - $599</option> -->
                   <!-- <option value="certification" data-price="1499">Certification Course - $1,499</option> -->
                 </select>
@@ -122,31 +122,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <!-- Photo Package -->
-              <div class="group bg-white p-6 rounded-xl border border-gray-100">
-                <div class="flex justify-between items-start mb-4">
-                  <div>
-                    <div class="flex items-center mb-2">
-                      <div class="bg-blue-100 p-2 rounded-lg mr-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                      </div>
-                      <h4 class="text-xl font-semibold text-gray-800">Photo Package</h4>
-                    </div>
-                    <p class="text-gray-600 text-sm ml-11">High-quality digital photos of your adventure</p>
-                    <p class="text-blue-600 font-semibold mt-2 ml-11">CA$75</p>
-                  </div>
-                  <div class="flex items-center">
-                    <label class="relative inline-flex items-center cursor-pointer">
-                      <input type="checkbox" name="photo_package" id="photo_package" class="sr-only peer">
-                      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                    </label>
-                  </div>
-                </div>
-              </div>
-
               <!-- Video Package -->
               <div class="group bg-white p-6 rounded-xl border border-gray-100">
                 <div class="flex justify-between items-start mb-4">
@@ -160,37 +135,12 @@
                       <h4 class="text-xl font-semibold text-gray-800">Video Package</h4>
                     </div>
                     <p class="text-gray-600 text-sm ml-11">Professional video coverage of your flight</p>
-                    <p class="text-purple-600 font-semibold mt-2 ml-11">CA$75</p>
+                    <p class="text-purple-600 font-semibold mt-2 ml-11">CA$90</p>
                   </div>
                   <div class="flex items-center">
                     <label class="relative inline-flex items-center cursor-pointer">
                       <input type="checkbox" name="video_package" id="video_package" class="sr-only peer">
                       <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Both Package -->
-              <div class="group bg-white p-6 rounded-xl border border-gray-100">
-                <div class="flex justify-between items-start mb-4">
-                  <div>
-                    <div class="flex items-center mb-2">
-                      <div class="bg-green-100 p-2 rounded-lg mr-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                        </svg>
-                      </div>
-                      <h4 class="text-xl font-semibold text-gray-800">Both (Photo + Video)</h4>
-                    </div>
-                    <p class="text-gray-600 text-sm ml-11">Complete photo and video coverage</p>
-                    <p class="text-green-600 font-semibold mt-2 ml-11">CA$110</p>
-                  </div>
-                  <div class="flex items-center">
-                    <label class="relative inline-flex items-center cursor-pointer">
-                      <input type="checkbox" name="both_package" id="both_package" class="sr-only peer">
-                      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
                     </label>
                   </div>
                 </div>
@@ -208,8 +158,8 @@
                       </div>
                       <h4 class="text-xl font-semibold text-gray-800">Deluxe Package</h4>
                     </div>
-                    <p class="text-gray-600 text-sm ml-11">Photos + Video + WhistlerSkySports T-shirt & Hat and Keyring</p>
-                    <p class="text-amber-600 font-semibold mt-2 ml-11">CA$150</p>
+                    <p class="text-gray-600 text-sm ml-11">Video + WhistlerSkySports T-shirt & Hat and Keyring</p>
+                    <p class="text-amber-600 font-semibold mt-2 ml-11">CA$120</p>
                   </div>
                   <div class="flex items-center">
                     <label class="relative inline-flex items-center cursor-pointer">
@@ -234,8 +184,8 @@
                       </div>
                       <h4 class="text-xl font-semibold text-gray-800 me-10">Merchandise Package</h4>
                     </div>
-                    <p class="text-gray-600 text-sm ml-11">T-shirt, cap, and souvenir photos</p>
-                    <p class="text-red-600 font-semibold mt-2 ml-11">CA$60</p>
+                    <p class="text-gray-600 text-sm ml-11">WhistlerSkySports T-shirt & Hat and Keyring</p>
+                    <p class="text-red-600 font-semibold mt-2 ml-11">CA$40</p>
                   </div>
                   <div class="flex items-center">
                     <button type="button" onclick="updateQuantity('merch_package', -1)" class="w-8 h-8 flex items-center hover:cursor-pointer justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200 mr-[5px]">
@@ -283,23 +233,23 @@
             </h3>
 
             <div class="space-y-2">
-              <label for="accommodation" class="block text-sm font-medium text-gray-700">Whistler Accommodation Details *</label>
-              <input type="text" id="accommodation" name="accommodation" required class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Hotel name or address of your stay">
+              <label for="accommodation" class="block text-sm font-medium text-gray-700">Accommodation Details </label>
+              <input type="text" id="accommodation" name="accommodation" class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Hotel name or address of your stay">
             </div>
 
             <div class="space-y-2">
-              <label for="special_event" class="block text-sm font-medium text-gray-700">Special Occasion or Surprise? *</label>
-              <textarea id="special_event" name="special_event" required rows="2" class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Tell us if you're celebrating something special"></textarea>
+              <label for="special_event" class="block text-sm font-medium text-gray-700">Special Occasion or Surprise?</label>
+              <textarea id="special_event" name="special_event" rows="2" class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Tell us if you're celebrating something special"></textarea>
             </div>
             
             <div class="space-y-2">
-              <label for="additional_info" class="block text-sm font-medium text-gray-700">Additional Notes for Our Team *</label>
-              <textarea id="additional_info" name="additional_info" required rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Any other details we should know to make your experience perfect"></textarea>
+              <label for="additional_info" class="block text-sm font-medium text-gray-700">Additional Notes for Our Team</label>
+              <textarea id="additional_info" name="additional_info" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200" placeholder="Any other details we should know to make your experience perfect"></textarea>
             </div>
 
             <div class="flex items-start p-4 bg-blue-50 rounded-lg border border-blue-100">
               <div class="flex items-center h-5">
-                <input id="waiver" name="waiver" type="checkbox" required class="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                <input id="waiver" name="waiver" type="checkbox" class="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
               </div>
               <div class="ml-3 text-sm">
                 <label for="waiver" class="font-medium text-gray-700">

@@ -39,7 +39,7 @@
         x-data="{ 
           activeSlide: 0,
           slides: [
-            { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7021.jpg') }}', alt: 'Power Hang Glider Flight' },
+            { type: 'image', src: '{{ asset('images/Aircreation_Skypper15.jpeg') }}', alt: 'Power Hang Glider Flight' },
             { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7017 2.jpg') }}', alt: 'Power Hang Glider Adventure' },
             { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7016 2.jpg') }}', alt: 'Power Hang Glider Experience' },
             { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7013.jpg') }}', alt: 'Power Hang Glider Scenery' },
