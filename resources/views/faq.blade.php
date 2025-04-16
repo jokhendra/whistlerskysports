@@ -191,6 +191,83 @@ Refunds will be made in the same method of payment and at the same location of p
             </div>
           </div>
 
+          <!-- FAQ Item 14 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <button class="flex justify-between items-center w-full px-6 py-4 text-lg font-medium text-left text-blue-800 focus:outline-none">
+              <span>What is Empty Weight, AUW, MAUW & Useful Load?</span>
+              <svg class="h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="px-6 py-4 text-gray-600">
+              <p><strong>Empty Weight:</strong> This is the weight of the aeroplane alone, with no pilot, passenger, fuel, or cargo. It includes the airframe, engine, and fixed equipment. For instance, an ultra-light with an empty weight of 300 kg needs to stay under 544 kg when loaded with people and fuel.</p>
+              <p><strong>AUW (All-Up Weight):</strong> This is the total weight of the aeroplane at any given moment, including the empty weight, pilot, passenger (if allowed), fuel, and any cargo. It's what the plane weighs when ready to fly, and it must not exceed the maximum allowed weight for safety.</p>
+              <p><strong>Gross Weight / MAUW (Maximum All-Up Weight):</strong> This is the highest weight an aeroplane is certified to take off with, as set by the manufacturer and approved by Transport Canada. For ultra-lights, it's typically 544 kg (1,200 pounds) for both basic (BULA) and advanced (AULA) categories. It's the upper limit of AUW to ensure safe operation.</p>
+              <p><strong>Useful Load:</strong> This is the weight available for the pilot, passenger, fuel, and any baggage after accounting for the empty weight. For example, if an advanced ultra-light has an empty weight of 300 kg, its useful load is 244 kg (544 kg MAUW minus 300 kg). Advanced ultra-lights (AULAs) must also meet a minimum useful load formula: 175 + (P/2) pounds, where P is engine horsepower.</p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 15 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <button class="flex justify-between items-center w-full px-6 py-4 text-lg font-medium text-left text-blue-800 focus:outline-none">
+              <span>What is an UL & AUL?</span>
+              <svg class="h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="px-6 py-4 text-gray-600">
+              <p>In Canada, an ultralight aeroplane is a lightweight aircraft regulated by Transport Canada under the Canadian Aviation Regulations (CARs), categorized into basic ultra-light aeroplanes (BULA) and advanced ultra-light aeroplanes (AULA).</p>
+              <p>A BULA is defined as an aeroplane with no more than two seats, a maximum take-off weight of 544 kg (1,200 pounds), and a stall speed in landing configuration of 39 knots (45 mph) or less.</p>
+              <p>An Advanced Ultra-light Aeroplane (AULA), as defined by Transport Canada, is an aeroplane with a maximum of two seats, a maximum take-off weight of 544 kg (1,200 pounds), and a stall speed in landing configuration not exceeding 39 knots (45 mph). It must comply with the Design Standards for Advanced Ultra-light Aeroplanes (DS10141) and meet a minimum useful load requirement of 175 + (P/2) pounds, where P is the engine power in horsepower. Unlike basic ultra-lights, AULAs are approved for carrying passengers with the appropriate pilot endorsement. For more details reach out to Transport Canada's website.</p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 16 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <button class="flex justify-between items-center w-full px-6 py-4 text-lg font-medium text-left text-blue-800 focus:outline-none">
+              <span>What Aircraft is covered and what is not covered?</span>
+              <svg class="h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="px-6 py-4 text-gray-600">
+              <p>Types of ultralight aircraft include fixed-wing aeroplanes, open cockpit weight-shift control trikes and powered paragliders and parachutes, but rotary-wing aircraft like gyroplanes are explicitly excluded from the AULA category. Gyroplanes are not considered ultralights in Canada and require a separate pilot permit and cannot be registered as ultralights.</p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 17 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <button class="flex justify-between items-center w-full px-6 py-4 text-lg font-medium text-left text-blue-800 focus:outline-none">
+              <span>Do I need a new pilot permit to fly a BULA or AULA if I already have a Private Pilot Licence (PPL) or higher?</span>
+              <svg class="h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="px-6 py-4 text-gray-600">
+              <p>If you hold a valid Private Pilot Licence (PPL), Recreational Pilot Permit (RPP), or higher aeroplane licence issued by Transport Canada, you can fly both BULA and AULA without needing an additional Ultra-light Pilot Permit. However, a thorough checkout with an instructor familiar with ultra-lights is strongly recommended due to their unique handling characteristics. For AULA, you can carry a passenger without further endorsement, but for BULA, passenger carrying is restricted unless the passenger is another pilot or a student under training.</p>
+            </div>
+          </div>
+
+          <!-- FAQ Item 18 -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <button class="flex justify-between items-center w-full px-6 py-4 text-lg font-medium text-left text-blue-800 focus:outline-none">
+              <span>What training is recommended for transitioning to ultra-lights from heavier aircraft?</span>
+              <svg class="h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="px-6 py-4 text-gray-600">
+              <p>Even with a PPL or higher, transitioning pilots should seek transition training with an instructor experienced in ultra-lights. Ultra-lights have lighter weight, slower speeds, and different handling (e.g., more rudder use, less yaw stability). Training should cover:</p>
+              <ul class="list-disc pl-5 mt-2">
+                <li>Familiarization with the specific ultra-light model (e.g., stick and rudder techniques).</li>
+                <li>Low-speed flight and stall characteristics.</li>
+                <li>Emergency procedures, as ultra-lights lose energy faster than heavier aircraft.</li>
+                <li>For AULA, understanding passenger-carrying responsibilities.</li>
+              </ul>
+              <p class="mt-2">Transport Canada suggests practicing landings with and without power and reviewing the manufacturer's instructions, if available.</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

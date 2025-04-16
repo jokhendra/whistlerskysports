@@ -10,13 +10,13 @@ module.exports = {
       colors: {
         // Primary colors
         primary: {
-          DEFAULT: '#0F1B2A', // Dark blue
+          DEFAULT: '#204fb4', // Dark blue
           light: '#12161c',   // Lighter dark blue
           dark: '#0A1220',    // Darker blue
         },
         // Accent colors
         accent: {
-          DEFAULT: '#FED600', // Yellow
+          DEFAULT: '#fcdb3f', // Yellow
           hover: '#b78b4d',   // Darker yellow for hover
           dark: '#c05300',    // Dark orange
         },
