@@ -73,13 +73,12 @@
     </div>
     
     <!-- Pricing Section -->
-    <div id="pricing" class="pricing-section bg-gradient-to-b from-blue-900/70 via-blue-800/65 to-blue-900/70 backdrop-blur-md py-16">
+    <!-- <div id="pricing" class="pricing-section bg-gradient-to-b from-blue-900/70 via-blue-800/65 to-blue-900/70 backdrop-blur-md py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="sm:flex sm:flex-col sm:align-center">
           <h2 class="text-3xl font-extrabold text-white/95 sm:text-center">Introductory Pricing</h2>
           <p class="mt-5 text-xl text-blue-200/90 sm:text-center">Experience the thrill of power hang gliding with our special promotional offers!</p>
           
-          <!-- Promotional Timer -->
           <div class="mt-6 bg-blue-800/40 backdrop-blur-sm rounded-lg p-4 sm:w-fit sm:mx-auto border border-white/20">
             <p class="text-blue-200/90 text-sm">Limited Time Offer Ends In:</p>
             <div class="flex space-x-4 mt-2">
@@ -104,7 +103,6 @@
         </div>
 
         <div class="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-3">
-          <!-- Basic Package -->
           <div class="bg-white/75 backdrop-blur-md border border-white/30 rounded-lg shadow-xl transform hover:scale-105 transition-all duration-300">
             <div class="p-6">
               <h3 class="text-2xl font-semibold text-blue-900">Basic Experience</h3>
@@ -140,7 +138,6 @@
             </div>
           </div>
 
-          <!-- Premium Package -->
           <div class="bg-gradient-to-b from-blue-600/75 to-blue-800/75 backdrop-blur-md border border-blue-300/30 rounded-lg shadow-xl transform hover:scale-105 transition-all duration-300">
             <div class="p-6">
               <h3 class="text-2xl font-semibold text-white">Mountain Explorer</h3>
@@ -182,7 +179,6 @@
             </div>
           </div>
 
-          <!-- Ultimate Package -->
           <div class="bg-white/75 backdrop-blur-md border border-white/30 rounded-lg shadow-xl transform hover:scale-105 transition-all duration-300">
             <div class="p-6">
               <h3 class="text-2xl font-semibold text-blue-900">Ultimate Experience</h3>
@@ -231,7 +227,6 @@
           </div>
         </div>
 
-        <!-- Additional Information -->
         <div class="mt-10 text-center">
           <p class="text-blue-200/95 max-w-2xl mx-auto bg-blue-900/30 backdrop-blur-sm p-4 rounded-lg border border-white/10">
             All packages include essential safety equipment and training. Group discounts available for bookings of 4 or more people.
@@ -245,35 +240,29 @@
       </div>
     </div>
 
-    <!-- Add countdown timer JavaScript -->
     <script>
-      // Set the date we're counting down to (7 days from now)
       const countDownDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).getTime();
 
-      // Update the countdown every 1 second
       const x = setInterval(function() {
         const now = new Date().getTime();
         const distance = countDownDate - now;
 
-        // Calculate days, hours, minutes and seconds
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Display the result
         document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
         document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
         document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
         document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
 
-        // If the countdown is finished, display expired message
         if (distance < 0) {
           clearInterval(x);
           document.getElementById("countdown").innerHTML = "OFFER EXPIRED";
         }
       }, 1000);
-    </script>
+    </script> -->
 
     <div class="relative h-96 overflow-hidden">
         <img src="{{ asset('images/hero-section.png') }}" alt="Hang gliding over mountains" class="w-full h-full object-cover">
