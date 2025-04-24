@@ -6,15 +6,35 @@ use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Class ReviewController
+ * 
+ * @package App\Http\Controllers
+ * @description Handles the customer review functionality including displaying and storing reviews
+ */
 class ReviewController extends Controller
 {
+    /**
+     * Display the review submission form.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         return view('review');
     }
 
+    /**
+     * Store a newly created review in the database.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     * 
+     * @throws \Illuminate\Validation\ValidationException When validation fails
+     */
     public function store(Request $request)
     {
+        // Validate the incoming request data
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
@@ -23,11 +43,13 @@ class ReviewController extends Controller
             'feedback' => 'required|string|min:10',
         ]);
 
+        // Handle profile picture upload if provided
         $profilePicturePath = null;
         if ($request->hasFile('profile_picture')) {
             $profilePicturePath = $request->file('profile_picture')->store('profile-pictures', 'public');
         }
 
+        // Create new review record in database
         Review::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -36,6 +58,7 @@ class ReviewController extends Controller
             'feedback' => $request->feedback,
         ]);
 
+        // Redirect back with success message
         return redirect()->back()->with('success', 'Thank you for your review!');
     }
 } 

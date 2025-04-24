@@ -1,148 +1,446 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- Main Container --}}
 <div class="min-h-screen bg-gray-50 py-12">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-white rounded-2xl shadow-xl p-8">
-            <div class="text-center mb-8">
-                <h1 class="text-3xl font-bold text-gray-900">Booking Preview</h1>
-                <p class="mt-2 text-gray-600">Please review your booking details before proceeding to payment</p>
-            </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {{-- Page Header --}}
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Booking Preview</h1>
+            <p class="text-lg text-gray-600">Please review your booking details before proceeding to payment</p>
+        </div>
 
-            <!-- Booking Details -->
-            <div class="bg-gray-50 rounded-xl p-6 mb-8">
-                <h2 class="text-xl font-semibold text-gray-900 mb-4">Booking Details</h2>
-                <div class="space-y-4">
-                    <div class="flex justify-between border-b pb-2">
-                        <span class="text-gray-600">Name:</span>
-                        <span class="font-medium">{{ $booking['name'] }}</span>
-                    </div>
-                    <div class="flex justify-between border-b pb-2">
-                        <span class="text-gray-600">Email:</span>
-                        <span class="font-medium">{{ $booking['email'] }}</span>
-                    </div>
-                    <div class="flex justify-between border-b pb-2">
-                        <span class="text-gray-600">Phone:</span>
-                        <span class="font-medium">{{ $booking['phone'] }}</span>
-                    </div>
-                    <div class="flex justify-between border-b pb-2">
-                        <span class="text-gray-600">Experience Level:</span>
-                        <span class="font-medium capitalize">{{ $booking['experience'] }}</span>
-                    </div>
-                    <div class="flex justify-between border-b pb-2">
-                        <span class="text-gray-600">Package:</span>
-                        <span class="font-medium capitalize">{{ $booking['package'] }}</span>
-                    </div>
-                    <div class="flex justify-between border-b pb-2">
-                        <span class="text-gray-600">Date:</span>
-                        <span class="font-medium">{{ \Carbon\Carbon::parse($booking['date'])->format('F j, Y') }}</span>
-                    </div>
-                    <div class="flex justify-between border-b pb-2">
-                        <span class="text-gray-600">Time:</span>
-                        <span class="font-medium">{{ $booking['time'] }}</span>
-                    </div>
-                    <div class="flex justify-between border-b pb-2">
-                        <span class="text-gray-600">Participants:</span>
-                        <span class="font-medium">{{ $booking['participants'] }}</span>
-                    </div>
-                    @if(isset($booking['special_requests']) && $booking['special_requests'])
-                    <div class="border-b pb-2">
-                        <span class="text-gray-600">Special Requests:</span>
-                        <p class="mt-1 text-gray-800">{{ $booking['special_requests'] }}</p>
-                    </div>
-                    @endif
-                    <div class="flex justify-between pt-4">
-                        <span class="text-lg font-semibold">Total Amount:</span>
-                        <span class="text-lg font-bold text-amber-600">${{ number_format($price, 2) }}</span>
-                    </div>
-                </div>
-            </div>
+        {{-- Content Grid Layout --}}
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {{-- Left Column: Booking Details --}}
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-semibold text-gray-900 mb-6">Booking Details</h2>
+                        
+                        <div class="space-y-6">
+                            {{-- Personal Information Section --}}
+                            <div class="border-b border-gray-200 pb-6">
+                                <h3 class="text-lg font-medium text-gray-900 mb-4">Personal Information</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {{-- Name --}}
+                                    <div>
+                                        <p class="text-sm text-gray-500">Name</p>
+                                        <p class="text-base font-medium text-gray-900">{{ $booking['name'] }}</p>
+                                    </div>
+                                    {{-- Email --}}
+                                    <div>
+                                        <p class="text-sm text-gray-500">Email</p>
+                                        <p class="text-base font-medium text-gray-900">{{ $booking['email'] }}</p>
+                                    </div>
+                                    {{-- Primary Phone --}}
+                                    <div>
+                                        <p class="text-sm text-gray-500">Primary Phone</p>
+                                        <p class="text-base font-medium text-gray-900">{{ $booking['primary_phone'] }}</p>
+                                    </div>
+                                    {{-- Local Contact --}}
+                                    <div>
+                                        <p class="text-sm text-gray-500">Local Contact</p>
+                                        <p class="text-base font-medium text-gray-900">{{ $booking['local_phone'] }}</p>
+                                    </div>
+                                </div>
+                            </div>
 
-            <!-- Payment Section -->
-            <div class="space-y-6">
-                <div x-data="{ paymentProcessing: false }" class="space-y-4">
-                    <div x-show="!paymentProcessing">
-                        <div id="paypal-button-container"></div>
-                    </div>
-                    <div x-show="paymentProcessing" class="text-center">
-                        <div class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-amber-500">
-                            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                            Processing payment...
+                            {{-- Flight Details Section --}}
+                            <div class="border-b border-gray-200 pb-6">
+                                <h3 class="text-lg font-medium text-gray-900 mb-4">Flight Details</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {{-- Package Type --}}
+                                    <div>
+                                        <p class="text-sm text-gray-500">Package</p>
+                                        <p class="text-base font-medium text-gray-900 capitalize">{{ $booking['package'] }}</p>
+                                    </div>
+                                    {{-- Preferred Date --}}
+                                    <div>
+                                        <p class="text-sm text-gray-500">Preferred Date</p>
+                                        <p class="text-base font-medium text-gray-900">{{ \Carbon\Carbon::parse($booking['preferred_dates'])->format('F j, Y') }}</p>
+                                    </div>
+                                    {{-- Sunrise Flight Option --}}
+                                    <div>
+                                        <p class="text-sm text-gray-500">Sunrise Flight</p>
+                                        <p class="text-base font-medium text-gray-900 capitalize">{{ $booking['sunrise_flight'] }}</p>
+                                    </div>
+                                    {{-- Timezone --}}
+                                    <div>
+                                        <p class="text-sm text-gray-500">Timezone</p>
+                                        <p class="text-base font-medium text-gray-900">{{ $booking['timezone'] }}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- Additional Services Section --}}
+                            <div>
+                                <h3 class="text-lg font-medium text-gray-900 mb-4">Additional Services</h3>
+                                <div class="space-y-3">
+                                    {{-- Video Package Option --}}
+                                    @if($booking['video_package'])
+                                        <div class="flex items-center text-green-600">
+                                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                            <span>Video Package</span>
+                                        </div>
+                                    @endif
+
+                                    {{-- Deluxe Package Option --}}
+                                    @if($booking['deluxe_package'])
+                                        <div class="flex items-center text-green-600">
+                                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                            <span>Deluxe Package</span>
+                                        </div>
+                                    @endif
+
+                                    {{-- Merchandise Package Option --}}
+                                    @if($booking['merch_package'])
+                                        <div class="flex items-center text-green-600">
+                                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                            <span>Merchandise Package ({{ $booking['merch_package'] }} items)</span>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="flex justify-between mt-8">
-                    <a href="{{ url()->previous() }}" class="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200">
-                        Back to Form
-                    </a>
+            {{-- Right Column: Payment Summary --}}
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden sticky top-4">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-semibold text-gray-900 mb-6">Payment Summary</h2>
+                        
+                        <div class="space-y-4">
+                            {{-- Base Package Price --}}
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Base Package ({{ ucfirst($booking['package']) }})</span>
+                                <span class="font-medium">${{ number_format($totalAmount - ($booking['video_package'] ? 90 : 0) - ($booking['deluxe_package'] ? 120 : 0) - ($booking['merch_package'] * 40) - ($booking['sunrise_flight'] === 'yes' ? 99 : 0), 2) }}</span>
+                            </div>
+
+                            {{-- Additional Services Prices --}}
+                            @if($booking['video_package'])
+                                <div class="flex justify-between items-center text-green-600">
+                                    <span>Video Package</span>
+                                    <span class="font-medium">$90.00</span>
+                                </div>
+                            @endif
+
+                            @if($booking['deluxe_package'])
+                                <div class="flex justify-between items-center text-green-600">
+                                    <span>Deluxe Package</span>
+                                    <span class="font-medium">$120.00</span>
+                                </div>
+                            @endif
+
+                            @if($booking['merch_package'])
+                                <div class="flex justify-between items-center text-green-600">
+                                    <span>Merchandise ({{ $booking['merch_package'] }} items)</span>
+                                    <span class="font-medium">${{ number_format($booking['merch_package'] * 40, 2) }}</span>
+                                </div>
+                            @endif
+
+                            @if($booking['sunrise_flight'] === 'yes')
+                                <div class="flex justify-between items-center text-green-600">
+                                    <span>Sunrise Flight Option</span>
+                                    <span class="font-medium">$99.00</span>
+                                </div>
+                            @endif
+
+                            {{-- Total Amount --}}
+                            <div class="border-t border-gray-200 my-4"></div>
+                            <div class="flex justify-between items-center text-lg font-bold">
+                                <span>Total Amount</span>
+                                <span class="text-blue-600">${{ number_format($totalAmount, 2) }}</span>
+                            </div>
+
+                            {{-- Payment Process Steps --}}
+                            <div class="mt-6 bg-gray-50 rounded-xl p-4">
+                                <h3 class="text-lg font-medium text-gray-900 mb-4">Payment Process</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                            <span class="text-blue-600 font-medium">1</span>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-900">Review Details</p>
+                                            <p class="text-xs text-gray-500">Check your booking information</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                            <span class="text-blue-600 font-medium">2</span>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-900">Click PayPal Button</p>
+                                            <p class="text-xs text-gray-500">Secure payment through PayPal</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                            <span class="text-blue-600 font-medium">3</span>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-900">Complete Payment</p>
+                                            <p class="text-xs text-gray-500">Receive confirmation email</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- PayPal Payment Section --}}
+                            <div class="mt-6">
+                                <div class="text-center mb-4">
+                                    <p class="text-lg font-medium text-gray-900">Complete Your Payment</p>
+                                    <p class="text-sm text-gray-600 mt-1">Click the PayPal button below to proceed</p>
+                                </div>
+                                <div class="bg-white border border-gray-200 rounded-lg p-4">
+                                    {{-- PayPal Loading State --}}
+                                    <div id="paypal-loading" class="w-full min-h-[150px] flex items-center justify-center">
+                                        <div class="text-center text-gray-500">
+                                            <svg class="animate-spin h-8 w-8 text-blue-500 mx-auto mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            <p>Loading PayPal...</p>
+                                        </div>
+                                    </div>
+                                    {{-- PayPal Button Container --}}
+                                    <div id="paypal-button-container" class="hidden"></div>
+                                </div>
+                            </div>
+
+                            {{-- Security Notice --}}
+                            <div class="mt-6 text-center">
+                                <div class="flex items-center justify-center text-sm text-gray-500">
+                                    <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                    </svg>
+                                    <span>Secure payment processed by PayPal</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+{{-- Hidden Elements --}}
+{{-- Booking Data Storage --}}
+<div id="booking-data" 
+     data-total-amount="{{ $totalAmount }}" 
+     data-booking-id="{{ $booking['order_id'] ?? 'pending' }}" 
+     class="hidden">
+</div>
+
+{{-- Hidden Form for Signature Data --}}
+<form id="signature-form" class="hidden">
+    <input type="hidden" name="signature_data" id="signature-data" value="{{ session('booking.signature_data') }}">
+</form>
+
+{{-- Processing Indicator Overlay --}}
+<div id="processing-indicator" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-8 text-center">
+        <svg class="animate-spin h-12 w-12 text-blue-500 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <p class="text-lg font-medium text-gray-900">Processing your payment...</p>
+        <p class="text-sm text-gray-600 mt-2">Please do not close this window</p>
+    </div>
+</div>
+
 @push('scripts')
-<script src="https://www.paypal.com/sdk/js?client-id={{ config('paypal.sandbox.client_id') }}&currency=USD"></script>
+{{-- PayPal SDK Integration --}}
+<script src="https://www.sandbox.paypal.com/sdk/js?client-id={{ config('paypal.sandbox.client_id') }}&currency=USD"></script>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    paypal.Buttons({
-        createOrder: async () => {
-            try {
-                const response = await fetch('/api/booking/create', {
+    // Initialize UI elements
+    const loadingElement = document.getElementById('paypal-loading');
+    const buttonContainer = document.getElementById('paypal-button-container');
+    const totalAmount = parseFloat(document.getElementById('booking-data').getAttribute('data-total-amount'));
+    const orderId = document.getElementById('booking-data').getAttribute('data-booking-id');
+    const isOrderId = orderId ? true : false;
+
+    // UI Helper Functions
+    function showProcessing() {
+        document.getElementById('processing-indicator').classList.remove('hidden');
+    }
+
+    function hideProcessing() {
+        document.getElementById('processing-indicator').classList.add('hidden');
+    }
+
+    function showError(message) {
+        buttonContainer.innerHTML = `
+            <div class="text-center text-red-600 p-4">
+                <svg class="mx-auto h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <p class="mt-2">${message}</p>
+            </div>
+        `;
+    }
+
+    // Initialize PayPal Button
+    if (typeof paypal !== 'undefined') {
+        paypal.Buttons({
+            // Button Style Configuration
+            style: {
+                layout: 'vertical',
+                color: 'blue',
+                shape: 'rect',
+                label: 'pay',
+                height: 55
+            },
+
+            // Create Order Handler
+            createOrder: function(data, actions) {
+                showProcessing();
+                return fetch('{{ route("booking.create") }}', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    }
-                });
-
-                const data = await response.json();
-                if (!data.success) throw new Error(data.error);
-                return data.paypal_order_id;
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Error creating order. Please try again.');
-                return null;
-            }
-        },
-        onApprove: async (data, actions) => {
-            const processingElement = document.querySelector('[x-data]').__x.$data;
-            processingElement.paymentProcessing = true;
-
-            try {
-                const response = await fetch('/api/booking/capture-payment', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'X-Requested-With': 'XMLHttpRequest'
                     },
                     body: JSON.stringify({
-                        order_id: data.orderID
+                        amount: totalAmount,
+                        currency: 'USD',
+                        orderId: isOrderId ? null : orderId,
                     })
+                })
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.error) throw new Error(data.error);
+                    window.bookingId = data.booking_id;
+                    
+                    return actions.order.create({
+                        intent: "CAPTURE",
+                        purchase_units: [{
+                            amount: {
+                                value: "10",
+                                currency_code: "USD"
+                            },
+                            reference_id: data.booking_id
+                        }]
+                    });
+                })
+                .catch(error => {
+                    hideProcessing();
+                    console.error('Error creating booking:', error);
+                    showError('Failed to create booking. Please try again.');
                 });
+            },
 
-                const result = await response.json();
-                if (result.success) {
-                    window.location.href = '/booking/success';
-                } else {
-                    throw new Error(result.error);
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Error processing payment: ' + error.message);
-                processingElement.paymentProcessing = false;
+            // Payment Approval Handler
+            onApprove: function(data, actions) {
+                showProcessing();
+                return fetch('{{ route("booking.capture-payment") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: JSON.stringify({
+                        order_id: data.orderID,
+                        booking_id: window.bookingId
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.json();
+                })
+                .then(details => {
+                    if (details.success) {
+                        window.location.href = '{{ route("booking.success") }}';
+                    } else {
+                        hideProcessing();
+                        showError('Payment failed: ' + (details.error || 'Unknown error'));
+                        logPaymentFailure(data.orderID, isOrderId ? null : orderId, details.error || 'Unknown error');
+                    }
+                })
+                .catch(error => {
+                    hideProcessing();
+                    console.error('Error capturing payment:', error);
+                    showError('Failed to capture payment. Please try again.');
+                    logPaymentFailure(data.orderID, isOrderId ? null : orderId, error.message || 'Error capturing payment');
+                });
+            },
+
+            // Error Handler
+            onError: function(err) {
+                hideProcessing();
+                console.error('PayPal error:', err);
+                showError('An error occurred with PayPal. Please try again.');
+                logPaymentFailure(null, isOrderId ? null : orderId, 'PayPal error: ' + (err.message || JSON.stringify(err)));
+            },
+
+            // Cancel Handler
+            onCancel: function() {
+                hideProcessing();
+                logPaymentFailure(null, isOrderId ? null : orderId, 'Payment cancelled by user');
             }
-        },
-        onError: (err) => {
-            console.error('PayPal Error:', err);
-            alert('Error processing PayPal payment. Please try again.');
-        }
-    }).render('#paypal-button-container');
+        }).render('#paypal-button-container')
+        .then(() => {
+            loadingElement.classList.add('hidden');
+            buttonContainer.classList.remove('hidden');
+        })
+        .catch(error => {
+            console.error('PayPal button render error:', error);
+            loadingElement.classList.add('hidden');
+            showError('Error loading PayPal button. Please refresh the page or try again later.');
+        });
+    } else {
+        console.error('PayPal SDK not loaded');
+        loadingElement.classList.add('hidden');
+        showError('Error loading PayPal. Please refresh the page or try again later.');
+    }
 });
+
+// Payment Failure Logging Function
+function logPaymentFailure(orderId, bookingId, errorMessage) {
+    fetch('{{ route("booking.log-payment-failure") }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify({
+            order_id: orderId,
+            booking_id: window.bookingId,
+            error_message: errorMessage
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            console.error('Failed to log payment failure to backend');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Payment failure logged:', data);
+    })
+    .catch(error => {
+        console.error('Error logging payment failure:', error);
+    });
+}
 </script>
 @endpush
 @endsection 

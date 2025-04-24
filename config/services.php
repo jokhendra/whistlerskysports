@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'google' => [
+        'calendar_id' => env('GOOGLE_CALENDAR_ID'),
+        'spreadsheet_id' => env('GOOGLE_SPREADSHEET_ID'),
+    ],
+
 ];

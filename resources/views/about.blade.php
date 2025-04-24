@@ -2,14 +2,28 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="bg-gray-100 py-16 mt-10">
+<section class="bg-gradient-to-b from-blue-900 to-blue-700 py-16 mt-10">
     <div class="container mx-auto px-4">
       <div class="flex flex-col items-center text-center">
-        <h1 class="text-5xl font-bold text-primary mb-6">About Whistler Sky Sports</h1>
-        <div class="w-24 h-1 bg-accent mb-8"></div>
-        <p class="text-xl text-gray-700 max-w-3xl">
-          At Whistler Sky Sports (WSS), we're not just about flying—we're about igniting a passion for flight and empowering aviation enthusiasts to take to the skies with confidence.
-        </p>
+        <h1 class="text-5xl font-bold text-white mb-6">About Whistler Sky Sports</h1>
+        <div class="w-24 h-1 bg-[#fcdb3f] mb-8"></div>
+        <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-white/20">
+            <div class="relative">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#fcdb3f] mb-6 animate-pulse">Live the DREAM!</h2>
+                <div class="text-xl text-blue-100 space-y-6">
+                    <p class="italic">
+                        "Once you have tasted flight, you will forever walk the earth with your eyes turned skyward."
+                    </p>
+                    <p class="text-sm text-blue-200">- Leonardo da Vinci</p>
+                    <p class="mt-6">
+                        At Whistler Sky Sports, we teach you how to trespass mankind's most ancestral fear - which is the fear of falling. The oldest dream of mankind is to fly and we help you achieve your dream!
+                    </p>
+                </div>
+                <!-- Decorative elements -->
+                <div class="absolute -top-4 -left-4 w-8 h-8 border-t-2 border-l-2 border-[#fcdb3f] opacity-60"></div>
+                <div class="absolute -bottom-4 -right-4 w-8 h-8 border-b-2 border-r-2 border-[#fcdb3f] opacity-60"></div>
+            </div>
+        </div>
       </div>
     </div>
 </section>

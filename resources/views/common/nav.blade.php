@@ -7,7 +7,7 @@
             <!-- Logo -->
             <div class="sm:w-[20%] md:w-[25%] lg:w-[15%] flex items-center">
                 <a href="/" class="flex items-center pl-[15px] sm:pl-[25px] md:pl-[50px] lg:pl-[75px]">
-                    <img src="{{ asset('images/logo/2Color.png') }}" class="h-8 sm:h-10 md:h-24 mr-3" alt="Alpine Air Adventures Logo" />
+                    <img src="{{ asset('images/logo/logo.png') }}" class="h-8 sm:h-10 md:h-24 mr-3" alt="WhistlerSkySports Logo" />
                 </a>
             </div>
             

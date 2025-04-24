@@ -99,6 +99,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Contact Form Configuration
+    |--------------------------------------------------------------------------
+    |
+    | This section contains configuration for the contact form email settings.
+    |
+    */
+
+    'contact' => [
+        'address' => env('CONTACT_EMAIL_ADDRESS', 'info@whistlerskysports.ca'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Global "From" Address
     |--------------------------------------------------------------------------
     |

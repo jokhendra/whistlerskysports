@@ -9,6 +9,17 @@
             <p class="text-xl text-gray-600">Experience the freedom of flight in the majestic skies of Whistler</p>
         </div>
 
+        <!-- Booking Instructions -->
+        <div class="max-w-5xl mx-auto mb-12 px-4">
+                <p class="text-gray-700 mb-3 text-center">
+                    To request a reservation, please fill out this request form and we will contact you to confirm your reservation.
+                </p>
+                <p class="text-gray-600 text-center">
+                    If you have any issues completing the request form, please call Whistler Sky Sports at 
+                </p>
+                <p class="text-center"><a href="tel:+12162881303" class="text-[#204fb4] hover:text-blue-700 font-medium">+1 216-288-1303</a>.
+            </p>
+        </div>
         <!-- Main Booking Form -->
         <div class="max-w-5xl mx-auto">
             <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -25,6 +36,23 @@
                 <!-- Booking Form -->
                 <form action="{{ route('booking.preview') }}" method="POST" class="p-8" id="bookingForm">
                     @csrf
+                    
+                    @if ($errors->any())
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            @if($errors->has('debug_info'))
+                                <div class="mt-2 p-2 bg-red-200 rounded text-xs font-mono overflow-x-auto">
+                                    <p class="font-bold">Debug Information:</p>
+                                    <p>{{ $errors->first('debug_info') }}</p>
+                                </div>
+                            @endif
+                        </div>
+                    @endif
+
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         <!-- Personal Information -->
                         <div class="space-y-6">
@@ -36,17 +64,17 @@
                             <div class="space-y-4">
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Full Name *</label>
-                                    <input type="text" name="name" id="name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                    <input type="text" name="name" id="name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" value="John Doe">
                                 </div>
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Email Address *</label>
-                                    <input type="email" name="email" id="email" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                    <input type="email" name="email" id="email" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" value="john.doe@example.com">
                                 </div>
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Primary Phone *</label>
-                                    <input type="tel" name="callback_phone" id="callback_phone" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                    <input type="tel" name="primary_phone" id="primary_phone" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" value="9999999999">
                                 </div>
 
                                 <div class="relative">
@@ -57,7 +85,7 @@
                                             <option value="America/New_York">Eastern Time (ET) - New York, Toronto</option>
                                             <option value="America/Chicago">Central Time (CT) - Chicago, Winnipeg</option>
                                             <option value="America/Denver">Mountain Time (MT) - Denver, Calgary</option>
-                                            <option value="America/Los_Angeles">Pacific Time (PT) - Los Angeles, Vancouver</option>
+                                            <option value="America/Los_Angeles" selected>Pacific Time (PT) - Los Angeles, Vancouver</option>
                                             <option value="America/Anchorage">Alaska Time (AKT) - Anchorage</option>
                                             <option value="Pacific/Honolulu">Hawaii Time (HT) - Honolulu</option>
                                         </optgroup>
@@ -82,7 +110,7 @@
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Local Contact (During Stay) *</label>
-                                    <input type="tel" name="oahu_phone" id="oahu_phone" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                    <input type="tel" name="local_phone" id="local_phone" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" value="9999999999">
                                 </div>
                             </div>
                         </div>
@@ -99,31 +127,36 @@
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Select Package *</label>
                                     <select name="package" id="package" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                         <option value="">Choose your adventure</option>
-                                        <option value="intro">Open Cockpit Weight Shift Trike - CA$229 (30 min)</option>
+                                        <option value="intro" selected>Open Cockpit Weight Shift Trike - CA$229 (30 min)</option>
                                         <option value="basic">Fixed Wing Advanced Ultralight - CA$199 (30 min)</option>
                                     </select>
                                 </div>
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Participant Details *</label>
-                                    <textarea name="flyer_details" id="flyer_details" required rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="List each participant's name and weight"></textarea>
+                                    <textarea name="flyer_details" id="flyer_details" required rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="List each participant's name and weight">John Doe, 30, 175lbs
+Jane Doe, 28, 135lbs</textarea>
                                 </div>
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Under 18 Participants</label>
-                                    <textarea name="underage_flyers" rows="2" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="List names of participants under 18"></textarea>
+                                    <textarea name="underage_flyers" rows="2" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="List names of participants under 18">None</textarea>
                                 </div>
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Preferred Dates *</label>
-                                    <input type="date" name="preferred_dates" id="preferred_dates" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                    <input type="date" 
+                                           name="preferred_dates" 
+                                           id="preferred_dates" 
+                                           required 
+                                           class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                 </div>
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Sunrise Flight Option *</label>
                                     <select name="sunrise_flight" id="sunrise_flight" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                         <option value="">Select preference</option>
-                                        <option value="yes">Yes - Sunrise Flight (CA$99)</option>
+                                        <option value="yes" selected>Yes - Sunrise Flight (CA$99)</option>
                                         <option value="no">No - Regular Time</option>
                                     </select>
                                 </div>
@@ -163,7 +196,7 @@
                                         <p class="text-[#204fb4] font-bold text-xl ml-11">CA$90</p>
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" name="video_package" class="sr-only peer" onchange="updateTotalPrice()">
+                                        <input type="checkbox" name="video_package" id="video_package" class="sr-only peer" onchange="updateTotalPrice()" checked>
                                         <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#204fb4]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#204fb4]"></div>
                                     </label>
                                 </div>
@@ -185,7 +218,7 @@
                                         <p class="text-[#204fb4] font-bold text-xl ml-11">CA$120</p>
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" name="deluxe_package" class="sr-only peer" onchange="updateTotalPrice()">
+                                        <input type="checkbox" name="deluxe_package" id="deluxe_package" class="sr-only peer" onchange="updateTotalPrice()" checked>
                                         <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#204fb4]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#204fb4]"></div>
                                     </label>
                                 </div>
@@ -211,7 +244,7 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
                                                 </svg>
                                             </button>
-                                            <input type="number" id="merch_package" name="merch_package" class="w-8 text-center text-sm border-gray-200 rounded-md" value="0" min="0" readonly onchange="updateTotalPrice()">
+                                            <input type="number" id="merch_package" name="merch_package" class="w-8 text-center text-sm border-gray-200 rounded-md" value="2" min="0" readonly onchange="updateTotalPrice()">
                                             <button type="button" onclick="updateQuantity('merch_package', 1)" class="w-6 h-6 flex items-center justify-center rounded-md bg-[#204fb4]/10 hover:bg-[#204fb4]/20 text-[#204fb4]">
                                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
@@ -252,18 +285,18 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="relative">
                                 <label class="text-sm font-medium text-gray-700 mb-1 block">Accommodation Details</label>
-                                <input type="text" name="accommodation" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Hotel name or address">
+                                <input type="text" name="accommodation" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Hotel name or address" value="Whistler Hilton, Room 301">
                             </div>
 
                             <div class="relative">
                                 <label class="text-sm font-medium text-gray-700 mb-1 block">Special Occasion?</label>
-                                <input type="text" name="special_event" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Tell us if you're celebrating">
+                                <input type="text" name="special_event" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Tell us if you're celebrating" value="Anniversary Celebration">
                             </div>
                         </div>
 
                         <div class="relative">
                             <label class="text-sm font-medium text-gray-700 mb-1 block">Additional Notes</label>
-                            <textarea name="additional_info" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Any other details we should know"></textarea>
+                            <textarea name="additional_info" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Any other details we should know">No dietary restrictions. Would prefer morning flight if possible.</textarea>
                         </div>
 
                         <!-- Terms and Waiver -->
@@ -276,7 +309,7 @@
                             </div>
 
                             <div class="flex items-start p-4 bg-[#204fb4]/5 rounded-xl">
-                                <input type="checkbox" name="terms" required class="mt-1 h-4 w-4 text-[#204fb4] focus:ring-[#204fb4]/20 border-gray-300 rounded">
+                                <input type="checkbox" name="terms" required class="mt-1 h-4 w-4 text-[#204fb4] focus:ring-[#204fb4]/20 border-gray-300 rounded" checked>
                                 <label class="ml-3 text-sm text-gray-700">
                                     I agree to the <a href="{{ route('terms') }}" target="_blank" class="text-[#204fb4] hover:text-blue-700 underline">terms and conditions</a>.
                                 </label>
@@ -604,51 +637,57 @@
                     <div class="flex flex-col">
                         <span class="text-sm text-gray-600">Read and signed on TODAY'S DATE</span>
                         <div class="flex items-center mt-1">
-                            <span class="border-b border-gray-400 inline-block w-48"></span>
+                            <span class="border-b border-gray-400 inline-block w-48" id="today_date"></span>
                             <span class="mx-2">, 20</span>
-                            <span class="border-b border-gray-400 inline-block w-12"></span>
+                            <span class="border-b border-gray-400 inline-block w-12" id="today_year"></span>
                         </div>
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="flex flex-col">
                             <span class="text-sm text-gray-600">Signature of Adult Participant</span>
-                            <span class="border-b border-gray-400 inline-block w-full mt-6"></span>
+                            <div class="signature-pad">
+                                <canvas id="signature-pad"></canvas>
+                                <div class="signature-actions">
+                                    <button type="button" class="clear-signature">Clear Signature</button>
+                                </div>
+                                <div class="signature-error">Please provide your signature</div>
+                            </div>
                         </div>
                         
                         <div class="flex flex-col">
                             <span class="text-sm text-gray-600">Name(s) of Minor Child or Children (if any)</span>
-                            <span class="border-b border-gray-400 inline-block w-full mt-6"></span>
+                            <span class="border-b border-gray-400 inline-block w-full mt-6" id="minor_children"></span>
                         </div>
                         
                         <div class="flex flex-col">
                             <span class="text-sm text-gray-600">Printed Name of Adult Participant</span>
-                            <span class="border-b border-gray-400 inline-block w-full mt-6"></span>
+                            <span class="border-b border-gray-400 inline-block w-full mt-6" id="printed_name"></span>
                         </div>
                         
                         <div class="flex flex-col">
                             <span class="text-sm text-gray-600">Signature of Parent or Guardian (if applicable)</span>
-                            <span class="border-b border-gray-400 inline-block w-full mt-6"></span>
+                            <span class="border-b border-gray-400 inline-block w-full mt-6" id="guardian_signature"></span>
                         </div>
                         
                         <div class="flex flex-col">
                             <span class="text-sm text-gray-600">Home Address</span>
-                            <span class="border-b border-gray-400 inline-block w-full mt-6"></span>
+                            <span class="border-b border-gray-400 inline-block w-full mt-6" id="home_address"></span>
                         </div>
                         
                         <div class="flex flex-col">
                             <span class="text-sm text-gray-600">Phone Number</span>
-                            <span class="border-b border-gray-400 inline-block w-full mt-6"></span>
+                            <span class="border-b border-gray-400 inline-block w-full mt-6" id="phone_number"></span>
                         </div>
                         
                         <div class="flex flex-col">
                             <span class="text-sm text-gray-600">City, Province, and Postal Code</span>
-                            <span class="border-b border-gray-400 inline-block w-full mt-6"></span>
+                            <span class="border-b border-gray-400 inline-block w-full mt-6" id="city_province"></span>
                         </div>
                         
                         <div class="flex flex-col">
                             <span class="text-sm text-gray-600">Email Address</span>
-                            <span class="border-b border-gray-400 inline-block w-full mt-6"></span>
+                            <span class="border-b border-gray-400 inline-block w-full mt-6" id="email_address"></span>
                         </div>
                     </div>
                     
@@ -657,17 +696,17 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="flex flex-col">
                                 <span class="text-sm text-gray-600">Name</span>
-                                <span class="border-b border-gray-400 inline-block w-full mt-6"></span>
+                                <input type="text" id="emergency_name" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Emergency contact name">
                             </div>
                             
                             <div class="flex flex-col">
                                 <span class="text-sm text-gray-600">Relationship</span>
-                                <span class="border-b border-gray-400 inline-block w-full mt-6"></span>
+                                <input type="text" id="emergency_relationship" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Relationship to you">
                             </div>
                             
                             <div class="flex flex-col">
                                 <span class="text-sm text-gray-600">Phone Number</span>
-                                <span class="border-b border-gray-400 inline-block w-full mt-6"></span>
+                                <input type="tel" id="emergency_phone" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Emergency contact phone">
                             </div>
                         </div>
                     </div>
@@ -682,9 +721,12 @@
     </div>
 </div>
 
-<!-- Add intl-tel-input CSS and JS -->
+<!-- Add required libraries -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
     .iti {
@@ -759,192 +801,271 @@
     .phone-input.error {
       border-color: #EF4444;
     }
+
+    /* Signature Pad Styles */
+    .signature-pad {
+        border: 2px solid #D1D5DB;
+        border-radius: 0.5rem;
+        background-color: white;
+        margin: 1rem 0;
+        position: relative;
+        width: 100%;
+        height: 250px;
+        touch-action: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .signature-pad canvas {
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 0.5rem;
+        touch-action: none;
+        cursor: crosshair;
+        background-color: white;
+    }
+
+    .signature-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 1rem;
+        padding: 0;
+    }
+
+    .signature-actions button {
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .clear-signature {
+        background-color: #F3F4F6;
+        color: #374151;
+        border: 1px solid #D1D5DB;
+    }
+
+    .clear-signature:hover {
+        background-color: #E5E7EB;
+        transform: translateY(-1px);
+    }
+
+    .signature-error {
+        color: #EF4444;
+        font-size: 0.875rem;
+        margin-top: 0.5rem;
+        display: none;
+        text-align: center;
+    }
+
+    /* Add a visual guide for the signature area */
+    .signature-guide {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background-color: #E5E7EB;
+        pointer-events: none;
+    }
+
+    /* Container for signature pad and actions */
+    .signature-container {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Adjust modal padding for full width */
+    #waiverModal .bg-white {
+        padding: 0;
+    }
+
+    #waiverModal .p-6 {
+        padding: 1.5rem;
+    }
 </style>
 
 <script>
+    // Global form reference
+    let mainForm;
+
+    /**
+     * Initialize all components when DOM is loaded
+     */
     document.addEventListener('DOMContentLoaded', function() {
-        // Initialize phone inputs
-        const phoneInputs = document.querySelectorAll("#callback_phone, #oahu_phone");
+        mainForm = document.getElementById('bookingForm');
+        
+        // Initialize all required components
+        initializePhoneInputs();
+        initializeWaiver();
+        initializePackagePricing();
+        initializeDateDefaults();
+        initializeEmergencyFields();
+        
+        // Add form submission handler
+        mainForm.addEventListener('submit', handleFormSubmission);
+    });
+
+    /**
+     * Initialize phone input fields with international format
+     */
+    function initializePhoneInputs() {
+        const phoneInputs = document.querySelectorAll("#primary_phone, #local_phone");
+        const phoneInstances = {};
         
         phoneInputs.forEach(phoneInput => {
             const iti = window.intlTelInput(phoneInput, {
                 separateDialCode: true,
                 utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-                initialCountry: "ca",
-                onlyCountries: [], // This will show all countries
-                localizedCountries: {}, // Use default country names
+                initialCountry: "CA",
+                onlyCountries: [], // Show all countries
                 formatOnDisplay: true,
-                autoPlaceholder: "aggressive",
-                customPlaceholder: function(selectedCountryPlaceholder, selectedCountryData) {
-                    return "e.g. " + selectedCountryPlaceholder;
-                }
+                autoPlaceholder: "aggressive"
             });
             
-            // Add class for styling
+            phoneInstances[phoneInput.id] = iti;
             phoneInput.classList.add('phone-input');
             
-            // Allow only numbers and prevent non-numeric input
-            phoneInput.addEventListener('keypress', function(e) {
-                const char = String.fromCharCode(e.which);
-                if (!/[0-9]/.test(char)) {
-                    e.preventDefault();
-                }
-            });
-
-            // Prevent paste of non-numeric characters
-            phoneInput.addEventListener('paste', function(e) {
-                const pastedText = (e.clipboardData || window.clipboardData).getData('text');
-                if (!/^\d+$/.test(pastedText)) {
-                    e.preventDefault();
-                }
-            });
-
-            // Clean any non-numeric characters on input
-            phoneInput.addEventListener('input', function() {
-                this.value = this.value.replace(/[^\d]/g, '');
-                if (iti.isValidNumber()) {
-                    this.classList.remove('error');
-                }
-            });
-
-            // Validate on blur
-            phoneInput.addEventListener('blur', function() {
-                if (phoneInput.value.trim()) {
-                    if (!iti.isValidNumber()) {
-                        phoneInput.classList.add('error');
-                    } else {
-                        phoneInput.classList.remove('error');
-                    }
-                }
-            });
+            if (phoneInput.value) {
+                iti.setNumber(phoneInput.value);
+            }
+            
+            setupPhoneInputHandlers(phoneInput, iti);
         });
+
+        return phoneInstances;
+    }
+
+    /**
+     * Handle form submission and validation
+     */
+    function handleFormSubmission(e) {
+        console.log('Form submission started');
         
-        // Form validation
-        const form = document.querySelector('form');
-        form.addEventListener('submit', function(e) {
-            const phoneInputs = document.querySelectorAll("#callback_phone, #oahu_phone");
-            let isValid = true;
-            
-            phoneInputs.forEach(phoneInput => {
-                const iti = window.intlTelInput(phoneInput);
-                if (phoneInput.value.trim() && !iti.isValidNumber()) {
-                    phoneInput.classList.add('error');
-                    isValid = false;
-                }
-            });
-            
-            if (!isValid) {
+        // Validate required fields
+        const requiredFields = {
+            name: document.getElementById('name').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            package: document.getElementById('package').value,
+            terms: document.querySelector('input[name="terms"]').checked,
+            waiver: document.getElementById('waiver_checkbox').checked
+        };
+
+        if (Object.values(requiredFields).includes('') || !requiredFields.terms || !requiredFields.waiver) {
+            e.preventDefault();
+            alert('Please fill in all required fields and accept both the terms and conditions and waiver.');
+            return false;
+        }
+
+        // Validate phone numbers
+        if (!validatePhoneNumbers()) {
+            e.preventDefault();
+            return false;
+        }
+
+        console.log('Form validation passed');
+        return true;
+    }
+
+    /**
+     * Setup phone input validation handlers
+     */
+    function setupPhoneInputHandlers(phoneInput, iti) {
+        // Allow only numbers
+        phoneInput.addEventListener('keypress', e => {
+            if (!/[0-9]/.test(String.fromCharCode(e.which))) {
                 e.preventDefault();
-                alert('Please enter valid phone numbers');
-                return false;
-            }
-            
-            // Set the full international number before submitting
-            phoneInputs.forEach(phoneInput => {
-                const iti = window.intlTelInput(phoneInput);
-                if (phoneInput.value.trim()) {
-                    phoneInput.value = iti.getNumber();
-                }
-            });
-        });
-        
-        // Rest of your existing script
-        const packageSelect = document.getElementById('package');
-        const waiverCheckbox = document.getElementById('waiver_checkbox');
-        const waiverLink = document.getElementById('waiver_link');
-        const waiverLinkContainer = document.getElementById('waiver_link_container');
-        const waiverLinkPlaceholder = document.getElementById('waiver_link_placeholder');
-        const waiverModal = document.getElementById('waiverModal');
-        const closeWaiverModal = document.getElementById('closeWaiverModal');
-        const acceptWaiver = document.getElementById('acceptWaiver');
-        const nameInput = document.getElementById('name');
-        
-        // Function to get initials from name
-        function getInitials(name) {
-            if (!name) return '';
-            return name.split(' ')
-                .map(part => part.charAt(0).toUpperCase())
-                .join(' ');
-        }
-        
-        // Function to fill initials in waiver
-        function fillInitialsInWaiver() {
-            const name = nameInput.value.trim();
-            const initials = getInitials(name);
-            
-            // Find all initial fields in the waiver
-            const initialFields = document.querySelectorAll('.waiver-initial');
-            
-            // Fill each initial field
-            initialFields.forEach(field => {
-                field.textContent = initials;
-            });
-        }
-        
-        // Add event listener to name input
-        nameInput.addEventListener('input', function() {
-            if (waiverModal.classList.contains('hidden') === false) {
-                fillInitialsInWaiver();
             }
         });
-        
-        // Form validation
-        form.addEventListener('submit', function(event) {
-            const name = document.getElementById('name').value;
-            const package = document.getElementById('package').value;
-            const terms = document.getElementById('terms').checked;
-            const waiver = document.getElementById('waiver_checkbox').checked;
-            
-            if (!name || !package || !terms || !waiver) {
-                event.preventDefault();
-                alert('Please fill in all required fields and accept both the terms and conditions and waiver.');
+
+        // Clean input on paste
+        phoneInput.addEventListener('paste', e => {
+            if (!/^\d+$/.test((e.clipboardData || window.clipboardData).getData('text'))) {
+                e.preventDefault();
             }
         });
-        
-        // Check if all mandatory fields are filled
-        function checkMandatoryFields() {
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const callback_phone = document.getElementById('callback_phone').value.trim();
-            const timezone = document.getElementById('timezone').value.trim();
-            const oahu_phone = document.getElementById('oahu_phone').value.trim();
-            const package = document.getElementById('package').value;
-            const flyer_details = document.getElementById('flyer_details').value.trim();
-            const preferred_dates = document.getElementById('preferred_dates').value;
-            const sunrise_flight = document.getElementById('sunrise_flight').value;
-            
-            const allFieldsFilled = name && email && callback_phone && timezone && oahu_phone && 
-                                   package && flyer_details && preferred_dates && sunrise_flight;
-            
-            if (allFieldsFilled) {
-                waiverLinkContainer.classList.remove('hidden');
-                waiverLinkPlaceholder.classList.add('hidden');
+
+        // Validate on input
+        phoneInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^\d]/g, '');
+            if (iti.isValidNumber()) {
+                this.classList.remove('error');
+            }
+        });
+
+        // Validate on blur
+        phoneInput.addEventListener('blur', function() {
+            if (this.value.trim() && !iti.isValidNumber()) {
+                this.classList.add('error');
             } else {
-                waiverLinkContainer.classList.add('hidden');
-                waiverLinkPlaceholder.classList.remove('hidden');
+                this.classList.remove('error');
             }
+        });
+    }
+
+    /**
+     * Initialize waiver functionality
+     */
+    function initializeWaiver() {
+        const waiverElements = {
+            checkbox: document.getElementById('waiver_checkbox'),
+            link: document.getElementById('waiver_link'),
+            linkContainer: document.getElementById('waiver_link_container'),
+            linkPlaceholder: document.getElementById('waiver_link_placeholder'),
+            modal: document.getElementById('waiverModal'),
+            closeButton: document.getElementById('closeWaiverModal'),
+            acceptButton: document.getElementById('acceptWaiver'),
+            nameInput: document.getElementById('name')
+        };
+
+        // Add name input listener for real-time initial updates
+        waiverElements.nameInput.addEventListener('input', () => {
+            if (!waiverElements.modal.classList.contains('hidden')) {
+                fillWaiverForm();
+            }
+        });
+
+        // Check mandatory fields before showing waiver
+        function checkMandatoryFields() {
+            const mandatoryFields = [
+                'name', 'email', 'primary_phone', 'timezone', 'local_phone', 
+                'package', 'flyer_details', 'preferred_dates', 'sunrise_flight'
+            ];
+            
+            const allFieldsFilled = mandatoryFields.every(fieldId => {
+                const field = document.getElementById(fieldId);
+                return field && field.value.trim();
+            });
+
+            console.log('Mandatory fields check:', allFieldsFilled);
+            
+            waiverElements.linkContainer.classList.toggle('hidden', !allFieldsFilled);
+            waiverElements.linkPlaceholder.classList.toggle('hidden', allFieldsFilled);
             
             return allFieldsFilled;
         }
-        
-        // Add event listeners to all mandatory fields
+
+        // Add event listeners to mandatory fields
         const mandatoryFields = [
-            'name', 'email', 'callback_phone', 'timezone', 'oahu_phone', 
+            'name', 'email', 'primary_phone', 'timezone', 'local_phone', 
             'package', 'flyer_details', 'preferred_dates', 'sunrise_flight'
         ];
         
         mandatoryFields.forEach(fieldId => {
             const field = document.getElementById(fieldId);
             if (field) {
-                field.addEventListener('input', checkMandatoryFields);
-                field.addEventListener('change', checkMandatoryFields);
+                ['input', 'change'].forEach(event => {
+                    field.addEventListener(event, checkMandatoryFields);
+                });
             }
         });
-        
-        // Initial check
+
+        // Initial check for mandatory fields
         checkMandatoryFields();
-        
-        // Open waiver modal
+
+        // Handle waiver modal opening
         window.openWaiverModal = function(event) {
             event.preventDefault();
             
@@ -953,69 +1074,197 @@
                 return;
             }
             
-            waiverModal.classList.remove('hidden');
+            waiverElements.modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
-            
-            // Fill initials when modal opens
-            fillInitialsInWaiver();
+            fillWaiverForm();
+            initializeSignaturePad();
         };
-        
-        // Close waiver modal
-        closeWaiverModal.addEventListener('click', function() {
-            waiverModal.classList.add('hidden');
+
+        // Handle waiver modal closing
+        waiverElements.closeButton.addEventListener('click', () => {
+            waiverElements.modal.classList.add('hidden');
             document.body.style.overflow = '';
         });
-        
-        // Accept waiver
-        acceptWaiver.addEventListener('click', function() {
-            waiverCheckbox.disabled = false;
-            waiverCheckbox.checked = true;
-            waiverModal.classList.add('hidden');
-            document.body.style.overflow = '';
-        });
-        
-        // Add tooltip to waiver checkbox
-        waiverCheckbox.addEventListener('mouseover', function() {
-            if (this.disabled) {
-                this.title = 'Please read the waiver first';
+
+        // Handle waiver acceptance
+        waiverElements.acceptButton.addEventListener('click', () => {
+            const signaturePad = document.querySelector('#signature-pad').__signaturePad;
+            
+            if (signaturePad.isEmpty()) {
+                document.querySelector('.signature-error').style.display = 'block';
+                return;
+            }
+
+            try {
+                const signatureData = signaturePad.toDataURL();
+                let signatureInput = document.getElementById('signature_data');
+                if (!signatureInput) {
+                    signatureInput = document.createElement('input');
+                    signatureInput.type = 'hidden';
+                    signatureInput.id = 'signature_data';
+                    signatureInput.name = 'signature_data';
+                    mainForm.appendChild(signatureInput);
+                }
+                signatureInput.value = signatureData;
+
+                waiverElements.checkbox.disabled = false;
+                waiverElements.checkbox.checked = true;
+                waiverElements.modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            } catch (error) {
+                console.error('Error processing signature:', error);
+                alert('There was an error processing your signature. Please try again.');
             }
         });
-    });
-
-    // Package prices
-    const prices = {
-        video_package: 90,
-        deluxe_package: 120,
-        merch_package: 40
-    };
-
-    // Function to update quantity
-    function updateQuantity(packageId, change) {
-        const input = document.getElementById(packageId);
-        const currentValue = parseInt(input.value);
-        const newValue = Math.max(0, currentValue + change);
-        input.value = newValue;
-        updateTotalPrice();
     }
 
-    // Function to update total price
-    function updateTotalPrice() {
-        let total = 0;
-        
-        // Add selected package prices
-        if (document.querySelector('input[name="video_package"]').checked) total += prices.video_package;
-        if (document.querySelector('input[name="deluxe_package"]').checked) total += prices.deluxe_package;
-        
-        // Add merchandise quantity price
-        const merchQuantity = parseInt(document.getElementById('merch_package').value);
-        total += merchQuantity * prices.merch_package;
-        
-        document.getElementById('total_price').textContent = `CA$${total}`;
+    /**
+     * Fill waiver form with user information
+     */
+    function fillWaiverForm() {
+        try {
+            // Set current date
+            const today = new Date();
+            document.getElementById('today_date').textContent = today.toLocaleDateString('en-US', { 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            document.getElementById('today_year').textContent = today.getFullYear().toString().slice(-2);
+
+            // Get name and fill initials
+            const nameField = document.getElementById('name');
+            if (nameField) {
+                const initials = nameField.value.trim()
+                    .split(' ')
+                    .map(part => part.charAt(0).toUpperCase())
+                    .join(' ');
+                
+                // Fill all initial fields
+                document.querySelectorAll('.waiver-initial').forEach(field => {
+                    field.textContent = initials;
+                });
+            }
+
+            // Map form fields to waiver fields
+            const fieldMappings = {
+                'name': ['printed_name'],
+                'primary_phone': ['phone_number'],
+                'email': ['email_address'],
+                'underage_flyers': ['minor_children'],
+                'accommodation': ['home_address']
+            };
+
+            // Fill in mapped fields
+            Object.entries(fieldMappings).forEach(([formField, waiverFields]) => {
+                const value = document.getElementById(formField)?.value || 'Not provided';
+                waiverFields.forEach(waiverField => {
+                    const element = document.getElementById(waiverField);
+                    if (element) element.textContent = value;
+                });
+            });
+
+            // Set location
+            document.getElementById('city_province').textContent = 'Whistler, BC';
+
+            // Handle emergency contact information
+        } catch (error) {
+            console.error('Error filling waiver form:', error);
+        }
     }
 
-    // Initialize total price on page load
-    document.addEventListener('DOMContentLoaded', function() {
+    /**
+     * Handle emergency contact information
+     */
+    function initializeEmergencyFields() {
+        // Define the emergency fields mapping
+        const emergencyFieldsMap = ['emergency_name','emergency_relationship','emergency_phone'];
+
+        // Add input listeners to emergency fields
+        emergencyFieldsMap.forEach((fieldName) => {
+            document.getElementById(fieldName).addEventListener('input', function() {
+                let hiddenInput = document.getElementById(`main_form_${fieldName}`);
+                if(!hiddenInput){
+                    hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.id = `main_form_${fieldName}`;
+                    hiddenInput.name = fieldName;
+                }
+                hiddenInput.value = this.value;
+                mainForm.appendChild(hiddenInput);
+            });
+        });
+    }
+
+    /**
+     * Initialize signature pad
+     */
+    function initializeSignaturePad() {
+        const canvas = document.getElementById('signature-pad');
+        const signaturePad = new SignaturePad(canvas, {
+            backgroundColor: 'rgba(255, 255, 255, 1)',
+            penColor: 'rgb(0, 0, 0)',
+            minWidth: 2,
+            maxWidth: 3
+        });
+
+        // Store reference for later use
+        canvas.__signaturePad = signaturePad;
+
+        function resizeCanvas() {
+            const ratio = Math.max(window.devicePixelRatio || 1, 1);
+            canvas.width = canvas.offsetWidth * ratio;
+            canvas.height = canvas.offsetHeight * ratio;
+            canvas.getContext("2d").scale(ratio, ratio);
+            signaturePad.clear();
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Clear signature button
+        document.querySelector('.clear-signature').addEventListener('click', () => {
+            signaturePad.clear();
+            document.querySelector('.signature-error').style.display = 'none';
+        });
+
+        return signaturePad;
+    }
+
+    /**
+     * Initialize date defaults
+     */
+    function initializeDateDefaults() {
+        const today = new Date().toISOString().split('T')[0];
+        const preferredDatesInput = document.getElementById('preferred_dates');
+        preferredDatesInput.min = today;
+        preferredDatesInput.value = today;
+    }
+
+    /**
+     * Initialize package pricing
+     */
+    function initializePackagePricing() {
+        const prices = {
+            video_package: 90,
+            deluxe_package: 120,
+            merch_package: 40
+        };
+
+        window.updateQuantity = function(packageId, change) {
+            const input = document.getElementById(packageId);
+            input.value = Math.max(0, parseInt(input.value) + change);
+            updateTotalPrice();
+        }
+
+        window.updateTotalPrice = function() {
+            let total = 0;
+            if (document.querySelector('input[name="video_package"]').checked) total += prices.video_package;
+            if (document.querySelector('input[name="deluxe_package"]').checked) total += prices.deluxe_package;
+            total += parseInt(document.getElementById('merch_package').value) * prices.merch_package;
+            document.getElementById('total_price').textContent = `CA$${total}`;
+        }
+
         updateTotalPrice();
-    });
+    }
 </script>
 @endsection

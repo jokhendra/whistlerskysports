@@ -10,26 +10,49 @@ class Booking extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'service_type',
-        'booking_date',
-        'start_time',
-        'duration',
-        'status',
-        'amount',
-        'payment_status',
+        'name',
+        'email',
+        'primary_phone',
+        'timezone',
+        'local_phone',
+        'package',
+        'flyer_details',
+        'underage_flyers',
+        'preferred_dates',
+        'sunrise_flight',
+        'video_package',
+        'deluxe_package',
+        'merch_package',
+        'accommodation',
+        'special_event',
+        'additional_info',
+        'waiver_pdf_path',
+        'order_id',
         'payment_id',
-        'notes'
+        'payment_order_id',
+        'status',
+        'total_amount',
+        'signature_data'
     ];
 
     protected $casts = [
-        'booking_date' => 'date',
-        'start_time' => 'datetime',
-        'amount' => 'decimal:2'
+        'preferred_dates' => 'date',
+        'video_package' => 'boolean',
+        'deluxe_package' => 'boolean',
+        'merch_package' => 'integer',
+        'total_amount' => 'decimal:2'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    
+    /**
+     * Get the payments for the booking.
+     */
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
     }
 } 
