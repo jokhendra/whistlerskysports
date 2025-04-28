@@ -60,9 +60,7 @@
                                     <li class="group/item">
                                         <a href="/booking?type=microlight" class="flex items-center px-3 sm:px-4 md:px-5 lg:px-6 py-1.5 sm:py-2 md:py-3 text-xs sm:text-sm md:text-base text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-transparent group-hover/item:text-blue-600 transition-all duration-300">
                                             <span class="relative overflow-hidden">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 mr-1.5 sm:mr-2 md:mr-3 inline-block transform transition-transform group-hover/item:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                                                </svg>
+                                                <img src="{{ asset('images/logo/open-cockpit.ico') }}" class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 mr-1.5 sm:mr-2 md:mr-3 inline-block transform transition-transform group-hover/item:scale-110" alt="Open Cockpit">
                                                 <span class="font-bold text-xs sm:text-sm md:text-base">Open Cockpit Weight Shift Trike</span>
                                                 <span class="block text-[10px] sm:text-xs md:text-sm text-gray-500 font-normal">Experience the freedom of flight</span>
                                             </span>
@@ -72,9 +70,7 @@
                                     <li class="group/item">
                                         <a href="/booking?type=gyrocopter" class="flex items-center px-3 sm:px-4 md:px-5 lg:px-6 py-1.5 sm:py-2 md:py-3 text-xs sm:text-sm md:text-base text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-transparent group-hover/item:text-blue-600 transition-all duration-300">
                                             <span class="relative overflow-hidden">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 mr-1.5 sm:mr-2 md:mr-3 inline-block transform transition-transform group-hover/item:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.072 0a5 5 0 010 7.07M13 12a1 1 0 11-2 0 1 1 0 012 0z"/>
-                                                </svg>
+                                                <img src="{{ asset('images/logo/fixed_wings.ico') }}" class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 mr-1.5 sm:mr-2 md:mr-3 inline-block transform transition-transform group-hover/item:scale-110" alt="Fixed Wing">
                                                 <span class="font-bold text-xs sm:text-sm md:text-base">Fixed Wing Advanced Ultralight</span>
                                                 <span class="block text-[10px] sm:text-xs md:text-sm text-gray-500 font-normal">Master the art of aviation</span>
                                             </span>

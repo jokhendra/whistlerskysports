@@ -340,7 +340,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         intent: "CAPTURE",
                         purchase_units: [{
                             amount: {
-                                value: "10",
+                                value: totalAmount,
                                 currency_code: "USD"
                             },
                             reference_id: data.booking_id
