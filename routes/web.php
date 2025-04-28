@@ -72,8 +72,16 @@ Route::prefix('booking')->group(function () {
     return view('booking');
 })->name('booking');
 
+    Route::post('/create', [BookingController::class, 'createBooking'])->name('booking.create');
+    Route::post('/capture-payment', [BookingController::class, 'capturePayment'])->name('booking.capture-payment');
+    Route::get('/preview', function() {
+        return redirect()->route('booking')
+            ->with('error', 'Please complete the booking form to access this page.');
+    })->name('booking.preview.redirect');
     Route::post('/preview', [BookingController::class, 'preview'])->name('booking.preview');
-    Route::get('/success', [BookingController::class, 'success'])->name('booking.success');
+    Route::get('/success', [BookingController::class, 'success'])
+        ->name('booking.success')
+        ->middleware(['web', \App\Http\Middleware\EnsureBookingSuccess::class]);
     Route::get('/cancel', function () {
     return view('booking.cancel');
 })->name('booking.cancel');
@@ -245,10 +253,7 @@ Route::get('/weather', function() {
 |--------------------------------------------------------------------------
 */
 // PayPal payment routes
-Route::prefix('api')->group(function () {
-    Route::post('/booking/create', [BookingController::class, 'createBooking'])->name('booking.create');
-    Route::post('/booking/capture-payment', [BookingController::class, 'capturePayment'])->name('booking.capture-payment');
-    
+Route::prefix('api')->group(function () {    
     // Chat Bot Routes
     Route::prefix('chat')->group(function () {
         Route::post('/start', [ChatBotController::class, 'startChat']);

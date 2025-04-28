@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-
+use Illuminate\Support\Facades\Log;
 class BookingConfirmation extends Mailable
 {
     use Queueable, SerializesModels;
@@ -30,7 +30,7 @@ class BookingConfirmation extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Booking Confirmation - Whistler Sky Sports',
+            subject: 'Booking Confirmation - WhistlerSkySports',
         );
     }
 

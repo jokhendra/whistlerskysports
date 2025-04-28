@@ -32,7 +32,11 @@ class Booking extends Model
         'payment_order_id',
         'status',
         'total_amount',
-        'signature_data'
+        'signature_data',
+        'ip_address',
+        'user_agent',
+        'flying_status',
+        'flying_time'
     ];
 
     protected $casts = [

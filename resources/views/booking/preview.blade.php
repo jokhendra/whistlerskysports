@@ -26,22 +26,22 @@
                                     {{-- Name --}}
                                     <div>
                                         <p class="text-sm text-gray-500">Name</p>
-                                        <p class="text-base font-medium text-gray-900">{{ $booking['name'] }}</p>
+                                        <p class="text-base font-medium text-gray-900">{{ e($booking['name']) }}</p>
                                     </div>
                                     {{-- Email --}}
                                     <div>
                                         <p class="text-sm text-gray-500">Email</p>
-                                        <p class="text-base font-medium text-gray-900">{{ $booking['email'] }}</p>
+                                        <p class="text-base font-medium text-gray-900">{{ e($booking['email']) }}</p>
                                     </div>
                                     {{-- Primary Phone --}}
                                     <div>
                                         <p class="text-sm text-gray-500">Primary Phone</p>
-                                        <p class="text-base font-medium text-gray-900">{{ $booking['primary_phone'] }}</p>
+                                        <p class="text-base font-medium text-gray-900">{{ e($booking['primary_phone']) }}</p>
                                     </div>
                                     {{-- Local Contact --}}
                                     <div>
                                         <p class="text-sm text-gray-500">Local Contact</p>
-                                        <p class="text-base font-medium text-gray-900">{{ $booking['local_phone'] }}</p>
+                                        <p class="text-base font-medium text-gray-900">{{ e($booking['local_phone']) }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                                     {{-- Package Type --}}
                                     <div>
                                         <p class="text-sm text-gray-500">Package</p>
-                                        <p class="text-base font-medium text-gray-900 capitalize">{{ $booking['package'] }}</p>
+                                        <p class="text-base font-medium text-gray-900 capitalize">{{ e($booking['package']) }}</p>
                                     </div>
                                     {{-- Preferred Date --}}
                                     <div>
@@ -63,12 +63,12 @@
                                     {{-- Sunrise Flight Option --}}
                                     <div>
                                         <p class="text-sm text-gray-500">Sunrise Flight</p>
-                                        <p class="text-base font-medium text-gray-900 capitalize">{{ $booking['sunrise_flight'] }}</p>
+                                        <p class="text-base font-medium text-gray-900 capitalize">{{ e($booking['sunrise_flight']) }}</p>
                                     </div>
                                     {{-- Timezone --}}
                                     <div>
                                         <p class="text-sm text-gray-500">Timezone</p>
-                                        <p class="text-base font-medium text-gray-900">{{ $booking['timezone'] }}</p>
+                                        <p class="text-base font-medium text-gray-900">{{ e($booking['timezone']) }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                             </svg>
-                                            <span>Merchandise Package ({{ $booking['merch_package'] }} items)</span>
+                                            <span>Merchandise Package ({{ e($booking['merch_package']) }} items)</span>
                                         </div>
                                     @endif
                                 </div>
@@ -122,36 +122,36 @@
                         <div class="space-y-4">
                             {{-- Base Package Price --}}
                             <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Base Package ({{ ucfirst($booking['package']) }})</span>
-                                <span class="font-medium">${{ number_format($totalAmount - ($booking['video_package'] ? 90 : 0) - ($booking['deluxe_package'] ? 120 : 0) - ($booking['merch_package'] * 40) - ($booking['sunrise_flight'] === 'yes' ? 99 : 0), 2) }}</span>
+                                <span class="text-gray-600">Base Package ({{ ucfirst(e($booking['package'])) }})</span>
+                                <span class="font-medium">USD ${{ number_format($totalAmount - ($booking['video_package'] ? 90 : 0) - ($booking['deluxe_package'] ? 120 : 0) - ($booking['merch_package'] * 40) - ($booking['sunrise_flight'] === 'yes' ? 99 : 0), 2) }}</span>
                             </div>
 
                             {{-- Additional Services Prices --}}
                             @if($booking['video_package'])
                                 <div class="flex justify-between items-center text-green-600">
                                     <span>Video Package</span>
-                                    <span class="font-medium">$90.00</span>
+                                    <span class="font-medium">USD $90.00</span>
                                 </div>
                             @endif
 
                             @if($booking['deluxe_package'])
                                 <div class="flex justify-between items-center text-green-600">
                                     <span>Deluxe Package</span>
-                                    <span class="font-medium">$120.00</span>
+                                    <span class="font-medium">USD $120.00</span>
                                 </div>
                             @endif
 
                             @if($booking['merch_package'])
                                 <div class="flex justify-between items-center text-green-600">
-                                    <span>Merchandise ({{ $booking['merch_package'] }} items)</span>
-                                    <span class="font-medium">${{ number_format($booking['merch_package'] * 40, 2) }}</span>
+                                    <span>Merchandise ({{ e($booking['merch_package']) }} items)</span>
+                                    <span class="font-medium">USD ${{ number_format($booking['merch_package'] * 40, 2) }}</span>
                                 </div>
                             @endif
 
                             @if($booking['sunrise_flight'] === 'yes')
                                 <div class="flex justify-between items-center text-green-600">
                                     <span>Sunrise Flight Option</span>
-                                    <span class="font-medium">$99.00</span>
+                                    <span class="font-medium">USD $99.00</span>
                                 </div>
                             @endif
 
@@ -159,7 +159,7 @@
                             <div class="border-t border-gray-200 my-4"></div>
                             <div class="flex justify-between items-center text-lg font-bold">
                                 <span>Total Amount</span>
-                                <span class="text-blue-600">${{ number_format($totalAmount, 2) }}</span>
+                                <span class="text-blue-600">USD ${{ number_format($totalAmount, 2) }}</span>
                             </div>
 
                             {{-- Payment Process Steps --}}
@@ -238,31 +238,38 @@
 {{-- Hidden Elements --}}
 {{-- Booking Data Storage --}}
 <div id="booking-data" 
-     data-total-amount="{{ $totalAmount }}" 
-     data-booking-id="{{ $booking['order_id'] ?? 'pending' }}" 
+     data-total-amount="{{ e($totalAmount) }}" 
+     data-booking-id="{{ e($booking['order_id'] ?? 'pending') }}" 
      class="hidden">
 </div>
 
 {{-- Hidden Form for Signature Data --}}
 <form id="signature-form" class="hidden">
-    <input type="hidden" name="signature_data" id="signature-data" value="{{ session('booking.signature_data') }}">
+    <input type="hidden" name="signature_data" id="signature-data" value="{{ e(session('booking.signature_data')) }}">
 </form>
 
 {{-- Processing Indicator Overlay --}}
-<div id="processing-indicator" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg p-8 text-center">
-        <svg class="animate-spin h-12 w-12 text-blue-500 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-        </svg>
-        <p class="text-lg font-medium text-gray-900">Processing your payment...</p>
-        <p class="text-sm text-gray-600 mt-2">Please do not close this window</p>
+<div id="processing-indicator" class="hidden fixed inset-0 bg-slate-900 bg-opacity-60 flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl p-8 text-center max-w-sm w-full mx-4 shadow-2xl">
+        <div class="mb-6">
+            <div class="mx-auto w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center">
+                <svg class="animate-spin h-8 w-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </div>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">Processing Payment</h3>
+        <p class="text-gray-600 mb-6">Please wait while we process your payment securely</p>
+        <div class="flex items-center justify-center text-sm text-gray-500">
+            <span>Do not close this window</span>
+        </div>
     </div>
 </div>
 
 @push('scripts')
 {{-- PayPal SDK Integration --}}
-<script src="https://www.sandbox.paypal.com/sdk/js?client-id={{ config('paypal.sandbox.client_id') }}&currency=USD"></script>
+<script src="https://www.sandbox.paypal.com/sdk/js?client-id={{ e(config('paypal.sandbox.client_id')) }}&currency=USD"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -363,12 +370,38 @@ document.addEventListener('DOMContentLoaded', function() {
                     })
                 })
                 .then(response => {
-                    if (!response.ok) throw new Error('Network response was not ok');
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
                     return response.json();
                 })
                 .then(details => {
                     if (details.success) {
-                        window.location.href = '{{ route("booking.success") }}';
+                        // Show success message before redirect
+                        const successMessage = document.createElement('div');
+                        successMessage.className = 'fixed inset-0 bg-slate-900 bg-opacity-50 flex items-center justify-center z-50';
+                        successMessage.innerHTML = `
+                            <div class="bg-white rounded-xl p-8 text-center max-w-sm w-full mx-4 shadow-2xl">
+                                <div class="mb-6">
+                                    <div class="mx-auto w-16 h-16 bg-green-50 rounded-full flex items-center justify-center">
+                                        <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <h3 class="text-2xl font-semibold text-gray-900 mb-3">Payment Successful</h3>
+                                <p class="text-gray-600 mb-6">Your booking has been confirmed</p>
+                                <div class="flex items-center justify-center text-sm text-gray-500">
+                                    <span>Redirecting to confirmation page...</span>
+                                </div>
+                            </div>
+                        `;
+                        document.body.appendChild(successMessage);
+                        
+                        // Redirect after a short delay
+                        setTimeout(() => {
+                            window.location.href = '{{ route("booking.success") }}';
+                        }, 2000);
                     } else {
                         hideProcessing();
                         showError('Payment failed: ' + (details.error || 'Unknown error'));
@@ -394,6 +427,25 @@ document.addEventListener('DOMContentLoaded', function() {
             // Cancel Handler
             onCancel: function() {
                 hideProcessing();
+                const cancelMessage = document.createElement('div');
+                cancelMessage.className = 'fixed inset-0 bg-slate-900 bg-opacity-50 flex items-center justify-center z-50';
+                cancelMessage.innerHTML = `
+                    <div class="bg-white rounded-xl p-8 text-center max-w-sm w-full mx-4 shadow-2xl">
+                        <div class="mb-6">
+                            <div class="mx-auto w-16 h-16 bg-yellow-50 rounded-full flex items-center justify-center">
+                                <svg class="h-8 w-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-3">Payment Cancelled</h3>
+                        <p class="text-gray-600 mb-6">You can try again or contact support if you need help</p>
+                        <button onclick="this.parentElement.parentElement.remove()" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            Close
+                        </button>
+                    </div>
+                `;
+                document.body.appendChild(cancelMessage);
                 logPaymentFailure(null, isOrderId ? null : orderId, 'Payment cancelled by user');
             }
         }).render('#paypal-button-container')

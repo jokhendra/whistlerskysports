@@ -64,17 +64,17 @@
                             <div class="space-y-4">
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Full Name *</label>
-                                    <input type="text" name="name" id="name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" value="John Doe">
+                                    <input type="text" name="name" id="name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                 </div>
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Email Address *</label>
-                                    <input type="email" name="email" id="email" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" value="john.doe@example.com">
+                                    <input type="email" name="email" id="email" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                 </div>
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Primary Phone *</label>
-                                    <input type="tel" name="primary_phone" id="primary_phone" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" value="9999999999">
+                                    <input type="tel" name="primary_phone" id="primary_phone" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                 </div>
 
                                 <div class="relative">
@@ -85,7 +85,7 @@
                                             <option value="America/New_York">Eastern Time (ET) - New York, Toronto</option>
                                             <option value="America/Chicago">Central Time (CT) - Chicago, Winnipeg</option>
                                             <option value="America/Denver">Mountain Time (MT) - Denver, Calgary</option>
-                                            <option value="America/Los_Angeles" selected>Pacific Time (PT) - Los Angeles, Vancouver</option>
+                                            <option value="America/Los_Angeles">Pacific Time (PT) - Los Angeles, Vancouver</option>
                                             <option value="America/Anchorage">Alaska Time (AKT) - Anchorage</option>
                                             <option value="Pacific/Honolulu">Hawaii Time (HT) - Honolulu</option>
                                         </optgroup>
@@ -110,7 +110,7 @@
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Local Contact (During Stay) *</label>
-                                    <input type="tel" name="local_phone" id="local_phone" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" value="9999999999">
+                                    <input type="tel" name="local_phone" id="local_phone" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                 </div>
                             </div>
                         </div>
@@ -127,20 +127,19 @@
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Select Package *</label>
                                     <select name="package" id="package" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                         <option value="">Choose your adventure</option>
-                                        <option value="intro" selected>Open Cockpit Weight Shift Trike - CA$229 (30 min)</option>
-                                        <option value="basic">Fixed Wing Advanced Ultralight - CA$199 (30 min)</option>
+                                        <option value="intro">Open Cockpit Weight Shift Trike - USD $229 (30 min)</option>
+                                        <option value="basic">Fixed Wing Advanced Ultralight - USD $199 (30 min)</option>
                                     </select>
                                 </div>
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Participant Details *</label>
-                                    <textarea name="flyer_details" id="flyer_details" required rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="List each participant's name and weight">John Doe, 30, 175lbs
-Jane Doe, 28, 135lbs</textarea>
+                                    <textarea name="flyer_details" id="flyer_details" required rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="List each participant's name and weight"></textarea>
                                 </div>
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Under 18 Participants</label>
-                                    <textarea name="underage_flyers" rows="2" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="List names of participants under 18">None</textarea>
+                                    <textarea name="underage_flyers" rows="2" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="List names of participants under 18"></textarea>
                                 </div>
 
                                 <div class="relative">
@@ -156,7 +155,7 @@ Jane Doe, 28, 135lbs</textarea>
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Sunrise Flight Option *</label>
                                     <select name="sunrise_flight" id="sunrise_flight" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                         <option value="">Select preference</option>
-                                        <option value="yes" selected>Yes - Sunrise Flight (CA$99)</option>
+                                        <option value="yes">Yes - Sunrise Flight (USD $99)</option>
                                         <option value="no">No - Regular Time</option>
                                     </select>
                                 </div>
@@ -193,10 +192,10 @@ Jane Doe, 28, 135lbs</textarea>
                                             <h4 class="text-xl font-bold text-gray-800">Video Package</h4>
                                         </div>
                                         <p class="text-gray-600 ml-11 mb-2">Professional flight video with audio</p>
-                                        <p class="text-[#204fb4] font-bold text-xl ml-11">CA$90</p>
+                                        <p class="text-[#204fb4] font-bold text-xl ml-11">USD $90</p>
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" name="video_package" id="video_package" class="sr-only peer" onchange="updateTotalPrice()" checked>
+                                        <input type="checkbox" name="video_package" id="video_package" class="sr-only peer" onchange="updateTotalPrice()">
                                         <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#204fb4]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#204fb4]"></div>
                                     </label>
                                 </div>
@@ -215,10 +214,10 @@ Jane Doe, 28, 135lbs</textarea>
                                             <h4 class="text-xl font-bold text-gray-800">Deluxe Package</h4>
                                         </div>
                                         <p class="text-gray-600 ml-11 mb-2">Video + WhistlerSkySports Gear</p>
-                                        <p class="text-[#204fb4] font-bold text-xl ml-11">CA$120</p>
+                                        <p class="text-[#204fb4] font-bold text-xl ml-11">USD $120</p>
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" name="deluxe_package" id="deluxe_package" class="sr-only peer" onchange="updateTotalPrice()" checked>
+                                        <input type="checkbox" name="deluxe_package" id="deluxe_package" class="sr-only peer" onchange="updateTotalPrice()">
                                         <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#204fb4]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#204fb4]"></div>
                                     </label>
                                 </div>
@@ -237,14 +236,14 @@ Jane Doe, 28, 135lbs</textarea>
                                     </div>
                                     <p class="text-gray-600 ml-11 mb-2">WhistlerSkySports Gear Pack</p>
                                     <div class="flex justify-between items-center mt-2">
-                                        <p class="text-[#204fb4] font-bold text-xl ml-11">CA$40</p>
+                                        <p class="text-[#204fb4] font-bold text-xl ml-11">USD $40</p>
                                         <div class="flex items-center gap-1">
                                             <button type="button" onclick="updateQuantity('merch_package', -1)" class="w-6 h-6 flex items-center justify-center rounded-md bg-gray-100 hover:bg-gray-200 text-gray-600">
                                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
                                                 </svg>
                                             </button>
-                                            <input type="number" id="merch_package" name="merch_package" class="w-8 text-center text-sm border-gray-200 rounded-md" value="2" min="0" readonly onchange="updateTotalPrice()">
+                                            <input type="number" id="merch_package" name="merch_package" class="w-8 text-center text-sm border-gray-200 rounded-md" value="0" min="0" readonly onchange="updateTotalPrice()">
                                             <button type="button" onclick="updateQuantity('merch_package', 1)" class="w-6 h-6 flex items-center justify-center rounded-md bg-[#204fb4]/10 hover:bg-[#204fb4]/20 text-[#204fb4]">
                                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
@@ -270,7 +269,7 @@ Jane Doe, 28, 135lbs</textarea>
                                         <p class="text-sm text-gray-600">Digital delivery within 48 hours</p>
                                     </div>
                                 </div>
-                                <p class="text-2xl font-bold text-[#204fb4]" id="total_price">CA$0</p>
+                                <p class="text-2xl font-bold text-[#204fb4]" id="total_price">USD $0</p>
                             </div>
                         </div>
                     </div>
@@ -285,18 +284,18 @@ Jane Doe, 28, 135lbs</textarea>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="relative">
                                 <label class="text-sm font-medium text-gray-700 mb-1 block">Accommodation Details</label>
-                                <input type="text" name="accommodation" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Hotel name or address" value="Whistler Hilton, Room 301">
+                                <input type="text" name="accommodation" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Hotel name or address">
                             </div>
 
                             <div class="relative">
                                 <label class="text-sm font-medium text-gray-700 mb-1 block">Special Occasion?</label>
-                                <input type="text" name="special_event" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Tell us if you're celebrating" value="Anniversary Celebration">
+                                <input type="text" name="special_event" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Tell us if you're celebrating">
                             </div>
                         </div>
 
                         <div class="relative">
                             <label class="text-sm font-medium text-gray-700 mb-1 block">Additional Notes</label>
-                            <textarea name="additional_info" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Any other details we should know">No dietary restrictions. Would prefer morning flight if possible.</textarea>
+                            <textarea name="additional_info" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Any other details we should know"></textarea>
                         </div>
 
                         <!-- Terms and Waiver -->
@@ -942,8 +941,8 @@ Jane Doe, 28, 135lbs</textarea>
      * Handle form submission and validation
      */
     function handleFormSubmission(e) {
-        console.log('Form submission started');
-        
+            console.log('Form submission started');
+            
         // Validate required fields
         const requiredFields = {
             name: document.getElementById('name').value.trim(),
@@ -956,9 +955,9 @@ Jane Doe, 28, 135lbs</textarea>
         if (Object.values(requiredFields).includes('') || !requiredFields.terms || !requiredFields.waiver) {
             e.preventDefault();
             alert('Please fill in all required fields and accept both the terms and conditions and waiver.');
-            return false;
-        }
-
+                return false;
+            }
+            
         // Validate phone numbers
         if (!validatePhoneNumbers()) {
             e.preventDefault();
@@ -966,7 +965,7 @@ Jane Doe, 28, 135lbs</textarea>
         }
 
         console.log('Form validation passed');
-        return true;
+            return true;
     }
 
     /**
@@ -999,7 +998,7 @@ Jane Doe, 28, 135lbs</textarea>
         phoneInput.addEventListener('blur', function() {
             if (this.value.trim() && !iti.isValidNumber()) {
                 this.classList.add('error');
-            } else {
+                } else {
                 this.classList.remove('error');
             }
         });
@@ -1026,7 +1025,7 @@ Jane Doe, 28, 135lbs</textarea>
                 fillWaiverForm();
             }
         });
-
+        
         // Check mandatory fields before showing waiver
         function checkMandatoryFields() {
             const mandatoryFields = [
@@ -1038,7 +1037,7 @@ Jane Doe, 28, 135lbs</textarea>
                 const field = document.getElementById(fieldId);
                 return field && field.value.trim();
             });
-
+            
             console.log('Mandatory fields check:', allFieldsFilled);
             
             waiverElements.linkContainer.classList.toggle('hidden', !allFieldsFilled);
@@ -1046,7 +1045,7 @@ Jane Doe, 28, 135lbs</textarea>
             
             return allFieldsFilled;
         }
-
+        
         // Add event listeners to mandatory fields
         const mandatoryFields = [
             'name', 'email', 'primary_phone', 'timezone', 'local_phone', 
@@ -1061,10 +1060,10 @@ Jane Doe, 28, 135lbs</textarea>
                 });
             }
         });
-
+        
         // Initial check for mandatory fields
         checkMandatoryFields();
-
+        
         // Handle waiver modal opening
         window.openWaiverModal = function(event) {
             event.preventDefault();
@@ -1079,38 +1078,38 @@ Jane Doe, 28, 135lbs</textarea>
             fillWaiverForm();
             initializeSignaturePad();
         };
-
+        
         // Handle waiver modal closing
         waiverElements.closeButton.addEventListener('click', () => {
             waiverElements.modal.classList.add('hidden');
             document.body.style.overflow = '';
         });
-
+        
         // Handle waiver acceptance
         waiverElements.acceptButton.addEventListener('click', () => {
             const signaturePad = document.querySelector('#signature-pad').__signaturePad;
-            
+
             if (signaturePad.isEmpty()) {
                 document.querySelector('.signature-error').style.display = 'block';
                 return;
             }
 
             try {
-                const signatureData = signaturePad.toDataURL();
-                let signatureInput = document.getElementById('signature_data');
-                if (!signatureInput) {
-                    signatureInput = document.createElement('input');
-                    signatureInput.type = 'hidden';
-                    signatureInput.id = 'signature_data';
-                    signatureInput.name = 'signature_data';
-                    mainForm.appendChild(signatureInput);
-                }
-                signatureInput.value = signatureData;
+            const signatureData = signaturePad.toDataURL();
+            let signatureInput = document.getElementById('signature_data');
+            if (!signatureInput) {
+                signatureInput = document.createElement('input');
+                signatureInput.type = 'hidden';
+                signatureInput.id = 'signature_data';
+                signatureInput.name = 'signature_data';
+                mainForm.appendChild(signatureInput);
+            }
+            signatureInput.value = signatureData;
 
                 waiverElements.checkbox.disabled = false;
                 waiverElements.checkbox.checked = true;
                 waiverElements.modal.classList.add('hidden');
-                document.body.style.overflow = '';
+            document.body.style.overflow = '';
             } catch (error) {
                 console.error('Error processing signature:', error);
                 alert('There was an error processing your signature. Please try again.');
@@ -1244,26 +1243,114 @@ Jane Doe, 28, 135lbs</textarea>
      * Initialize package pricing
      */
     function initializePackagePricing() {
-        const prices = {
+        // Fixed prices that cannot be modified
+        const prices = Object.freeze({
             video_package: 90,
             deluxe_package: 120,
-            merch_package: 40
-        };
+            merch_package: 40,
+            sunrise_flight: 99,
+            packages: {
+                'intro': 229,
+                'basic': 199
+            }
+        });
 
         window.updateQuantity = function(packageId, change) {
             const input = document.getElementById(packageId);
-            input.value = Math.max(0, parseInt(input.value) + change);
+            if (!input) return;
+            
+            // Ensure quantity is between 0 and 10
+            const currentValue = parseInt(input.value) || 0;
+            const newValue = Math.max(0, Math.min(currentValue + change, 10));
+            
+            if (currentValue !== newValue) {
+            input.value = newValue;
             updateTotalPrice();
+            }
         }
 
         window.updateTotalPrice = function() {
+            try {
             let total = 0;
-            if (document.querySelector('input[name="video_package"]').checked) total += prices.video_package;
-            if (document.querySelector('input[name="deluxe_package"]').checked) total += prices.deluxe_package;
-            total += parseInt(document.getElementById('merch_package').value) * prices.merch_package;
-            document.getElementById('total_price').textContent = `CA$${total}`;
+            
+                // Add base package price
+                const selectedPackage = document.getElementById('package').value;
+                if (!prices.packages[selectedPackage]) {
+                    console.error('Invalid package selected');
+                    return;
+                }
+                total += prices.packages[selectedPackage];
+
+                // Add video package if selected
+                if (document.getElementById('video_package').checked) {
+                    total += prices.video_package;
+                }
+
+                // Add deluxe package if selected
+                if (document.getElementById('deluxe_package').checked) {
+                    total += prices.deluxe_package;
+                }
+
+                // Add sunrise flight if selected
+                if (document.getElementById('sunrise_flight').value === 'yes') {
+                    total += prices.sunrise_flight;
+                }
+
+                // Add merchandise with validation
+                const merchQty = Math.max(0, Math.min(parseInt(document.getElementById('merch_package').value) || 0, 10));
+                total += merchQty * prices.merch_package;
+            
+                // Update display with proper formatting
+                const totalElement = document.getElementById('total_price');
+                if (totalElement) {
+                    totalElement.textContent = `USD $${total.toFixed(2)}`;
         }
 
+                // Store calculated total in hidden input for server validation
+                let totalInput = document.getElementById('calculated_total');
+                if (!totalInput) {
+                    totalInput = document.createElement('input');
+                    totalInput.type = 'hidden';
+                    totalInput.id = 'calculated_total';
+                    totalInput.name = 'calculated_total';
+                    document.getElementById('bookingForm').appendChild(totalInput);
+                }
+                totalInput.value = total.toFixed(2);
+
+                // Store price components for server validation
+                let priceComponents = document.getElementById('price_components');
+                if (!priceComponents) {
+                    priceComponents = document.createElement('input');
+                    priceComponents.type = 'hidden';
+                    priceComponents.id = 'price_components';
+                    priceComponents.name = 'price_components';
+                    document.getElementById('bookingForm').appendChild(priceComponents);
+                }
+                priceComponents.value = JSON.stringify({
+                    package: selectedPackage,
+                    video_package: document.getElementById('video_package').checked,
+                    deluxe_package: document.getElementById('deluxe_package').checked,
+                    merch_package: merchQty,
+                    sunrise_flight: document.getElementById('sunrise_flight').value === 'yes'
+                });
+
+                return total;
+            } catch (error) {
+                console.error('Error calculating total:', error);
+                return 0;
+            }
+        }
+
+        // Add event listeners for price updates
+        const priceElements = ['video_package', 'deluxe_package', 'package', 'sunrise_flight', 'merch_package'];
+        priceElements.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.addEventListener('change', updateTotalPrice);
+            }
+        });
+
+        // Calculate initial price
         updateTotalPrice();
     }
 </script>

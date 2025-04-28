@@ -14,6 +14,8 @@ use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\Jobs\ProcessBookingConfirmation;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class BookingController
@@ -28,6 +30,20 @@ class BookingController extends Controller
 
     /** @var GoogleService|null */
     private $googleService = null;
+
+    /**
+     * Fixed prices for packages and add-ons
+     */
+    private const PRICES = [
+        'packages' => [
+            'intro' => 229,
+            'basic' => 199
+        ],
+        'video_package' => 90,
+        'deluxe_package' => 120,
+        'merch_package' => 40,
+        'sunrise_flight' => 99
+    ];
 
     /**
      * Initialize PayPal client with proper credentials
@@ -85,64 +101,114 @@ class BookingController extends Controller
     public function preview(Request $request)
     {
         try {
-            // Convert checkbox values to boolean
+            // Rate limiting to prevent form spam
+            if (RateLimiter::tooManyAttempts('booking_preview:' . $request->ip(), 10)) {
+                Log::warning('Rate limit exceeded for booking preview', ['ip' => $request->ip()]);
+                return redirect()->back()
+                    ->withInput()
+                    ->withErrors(['error' => 'Too many attempts. Please try again later.']);
+            }
+            RateLimiter::hit('booking_preview:' . $request->ip());
+
+            // Convert checkbox values to boolean with strict type casting
             $request->merge([
-                'video_package' => $request->has('video_package'),
-                'deluxe_package' => $request->has('deluxe_package'),
-                'terms' => $request->has('terms'),
-                'waiver' => $request->has('waiver')
+                'video_package' => filter_var($request->has('video_package'), FILTER_VALIDATE_BOOLEAN),
+                'deluxe_package' => filter_var($request->has('deluxe_package'), FILTER_VALIDATE_BOOLEAN),
+                'terms' => filter_var($request->has('terms'), FILTER_VALIDATE_BOOLEAN),
+                'waiver' => filter_var($request->has('waiver'), FILTER_VALIDATE_BOOLEAN)
             ]);
 
-            // Validate request data
+            // Validate request data with strict rules
             $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|email',
-                'primary_phone' => 'required|string',
-                'timezone' => 'required|string',
-                'local_phone' => 'required|string',
-                'package' => 'required|string',
-                'flyer_details' => 'required|string',
-                'underage_flyers' => 'nullable|string',
-                'preferred_dates' => 'required|date',
-                'sunrise_flight' => 'required|string',
-                'video_package' => 'boolean',
-                'deluxe_package' => 'boolean',
-                'merch_package' => 'nullable|integer',
-                'accommodation' => 'nullable|string',
-                'special_event' => 'nullable|string',
-                'additional_info' => 'nullable|string',
-                'terms' => 'accepted',
-                'waiver' => 'accepted',
-                'emergency_name' => 'nullable|string|max:255',
-                'emergency_relationship' => 'nullable|string|max:255',
-                'emergency_phone' => 'nullable|string|max:20'
+                'name' => ['required', 'string', 'max:255', 'regex:/^[\p{L}\s\-\'\.]+$/u'],
+                'email' => ['required', 'email:rfc,dns', 'max:255'],
+                'primary_phone' => ['required', 'string', 'regex:/^\+?[\d\s-]{10,20}$/'],
+                'timezone' => ['required', 'string', 'timezone'],
+                'local_phone' => ['required', 'string', 'regex:/^\+?[\d\s-]{10,20}$/'],
+                'package' => ['required', 'string', 'in:intro,basic'],
+                'flyer_details' => ['required', 'string', 'max:1000'],
+                'underage_flyers' => ['nullable', 'string', 'max:500'],
+                'preferred_dates' => ['required', 'date', 'after_or_equal:today', 'before:+6 months'],
+                'sunrise_flight' => ['required', 'string', 'in:yes,no'],
+                'video_package' => ['required', 'boolean'],
+                'deluxe_package' => ['required', 'boolean'],
+                'merch_package' => ['nullable', 'integer', 'min:0', 'max:10'],
+                'accommodation' => ['nullable', 'string', 'max:500'],
+                'special_event' => ['nullable', 'string', 'max:255'],
+                'additional_info' => ['nullable', 'string', 'max:1000'],
+                'terms' => ['accepted'],
+                'waiver' => ['accepted'],
+                'emergency_name' => ['nullable', 'string', 'max:255', 'regex:/^[\p{L}\s\-\'\.]+$/u'],
+                'emergency_relationship' => ['nullable', 'string', 'max:100'],
+                'emergency_phone' => ['nullable', 'string'],
+                'price_components' => ['required', 'json'],
+                'calculated_total' => ['required', 'numeric', 'min:0', 'max:10000']
             ]);
 
-            // Clean phone numbers
+            // Clean and sanitize phone numbers
             $validated['primary_phone'] = preg_replace('/[^0-9+]/', '', $validated['primary_phone']);
             $validated['local_phone'] = preg_replace('/[^0-9+]/', '', $validated['local_phone']);
+            if (!empty($validated['emergency_phone'])) {
+                $validated['emergency_phone'] = preg_replace('/[^0-9+]/', '', $validated['emergency_phone']);
+            }
 
-            // Calculate total amount and generate waiver
-            $totalAmount = $this->calculateTotalAmount($validated);
-            $pdfPath = $this->generateWaiverPDF($request, $totalAmount);
+            // Verify price components against submitted total
+            $priceComponents = json_decode($validated['price_components'], true);
+            $calculatedTotal = $this->calculateTotalAmount($validated);
+            $submittedTotal = floatval($validated['calculated_total']);
 
-            // Generate unique order ID
-            $uniqueOrderId = time() . substr(md5(uniqid($validated['email'], true)), 0, 8);
+            if (abs($calculatedTotal - $submittedTotal) > 0.01) {
+                Log::warning('Price manipulation detected', [
+                    'calculated' => $calculatedTotal,
+                    'submitted' => $submittedTotal,
+                    'difference' => abs($calculatedTotal - $submittedTotal),
+                    'ip' => $request->ip(),
+                    'components' => $priceComponents
+                ]);
+                return redirect()->back()
+                    ->withInput()
+                    ->withErrors(['error' => 'Invalid price calculation. Please try again.']);
+            }
+
+            // Generate waiver with security checks
+            try {
+                $pdfPath = $this->generateWaiverPDF($request, $calculatedTotal);
+                if (!Storage::disk('public')->exists($pdfPath)) {
+                    throw new \Exception('Failed to generate waiver PDF');
+                }
+            } catch (\Exception $e) {
+                Log::error('Waiver generation failed: ' . $e->getMessage());
+                return redirect()->back()
+                    ->withInput()
+                    ->withErrors(['error' => 'Failed to generate waiver. Please try again.']);
+            }
+
+            // Generate unique order ID with collision checking
+            $uniqueOrderId = $this->generateUniqueOrderId($validated['email']);
             
-            // Store booking data in session
+            // Store booking data in session with expiration
             $bookingData = array_merge($validated, [
-                'total_amount' => $totalAmount,
+                'total_amount' => $calculatedTotal,
                 'waiver_pdf_path' => $pdfPath,
                 'order_id' => $uniqueOrderId
             ]);
-            session(['booking_data' => $bookingData]);
+            
+            // Set session with expiration
+            $request->session()->put('booking_data', $bookingData);
+            $request->session()->put('booking_data_expiry', now()->addHours(1));
 
             return view('booking.preview', [
                 'booking' => $bookingData,
                 'waiver_pdf' => $pdfPath,
-                'totalAmount' => $totalAmount
+                'totalAmount' => $calculatedTotal
             ]);
 
+        } catch (ValidationException $e) {
+            Log::error('Booking validation failed', [
+                'errors' => $e->errors(),
+                'ip' => $request->ip()
+            ]);
+            throw $e;
         } catch (\Exception $e) {
             Log::error('Booking preview error: ' . $e->getMessage());
             Log::error('Error trace: ' . $e->getTraceAsString());
@@ -152,7 +218,7 @@ class BookingController extends Controller
                 ->withInput()
                 ->withErrors([
                     'error' => 'There was an error processing your booking. Please try again.',
-                    'debug_info' => 'Error: ' . $e->getMessage() . ' | File: ' . $e->getFile() . ' | Line: ' . $e->getLine()
+                    'debug_info' => config('app.debug') ? $e->getMessage() : null
                 ]);
         }
     }
@@ -178,9 +244,7 @@ class BookingController extends Controller
             'emergency_relationship' => $request->emergency_relationship,
             'emergency_phone' => $request->emergency_phone
         ];
-        Log::info('###################################');
-        Log::info('Generating waiver PDF', ['data' => $data]);
-        Log::info('###################################');
+        
         $pdf = PDF::loadView('pdfs.waiver', $data);
         
         $fileName = 'waiver_' . str_replace(' ', '_', $request->name) . '_' . time() . '.pdf';
@@ -204,45 +268,104 @@ class BookingController extends Controller
     }
 
     /**
-     * Create a new booking record
+     * Create a new booking record with enhanced security
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function createBooking(Request $request)
     {
+        try {
+            // Rate limiting to prevent abuse
+            if (RateLimiter::tooManyAttempts('create_booking:' . $request->ip(), 5)) {
+                Log::warning('Rate limit exceeded for booking creation', ['ip' => $request->ip()]);
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Too many attempts. Please try again later.'
+                ], 429);
+            }
+            RateLimiter::hit('create_booking:' . $request->ip());
+
+            // Validate session data exists and hasn't expired
         $bookingData = session('booking_data');
-        
-        if (!$bookingData) {
+            $bookingExpiry = session('booking_data_expiry');
+            
+            if (!$bookingData || !$bookingExpiry || now()->isAfter($bookingExpiry)) {
+                Log::warning('Invalid or expired booking session', [
+                    'has_data' => !empty($bookingData),
+                    'has_expiry' => !empty($bookingExpiry),
+                    'ip' => $request->ip()
+                ]);
             return response()->json([
                 'success' => false,
-                'error' => 'Booking data not found'
-            ]);
-        }
+                    'error' => 'Booking session expired or invalid. Please start over.'
+                ], 400);
+            }
 
-        try {
+            // Verify CSRF token
+            if (!$request->hasValidSignature() && !$request->isMethod('post')) {
+                Log::warning('Invalid CSRF token for booking creation', ['ip' => $request->ip()]);
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Invalid request signature'
+                ], 403);
+            }
+
+            // Sanitize and validate booking data
+            $sanitizedData = $this->sanitizeBookingData($bookingData);
+            
+            // Verify price hasn't been tampered with
+            if (!$this->verifyBookingPrice($sanitizedData)) {
+                Log::warning('Price tampering detected', [
+                    'ip' => $request->ip(),
+                    'data' => $sanitizedData
+                ]);
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Invalid booking data detected'
+                ], 400);
+            }
+
+            // Create booking within a transaction
+            $booking = DB::transaction(function () use ($sanitizedData) {
             $booking = Booking::create([
-                'name' => $bookingData['name'],
-                'email' => $bookingData['email'],
-                'primary_phone' => $bookingData['primary_phone'],
-                'timezone' => $bookingData['timezone'],
-                'local_phone' => $bookingData['local_phone'],
-                'package' => $bookingData['package'],
-                'flyer_details' => $bookingData['flyer_details'],
-                'underage_flyers' => $bookingData['underage_flyers'] ?? null,
-                'preferred_dates' => $bookingData['preferred_dates'],
-                'sunrise_flight' => $bookingData['sunrise_flight'],
-                'video_package' => $bookingData['video_package'] ?? false,
-                'deluxe_package' => $bookingData['deluxe_package'] ?? false,
-                'merch_package' => $bookingData['merch_package'] ?? 0,
-                'accommodation' => $bookingData['accommodation'] ?? null,
-                'special_event' => $bookingData['special_event'] ?? null,
-                'additional_info' => $bookingData['additional_info'] ?? null,
-                'total_amount' => $bookingData['total_amount'],
-                'waiver_pdf_path' => $bookingData['waiver_pdf_path'],
+                    'name' => $sanitizedData['name'],
+                    'email' => $sanitizedData['email'],
+                    'primary_phone' => $sanitizedData['primary_phone'],
+                    'timezone' => $sanitizedData['timezone'],
+                    'local_phone' => $sanitizedData['local_phone'],
+                    'package' => $sanitizedData['package'],
+                    'flyer_details' => $sanitizedData['flyer_details'],
+                    'underage_flyers' => $sanitizedData['underage_flyers'] ?? null,
+                    'preferred_dates' => $sanitizedData['preferred_dates'],
+                    'sunrise_flight' => $sanitizedData['sunrise_flight'],
+                    'video_package' => $sanitizedData['video_package'] ?? false,
+                    'deluxe_package' => $sanitizedData['deluxe_package'] ?? false,
+                    'merch_package' => $sanitizedData['merch_package'] ?? 0,
+                    'accommodation' => $sanitizedData['accommodation'] ?? null,
+                    'special_event' => $sanitizedData['special_event'] ?? null,
+                    'additional_info' => $sanitizedData['additional_info'] ?? null,
+                    'total_amount' => $sanitizedData['total_amount'],
+                    'waiver_pdf_path' => $sanitizedData['waiver_pdf_path'],
                 'status' => 'pending',
-                'order_id' => $bookingData['order_id']
-            ]);
+                    'order_id' => $sanitizedData['order_id'],
+                    'ip_address' => request()->ip(),
+                    'user_agent' => request()->userAgent(),
+                    'flying_status' => 'pending'
+                ]);
+
+                // Log successful booking creation
+                Log::info('Booking created successfully', [
+                    'booking_id' => $booking->id,
+                    'order_id' => $booking->order_id,
+                    'ip' => request()->ip()
+                ]);
+
+                return $booking;
+            });
+
+            // Clear sensitive session data
+            session()->forget(['booking_data', 'booking_data_expiry']);
 
             return response()->json([
                 'success' => true,
@@ -251,16 +374,77 @@ class BookingController extends Controller
             ]);
 
         } catch (\Exception $e) {
-            Log::error('Booking creation error: ' . $e->getMessage());
+            Log::error('Booking creation error: ' . $e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
+                'ip' => $request->ip()
+            ]);
+            
             return response()->json([
                 'success' => false,
-                'error' => 'Failed to create booking: ' . $e->getMessage()
-            ]);
+                'error' => 'Failed to create booking. Please try again.'
+            ], 500);
         }
     }
 
     /**
-     * Capture payment for a booking
+     * Sanitize booking data to prevent XSS and injection attacks
+     *
+     * @param array $data
+     * @return array
+     */
+    private function sanitizeBookingData(array $data): array
+    {
+        $sanitized = [];
+        
+        // Sanitize string fields
+        $stringFields = [
+            'name', 'email', 'primary_phone', 'timezone', 'local_phone',
+            'package', 'flyer_details', 'underage_flyers', 'accommodation',
+            'special_event', 'additional_info', 'waiver_pdf_path', 'order_id'
+        ];
+
+        foreach ($stringFields as $field) {
+            if (isset($data[$field])) {
+                $sanitized[$field] = htmlspecialchars(strip_tags($data[$field]), ENT_QUOTES, 'UTF-8');
+            }
+        }
+
+        // Sanitize boolean fields
+        $booleanFields = ['video_package', 'deluxe_package'];
+        foreach ($booleanFields as $field) {
+            $sanitized[$field] = filter_var($data[$field] ?? false, FILTER_VALIDATE_BOOLEAN);
+        }
+
+        // Sanitize numeric fields
+        $sanitized['merch_package'] = filter_var($data['merch_package'] ?? 0, FILTER_VALIDATE_INT);
+        $sanitized['total_amount'] = filter_var($data['total_amount'], FILTER_VALIDATE_FLOAT);
+
+        // Sanitize date field
+        $sanitized['preferred_dates'] = $data['preferred_dates'];
+        $sanitized['sunrise_flight'] = $data['sunrise_flight'];
+
+        return $sanitized;
+    }
+
+    /**
+     * Verify that the booking price hasn't been tampered with
+     *
+     * @param array $data
+     * @return bool
+     */
+    private function verifyBookingPrice(array $data): bool
+    {
+        try {
+            $calculatedTotal = $this->calculateTotalAmount($data);
+            return abs($calculatedTotal - $data['total_amount']) < 0.01;
+        } catch (\Exception $e) {
+            Log::error('Price verification failed: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Capture payment for a booking with enhanced security
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -268,68 +452,143 @@ class BookingController extends Controller
     public function capturePayment(Request $request)
     {
         try {
-            $orderId = $request->input('order_id');
-            $bookingId = $request->input('booking_id');
-            Log::info('Starting payment capture process', ['order_id' => $orderId, 'booking_id' => $bookingId]);
-            
-            if (!$orderId) {
+            // Rate limiting to prevent abuse
+            if (RateLimiter::tooManyAttempts('capture_payment:' . $request->ip(), 5)) {
+                Log::warning('Rate limit exceeded for payment capture', ['ip' => $request->ip()]);
                 return response()->json([
                     'success' => false,
-                    'error' => 'Order ID is required'
+                    'error' => 'Too many attempts. Please try again later.'
+                ], 429);
+            }
+            RateLimiter::hit('capture_payment:' . $request->ip());
+
+            // Validate request data
+            $validated = $request->validate([
+                'order_id' => ['required', 'string', 'max:255'],
+                'booking_id' => ['nullable', 'integer', 'exists:bookings,id']
+            ]);
+
+            $orderId = $validated['order_id'];
+            $bookingId = $validated['booking_id'];
+
+            Log::info('Starting payment capture process', [
+                'order_id' => $orderId, 
+                'booking_id' => $bookingId,
+                'ip' => $request->ip()
+            ]);
+            
+            // Initialize PayPal with error handling
+            try {
+            $this->initializePayPal();
+            } catch (\Exception $e) {
+                Log::error('PayPal initialization failed', [
+                    'error' => $e->getMessage(),
+                    'ip' => $request->ip()
                 ]);
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Payment service unavailable. Please try again later.'
+                ], 503);
             }
             
-            $this->initializePayPal();
-            
             try {
-                // Capture the payment first
+                // Capture the payment with validation
             $capture = $this->capturePayPalPayment($orderId);
-            Log::info('PayPal capture response:', ['capture' => $capture]);
+                if (!$capture || !isset($capture['id'])) {
+                    throw new \Exception('Invalid PayPal capture response');
+                }
+                
+                Log::info('PayPal capture response:', [
+                    'capture_id' => $capture['id'],
+                    'status' => $capture['status'] ?? 'unknown'
+                ]);
                 
                 $paymentDetails = $this->extractPaymentDetails($capture);
+                if (!isset($capture['purchase_units'][0]['reference_id'])) {
+                    throw new \Exception('Invalid purchase unit reference');
+                }
+                
                 $referenceId = $capture['purchase_units'][0]['reference_id'];
                 
-                $booking = $bookingId ? Booking::find($bookingId) : 
-                                      Booking::where('order_id', $orderId)->first();
-                    
-                if (!$booking) {
-                    throw new \Exception('Booking not found');
+                // Find booking with proper error handling
+                $booking = $bookingId ? 
+                    Booking::findOrFail($bookingId) : 
+                    Booking::where('order_id', $orderId)->firstOrFail();
+                
+                // Verify booking status
+                if ($booking->status !== 'pending') {
+                    throw new \Exception('Invalid booking status for payment capture');
                 }
 
                 // Handle critical operations in a transaction
                 DB::transaction(function () use ($booking, $paymentDetails, $orderId) {
                     // Update booking status
-                    $booking->update([
+                        $updateResult = $booking->update([
                         'status' => 'confirmed',
                             'payment_id' => $paymentDetails['payment_info']['payment_id'] ?? null,
-                        'payment_order_id' => $orderId
+                        'payment_order_id' => $orderId,
+                        'flying_status' => 'pending',
                     ]);
+
+                    if (!$updateResult) {
+                        throw new \Exception('Failed to update booking status');
+                    }
                         
                         // Store payment information
-                        $this->storePayment($booking, $paymentDetails);
+                    $payment = $this->storePayment($booking, $paymentDetails);
+                    if (!$payment) {
+                        throw new \Exception('Failed to store payment information');
+                    }
                 });
                         
                 // Dispatch non-critical operations to queue
-                ProcessBookingConfirmation::dispatch($booking)
-                    ->delay(now()->addSeconds(5)); // Small delay to ensure transaction is committed
+                try {
+                    ProcessBookingConfirmation::dispatch($booking)
+                        ->delay(now()->addSeconds(5))
+                        ->onQueue('bookings');
+                } catch (\Exception $e) {
+                    Log::error('Failed to dispatch booking confirmation', [
+                        'error' => $e->getMessage(),
+                        'booking_id' => $booking->id
+                    ]);
+                }
+
+                // Clear all session data related to the booking
+                $this->clearBookingSession($request);
+
+                // Store successful booking ID in session
+                $request->session()->put('last_successful_booking_id', $booking->id);
             
             return response()->json([
                 'success' => true,
                 'message' => 'Payment captured successfully',
-                'capture_id' => $capture['id'] ?? null
-            ]);
+                    'capture_id' => $capture['id']
+                ]);
 
-        } catch (\Exception $e) {
+            } catch (\Exception $e) {
                 $this->handlePaymentError($e, $bookingId, $orderId);
-                throw $e;
+                // Clear session data even on failure
+                $this->clearBookingSession($request);
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Payment failed. Please try again or contact support.'
+                ], 400);
             }
 
         } catch (\Exception $e) {
-            Log::error('Payment capture error: ' . $e->getMessage());
-            return response()->json([
-                'success' => false,
-                'error' => 'Failed to capture payment: ' . $e->getMessage()
+            Log::error('Payment capture error', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'ip' => $request->ip()
             ]);
+            
+            // Clear session data on any error
+            $this->clearBookingSession($request);
+                
+                return response()->json([
+                    'success' => false,
+                'error' => 'Failed to capture payment. Please try again.'
+            ], 500);
         }
     }
 
@@ -342,15 +601,23 @@ class BookingController extends Controller
      */
     private function handlePaymentError(\Exception $e, $bookingId, $orderId)
     {
-        Log::error('Payment error: ' . $e->getMessage());
-        Log::error('Error trace: ' . $e->getTraceAsString());
+        Log::error('Payment error', [
+            'error' => $e->getMessage(),
+            'trace' => $e->getTraceAsString(),
+            'booking_id' => $bookingId,
+            'order_id' => $orderId
+        ]);
         
-        $booking = $bookingId ? Booking::find($bookingId) : 
-                               Booking::where('order_id', $orderId)->first();
+        $booking = $bookingId ? 
+            Booking::find($bookingId) : 
+            Booking::where('order_id', $orderId)->first();
         
-        if ($booking) {
-            $booking->update(['status' => 'failed']);
-            $this->storeFailedPayment($booking, $orderId, $e->getMessage());
+            if ($booking) {
+                $booking->update([
+                'status' => 'failed',
+                'flying_status' => 'cancelled'
+                ]);
+                $this->storeFailedPayment($booking, $orderId, $e->getMessage());
         }
     }
 
@@ -361,52 +628,85 @@ class BookingController extends Controller
      */
     public function success()
     {
-        return view('booking.success');
+        // Get booking ID from session
+        $bookingId = session('last_successful_booking_id');
+        
+        if (!$bookingId) {
+            return redirect()->route('home')
+                ->with('error', 'No booking found.');
+        }
+
+        // Get booking details
+        $booking = Booking::where('id', $bookingId)
+                        ->where('status', 'confirmed')
+                        ->first();
+
+        if (!$booking) {
+            return redirect()->route('home')
+                ->with('error', 'Booking not found.');
+        }
+
+        // Clear the session data
+        session()->forget('last_successful_booking_id');
+
+        return view('booking.success', [
+            'booking' => $booking
+        ]);
     }
 
     /**
-     * Calculate total amount for booking
+     * Calculate total amount with security validation
      *
      * @param array $data
      * @return float
      */
     private function calculateTotalAmount($data)
     {
-        $total = $this->getPackagePrice($data['package']);
+        try {
+            $total = 0;
 
-        if ($data['video_package'] ?? false) {
-            $total += 90;
+            // Validate and add base package price
+            if (!isset(self::PRICES['packages'][$data['package']])) {
+                throw new \Exception('Invalid package selected');
+            }
+            $total += self::PRICES['packages'][$data['package']];
+
+            // Add video package if selected
+            if (filter_var($data['video_package'], FILTER_VALIDATE_BOOLEAN)) {
+                $total += self::PRICES['video_package'];
+            }
+
+            // Add deluxe package if selected
+            if (filter_var($data['deluxe_package'], FILTER_VALIDATE_BOOLEAN)) {
+                $total += self::PRICES['deluxe_package'];
+            }
+
+            // Add merchandise with validation
+            $merchQty = isset($data['merch_package']) ? (int)$data['merch_package'] : 0;
+            $merchQty = max(0, min($merchQty, 10)); // Ensure between 0 and 10
+            $total += $merchQty * self::PRICES['merch_package'];
+
+            // Add sunrise flight if selected
+            if ($data['sunrise_flight'] === 'yes') {
+                $total += self::PRICES['sunrise_flight'];
+            }
+
+            Log::info('Price calculation details', [
+                'package' => $data['package'],
+                'video_package' => $data['video_package'],
+                'deluxe_package' => $data['deluxe_package'],
+                'merch_package' => $merchQty,
+                'sunrise_flight' => $data['sunrise_flight'],
+                'total' => $total
+            ]);
+
+            return $total;
+        } catch (\Exception $e) {
+            Log::error('Error calculating total amount: ' . $e->getMessage(), [
+                'data' => $data
+            ]);
+            throw $e;
         }
-
-        if ($data['deluxe_package'] ?? false) {
-            $total += 120;
-        }
-
-        $total += ($data['merch_package'] ?? 0) * 40;
-
-        if ($data['sunrise_flight'] === 'yes') {
-            $total += 99;
-        }
-
-        return $total;
-    }
-
-    /**
-     * Get base price for a package
-     *
-     * @param string $package
-     * @return float
-     */
-    private function getPackagePrice($package)
-    {
-        $prices = [
-            'intro' => 229,
-            'basic' => 199,
-            'advanced' => 299,
-            'certification' => 499
-        ];
-
-        return $prices[$package] ?? 0;
     }
 
     /**
@@ -602,30 +902,58 @@ class BookingController extends Controller
      *
      * @param Booking $booking
      */
-    private function addBookingToGoogleServices(Booking $booking)
+
+    /**
+     * Generate unique order ID with collision checking
+     *
+     * @param string $email
+     * @return string
+     * @throws \Exception
+     */
+    private function generateUniqueOrderId($email)
+    {
+        $attempts = 0;
+        $maxAttempts = 5;
+
+        do {
+            $uniqueOrderId = time() . substr(md5(uniqid($email . $attempts, true)), 0, 8);
+            $exists = Booking::where('order_id', $uniqueOrderId)->exists();
+            $attempts++;
+        } while ($exists && $attempts < $maxAttempts);
+
+        if ($exists) {
+            throw new \Exception('Failed to generate unique order ID');
+        }
+
+        return $uniqueOrderId;
+    }
+
+    /**
+     * Clear all booking-related session data
+     *
+     * @param Request $request
+     * @return void
+     */
+    private function clearBookingSession(Request $request)
     {
         try {
-            $googleService = $this->initializeGoogle();
-            
-            if ($googleService) {
-                $calendarEventId = $googleService->addBookingToCalendar($booking);
-                if ($calendarEventId) {
-                    Log::info('Booking added to Google Calendar', [
-                        'booking_id' => $booking->id,
-                        'calendar_event_id' => $calendarEventId
-                    ]);
-                }
-                
-                $sheetsResult = $googleService->addBookingToSheet($booking);
-                if ($sheetsResult) {
-                    Log::info('Booking added to Google Sheets', [
-                        'booking_id' => $booking->id
-                    ]);
-                }
-            }
+            // Clear all booking-related session data
+            $request->session()->forget([
+                'booking_data',
+                'booking_data_expiry',
+                'booking.signature_data',
+                'booking.payment_attempts',
+                'booking.last_payment_attempt'
+            ]);
+
+            Log::info('Booking session data cleared', [
+                'ip' => $request->ip()
+            ]);
         } catch (\Exception $e) {
-            Log::error('Error adding booking to Google services: ' . $e->getMessage());
-            Log::error('Error trace: ' . $e->getTraceAsString());
+            Log::error('Failed to clear booking session data', [
+                'error' => $e->getMessage(),
+                'ip' => $request->ip()
+            ]);
         }
     }
 } 

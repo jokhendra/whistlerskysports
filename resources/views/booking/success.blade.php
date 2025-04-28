@@ -13,6 +13,37 @@
             <h1 class="text-3xl font-bold text-gray-900 mb-4">Booking Confirmed!</h1>
             <p class="text-lg text-gray-600 mb-8">Thank you for booking your power hang gliding experience with us.</p>
 
+            {{-- Booking Details Section --}}
+            <div class="bg-gray-50 rounded-xl p-6 mb-8 text-left">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Booking Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-500">Booking ID</p>
+                        <p class="text-base font-medium text-gray-900">{{ $booking->id }}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Package</p>
+                        <p class="text-base font-medium text-gray-900 capitalize">{{ $booking->package }}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Date</p>
+                        <p class="text-base font-medium text-gray-900">{{ \Carbon\Carbon::parse($booking->preferred_dates)->format('F j, Y') }}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Flying Status</p>
+                        <p class="text-base font-medium text-gray-900 capitalize">{{ $booking->flying_status }}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Total Amount</p>
+                        <p class="text-base font-medium text-gray-900">${{ number_format($booking->total_amount, 2) }}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Payment Status</p>
+                        <p class="text-base font-medium text-green-600">Paid</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="bg-gray-50 rounded-xl p-6 mb-8 text-left">
                 <h2 class="text-xl font-semibold text-gray-900 mb-4">What's Next?</h2>
                 <ul class="space-y-4">
@@ -50,9 +81,9 @@
                 <a href="{{ route('home') }}" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-amber-600 hover:bg-amber-700">
                     Return to Home
                 </a>
-                <a href="#" class="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                <!-- <a href="#" class="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
                     View Booking Details
-                </a>
+                </a> -->
             </div>
         </div>
     </div>

@@ -52,7 +52,7 @@ Thank you for booking with Whistler Sky Sports! Your booking has been confirmed.
 ## Payment Information
 **Total Amount:** CAD {{ number_format($booking->total_amount, 2) }}  
 **Payment Status:** Paid  
-**Transaction ID:** {{ $booking->paypal_payment_id }}
+**Transaction ID:** {{ $booking->payment_id }}
 
 @component('mail::button', ['url' => config('app.url')])
 Visit Our Website

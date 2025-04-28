@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="bg-gradient-to-b from-blue-900 to-blue-700 py-16 mt-10">
+<section class="bg-gradient-to-b from-blue-900 to-blue-700 py-16">
     <div class="container mx-auto px-4">
       <div class="flex flex-col items-center text-center">
         <h1 class="text-5xl font-bold text-white mb-6">About Whistler Sky Sports</h1>
@@ -17,6 +17,12 @@
                     <p class="text-sm text-blue-200">- Leonardo da Vinci</p>
                     <p class="mt-6">
                         At Whistler Sky Sports, we teach you how to trespass mankind's most ancestral fear - which is the fear of falling. The oldest dream of mankind is to fly and we help you achieve your dream!
+                    </p>
+                    <p class="mt-4">
+                        This fear dates back to our existence as monkeys, who were afraid of predators below the trees and therefore unwilling to take the leap of faith. Taking that first leap requires immense courage. Today, flying represents humanity's triumph over that biggest fear. When we dare to overcome our fears and take bold steps forward, we unlock extraordinary possibilities.
+                    </p>
+                    <p class="mt-4">
+                        Here at Whistler Sky Sports, we are here to hold your hand and make you fall in love with the skies in the most affordable way. Not to forget; you are amidst the most beautiful landscape views in the entire world.
                     </p>
                 </div>
                 <!-- Decorative elements -->
@@ -33,18 +39,18 @@
   <div class="container mx-auto px-4">
     <div class="flex flex-col md:flex-row items-center gap-12">
       <div class="md:w-1/2">
-        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Whistler Sky Sports Aircraft" class="rounded-lg shadow-lg w-full h-auto object-cover">
+        <img src="{{ asset('images/fixed_wings/IMG_7849.JPG') }}" alt="Open Cockpit Ultralight Aircraft" class="rounded-lg shadow-lg w-full h-[400px] object-cover">
       </div>
       <div class="md:w-1/2">
         <h2 class="text-3xl font-bold text-gray-800 mb-6">Our Mission</h2>
         <p class="text-gray-600 mb-4">
-          As a premier Flight Training Unit based at Pemberton Airport, British Columbia, WSS specializes in ultralight and advanced ultralight aircraft, delivering top-tier flight training that meets Transport Canada's rigorous standards.
+          We don't take our fellow aviators on joy rides – we teach them how to dance confidently in those skies and give them a taste and then the skills. If you're the adrenaline seeker, we'll share an unforgettable experience in an open cockpit weight shift trike. If you'd rather take things slow, we have a closed cockpit plane but with very sensitive controls.
         </p>
         <p class="text-gray-600 mb-4">
-          With a focus on the ultralight category—defined as aircraft with a maximum gross weight of 1,232 lbs (560 kg) and a stall speed of 45 mph or less—we offer a thrilling yet accessible entry into the world of aviation.
+          Getting your private pilot's license could be very expensive these days. You open your doors towards the most affordable flying with Whistler Sky Sports. With your "Quick Learner's" package, an aspiring pilot can complete their Ultralight permit in as low as 10 hours and Instructor ratings in around 22 hours. In as low as 2-3 months you can learn how to spread your wings and master the art of flying; weather permitting.
         </p>
         <p class="text-gray-600">
-          Founded by Ishan Tewari, our Chief Flight Instructor, ground instructor, and sole director, WSS embodies a singular vision: exceptional flight training rooted in safety, quality, and hands-on experience.
+          Our greatest eternal desire as mankind is to have wings and fly like a bird. You would love the adrenaline rush you will get by learning these challenging skills in the Whistler's challenging terrains surrounded by one of the most beautiful and peaceful bird's eyeview of the Canadian rockies. We promise your comfort and an experience you will remember for the rest of your life.
         </p>
       </div>
     </div>
@@ -57,7 +63,7 @@
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Core Values</h2>
       <p class="text-gray-600 max-w-2xl mx-auto">
-        Safety, transparency, and excellence are the pillars of our company culture.
+        Our Core Values of safety, transparency, and excellence define our company culture, rooted in unwavering integrity and authenticity.
       </p>
     </div>
     
@@ -71,7 +77,7 @@
         </div>
         <h3 class="text-xl font-bold text-gray-800 mb-2">Safety</h3>
         <p class="text-gray-600">
-          We prioritize safety in every aspect of our operations, with rigorous maintenance, strict protocols, and a focus on risk management.
+          We prioritize rigorous pre-flight inspections and maintenance, never cutting corners, and cancel flights if weather, aircraft, or health conditions aren't perfect.
         </p>
       </div>
       
@@ -111,29 +117,37 @@
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Fleet</h2>
       <p class="text-gray-600 max-w-2xl mx-auto">
-        With two aircraft in our fleet, we are thrilled to guide you as you take your first steps toward learning how to fly.
+        Experience the thrill of flight with our carefully selected aircraft, designed for both performance and safety.
       </p>
     </div>
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <!-- Aircraft 1 -->
       <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Weight-shift Trike" class="w-full h-64 object-cover">
+        <img src="{{ asset('images/microlite/Skypper 2.jpeg') }}" alt="DTA Combo Trike" class="w-full h-64 object-cover">
         <div class="p-6">
-          <h3 class="text-xl font-bold text-gray-800 mb-2">Weight-shift Trike (Ultralight)</h3>
-          <p class="text-gray-600">
-            Our weight-shift trike offers an intuitive and responsive flying experience, perfect for beginners and experienced pilots alike.
+          <h3 class="text-xl font-bold text-gray-800 mb-2">DTA Combo Trike</h3>
+          <p class="text-gray-600 mb-4">
+            Experience the thrill of open-cockpit flight with the DTA Combo trike, a top choice for aviation enthusiasts. Designed by Jean-Michel Dizier, DTA trikes blend high-performance wings with exceptional low-speed handling, making them suitable for pilots of all skill levels.
           </p>
+          <p class="text-gray-600 mb-4">
+            Dizier's innovative designs have stood the test of time, with the iconic "Voyageur" model earning global acclaim. Notable adventures include:
+          </p>
+          <ul class="list-disc list-inside text-gray-600 space-y-2">
+            <li><a href="http://www.trikeexpeditions.com" target="_blank" class="text-blue-600 hover:text-blue-800 underline">Olivier Aubert's worldwide expeditions</a></li>
+            <li><a href="http://odile-rablat.com" target="_blank" class="text-blue-600 hover:text-blue-800 underline">Odile Rablat's dual crossings of Canada</a></li>
+            <li><a href="http://trike-globetrotter.com" target="_blank" class="text-blue-600 hover:text-blue-800 underline">Andreas Zmuda and Doreen Kroeber's global circumnavigation</a></li>
+          </ul>
         </div>
       </div>
       
       <!-- Aircraft 2 -->
       <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Fixed-wing Aircraft" class="w-full h-64 object-cover">
+        <img src="{{ asset('images/fixed_wings/IMG_7850.JPG') }}" alt="RANS S6 Coyote II" class="w-full h-64 object-cover">
         <div class="p-6">
-          <h3 class="text-xl font-bold text-gray-800 mb-2">Fixed-wing (Advanced Ultralight)</h3>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">RANS S6 Coyote II</h3>
           <p class="text-gray-600">
-            Our fixed-wing aircraft provides a traditional flying experience with advanced capabilities for more complex training scenarios.
+            Take to the skies in the RANS S6 Coyote II, a closed-cockpit ultralight fixed-wing aircraft masterfully crafted by Rans Inc. Designed by Randy Schlitter, this cutting-edge aircraft offers unmatched reliability and performance, making it the perfect companion for exploring the vast Canadian wilderness from above.
           </p>
         </div>
       </div>
@@ -151,69 +165,49 @@
       </p>
     </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <!-- Program 1 -->
-      <div class="bg-white p-8 rounded-lg shadow-md">
-        <h3 class="text-xl font-bold text-gray-800 mb-4">Practical Flight Training</h3>
-        <ul class="space-y-3 text-gray-600">
-          <li class="flex items-start">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            <span>Takeoff and landing techniques</span>
-          </li>
-          <li class="flex items-start">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            <span>Navigation and flight planning</span>
-          </li>
-          <li class="flex items-start">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            <span>Emergency procedures</span>
-          </li>
-          <li class="flex items-start">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            <span>Mountain flying techniques</span>
-          </li>
-        </ul>
-      </div>
-      
-      <!-- Program 2 -->
-      <div class="bg-white p-8 rounded-lg shadow-md">
-        <h3 class="text-xl font-bold text-gray-800 mb-4">Ground School</h3>
-        <ul class="space-y-3 text-gray-600">
-          <li class="flex items-start">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            <span>Aerodynamics and aircraft systems</span>
-          </li>
-          <li class="flex items-start">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            <span>Meteorology and weather interpretation</span>
-          </li>
-          <li class="flex items-start">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            <span>Transport Canada regulations</span>
-          </li>
-          <li class="flex items-start">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            <span>Navigation and flight planning</span>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto mb-20">
+            <!-- 30 Minute Lesson Package -->
+            <div class="bg-white/40 rounded-2xl overflow-hidden">
+                <div class="p-8 text-center">
+                    <h2 class="text-3xl font-bold mb-2">Open Cockpit Weight Shift Trike - Learn to Fly like a Bird</h2>
+                    <div class="text-4xl font-bold text-[#204fb4] mb-2">USD$229</div>
+                    <p class="text-gray-600 mb-4">per person</p>
+                    <p class="text-xl text-gray-700 mb-6">30 Minute Lesson</p>
+                    <p class="text-lg text-gray-600 mb-8">Spread your wings and reach out to the sky!</p>
+                    <a href="{{ route('booking') }}" class="inline-block bg-[#204fb4] text-[#fcdb3f] font-bold py-3 px-8 rounded-full hover:bg-[#204fb4] transition duration-300 transform hover:scale-105">
+                        RESERVE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mountain Flying Course Package -->
+            <div class="bg-white/40 rounded-2xl overflow-hidden">
+                <div class="p-8 text-center">
+                    <h2 class="text-3xl font-bold mb-2">Fixed Wing Advanced Ultralight - Lesson for the Nuanced </h2>
+                    <div class="text-4xl font-bold text-[#204fb4] mb-2">USD$199</div>
+                    <p class="text-gray-600 mb-4">per person</p>
+                    <p class="text-xl text-gray-700 mb-6">30 Minute Lesson</p>
+                    <p class="text-lg text-gray-600 mb-8">Master the art of mountain flying with our comprehensive course!</p>
+                    <a href="{{ route('booking') }}" class="inline-block bg-[#204fb4] text-[#fcdb3f] font-bold py-3 px-8 rounded-full hover:bg-[#204fb4] transition duration-300 transform hover:scale-105">
+                        RESERVE
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Comprehensive Flight Training Programs -->
+            <div class="bg-white/40 rounded-2xl overflow-hidden">
+                <div class="p-8 text-center">
+                    <h2 class="text-3xl font-bold mb-2">Comprehensive Flight Training Programs</h2>
+                    <!-- <div class="text-4xl font-bold text-purple-600 mb-2">From CA$3,995</div> -->
+                    <p class="text-gray-600 mb-4">complete program</p>
+                    <p class="text-xl text-gray-700 mb-6">Transport Canada Approved</p>
+                    <p class="text-lg text-gray-600 mb-8">From Basic Ultralight to Recreational Pilot Permit - structured programs designed to take you from beginner to certified pilot.</p>
+                    <a href="{{ route('pricing') }}#comprehensive-programs" class="inline-block bg-[#204fb4] text-[#fcdb3f] font-bold py-3 px-8 rounded-full hover:bg-[#204fb4] transition duration-300 transform hover:scale-105 smooth-scroll">
+                        LEARN MORE
+                    </a>
+                </div>
+            </div>
+        </div>
   </div>
 </section>
 
@@ -242,147 +236,6 @@
   </div>
 </section>
 
-<!-- Meet Our Friends Section -->
-<section class="py-16 bg-amber-50">
-  <div class="container mx-auto px-4">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold text-gray-800 mb-4">Meet Our Friends</h2>
-      <p class="text-gray-600 max-w-2xl mx-auto">
-        Our team of experienced pilots and engineers is dedicated to delivering the best flying experiences.
-      </p>
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      <!-- Team Member 1 -->
-      <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Team Member" class="w-full h-64 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-gray-800 mb-1">John Doe</h3>
-          <p class="text-amber-600 mb-3">CEO & Founder</p>
-          <p class="text-gray-600 text-sm">
-            With over 15 years of industry experience, John leads our company with vision and passion.
-          </p>
-          <div class="mt-4 flex space-x-3">
-            <a href="#" class="text-gray-400 hover:text-blue-500">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-              </svg>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-blue-400">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Team Member 2 -->
-      <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Team Member" class="w-full h-64 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-gray-800 mb-1">Jane Smith</h3>
-          <p class="text-amber-600 mb-3">CTO</p>
-          <p class="text-gray-600 text-sm">
-            Jane oversees our technical strategy and ensures we stay at the cutting edge of innovation.
-          </p>
-          <div class="mt-4 flex space-x-3">
-            <a href="#" class="text-gray-400 hover:text-blue-500">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-              </svg>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-blue-400">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Team Member 3 -->
-      <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Team Member" class="w-full h-64 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-gray-800 mb-1">Michael Johnson</h3>
-          <p class="text-amber-600 mb-3">Design Director</p>
-          <p class="text-gray-600 text-sm">
-            Michael brings creativity and user-centered design principles to all our products.
-          </p>
-          <div class="mt-4 flex space-x-3">
-            <a href="#" class="text-gray-400 hover:text-blue-500">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-              </svg>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-blue-400">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Team Member 4 -->
-      <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="Team Member" class="w-full h-64 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-gray-800 mb-1">Sarah Williams</h3>
-          <p class="text-amber-600 mb-3">Marketing Director</p>
-          <p class="text-gray-600 text-sm">
-            Sarah develops our marketing strategies and helps us connect with our customers.
-          </p>
-          <div class="mt-4 flex space-x-3">
-            <a href="#" class="text-gray-400 hover:text-blue-500">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-              </svg>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-blue-400">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Stats Section -->
-<section class="bg-amber-600 py-16 text-white">
-  <div class="container mx-auto px-4">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-      <!-- Stat 1 -->
-      <div>
-        <div class="text-4xl font-bold mb-2">1000+</div>
-        <div class="text-xl">Hours of Experience</div>
-      </div>
-      
-      <!-- Stat 2 -->
-      <div>
-        <div class="text-4xl font-bold mb-2">50+</div>
-        <div class="text-xl">Students Trained</div>
-      </div>
-      
-      <!-- Stat 3 -->
-      <div>
-        <div class="text-4xl font-bold mb-2">10+</div>
-        <div class="text-xl">Partners</div>
-      </div>
-      
-      <!-- Stat 4 -->
-      <div>
-        <div class="text-4xl font-bold mb-2">1200+</div>
-        <div class="text-xl">Happy Clients</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- Our Commitment Section -->
 <section class="bg-gray-100 py-16">
   <div class="container mx-auto px-4">
@@ -402,10 +255,10 @@
         </div>
         <div class="md:w-2/3">
           <p class="text-gray-600 mb-4">
-            Even when life gets busy, we never cut corners with pre-flight inspections or maintenance. If something isn't right—whether it's the weather, the aircraft, or your health—we cancel the flight. Situational awareness is your best friend.
+            With one thousand hours of experience flying various ultralight aircraft, you will find immense joy in learning and mastering the Whistler skies. My passion for sharing knowledge and skills was inspired by a mentor 15 years ago, who instilled the values of humility and kindness.
           </p>
           <p class="text-gray-600 mb-4">
-            Sometimes things happen—perhaps a mistake or an event beyond your control—but an inquiry into any incident will always reveal the truth. At WSS, we stand ready to put our hands on our hearts and speak that truth with confidence.
+            Even when life gets busy, we never cut corners with pre-flight inspections or maintenance. If something isn't right—whether it's the weather, the aircraft, or your health—we cancel the flight. Situational awareness is your best friend.
           </p>
           <p class="text-gray-600">
             At WSS, we're more than a flight school—we're a community of dreamers and doers united by a love for aviation. Join us as we take flight, blending adventure with excellence, and discover why the skies are calling your name.
