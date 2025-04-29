@@ -22,7 +22,7 @@
         </div>
         <!-- Main Booking Form -->
         <div class="max-w-5xl mx-auto">
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
                 <!-- Form Header -->
                 <div class="bg-[#204fb4] p-8 relative overflow-hidden">
                     <div class="absolute top-0 right-0 w-96 h-96 bg-blue-400/10 rounded-full -mr-48 -mt-48 blur-3xl"></div>
@@ -64,17 +64,28 @@
                             <div class="space-y-4">
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Full Name *</label>
-                                    <input type="text" name="name" id="name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                    <input type="text" name="name" id="name" value="John Doe" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                 </div>
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Email Address *</label>
-                                    <input type="email" name="email" id="email" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                    <input type="email" name="email" id="email" value="whistlerskysports@gmail.com" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                 </div>
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Primary Phone *</label>
-                                    <input type="tel" name="primary_phone" id="primary_phone" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                    <input type="tel" name="primary_phone" id="primary_phone" value="+12162881303" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                </div>
+
+                                <div class="relative">
+                                    <label class="text-sm font-medium text-gray-700 mb-1 block">Date of Birth *</label>
+                                    <input type="date" name="date_of_birth" id="date_of_birth" value="1990-01-01" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                </div>
+
+                                <div class="relative">
+                                    <label class="text-sm font-medium text-gray-700 mb-1 block">Weight (lbs) *</label>
+                                    <input type="number" name="weight" id="weight" value="150" required min="0" max="245" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Enter your weight in pounds">
+                                    <p class="text-xs text-gray-500 mt-1">Maximum weight limit: 245 lbs</p>
                                 </div>
 
                                 <div class="relative">
@@ -82,7 +93,7 @@
                                     <select name="timezone" id="timezone" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                         <option value="">Select your time zone</option>
                                         <optgroup label="North America">
-                                            <option value="America/New_York">Eastern Time (ET) - New York, Toronto</option>
+                                            <option value="America/New_York" selected>Eastern Time (ET) - New York, Toronto</option>
                                             <option value="America/Chicago">Central Time (CT) - Chicago, Winnipeg</option>
                                             <option value="America/Denver">Mountain Time (MT) - Denver, Calgary</option>
                                             <option value="America/Los_Angeles">Pacific Time (PT) - Los Angeles, Vancouver</option>
@@ -110,7 +121,7 @@
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Local Contact (During Stay) *</label>
-                                    <input type="tel" name="local_phone" id="local_phone" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                    <input type="tel" name="local_phone" id="local_phone" value="+12162881303" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                 </div>
                             </div>
                         </div>
@@ -128,7 +139,7 @@
                                     <select name="package" id="package" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                         <option value="">Choose your adventure</option>
                                         <option value="intro">Open Cockpit Weight Shift Trike - USD $229 (30 min)</option>
-                                        <option value="basic">Fixed Wing Advanced Ultralight - USD $199 (30 min)</option>
+                                        <option value="basic" selected>Fixed Wing Advanced Ultralight - USD $199 (30 min)</option>
                                     </select>
                                 </div>
 
@@ -156,7 +167,7 @@
                                     <select name="sunrise_flight" id="sunrise_flight" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                         <option value="">Select preference</option>
                                         <option value="yes">Yes - Sunrise Flight (USD $99)</option>
-                                        <option value="no">No - Regular Time</option>
+                                        <option value="no" selected>No - Regular Time</option>
                                     </select>
                                 </div>
                             </div>
@@ -949,7 +960,9 @@
             email: document.getElementById('email').value.trim(),
             package: document.getElementById('package').value,
             terms: document.querySelector('input[name="terms"]').checked,
-            waiver: document.getElementById('waiver_checkbox').checked
+            waiver: document.getElementById('waiver_checkbox').checked,
+            date_of_birth: document.getElementById('date_of_birth').value,
+            weight: document.getElementById('weight').value
         };
 
         if (Object.values(requiredFields).includes('') || !requiredFields.terms || !requiredFields.waiver) {
@@ -957,6 +970,26 @@
             alert('Please fill in all required fields and accept both the terms and conditions and waiver.');
                 return false;
             }
+
+        // Validate DOB
+        const dob = new Date(requiredFields.date_of_birth);
+        const today = new Date();
+        const minAge = 18;
+        const minDate = new Date(today.getFullYear() - minAge, today.getMonth(), today.getDate());
+        
+        if (dob > minDate) {
+            e.preventDefault();
+            alert(`You must be at least ${minAge} years old to book a flight.`);
+            return false;
+        }
+
+        // Validate weight
+        const weight = parseInt(requiredFields.weight);
+        if (isNaN(weight) || weight <= 0 || weight > 245) {
+            e.preventDefault();
+            alert('Please enter a valid weight between 1 and 245 lbs.');
+            return false;
+        }
             
         // Validate phone numbers
         if (!validatePhoneNumbers()) {
@@ -1230,13 +1263,32 @@
     }
 
     /**
-     * Initialize date defaults
+     * Initialize date defaults and validation
      */
     function initializeDateDefaults() {
         const today = new Date().toISOString().split('T')[0];
         const preferredDatesInput = document.getElementById('preferred_dates');
         preferredDatesInput.min = today;
         preferredDatesInput.value = today;
+
+        // Set max date for DOB to today
+        const dobInput = document.getElementById('date_of_birth');
+        if (dobInput) {
+            dobInput.max = today;
+        }
+
+        // Add weight validation on input
+        const weightInput = document.getElementById('weight');
+        if (weightInput) {
+            weightInput.addEventListener('input', function() {
+                const value = parseInt(this.value);
+                if (value > 245) {
+                    this.value = 245;
+                } else if (value < 0) {
+                    this.value = 0;
+                }
+            });
+        }
     }
 
     /**

@@ -87,7 +87,7 @@
     </nav>
     
     <!-- Add padding to account for the navbar height -->
-    <div class="pt-16 sm:pt-20 md:pt-24 lg:pt-28 xl:pt-32"></div>
+    <div class="pt-16 sm:pt-20 md:pt-24 lg:pt-13 xl:pt-15"></div>
 
     <script>
         // Toggle mobile menu

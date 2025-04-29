@@ -30,10 +30,19 @@ return new class extends Migration
             $table->text('special_event')->nullable();
             $table->text('additional_info')->nullable();
             $table->string('waiver_pdf_path')->nullable();
-            $table->string('paypal_order_id')->nullable();
-            $table->string('paypal_payment_id')->nullable();
+            $table->string('emergency_name');
+            $table->string('emergency_relationship');
+            $table->string('emergency_phone');
             $table->string('status')->default('pending');
             $table->decimal('total_amount', 10, 2);
+            $table->string('payment_id')->nullable();
+            $table->string('payment_order_id')->nullable();
+            $table->string('order_id')->nullable();
+            $table->text('signature_data')->nullable();
+            $table->string('ip_address')->nullable();
+            $table->string('user_agent')->nullable();
+            $table->string('flying_status')->default('pending');
+            $table->string('flying_time')->nullable();
             $table->timestamps();
         });
     }
@@ -45,4 +54,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('bookings');
     }
-};
+}; 

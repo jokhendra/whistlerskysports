@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('bookings', function (Blueprint $table) {
-            $table->text('signature_data')->nullable()->after('additional_info');
+        Schema::table('payments', function (Blueprint $table) {
+            $table->decimal('refunded_amount', 10, 2)->nullable();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('bookings', function (Blueprint $table) {
-            $table->dropColumn('signature_data');
+        Schema::table('payments', function (Blueprint $table) {
+            $table->dropColumn('refunded_amount');
         });
     }
 };

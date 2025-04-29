@@ -12,11 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('bookings', function (Blueprint $table) {
-            $table->string('payment_order_id')->nullable()->after('payment_id');
-        });
-
-        Schema::table('payments', function (Blueprint $table) {
-            $table->string('payment_order_id')->nullable()->after('payment_id');
+            $table->date('date_of_birth')->nullable();
+            $table->decimal('weight', 5, 2)->nullable();
         });
     }
 
@@ -26,11 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('bookings', function (Blueprint $table) {
-            $table->dropColumn('payment_order_id');
-        });
-
-        Schema::table('payments', function (Blueprint $table) {
-            $table->dropColumn('payment_order_id');
+            $table->dropColumn(['date_of_birth', 'weight']);
         });
     }
-}; 
+};

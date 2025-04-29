@@ -36,7 +36,12 @@ class Booking extends Model
         'ip_address',
         'user_agent',
         'flying_status',
-        'flying_time'
+        'flying_time',
+        'date_of_birth',
+        'weight',
+        'emergency_name',
+        'emergency_relationship',
+        'emergency_phone'
     ];
 
     protected $casts = [
@@ -44,7 +49,9 @@ class Booking extends Model
         'video_package' => 'boolean',
         'deluxe_package' => 'boolean',
         'merch_package' => 'integer',
-        'total_amount' => 'decimal:2'
+        'total_amount' => 'decimal:2',
+        'date_of_birth' => 'date',
+        'weight' => 'integer'
     ];
 
     public function user()

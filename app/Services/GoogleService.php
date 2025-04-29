@@ -151,6 +151,11 @@ class GoogleService
         $description .= "Package: {$booking->package}\n";
         $description .= "Sunrise Flight: {$booking->sunrise_flight}\n";
         
+        // Add weight and age information
+        $age = $this->calculateAge($booking->date_of_birth);
+        $description .= "Weight: {$booking->weight} lbs\n";
+        $description .= "Age: {$age} years\n";
+        
         if ($booking->video_package) {
             $description .= "Add-ons: Video Package\n";
         }
@@ -166,6 +171,20 @@ class GoogleService
         $description .= "Total Amount: CAD {$booking->total_amount}\n";
         
         return $description;
+    }
+
+    /**
+     * Calculate age from date of birth
+     *
+     * @param string $dateOfBirth
+     * @return int
+     */
+    private function calculateAge(string $dateOfBirth): int
+    {
+        $birthDate = new \DateTime($dateOfBirth);
+        $today = new \DateTime();
+        $age = $today->diff($birthDate)->y;
+        return $age;
     }
 
     /**
@@ -222,10 +241,14 @@ class GoogleService
      */
     private function prepareSheetRowData(Booking $booking): array
     {
+        $age = $this->calculateAge($booking->date_of_birth);
+        
         return [
             $booking->id,
             $booking->name,
             $booking->email,
+            $booking->weight,
+            $age,
             $booking->primary_phone,
             $booking->timezone,
             $booking->local_phone,
@@ -250,7 +273,7 @@ class GoogleService
             // Check if headers exist
             $response = $this->sheetsService->spreadsheets_values->get(
                 $this->spreadsheetId,
-                'Sheet1!A1:O1'
+                'Sheet1!A1:Q1'
             );
 
             $values = $response->getValues();
@@ -275,6 +298,8 @@ class GoogleService
             'Booking ID',
             'Name',
             'Email',
+            'Weight (lbs)',
+            'Age',
             'Primary Phone',
             'Timezone',
             'Local Phone',
@@ -294,7 +319,7 @@ class GoogleService
 
         $this->sheetsService->spreadsheets_values->update(
             $this->spreadsheetId,
-            'Sheet1!A1:O1',
+            'Sheet1!A1:Q1',
             $headerRange,
             ['valueInputOption' => 'RAW']
         );
@@ -345,10 +370,10 @@ class GoogleService
     {
         $headerFormat = new CellFormat();
         
-        // Set background color
+        // Set background color to a strong blue
         $headerFormat->setBackgroundColor(new Color([
-            'red' => 0.2,
-            'green' => 0.6,
+            'red' => 0.0,
+            'green' => 0.4,
             'blue' => 0.8
         ]));
         
@@ -382,7 +407,7 @@ class GoogleService
                     'startRowIndex' => 0,
                     'endRowIndex' => 1,
                     'startColumnIndex' => 0,
-                    'endColumnIndex' => 15
+                    'endColumnIndex' => 18
                 ],
                 'cell' => new CellData([
                     'userEnteredFormat' => $headerFormat
@@ -405,7 +430,7 @@ class GoogleService
                     'sheetId' => 0,
                     'dimension' => 'COLUMNS',
                     'startIndex' => 0,
-                    'endIndex' => 15
+                    'endIndex' => 18
                 ]
             ]
         ]);
@@ -423,13 +448,13 @@ class GoogleService
                 'bandedRange' => [
                     'range' => [
                         'sheetId' => 0,
-                        'startRowIndex' => 1,
+                        'startRowIndex' => 0,
                         'endRowIndex' => 1000,
                         'startColumnIndex' => 0,
-                        'endColumnIndex' => 15
+                        'endColumnIndex' => 18
                     ],
                     'rowProperties' => [
-                        'headerColor' => new Color(['red' => 0.9, 'green' => 0.9, 'blue' => 0.9]),
+                        'headerColor' => new Color(['red' => 0.0, 'green' => 0.4, 'blue' => 0.8]),
                         'firstBandColor' => new Color(['red' => 1, 'green' => 1, 'blue' => 1]),
                         'secondBandColor' => new Color(['red' => 0.95, 'green' => 0.95, 'blue' => 0.95])
                     ]
@@ -452,14 +477,21 @@ class GoogleService
                     'startRowIndex' => 1,
                     'endRowIndex' => 1000,
                     'startColumnIndex' => 0,
-                    'endColumnIndex' => 15
+                    'endColumnIndex' => 18
                 ],
                 'cell' => new CellData([
                     'userEnteredFormat' => [
-                        'horizontalAlignment' => 'CENTER'
+                        'horizontalAlignment' => 'CENTER',
+                        'textFormat' => [
+                            'foregroundColor' => [
+                                'red' => 0,
+                                'green' => 0,
+                                'blue' => 0
+                            ]
+                        ]
                     ]
                 ]),
-                'fields' => 'userEnteredFormat(horizontalAlignment)'
+                'fields' => 'userEnteredFormat(horizontalAlignment,textFormat.foregroundColor)'
             ])
         ]);
     }

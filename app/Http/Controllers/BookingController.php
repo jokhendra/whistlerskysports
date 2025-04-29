@@ -109,7 +109,6 @@ class BookingController extends Controller
                     ->withErrors(['error' => 'Too many attempts. Please try again later.']);
             }
             RateLimiter::hit('booking_preview:' . $request->ip());
-
             // Convert checkbox values to boolean with strict type casting
             $request->merge([
                 'video_package' => filter_var($request->has('video_package'), FILTER_VALIDATE_BOOLEAN),
@@ -117,7 +116,6 @@ class BookingController extends Controller
                 'terms' => filter_var($request->has('terms'), FILTER_VALIDATE_BOOLEAN),
                 'waiver' => filter_var($request->has('waiver'), FILTER_VALIDATE_BOOLEAN)
             ]);
-
             // Validate request data with strict rules
             $validated = $request->validate([
                 'name' => ['required', 'string', 'max:255', 'regex:/^[\p{L}\s\-\'\.]+$/u'],
@@ -130,6 +128,8 @@ class BookingController extends Controller
                 'underage_flyers' => ['nullable', 'string', 'max:500'],
                 'preferred_dates' => ['required', 'date', 'after_or_equal:today', 'before:+6 months'],
                 'sunrise_flight' => ['required', 'string', 'in:yes,no'],
+                'date_of_birth' => ['required', 'date', 'before:-18 years'],
+                'weight' => ['required', 'integer', 'min:1', 'max:245'],
                 'video_package' => ['required', 'boolean'],
                 'deluxe_package' => ['required', 'boolean'],
                 'merch_package' => ['nullable', 'integer', 'min:0', 'max:10'],
@@ -287,8 +287,10 @@ class BookingController extends Controller
             RateLimiter::hit('create_booking:' . $request->ip());
 
             // Validate session data exists and hasn't expired
-        $bookingData = session('booking_data');
+            $bookingData = session('booking_data');
             $bookingExpiry = session('booking_data_expiry');
+
+            Log::info('Booking data:', ['data' => $bookingData]);
             
             if (!$bookingData || !$bookingExpiry || now()->isAfter($bookingExpiry)) {
                 Log::warning('Invalid or expired booking session', [
@@ -313,6 +315,8 @@ class BookingController extends Controller
 
             // Sanitize and validate booking data
             $sanitizedData = $this->sanitizeBookingData($bookingData);
+
+            Log::info('Sanitized data:', ['data' => $sanitizedData]);
             
             // Verify price hasn't been tampered with
             if (!$this->verifyBookingPrice($sanitizedData)) {
@@ -339,6 +343,8 @@ class BookingController extends Controller
                     'underage_flyers' => $sanitizedData['underage_flyers'] ?? null,
                     'preferred_dates' => $sanitizedData['preferred_dates'],
                     'sunrise_flight' => $sanitizedData['sunrise_flight'],
+                    'date_of_birth' => $sanitizedData['date_of_birth'],
+                    'weight' => $sanitizedData['weight'],
                     'video_package' => $sanitizedData['video_package'] ?? false,
                     'deluxe_package' => $sanitizedData['deluxe_package'] ?? false,
                     'merch_package' => $sanitizedData['merch_package'] ?? 0,
@@ -347,7 +353,10 @@ class BookingController extends Controller
                     'additional_info' => $sanitizedData['additional_info'] ?? null,
                     'total_amount' => $sanitizedData['total_amount'],
                     'waiver_pdf_path' => $sanitizedData['waiver_pdf_path'],
-                'status' => 'pending',
+                    'emergency_name' => $sanitizedData['emergency_name'] ?? null,
+                    'emergency_relationship' => $sanitizedData['emergency_relationship'] ?? null,
+                    'emergency_phone' => $sanitizedData['emergency_phone'] ?? null,
+                    'status' => 'pending',
                     'order_id' => $sanitizedData['order_id'],
                     'ip_address' => request()->ip(),
                     'user_agent' => request()->userAgent(),
@@ -360,7 +369,6 @@ class BookingController extends Controller
                     'order_id' => $booking->order_id,
                     'ip' => request()->ip()
                 ]);
-
                 return $booking;
             });
 
@@ -400,7 +408,8 @@ class BookingController extends Controller
         $stringFields = [
             'name', 'email', 'primary_phone', 'timezone', 'local_phone',
             'package', 'flyer_details', 'underage_flyers', 'accommodation',
-            'special_event', 'additional_info', 'waiver_pdf_path', 'order_id'
+            'special_event', 'additional_info', 'waiver_pdf_path', 'order_id',
+            'emergency_name', 'emergency_relationship', 'emergency_phone'
         ];
 
         foreach ($stringFields as $field) {
@@ -418,10 +427,12 @@ class BookingController extends Controller
         // Sanitize numeric fields
         $sanitized['merch_package'] = filter_var($data['merch_package'] ?? 0, FILTER_VALIDATE_INT);
         $sanitized['total_amount'] = filter_var($data['total_amount'], FILTER_VALIDATE_FLOAT);
+        $sanitized['weight'] = (int)$data['weight']; // Ensure weight is an integer
 
-        // Sanitize date field
+        // Sanitize date fields
         $sanitized['preferred_dates'] = $data['preferred_dates'];
         $sanitized['sunrise_flight'] = $data['sunrise_flight'];
+        $sanitized['date_of_birth'] = $data['date_of_birth']; // Keep date_of_birth as is
 
         return $sanitized;
     }
@@ -525,9 +536,8 @@ class BookingController extends Controller
                     // Update booking status
                         $updateResult = $booking->update([
                         'status' => 'confirmed',
-                            'payment_id' => $paymentDetails['payment_info']['payment_id'] ?? null,
+                        'payment_id' => $paymentDetails['payment_info']['payment_id'] ?? null,
                         'payment_order_id' => $orderId,
-                        'flying_status' => 'pending',
                     ]);
 
                     if (!$updateResult) {
