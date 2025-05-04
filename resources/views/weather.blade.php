@@ -1,12 +1,26 @@
 @extends('layouts.app')
 
+@push('styles')
+<style>
+/* Weather Animations and Effects */
+.weather-gradient {
+    background-size: 200% auto;
+    animation: gradientFlow 5s ease infinite;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+</style>
+@endpush
+
 @section('content')
 <!DOCTYPE html>
 <html lang="en">
-@include("common.header")
 <body class="bg-gradient-to-br">
-  @include("common.nav")
-  <div class="container mx-auto px-4 py-8 sm:py-12 mt-10">
+  <div class="container mx-auto px-4 py-8 sm:py-12 mt-24">
     <div class="max-w-5xl mx-auto">
       <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold text-center mb-4 text-blue-900 bg-clip-text bg-gradient-to-r from-blue-900 to-blue-600">Weather Information</h1>
       <p class="text-center text-gray-600 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">Stay informed about current conditions and forecasts for optimal flying experiences</p>

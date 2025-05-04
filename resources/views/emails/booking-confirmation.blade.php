@@ -18,10 +18,10 @@ We're dedicated to ensuring your flying experience is truly unforgettable and a 
 
 **Selected Add-ons**  
 @if($booking->video_package)
-- Video Package  
+- Video Package
 @endif
 @if($booking->deluxe_package)
-- Deluxe Package  
+- Deluxe Package
 @endif
 @if($booking->merch_package > 0)
 - Merchandise Package ({{ $booking->merch_package }} item{{ $booking->merch_package > 1 ? 's' : '' }})  
@@ -38,7 +38,7 @@ _None selected_
 
 **Participant Details**  
 @if($booking->flyer_details)
-{{ $booking->flyer_details }}  
+{{ $booking->flyer_details }}
 @else
 None provided  
 @endif
@@ -64,7 +64,7 @@ None provided
 **Total Amount:** CAD {{ number_format($booking->total_amount, 2) }}  
 **Payment Status:** Paid  
 @if($booking->payment_id)
-**Transaction ID:** {{ $booking->payment_id }}  
+**Transaction ID:** {{ $booking->payment_id }}
 @endif
 
 @component('mail::button', ['url' => config('app.url')])

@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <div class="bg-gray-50 py-16">
     <div class="container mx-auto px-4">
       <div class="text-center mb-12">
@@ -70,7 +73,7 @@
             <div class="px-6 py-4 text-gray-600">
               <p>Absolutely NOT. You cannot have any alcohol, cannabis or illegal substances in your system when you jump. Please do not consume any of these the day of your jump or you will not be allowed to board the plane.
 
-Whistler Skydiving reserves the right to refuse service to any passenger that may compromise safety. The use of drugs or alcohol prior to a skydive is not permitted and will result in cancellation no refund will be given.</p>
+  Whistler Skydiving reserves the right to refuse service to any passenger that may compromise safety. The use of drugs or alcohol prior to a skydive is not permitted and will result in cancellation no refund will be given.</p>
             </div>
           </div>
           
@@ -228,3 +231,5 @@ Refunds will be made in the same method of payment and at the same location of p
       });
     });
   </script>
+
+  @endsection

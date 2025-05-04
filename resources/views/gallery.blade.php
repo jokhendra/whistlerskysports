@@ -1,14 +1,141 @@
 @extends('layouts.app')
 
+@push('styles')
+  <style>
+    /* Animation keyframes */
+    @keyframes slide-up {
+      0% { opacity: 0; transform: translateY(50px) scale(0.95); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes slide-left {
+      0% { opacity: 0; transform: translateX(50px) scale(0.95); }
+      100% { opacity: 1; transform: translateX(0) scale(1); }
+    }
+    @keyframes slide-down {
+      0% { opacity: 0; transform: translateY(-50px) scale(0.95); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes float-bottom-top {
+      0% { transform: translateY(100%); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100%); opacity: 0; }
+    }
+    @keyframes float-right-left {
+      0% { transform: translateX(100%); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateX(-100%); opacity: 0; }
+    }
+    @keyframes float-top-bottom {
+      0% { transform: translateY(-100%); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(100%); opacity: 0; }
+    }
+    @keyframes subtle-zoom {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    @keyframes slide-diagonal {
+      0% { 
+        opacity: 0; 
+        transform: translate(-50px, 50px) rotate(-5deg) scale(0.95); 
+      }
+      100% { 
+        opacity: 1; 
+        transform: translate(0, 0) rotate(0) scale(1); 
+      }
+    }
+
+    /* Carousel styles */
+    .carousel-container { overflow: hidden; }
+    .carousel-slides { position: relative; }
+    .carousel-slide {
+      opacity: 0;
+      transform: scale(1.1);
+      transition: all 1s ease-in-out;
+      pointer-events: none;
+    }
+    .carousel-slide.active {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+    .carousel-slide.active img {
+      animation: subtle-zoom 10s ease-in-out infinite;
+    }
+
+    /* Carousel dots */
+    .carousel-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.3);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      border: 2px solid transparent;
+      position: relative;
+    }
+    .carousel-dot::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: transparent;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    .carousel-dot:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+      transform: scale(1.1);
+    }
+    .carousel-dot.active {
+      background-color: white;
+      transform: scale(1.2);
+    }
+    .carousel-dot.active::after {
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Text effects */
+    .animate-float-bottom-top {
+      animation: float-bottom-top 8s linear infinite;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+      background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5), transparent);
+      padding: 0.5rem 2rem;
+      border-radius: 4px;
+    }
+    .animate-float-right-left {
+      animation: float-right-left 8s linear infinite;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+      background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5), transparent);
+      padding: 0.5rem 2rem;
+      border-radius: 4px;
+    }
+    .animate-float-top-bottom {
+      animation: float-top-bottom 8s linear infinite;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+      background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5), transparent);
+      padding: 0.5rem 2rem;
+      border-radius: 4px;
+    }
+
+    /* Container animations */
+    .animate-slide-up { animation: slide-up 1s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+    .animate-slide-left { animation: slide-left 1s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+    .animate-slide-down { animation: slide-down 1s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+    .animate-slide-diagonal { animation: slide-diagonal 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+  </style>
+@endpush
+
+
+
 @section('content')
-<!DOCTYPE html>
-<html lang="en">
-@include('common.header')
-<body>
-  @include('common.nav')
+
   
   <!-- Gallery Hero Section -->
-  <div class="bg-gradient-to-b from-blue-900 to-blue-700 text-white py-16">
+  <div class="bg-gradient-to-b from-blue-900 to-blue-700 text-white py-8 sm:py-12 md:py-16 lg:mt-24 md:mt-24 mt-16">
     <div class="container mx-auto px-4 text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-4">Gallery</h1>
       <p class="text-lg text-blue-100 max-w-3xl mx-auto">Welcome to Whistler Sky Sports! Our media gallery brings the thrill of flight to life with a collection of stunning photos and dynamic videos.</p>
@@ -27,15 +154,15 @@
             'images' => ['aerial_view1.png', 'aerial_view3.png', 'aerial_view4.png', 'aerial_view5.png', 'aerial_view6.png', 'aerial_view7.png', 'Whistler 1.jpg'],
             'animation' => 'slide-up',
             'text_animation' => 'float-bottom-top',
-            'bg_color' => 'blue'
+            'bg_color' => 'blue',
           ],
           [
             'category' => 'microlite',
             'title' => 'Open Cockpit Trikes',
             'images' => ['IMG_7634.jpg','Single_Ultraligh1.jpeg', 'Solo_2.jpeg', 'Hangar.jpeg', 'Skypper 2.jpeg', 'Landscape.jpg', 'Landsacpe2.jpg', 'Copy of image000001.JPG'],
-            'animation' => 'slide-left',
-            'text_animation' => 'float-right-left',
-            'bg_color' => 'red'
+            'animation' => 'slide-diagonal',
+            'text_animation' => 'float-bottom-top',
+            'bg_color' => 'red',
           ],
           [
             'category' => 'fixed_wings',
@@ -43,8 +170,8 @@
             'images' => ['IMG_7849.JPG','IMG_7850.JPG','IMG_7848.JPG','IMG_7847.JPG','IMG_7846.JPG','AnyConv.com__IMG_7013.jpg', 'AnyConv.com__IMG_7016 2.jpg', 'AnyConv.com__IMG_7017 2.jpg', 'AnyConv.com__IMG_7021.jpg', 'AnyConv.com__IMG_7022.jpg'],
             'animation' => 'slide-down',
             'text_animation' => 'float-top-bottom',
-            'bg_color' => 'yellow'
-          ]
+            'bg_color' => 'yellow',
+          ],
         ] as $galleryItem)
         <div class="relative overflow-hidden rounded-xl shadow-xl bg-white h-[500px] opacity-0 animate-{{ $galleryItem['animation'] }}" 
              onclick="openImagePreview('{{ $galleryItem['category'] }}')">
@@ -153,122 +280,9 @@
     </div>
   </div>
 
-  <style>
-    /* Animation keyframes */
-    @keyframes slide-up {
-      0% { opacity: 0; transform: translateY(50px) scale(0.95); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    @keyframes slide-left {
-      0% { opacity: 0; transform: translateX(50px) scale(0.95); }
-      100% { opacity: 1; transform: translateX(0) scale(1); }
-    }
-    @keyframes slide-down {
-      0% { opacity: 0; transform: translateY(-50px) scale(0.95); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    @keyframes float-bottom-top {
-      0% { transform: translateY(100%); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateY(-100%); opacity: 0; }
-    }
-    @keyframes float-right-left {
-      0% { transform: translateX(100%); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateX(-100%); opacity: 0; }
-    }
-    @keyframes float-top-bottom {
-      0% { transform: translateY(-100%); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateY(100%); opacity: 0; }
-    }
-    @keyframes subtle-zoom {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
+@endsection
 
-    /* Carousel styles */
-    .carousel-container { overflow: hidden; }
-    .carousel-slides { position: relative; }
-    .carousel-slide {
-      opacity: 0;
-      transform: scale(1.1);
-      transition: all 1s ease-in-out;
-      pointer-events: none;
-    }
-    .carousel-slide.active {
-      opacity: 1;
-      transform: scale(1);
-      pointer-events: auto;
-    }
-    .carousel-slide.active img {
-      animation: subtle-zoom 10s ease-in-out infinite;
-    }
-
-    /* Carousel dots */
-    .carousel-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.3);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer;
-      border: 2px solid transparent;
-      position: relative;
-    }
-    .carousel-dot::after {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      background: transparent;
-      border: 2px solid transparent;
-      transition: all 0.3s ease;
-    }
-    .carousel-dot:hover {
-      background-color: rgba(255, 255, 255, 0.8);
-      transform: scale(1.1);
-    }
-    .carousel-dot.active {
-      background-color: white;
-      transform: scale(1.2);
-    }
-    .carousel-dot.active::after {
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    /* Text effects */
-    .animate-float-bottom-top {
-      animation: float-bottom-top 8s linear infinite;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-      background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5), transparent);
-      padding: 0.5rem 2rem;
-      border-radius: 4px;
-    }
-    .animate-float-right-left {
-      animation: float-right-left 8s linear infinite;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-      background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5), transparent);
-      padding: 0.5rem 2rem;
-      border-radius: 4px;
-    }
-    .animate-float-top-bottom {
-      animation: float-top-bottom 8s linear infinite;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-      background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5), transparent);
-      padding: 0.5rem 2rem;
-      border-radius: 4px;
-    }
-
-    /* Container animations */
-    .animate-slide-up { animation: slide-up 1s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-    .animate-slide-left { animation: slide-left 1s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-    .animate-slide-down { animation: slide-down 1s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-  </style>
-
+@push('scripts')
   <script>
     // Image Preview Functionality
     const imagePreview = {
@@ -312,7 +326,7 @@
       },
       
       setImages: function() {
-        if (this.category === 'aerial') {
+        if (this.category === 'aerial_views') {
           this.images = [
             'aerial_view1.png', 'aerial_view3.png', 'aerial_view4.png', 
             'aerial_view5.png', 'aerial_view6.png', 'aerial_view7.png', 
@@ -447,6 +461,4 @@
     window.prevPreviewImage = () => imagePreview.prev();
     window.nextPreviewImage = () => imagePreview.next();
   </script>
-</body>
-</html>
-@endsection
+@endpush

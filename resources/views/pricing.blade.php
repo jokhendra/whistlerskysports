@@ -1,7 +1,54 @@
 @extends('layouts.app')
 
+@push('styles')
+<style>
+    /* Add smooth hover transitions */
+    .hover\:scale-105 {
+        transition: transform 0.3s ease-in-out;
+    }
+
+    /* Add shadow transitions */
+    .shadow-lg {
+        transition: box-shadow 0.3s ease-in-out;
+    }
+
+    /* Add gradient animation */
+    @keyframes gradientFlow {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .bg-gradient-animate {
+        background-size: 200% 200%;
+        animation: gradientFlow 15s ease infinite;
+    }
+
+    /* Add text shadow for better visibility */
+    .text-shadow-lg {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Add glass morphism effect */
+    .backdrop-blur-sm {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+    
+    #comprehensive-programs {
+        scroll-margin-top: 4rem;
+    }
+</style>
+@endpush
+
 @section('content')
-<div class="relative bg-gradient-to-b from-sky-100/90 mt-10 to-white/80 py-16">
+<div class="relative bg-gradient-to-b from-sky-100/90 lg:mt-24 md:mt-24 mt-16 to-white/80 py-16">
     <!-- Hero Section with Background Image -->
     <!-- <div class="absolute inset-0 z-0">
         <img src="{{ asset('images/pwg1.jpg') }}" alt="Hang Gliding Experience" class="w-full h-full object-cover opacity-20">
@@ -431,49 +478,4 @@
         </div>
     </div>
 </div>
-
-
-<style>
-/* Add smooth hover transitions */
-.hover\:scale-105 {
-    transition: transform 0.3s ease-in-out;
-}
-
-/* Add shadow transitions */
-.shadow-lg {
-    transition: box-shadow 0.3s ease-in-out;
-}
-
-/* Add gradient animation */
-@keyframes gradientFlow {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-.bg-gradient-animate {
-    background-size: 200% 200%;
-    animation: gradientFlow 15s ease infinite;
-}
-
-/* Add text shadow for better visibility */
-.text-shadow-lg {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Add glass morphism effect */
-.backdrop-blur-sm {
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-}
-#comprehensive-programs {
-    scroll-margin-top: 4rem;
-}
-</style>
 @endsection

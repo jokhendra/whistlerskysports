@@ -1,5 +1,166 @@
 @extends('layouts.app')
 
+@push('styles')
+    <!-- Add required CSS libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+    
+    <style>
+        .iti {
+            width: 100%;
+        }
+
+        .iti__country-list {
+            max-height: 300px;
+            width: 200px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+
+        .iti__selected-flag {
+            padding: 0 8px 0 8px;
+            background-color: #F3F4F6 !important;
+            width: auto;
+        }
+
+        .iti--separate-dial-code .iti__selected-flag {
+            background-color: #F3F4F6;
+            border-radius: 0.5rem 0 0 0.5rem;
+            border: 1px solid #D1D5DB;
+            border-right: none;
+            min-width: 95px;
+        }
+
+        .iti--separate-dial-code input {
+            border-radius: 0 0.5rem 0.5rem 0;
+            padding-left: 100px !important;
+            padding-right: 15px;
+            width: 100%;
+        }
+
+        .iti--separate-dial-code .iti__selected-dial-code {
+            padding-left: 10px;
+        }
+
+        .iti__country {
+            padding: 8px 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .iti__country-name {
+            margin-left: 8px;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .iti__dial-code {
+            color: #6B7280;
+            font-size: 13px;
+        }
+
+        .phone-input {
+            height: 3rem;
+            border-color: #D1D5DB;
+            transition: all 0.2s;
+            width: 100%;
+            text-indent: 0;
+        }
+
+        .phone-input:focus {
+            border-color: #204fb4;
+            box-shadow: 0 0 0 3px rgba(32, 79, 180, 0.25);
+            outline: none;
+        }
+
+        .phone-input.error {
+            border-color: #EF4444;
+        }
+
+        /* Signature Pad Styles */
+        .signature-pad {
+            border: 2px solid #D1D5DB;
+            border-radius: 0.5rem;
+            background-color: white;
+            margin: 1rem 0;
+            position: relative;
+            width: 100%;
+            height: 250px;
+            touch-action: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .signature-pad canvas {
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 0.5rem;
+            touch-action: none;
+            cursor: crosshair;
+            background-color: white;
+        }
+
+        .signature-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1rem;
+            padding: 0;
+        }
+
+        .signature-actions button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .clear-signature {
+            background-color: #F3F4F6;
+            color: #374151;
+            border: 1px solid #D1D5DB;
+        }
+
+        .clear-signature:hover {
+            background-color: #E5E7EB;
+            transform: translateY(-1px);
+        }
+
+        .signature-error {
+            color: #EF4444;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+            text-align: center;
+        }
+
+        .signature-guide {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #E5E7EB;
+            pointer-events: none;
+        }
+
+        .signature-container {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #waiverModal .bg-white {
+            padding: 0;
+        }
+
+        #waiverModal .p-6 {
+            padding: 1.5rem;
+        }
+    </style>
+@endpush
+
 @section('content')
 <div class="min-h-screen bg-gradient-to-b from-sky-50 to-white pt-16 pb-12 mt-10">
     <div class="container mx-auto px-4">
@@ -730,680 +891,522 @@
         </div>
     </div>
 </div>
+@endsection
 
-<!-- Add required libraries -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+@push('scripts')
+    <!-- Add required JavaScript libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<style>
-    .iti {
-      width: 100%;
-    }
+    <script>
+        // Global form reference
+        let mainForm;
 
-    .iti__country-list {
-      max-height: 300px;
-      width: 200px;
-      overflow-y: scroll;
-      overflow-x: hidden;
-    }
-
-    .iti__selected-flag {
-      padding: 0 8px 0 8px;
-      background-color: #F3F4F6 !important;
-      width: auto;
-    }
-
-    .iti--separate-dial-code .iti__selected-flag {
-      background-color: #F3F4F6;
-      border-radius: 0.5rem 0 0 0.5rem;
-      border: 1px solid #D1D5DB;
-      border-right: none;
-      min-width: 95px;
-    }
-
-    .iti--separate-dial-code input {
-      border-radius: 0 0.5rem 0.5rem 0;
-      padding-left: 100px !important;
-      padding-right: 15px;
-      width: 100%;
-    }
-
-    .iti--separate-dial-code .iti__selected-dial-code {
-      padding-left: 10px;
-    }
-
-    .iti__country {
-      padding: 8px 10px;
-      display: flex;
-      align-items: center;
-    }
-
-    .iti__country-name {
-      margin-left: 8px;
-      font-size: 14px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .iti__dial-code {
-      color: #6B7280;
-      font-size: 13px;
-    }
-
-    .phone-input {
-      height: 3rem;
-      border-color: #D1D5DB;
-      transition: all 0.2s;
-      width: 100%;
-      text-indent: 0;
-    }
-
-    .phone-input:focus {
-      border-color: #204fb4;
-      box-shadow: 0 0 0 3px rgba(32, 79, 180, 0.25);
-      outline: none;
-    }
-
-    .phone-input.error {
-      border-color: #EF4444;
-    }
-
-    /* Signature Pad Styles */
-    .signature-pad {
-        border: 2px solid #D1D5DB;
-        border-radius: 0.5rem;
-        background-color: white;
-        margin: 1rem 0;
-        position: relative;
-        width: 100%;
-        height: 250px;
-        touch-action: none;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .signature-pad canvas {
-        width: 100% !important;
-        height: 100% !important;
-        border-radius: 0.5rem;
-        touch-action: none;
-        cursor: crosshair;
-        background-color: white;
-    }
-
-    .signature-actions {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 1rem;
-        padding: 0;
-    }
-
-    .signature-actions button {
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.375rem;
-        font-size: 0.875rem;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-
-    .clear-signature {
-        background-color: #F3F4F6;
-        color: #374151;
-        border: 1px solid #D1D5DB;
-    }
-
-    .clear-signature:hover {
-        background-color: #E5E7EB;
-        transform: translateY(-1px);
-    }
-
-    .signature-error {
-        color: #EF4444;
-        font-size: 0.875rem;
-        margin-top: 0.5rem;
-        display: none;
-        text-align: center;
-    }
-
-    /* Add a visual guide for the signature area */
-    .signature-guide {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background-color: #E5E7EB;
-        pointer-events: none;
-    }
-
-    /* Container for signature pad and actions */
-    .signature-container {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-
-    /* Adjust modal padding for full width */
-    #waiverModal .bg-white {
-        padding: 0;
-    }
-
-    #waiverModal .p-6 {
-        padding: 1.5rem;
-    }
-</style>
-
-<script>
-    // Global form reference
-    let mainForm;
-
-    /**
-     * Initialize all components when DOM is loaded
-     */
-    document.addEventListener('DOMContentLoaded', function() {
-        mainForm = document.getElementById('bookingForm');
-        
-        // Initialize all required components
-        initializePhoneInputs();
-        initializeWaiver();
-        initializePackagePricing();
-        initializeDateDefaults();
-        initializeEmergencyFields();
-        
-        // Add form submission handler
-        mainForm.addEventListener('submit', handleFormSubmission);
-    });
-
-    /**
-     * Initialize phone input fields with international format
-     */
-    function initializePhoneInputs() {
-        const phoneInputs = document.querySelectorAll("#primary_phone, #local_phone");
-        const phoneInstances = {};
-        
-        phoneInputs.forEach(phoneInput => {
-            const iti = window.intlTelInput(phoneInput, {
-                separateDialCode: true,
-                utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-                initialCountry: "CA",
-                onlyCountries: [], // Show all countries
-                formatOnDisplay: true,
-                autoPlaceholder: "aggressive"
-            });
+        /**
+         * Initialize all components when DOM is loaded
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            mainForm = document.getElementById('bookingForm');
             
-            phoneInstances[phoneInput.id] = iti;
-            phoneInput.classList.add('phone-input');
+            // Initialize all required components
+            initializePhoneInputs();
+            initializeWaiver();
+            initializePackagePricing();
+            initializeDateDefaults();
+            initializeEmergencyFields();
             
-            if (phoneInput.value) {
-                iti.setNumber(phoneInput.value);
-            }
-            
-            setupPhoneInputHandlers(phoneInput, iti);
+            // Add form submission handler
+            mainForm.addEventListener('submit', handleFormSubmission);
         });
 
-        return phoneInstances;
-    }
-
-    /**
-     * Handle form submission and validation
-     */
-    function handleFormSubmission(e) {
-            console.log('Form submission started');
+        /**
+         * Initialize phone input fields with international format
+         */
+        function initializePhoneInputs() {
+            const phoneInputs = document.querySelectorAll("#primary_phone, #local_phone");
+            const phoneInstances = {};
             
-        // Validate required fields
-        const requiredFields = {
-            name: document.getElementById('name').value.trim(),
-            email: document.getElementById('email').value.trim(),
-            package: document.getElementById('package').value,
-            terms: document.querySelector('input[name="terms"]').checked,
-            waiver: document.getElementById('waiver_checkbox').checked,
-            date_of_birth: document.getElementById('date_of_birth').value,
-            weight: document.getElementById('weight').value
-        };
+            phoneInputs.forEach(phoneInput => {
+                const iti = window.intlTelInput(phoneInput, {
+                    separateDialCode: true,
+                    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+                    initialCountry: "CA",
+                    onlyCountries: [], // Show all countries
+                    formatOnDisplay: true,
+                    autoPlaceholder: "aggressive"
+                });
+                
+                phoneInstances[phoneInput.id] = iti;
+                phoneInput.classList.add('phone-input');
+                
+                if (phoneInput.value) {
+                    iti.setNumber(phoneInput.value);
+                }
+                
+                setupPhoneInputHandlers(phoneInput, iti);
+            });
 
-        if (Object.values(requiredFields).includes('') || !requiredFields.terms || !requiredFields.waiver) {
-            e.preventDefault();
-            alert('Please fill in all required fields and accept both the terms and conditions and waiver.');
+            return phoneInstances;
+        }
+
+        /**
+         * Handle form submission and validation
+         */
+        function handleFormSubmission(e) {
+                console.log('Form submission started');
+                
+            // Validate required fields
+            const requiredFields = {
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                package: document.getElementById('package').value,
+                terms: document.querySelector('input[name="terms"]').checked,
+                waiver: document.getElementById('waiver_checkbox').checked,
+                date_of_birth: document.getElementById('date_of_birth').value,
+                weight: document.getElementById('weight').value
+            };
+
+            if (Object.values(requiredFields).includes('') || !requiredFields.terms || !requiredFields.waiver) {
+                e.preventDefault();
+                alert('Please fill in all required fields and accept both the terms and conditions and waiver.');
+                    return false;
+                }
+
+            // Validate DOB
+            const dob = new Date(requiredFields.date_of_birth);
+            const today = new Date();
+            const minAge = 18;
+            const minDate = new Date(today.getFullYear() - minAge, today.getMonth(), today.getDate());
+            
+            if (dob > minDate) {
+                e.preventDefault();
+                alert(`You must be at least ${minAge} years old to book a flight.`);
                 return false;
             }
 
-        // Validate DOB
-        const dob = new Date(requiredFields.date_of_birth);
-        const today = new Date();
-        const minAge = 18;
-        const minDate = new Date(today.getFullYear() - minAge, today.getMonth(), today.getDate());
-        
-        if (dob > minDate) {
-            e.preventDefault();
-            alert(`You must be at least ${minAge} years old to book a flight.`);
-            return false;
+            // Validate weight
+            const weight = parseInt(requiredFields.weight);
+            if (isNaN(weight) || weight <= 0 || weight > 245) {
+                e.preventDefault();
+                alert('Please enter a valid weight between 1 and 245 lbs.');
+                return false;
+            }
+                
+            // Validate phone numbers
+            if (!validatePhoneNumbers()) {
+                e.preventDefault();
+                return false;
+            }
+
+            console.log('Form validation passed');
+                return true;
         }
 
-        // Validate weight
-        const weight = parseInt(requiredFields.weight);
-        if (isNaN(weight) || weight <= 0 || weight > 245) {
-            e.preventDefault();
-            alert('Please enter a valid weight between 1 and 245 lbs.');
-            return false;
+        /**
+         * Setup phone input validation handlers
+         */
+        function setupPhoneInputHandlers(phoneInput, iti) {
+            // Allow only numbers
+            phoneInput.addEventListener('keypress', e => {
+                if (!/[0-9]/.test(String.fromCharCode(e.which))) {
+                    e.preventDefault();
+                }
+            });
+
+            // Clean input on paste
+            phoneInput.addEventListener('paste', e => {
+                if (!/^\d+$/.test((e.clipboardData || window.clipboardData).getData('text'))) {
+                    e.preventDefault();
+                }
+            });
+
+            // Validate on input
+            phoneInput.addEventListener('input', function() {
+                this.value = this.value.replace(/[^\d]/g, '');
+                if (iti.isValidNumber()) {
+                    this.classList.remove('error');
+                }
+            });
+
+            // Validate on blur
+            phoneInput.addEventListener('blur', function() {
+                if (this.value.trim() && !iti.isValidNumber()) {
+                    this.classList.add('error');
+                    } else {
+                    this.classList.remove('error');
+                }
+            });
         }
+
+        /**
+         * Initialize waiver functionality
+         */
+        function initializeWaiver() {
+            const waiverElements = {
+                checkbox: document.getElementById('waiver_checkbox'),
+                link: document.getElementById('waiver_link'),
+                linkContainer: document.getElementById('waiver_link_container'),
+                linkPlaceholder: document.getElementById('waiver_link_placeholder'),
+                modal: document.getElementById('waiverModal'),
+                closeButton: document.getElementById('closeWaiverModal'),
+                acceptButton: document.getElementById('acceptWaiver'),
+                nameInput: document.getElementById('name')
+            };
+
+            // Add name input listener for real-time initial updates
+            waiverElements.nameInput.addEventListener('input', () => {
+                if (!waiverElements.modal.classList.contains('hidden')) {
+                    fillWaiverForm();
+                }
+            });
             
-        // Validate phone numbers
-        if (!validatePhoneNumbers()) {
-            e.preventDefault();
-            return false;
-        }
-
-        console.log('Form validation passed');
-            return true;
-    }
-
-    /**
-     * Setup phone input validation handlers
-     */
-    function setupPhoneInputHandlers(phoneInput, iti) {
-        // Allow only numbers
-        phoneInput.addEventListener('keypress', e => {
-            if (!/[0-9]/.test(String.fromCharCode(e.which))) {
-                e.preventDefault();
+            // Check mandatory fields before showing waiver
+            function checkMandatoryFields() {
+                const mandatoryFields = [
+                    'name', 'email', 'primary_phone', 'timezone', 'local_phone', 
+                    'package', 'flyer_details', 'preferred_dates', 'sunrise_flight'
+                ];
+                
+                const allFieldsFilled = mandatoryFields.every(fieldId => {
+                    const field = document.getElementById(fieldId);
+                    return field && field.value.trim();
+                });
+                
+                console.log('Mandatory fields check:', allFieldsFilled);
+                
+                waiverElements.linkContainer.classList.toggle('hidden', !allFieldsFilled);
+                waiverElements.linkPlaceholder.classList.toggle('hidden', allFieldsFilled);
+                
+                return allFieldsFilled;
             }
-        });
-
-        // Clean input on paste
-        phoneInput.addEventListener('paste', e => {
-            if (!/^\d+$/.test((e.clipboardData || window.clipboardData).getData('text'))) {
-                e.preventDefault();
-            }
-        });
-
-        // Validate on input
-        phoneInput.addEventListener('input', function() {
-            this.value = this.value.replace(/[^\d]/g, '');
-            if (iti.isValidNumber()) {
-                this.classList.remove('error');
-            }
-        });
-
-        // Validate on blur
-        phoneInput.addEventListener('blur', function() {
-            if (this.value.trim() && !iti.isValidNumber()) {
-                this.classList.add('error');
-                } else {
-                this.classList.remove('error');
-            }
-        });
-    }
-
-    /**
-     * Initialize waiver functionality
-     */
-    function initializeWaiver() {
-        const waiverElements = {
-            checkbox: document.getElementById('waiver_checkbox'),
-            link: document.getElementById('waiver_link'),
-            linkContainer: document.getElementById('waiver_link_container'),
-            linkPlaceholder: document.getElementById('waiver_link_placeholder'),
-            modal: document.getElementById('waiverModal'),
-            closeButton: document.getElementById('closeWaiverModal'),
-            acceptButton: document.getElementById('acceptWaiver'),
-            nameInput: document.getElementById('name')
-        };
-
-        // Add name input listener for real-time initial updates
-        waiverElements.nameInput.addEventListener('input', () => {
-            if (!waiverElements.modal.classList.contains('hidden')) {
-                fillWaiverForm();
-            }
-        });
-        
-        // Check mandatory fields before showing waiver
-        function checkMandatoryFields() {
+            
+            // Add event listeners to mandatory fields
             const mandatoryFields = [
                 'name', 'email', 'primary_phone', 'timezone', 'local_phone', 
                 'package', 'flyer_details', 'preferred_dates', 'sunrise_flight'
             ];
             
-            const allFieldsFilled = mandatoryFields.every(fieldId => {
+            mandatoryFields.forEach(fieldId => {
                 const field = document.getElementById(fieldId);
-                return field && field.value.trim();
+                if (field) {
+                    ['input', 'change'].forEach(event => {
+                        field.addEventListener(event, checkMandatoryFields);
+                    });
+                }
             });
             
-            console.log('Mandatory fields check:', allFieldsFilled);
+            // Initial check for mandatory fields
+            checkMandatoryFields();
             
-            waiverElements.linkContainer.classList.toggle('hidden', !allFieldsFilled);
-            waiverElements.linkPlaceholder.classList.toggle('hidden', allFieldsFilled);
-            
-            return allFieldsFilled;
-        }
-        
-        // Add event listeners to mandatory fields
-        const mandatoryFields = [
-            'name', 'email', 'primary_phone', 'timezone', 'local_phone', 
-            'package', 'flyer_details', 'preferred_dates', 'sunrise_flight'
-        ];
-        
-        mandatoryFields.forEach(fieldId => {
-            const field = document.getElementById(fieldId);
-            if (field) {
-                ['input', 'change'].forEach(event => {
-                    field.addEventListener(event, checkMandatoryFields);
-                });
-            }
-        });
-        
-        // Initial check for mandatory fields
-        checkMandatoryFields();
-        
-        // Handle waiver modal opening
-        window.openWaiverModal = function(event) {
-            event.preventDefault();
-            
-            if (!checkMandatoryFields()) {
-                alert('Please fill all mandatory fields before viewing the waiver.');
-                return;
-            }
-            
-            waiverElements.modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            fillWaiverForm();
-            initializeSignaturePad();
-        };
-        
-        // Handle waiver modal closing
-        waiverElements.closeButton.addEventListener('click', () => {
-            waiverElements.modal.classList.add('hidden');
-            document.body.style.overflow = '';
-        });
-        
-        // Handle waiver acceptance
-        waiverElements.acceptButton.addEventListener('click', () => {
-            const signaturePad = document.querySelector('#signature-pad').__signaturePad;
-
-            if (signaturePad.isEmpty()) {
-                document.querySelector('.signature-error').style.display = 'block';
-                return;
-            }
-
-            try {
-            const signatureData = signaturePad.toDataURL();
-            let signatureInput = document.getElementById('signature_data');
-            if (!signatureInput) {
-                signatureInput = document.createElement('input');
-                signatureInput.type = 'hidden';
-                signatureInput.id = 'signature_data';
-                signatureInput.name = 'signature_data';
-                mainForm.appendChild(signatureInput);
-            }
-            signatureInput.value = signatureData;
-
-                waiverElements.checkbox.disabled = false;
-                waiverElements.checkbox.checked = true;
-                waiverElements.modal.classList.add('hidden');
-            document.body.style.overflow = '';
-            } catch (error) {
-                console.error('Error processing signature:', error);
-                alert('There was an error processing your signature. Please try again.');
-            }
-        });
-    }
-
-    /**
-     * Fill waiver form with user information
-     */
-    function fillWaiverForm() {
-        try {
-            // Set current date
-            const today = new Date();
-            document.getElementById('today_date').textContent = today.toLocaleDateString('en-US', { 
-                month: 'long', 
-                day: 'numeric' 
-            });
-            document.getElementById('today_year').textContent = today.getFullYear().toString().slice(-2);
-
-            // Get name and fill initials
-            const nameField = document.getElementById('name');
-            if (nameField) {
-                const initials = nameField.value.trim()
-                    .split(' ')
-                    .map(part => part.charAt(0).toUpperCase())
-                    .join(' ');
+            // Handle waiver modal opening
+            window.openWaiverModal = function(event) {
+                event.preventDefault();
                 
-                // Fill all initial fields
-                document.querySelectorAll('.waiver-initial').forEach(field => {
-                    field.textContent = initials;
-                });
-            }
-
-            // Map form fields to waiver fields
-            const fieldMappings = {
-                'name': ['printed_name'],
-                'primary_phone': ['phone_number'],
-                'email': ['email_address'],
-                'underage_flyers': ['minor_children'],
-                'accommodation': ['home_address']
-            };
-
-            // Fill in mapped fields
-            Object.entries(fieldMappings).forEach(([formField, waiverFields]) => {
-                const value = document.getElementById(formField)?.value || 'Not provided';
-                waiverFields.forEach(waiverField => {
-                    const element = document.getElementById(waiverField);
-                    if (element) element.textContent = value;
-                });
-            });
-
-            // Set location
-            document.getElementById('city_province').textContent = 'Whistler, BC';
-
-            // Handle emergency contact information
-        } catch (error) {
-            console.error('Error filling waiver form:', error);
-        }
-    }
-
-    /**
-     * Handle emergency contact information
-     */
-    function initializeEmergencyFields() {
-        // Define the emergency fields mapping
-        const emergencyFieldsMap = ['emergency_name','emergency_relationship','emergency_phone'];
-
-        // Add input listeners to emergency fields
-        emergencyFieldsMap.forEach((fieldName) => {
-            document.getElementById(fieldName).addEventListener('input', function() {
-                let hiddenInput = document.getElementById(`main_form_${fieldName}`);
-                if(!hiddenInput){
-                    hiddenInput = document.createElement('input');
-                    hiddenInput.type = 'hidden';
-                    hiddenInput.id = `main_form_${fieldName}`;
-                    hiddenInput.name = fieldName;
-                }
-                hiddenInput.value = this.value;
-                mainForm.appendChild(hiddenInput);
-            });
-        });
-    }
-
-    /**
-     * Initialize signature pad
-     */
-    function initializeSignaturePad() {
-        const canvas = document.getElementById('signature-pad');
-        const signaturePad = new SignaturePad(canvas, {
-            backgroundColor: 'rgba(255, 255, 255, 1)',
-            penColor: 'rgb(0, 0, 0)',
-            minWidth: 2,
-            maxWidth: 3
-        });
-
-        // Store reference for later use
-        canvas.__signaturePad = signaturePad;
-
-        function resizeCanvas() {
-            const ratio = Math.max(window.devicePixelRatio || 1, 1);
-            canvas.width = canvas.offsetWidth * ratio;
-            canvas.height = canvas.offsetHeight * ratio;
-            canvas.getContext("2d").scale(ratio, ratio);
-            signaturePad.clear();
-        }
-
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        // Clear signature button
-        document.querySelector('.clear-signature').addEventListener('click', () => {
-            signaturePad.clear();
-            document.querySelector('.signature-error').style.display = 'none';
-        });
-
-        return signaturePad;
-    }
-
-    /**
-     * Initialize date defaults and validation
-     */
-    function initializeDateDefaults() {
-        const today = new Date().toISOString().split('T')[0];
-        const preferredDatesInput = document.getElementById('preferred_dates');
-        preferredDatesInput.min = today;
-        preferredDatesInput.value = today;
-
-        // Set max date for DOB to today
-        const dobInput = document.getElementById('date_of_birth');
-        if (dobInput) {
-            dobInput.max = today;
-        }
-
-        // Add weight validation on input
-        const weightInput = document.getElementById('weight');
-        if (weightInput) {
-            weightInput.addEventListener('input', function() {
-                const value = parseInt(this.value);
-                if (value > 245) {
-                    this.value = 245;
-                } else if (value < 0) {
-                    this.value = 0;
-                }
-            });
-        }
-    }
-
-    /**
-     * Initialize package pricing
-     */
-    function initializePackagePricing() {
-        // Fixed prices that cannot be modified
-        const prices = Object.freeze({
-            video_package: 90,
-            deluxe_package: 120,
-            merch_package: 40,
-            sunrise_flight: 99,
-            packages: {
-                'intro': 229,
-                'basic': 199
-            }
-        });
-
-        window.updateQuantity = function(packageId, change) {
-            const input = document.getElementById(packageId);
-            if (!input) return;
-            
-            // Ensure quantity is between 0 and 10
-            const currentValue = parseInt(input.value) || 0;
-            const newValue = Math.max(0, Math.min(currentValue + change, 10));
-            
-            if (currentValue !== newValue) {
-            input.value = newValue;
-            updateTotalPrice();
-            }
-        }
-
-        window.updateTotalPrice = function() {
-            try {
-            let total = 0;
-            
-                // Add base package price
-                const selectedPackage = document.getElementById('package').value;
-                if (!prices.packages[selectedPackage]) {
-                    console.error('Invalid package selected');
+                if (!checkMandatoryFields()) {
+                    alert('Please fill all mandatory fields before viewing the waiver.');
                     return;
                 }
-                total += prices.packages[selectedPackage];
-
-                // Add video package if selected
-                if (document.getElementById('video_package').checked) {
-                    total += prices.video_package;
-                }
-
-                // Add deluxe package if selected
-                if (document.getElementById('deluxe_package').checked) {
-                    total += prices.deluxe_package;
-                }
-
-                // Add sunrise flight if selected
-                if (document.getElementById('sunrise_flight').value === 'yes') {
-                    total += prices.sunrise_flight;
-                }
-
-                // Add merchandise with validation
-                const merchQty = Math.max(0, Math.min(parseInt(document.getElementById('merch_package').value) || 0, 10));
-                total += merchQty * prices.merch_package;
+                
+                waiverElements.modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                fillWaiverForm();
+                initializeSignaturePad();
+            };
             
-                // Update display with proper formatting
-                const totalElement = document.getElementById('total_price');
-                if (totalElement) {
-                    totalElement.textContent = `USD $${total.toFixed(2)}`;
+            // Handle waiver modal closing
+            waiverElements.closeButton.addEventListener('click', () => {
+                waiverElements.modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            });
+            
+            // Handle waiver acceptance
+            waiverElements.acceptButton.addEventListener('click', () => {
+                const signaturePad = document.querySelector('#signature-pad').__signaturePad;
+
+                if (signaturePad.isEmpty()) {
+                    document.querySelector('.signature-error').style.display = 'block';
+                    return;
+                }
+
+                try {
+                const signatureData = signaturePad.toDataURL();
+                let signatureInput = document.getElementById('signature_data');
+                if (!signatureInput) {
+                    signatureInput = document.createElement('input');
+                    signatureInput.type = 'hidden';
+                    signatureInput.id = 'signature_data';
+                    signatureInput.name = 'signature_data';
+                    mainForm.appendChild(signatureInput);
+                }
+                signatureInput.value = signatureData;
+
+                    waiverElements.checkbox.disabled = false;
+                    waiverElements.checkbox.checked = true;
+                    waiverElements.modal.classList.add('hidden');
+                document.body.style.overflow = '';
+                } catch (error) {
+                    console.error('Error processing signature:', error);
+                    alert('There was an error processing your signature. Please try again.');
+                }
+            });
         }
 
-                // Store calculated total in hidden input for server validation
-                let totalInput = document.getElementById('calculated_total');
-                if (!totalInput) {
-                    totalInput = document.createElement('input');
-                    totalInput.type = 'hidden';
-                    totalInput.id = 'calculated_total';
-                    totalInput.name = 'calculated_total';
-                    document.getElementById('bookingForm').appendChild(totalInput);
-                }
-                totalInput.value = total.toFixed(2);
+        /**
+         * Fill waiver form with user information
+         */
+        function fillWaiverForm() {
+            try {
+                // Set current date
+                const today = new Date();
+                document.getElementById('today_date').textContent = today.toLocaleDateString('en-US', { 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                document.getElementById('today_year').textContent = today.getFullYear().toString().slice(-2);
 
-                // Store price components for server validation
-                let priceComponents = document.getElementById('price_components');
-                if (!priceComponents) {
-                    priceComponents = document.createElement('input');
-                    priceComponents.type = 'hidden';
-                    priceComponents.id = 'price_components';
-                    priceComponents.name = 'price_components';
-                    document.getElementById('bookingForm').appendChild(priceComponents);
+                // Get name and fill initials
+                const nameField = document.getElementById('name');
+                if (nameField) {
+                    const initials = nameField.value.trim()
+                        .split(' ')
+                        .map(part => part.charAt(0).toUpperCase())
+                        .join(' ');
+                    
+                    // Fill all initial fields
+                    document.querySelectorAll('.waiver-initial').forEach(field => {
+                        field.textContent = initials;
+                    });
                 }
-                priceComponents.value = JSON.stringify({
-                    package: selectedPackage,
-                    video_package: document.getElementById('video_package').checked,
-                    deluxe_package: document.getElementById('deluxe_package').checked,
-                    merch_package: merchQty,
-                    sunrise_flight: document.getElementById('sunrise_flight').value === 'yes'
+
+                // Map form fields to waiver fields
+                const fieldMappings = {
+                    'name': ['printed_name'],
+                    'primary_phone': ['phone_number'],
+                    'email': ['email_address'],
+                    'underage_flyers': ['minor_children'],
+                    'accommodation': ['home_address']
+                };
+
+                // Fill in mapped fields
+                Object.entries(fieldMappings).forEach(([formField, waiverFields]) => {
+                    const value = document.getElementById(formField)?.value || 'Not provided';
+                    waiverFields.forEach(waiverField => {
+                        const element = document.getElementById(waiverField);
+                        if (element) element.textContent = value;
+                    });
                 });
 
-                return total;
+                // Set location
+                document.getElementById('city_province').textContent = 'Whistler, BC';
+
+                // Handle emergency contact information
             } catch (error) {
-                console.error('Error calculating total:', error);
-                return 0;
+                console.error('Error filling waiver form:', error);
             }
         }
 
-        // Add event listeners for price updates
-        const priceElements = ['video_package', 'deluxe_package', 'package', 'sunrise_flight', 'merch_package'];
-        priceElements.forEach(id => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.addEventListener('change', updateTotalPrice);
-            }
-        });
+        /**
+         * Handle emergency contact information
+         */
+        function initializeEmergencyFields() {
+            // Define the emergency fields mapping
+            const emergencyFieldsMap = ['emergency_name','emergency_relationship','emergency_phone'];
 
-        // Calculate initial price
-        updateTotalPrice();
-    }
-</script>
-@endsection
+            // Add input listeners to emergency fields
+            emergencyFieldsMap.forEach((fieldName) => {
+                document.getElementById(fieldName).addEventListener('input', function() {
+                    let hiddenInput = document.getElementById(`main_form_${fieldName}`);
+                    if(!hiddenInput){
+                        hiddenInput = document.createElement('input');
+                        hiddenInput.type = 'hidden';
+                        hiddenInput.id = `main_form_${fieldName}`;
+                        hiddenInput.name = fieldName;
+                    }
+                    hiddenInput.value = this.value;
+                    mainForm.appendChild(hiddenInput);
+                });
+            });
+        }
+
+        /**
+         * Initialize signature pad
+         */
+        function initializeSignaturePad() {
+            const canvas = document.getElementById('signature-pad');
+            const signaturePad = new SignaturePad(canvas, {
+                backgroundColor: 'rgba(255, 255, 255, 1)',
+                penColor: 'rgb(0, 0, 0)',
+                minWidth: 2,
+                maxWidth: 3
+            });
+
+            // Store reference for later use
+            canvas.__signaturePad = signaturePad;
+
+            function resizeCanvas() {
+                const ratio = Math.max(window.devicePixelRatio || 1, 1);
+                canvas.width = canvas.offsetWidth * ratio;
+                canvas.height = canvas.offsetHeight * ratio;
+                canvas.getContext("2d").scale(ratio, ratio);
+                signaturePad.clear();
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            // Clear signature button
+            document.querySelector('.clear-signature').addEventListener('click', () => {
+                signaturePad.clear();
+                document.querySelector('.signature-error').style.display = 'none';
+            });
+
+            return signaturePad;
+        }
+
+        /**
+         * Initialize date defaults and validation
+         */
+        function initializeDateDefaults() {
+            const today = new Date().toISOString().split('T')[0];
+            const preferredDatesInput = document.getElementById('preferred_dates');
+            preferredDatesInput.min = today;
+            preferredDatesInput.value = today;
+
+            // Set max date for DOB to today
+            const dobInput = document.getElementById('date_of_birth');
+            if (dobInput) {
+                dobInput.max = today;
+            }
+
+            // Add weight validation on input
+            const weightInput = document.getElementById('weight');
+            if (weightInput) {
+                weightInput.addEventListener('input', function() {
+                    const value = parseInt(this.value);
+                    if (value > 245) {
+                        this.value = 245;
+                    } else if (value < 0) {
+                        this.value = 0;
+                    }
+                });
+            }
+        }
+
+        /**
+         * Initialize package pricing
+         */
+        function initializePackagePricing() {
+            // Fixed prices that cannot be modified
+            const prices = Object.freeze({
+                video_package: 90,
+                deluxe_package: 120,
+                merch_package: 40,
+                sunrise_flight: 99,
+                packages: {
+                    'intro': 229,
+                    'basic': 199
+                }
+            });
+
+            window.updateQuantity = function(packageId, change) {
+                const input = document.getElementById(packageId);
+                if (!input) return;
+                
+                // Ensure quantity is between 0 and 10
+                const currentValue = parseInt(input.value) || 0;
+                const newValue = Math.max(0, Math.min(currentValue + change, 10));
+                
+                if (currentValue !== newValue) {
+                input.value = newValue;
+                updateTotalPrice();
+                }
+            }
+
+            window.updateTotalPrice = function() {
+                try {
+                let total = 0;
+                
+                    // Add base package price
+                    const selectedPackage = document.getElementById('package').value;
+                    if (!prices.packages[selectedPackage]) {
+                        console.error('Invalid package selected');
+                        return;
+                    }
+                    total += prices.packages[selectedPackage];
+
+                    // Add video package if selected
+                    if (document.getElementById('video_package').checked) {
+                        total += prices.video_package;
+                    }
+
+                    // Add deluxe package if selected
+                    if (document.getElementById('deluxe_package').checked) {
+                        total += prices.deluxe_package;
+                    }
+
+                    // Add sunrise flight if selected
+                    if (document.getElementById('sunrise_flight').value === 'yes') {
+                        total += prices.sunrise_flight;
+                    }
+
+                    // Add merchandise with validation
+                    const merchQty = Math.max(0, Math.min(parseInt(document.getElementById('merch_package').value) || 0, 10));
+                    total += merchQty * prices.merch_package;
+                
+                    // Update display with proper formatting
+                    const totalElement = document.getElementById('total_price');
+                    if (totalElement) {
+                        totalElement.textContent = `USD $${total.toFixed(2)}`;
+        }
+
+                    // Store calculated total in hidden input for server validation
+                    let totalInput = document.getElementById('calculated_total');
+                    if (!totalInput) {
+                        totalInput = document.createElement('input');
+                        totalInput.type = 'hidden';
+                        totalInput.id = 'calculated_total';
+                        totalInput.name = 'calculated_total';
+                        document.getElementById('bookingForm').appendChild(totalInput);
+                    }
+                    totalInput.value = total.toFixed(2);
+
+                    // Store price components for server validation
+                    let priceComponents = document.getElementById('price_components');
+                    if (!priceComponents) {
+                        priceComponents = document.createElement('input');
+                        priceComponents.type = 'hidden';
+                        priceComponents.id = 'price_components';
+                        priceComponents.name = 'price_components';
+                        document.getElementById('bookingForm').appendChild(priceComponents);
+                    }
+                    priceComponents.value = JSON.stringify({
+                        package: selectedPackage,
+                        video_package: document.getElementById('video_package').checked,
+                        deluxe_package: document.getElementById('deluxe_package').checked,
+                        merch_package: merchQty,
+                        sunrise_flight: document.getElementById('sunrise_flight').value === 'yes'
+                    });
+
+                    return total;
+                } catch (error) {
+                    console.error('Error calculating total:', error);
+                    return 0;
+                }
+            }
+
+            // Add event listeners for price updates
+            const priceElements = ['video_package', 'deluxe_package', 'package', 'sunrise_flight', 'merch_package'];
+            priceElements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('change', updateTotalPrice);
+                }
+            });
+
+            // Calculate initial price
+            updateTotalPrice();
+        }
+    </script>
+@endpush

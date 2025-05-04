@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use App\Models\Review;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * Class ReviewController
@@ -46,7 +47,23 @@ class ReviewController extends Controller
         // Handle profile picture upload if provided
         $profilePicturePath = null;
         if ($request->hasFile('profile_picture')) {
-            $profilePicturePath = $request->file('profile_picture')->store('profile-pictures', 'public');
+            $file = $request->file('profile_picture');
+            
+            // Sanitize and create a safe filename
+            $extension = $file->getClientOriginalExtension();
+            $fileName = time() . '_' . substr(md5(uniqid()), 0, 8) . '.' . $extension;
+            
+            try {
+                // Store the file in the S3 bucket without ACL
+                $profilePicturePath = Storage::disk('s3')->putFileAs(
+                    'reviews/profile-pictures',
+                    $file,
+                    $fileName
+                );
+            } catch (\Exception $e) {
+                // Log the error but continue without the image
+                Log::error('Failed to upload profile picture: ' . $e->getMessage());
+            }
         }
 
         // Create new review record in database
@@ -59,6 +76,6 @@ class ReviewController extends Controller
         ]);
 
         // Redirect back with success message
-        return redirect()->back()->with('success', 'Thank you for your review!');
+        return redirect()->back()->with('success', 'Thank you for sharing your experience with us! Your feedback is invaluable in helping us improve our services.');
     }
 } 

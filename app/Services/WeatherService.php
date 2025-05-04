@@ -3,103 +3,94 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
-use Symfony\Component\DomCrawler\Crawler;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class WeatherService
 {
-    protected $url = 'https://www.accuweather.com/en/ao/canda/634115/current-weather/634115';
+    protected $latitude;
+    protected $longitude;
+    protected $cacheMinutes = 30; // Cache weather data for 30 minutes
 
+    public function __construct()
+    {
+        // Whistler coordinates
+        $this->latitude = 50.1163;
+        $this->longitude = -122.9574;
+    }
+
+    /**
+     * Get current weather data
+     *
+     * @return array
+     */
     public function getCurrentWeather()
     {
-        try {
-            $response = Http::get($this->url);
-            
-            if (!$response->successful()) {
-                throw new \Exception('Failed to fetch weather data');
+        return Cache::remember('current_weather', $this->cacheMinutes, function () {
+            try {
+                $forecast = $this->getForecast();
+                
+                return [
+                    'temperature' => $forecast['current']['temp'] ?? null,
+                    'conditions' => $forecast['current']['weather'][0]['description'] ?? 'Unknown',
+                    'wind_speed' => $forecast['current']['wind_speed'] ?? null,
+                    'humidity' => $forecast['current']['humidity'] ?? null,
+                    'visibility' => ($forecast['current']['visibility'] ?? 0) / 1000, // Convert to km
+                    'forecast' => $this->formatForecast($forecast['daily'] ?? [])
+                ];
+            } catch (\Exception $e) {
+                Log::error('Failed to fetch weather data: ' . $e->getMessage());
+                throw $e;
             }
+        });
+    }
 
-            $html = $response->body();
-            $crawler = new Crawler($html);
+    /**
+     * Get weather forecast from OpenWeatherMap API
+     *
+     * @return array
+     */
+    protected function getForecast()
+    {
+        $response = Http::get('https://api.openweathermap.org/data/3.0/onecall', [
+            'lat' => $this->latitude,
+            'lon' => $this->longitude,
+            'appid' => config('services.openweather.key'),
+            'units' => 'metric',
+            'exclude' => 'minutely,hourly,alerts'
+        ]);
 
-            // Find the current weather card
-            $weatherCard = $crawler->filter('.current-weather-card.card-module.content-module');
-
-            if ($weatherCard->count() === 0) {
-                throw new \Exception('Weather card not found');
-            }
-
-            // Extract weather data
-            $data = [
-                'temperature' => $this->extractTemperature($weatherCard),
-                'real_feel' => $this->extractRealFeel($weatherCard),
-                'humidity' => $this->extractHumidity($weatherCard),
-                'wind' => $this->extractWind($weatherCard),
-                'pressure' => $this->extractPressure($weatherCard),
-                'visibility' => $this->extractVisibility($weatherCard),
-                'cloud_cover' => $this->extractCloudCover($weatherCard),
-                'dew_point' => $this->extractDewPoint($weatherCard),
-                'last_updated' => now()->toDateTimeString(),
-            ];
-
-            return $data;
-        } catch (\Exception $e) {
-            throw new \Exception('Error fetching weather data: ' . $e->getMessage());
+        if (!$response->successful()) {
+            Log::error('Weather API error: ' . $response->body());
+            throw new \Exception('Failed to fetch weather data from API');
         }
+
+        return $response->json();
     }
 
-    protected function extractTemperature($weatherCard)
+    /**
+     * Format the forecast data for the next 3 days
+     *
+     * @param array $dailyForecast
+     * @return array
+     */
+    protected function formatForecast($dailyForecast)
     {
-        return $weatherCard->filter('.temp')->count() > 0 
-            ? $weatherCard->filter('.temp')->text() 
-            : null;
-    }
+        $forecast = [];
+        
+        // Get next 3 days
+        for ($i = 1; $i <= 3; $i++) {
+            if (isset($dailyForecast[$i])) {
+                $day = $dailyForecast[$i];
+                $forecast[] = [
+                    'date' => date('D, M j', $day['dt']),
+                    'high' => round($day['temp']['max']),
+                    'low' => round($day['temp']['min']),
+                    'conditions' => $day['weather'][0]['description'] ?? 'Unknown'
+                ];
+            }
+        }
 
-    protected function extractRealFeel($weatherCard)
-    {
-        return $weatherCard->filter('.real-feel')->count() > 0 
-            ? $weatherCard->filter('.real-feel')->text() 
-            : null;
-    }
-
-    protected function extractHumidity($weatherCard)
-    {
-        return $weatherCard->filter('.humidity')->count() > 0 
-            ? $weatherCard->filter('.humidity')->text() 
-            : null;
-    }
-
-    protected function extractWind($weatherCard)
-    {
-        return $weatherCard->filter('.wind')->count() > 0 
-            ? $weatherCard->filter('.wind')->text() 
-            : null;
-    }
-
-    protected function extractPressure($weatherCard)
-    {
-        return $weatherCard->filter('.pressure')->count() > 0 
-            ? $weatherCard->filter('.pressure')->text() 
-            : null;
-    }
-
-    protected function extractVisibility($weatherCard)
-    {
-        return $weatherCard->filter('.visibility')->count() > 0 
-            ? $weatherCard->filter('.visibility')->text() 
-            : null;
-    }
-
-    protected function extractCloudCover($weatherCard)
-    {
-        return $weatherCard->filter('.cloud-cover')->count() > 0 
-            ? $weatherCard->filter('.cloud-cover')->text() 
-            : null;
-    }
-
-    protected function extractDewPoint($weatherCard)
-    {
-        return $weatherCard->filter('.dew-point')->count() > 0 
-            ? $weatherCard->filter('.dew-point')->text() 
-            : null;
+        return $forecast;
     }
 } 

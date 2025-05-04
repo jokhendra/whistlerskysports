@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
@@ -23,31 +23,22 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            
-            if (!$user->is_admin) {
-                Auth::logout();
-                return back()->withErrors([
-                    'email' => 'You do not have admin privileges.',
-                ]);
-            }
-
+        if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
-            Log::info('Admin logged in: ' . $user->email);
+            Log::info('Admin logged in: ' . Auth::guard('admin')->user()->email);
 
             return redirect()->intended(route('admin.dashboard'));
         }
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
-        ]);
+        ])->withInput($request->only('email'));
     }
 
     public function logout(Request $request)
     {
-        Log::info('Admin logged out: ' . Auth::user()->email);
-        Auth::logout();
+        Log::info('Admin logged out: ' . Auth::guard('admin')->user()->email);
+        Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('admin.login');
@@ -57,18 +48,17 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        $user = User::create([
+        $admin = Admin::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'is_admin' => true,
         ]);
 
-        Log::info('New admin created: ' . $user->email);
+        Log::info('New admin created: ' . $admin->email);
 
         return redirect()->route('admin.dashboard')
             ->with('success', 'Admin user created successfully.');

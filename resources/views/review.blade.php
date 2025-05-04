@@ -1,9 +1,101 @@
 @extends('layouts.app')
+
+@push('styles')
+<style>
+.rating-star {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.star-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.rating-label {
+    font-size: 0.75rem;
+    color: #6B7280;
+    margin-top: 0.25rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+@media (min-width: 640px) {
+    .rating-label {
+        font-size: 0.875rem;
+        margin-top: 0.5rem;
+    }
+}
+
+.rating-star:hover .rating-label,
+.rating-star.active .rating-label {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.rating-star.active svg {
+    filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.5));
+}
+
+.rating-feedback {
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.pulse {
+    animation: pulse 0.5s ease-in-out;
+}
+
+.rating-container {
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.rating-star.active + .rating-container {
+    border-color: #F59E0B;
+}
+</style>
+@endpush
+
 @section('content')
-<div class="min-h-screen bg-gradient-to-b from-gray-100 to-white py-8 sm:py-12">
+<div class="min-h-screen bg-gradient-to-b from-gray-100 to-white lg:mt-24 md:mt-24 mt-16 to-white/80 py-16">
     <div class="container mx-auto px-4">
         <!-- Header Section with Fade Effect -->
         
+        <!-- Success Message -->
+        @if(session('success'))
+        <div class="max-w-2xl mx-auto mb-6">
+            <div class="bg-green-50 border border-green-200 rounded-xl p-4">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm font-medium text-green-800">
+                            {{ session('success') }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
 
         <!-- Review Form with Blue Background -->
         <div class="max-w-2xl mx-auto rounded-3xl p-4 sm:p-8">
@@ -126,8 +218,9 @@
     </div>
 </div>
 @include('components.testimonials')
+@endsection
 
-<!-- JavaScript for Rating and Image Preview -->
+@push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Rating functionality
@@ -221,74 +314,4 @@ function previewImage(input) {
     }
 }
 </script>
-
-<style>
-.rating-star {
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-.star-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.3s ease;
-}
-
-.rating-label {
-    font-size: 0.75rem;
-    color: #6B7280;
-    margin-top: 0.25rem;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-}
-
-@media (min-width: 640px) {
-    .rating-label {
-        font-size: 0.875rem;
-        margin-top: 0.5rem;
-    }
-}
-
-.rating-star:hover .rating-label,
-.rating-star.active .rating-label {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.rating-star.active svg {
-    filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.5));
-}
-
-.rating-feedback {
-    transition: opacity 0.3s ease;
-    opacity: 0;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.02);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.pulse {
-    animation: pulse 0.5s ease-in-out;
-}
-
-.rating-container {
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-}
-
-.rating-star.active + .rating-container {
-    border-color: #F59E0B;
-}
-</style>
-@endsection 
+@endpush 

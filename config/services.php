@@ -14,6 +14,13 @@ return [
     |
     */
 
+    'mailgun' => [
+        'domain' => env('MAILGUN_DOMAIN'),
+        'secret' => env('MAILGUN_SECRET'),
+        'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
+        'scheme' => 'https',
+    ],
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
@@ -38,6 +45,10 @@ return [
     'google' => [
         'calendar_id' => env('GOOGLE_CALENDAR_ID'),
         'spreadsheet_id' => env('GOOGLE_SPREADSHEET_ID'),
+    ],
+
+    'openweather' => [
+        'key' => env('OPENWEATHER_API_KEY'),
     ],
 
 ];
