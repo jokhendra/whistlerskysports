@@ -2,316 +2,395 @@
 
 @push('styles')
 <style>
-.rating-star {
+.review-container {
+    background-color: #004080;
+}
+
+/* Star rating custom styles */
+.rating-stars input[type="radio"] {
+    display: none;
+}
+
+.rating-stars label {
+    cursor: pointer;
+    font-size: 24px;
+    color: #ccc;
+}
+
+.rating-stars label:hover,
+.rating-stars label:hover ~ label,
+.rating-stars input[type="radio"]:checked ~ label {
+    color: #FFD700;
+}
+
+/* Custom radio buttons and checkboxes */
+.custom-radio-checkbox input[type="radio"],
+.custom-radio-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.custom-radio-checkbox label {
     position: relative;
-    transition: all 0.3s ease;
+    padding-left: 25px;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 8px;
 }
 
-.star-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.3s ease;
+.custom-radio-checkbox label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ccc;
+    background-color: #fff;
 }
 
-.rating-label {
-    font-size: 0.75rem;
-    color: #6B7280;
-    margin-top: 0.25rem;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
+.custom-radio-checkbox input[type="radio"] + label:before {
+    border-radius: 50%;
 }
 
-@media (min-width: 640px) {
-    .rating-label {
-        font-size: 0.875rem;
-        margin-top: 0.5rem;
-    }
+.custom-radio-checkbox input[type="checkbox"] + label:before {
+    border-radius: 3px;
 }
 
-.rating-star:hover .rating-label,
-.rating-star.active .rating-label {
-    opacity: 1;
-    transform: translateY(0);
+.custom-radio-checkbox input[type="radio"]:checked + label:before,
+.custom-radio-checkbox input[type="checkbox"]:checked + label:before {
+    background-color: #004080;
+    border-color: #004080;
 }
 
-.rating-star.active svg {
-    filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.5));
+.custom-radio-checkbox input[type="radio"]:checked + label:after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 7px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: white;
 }
 
-.rating-feedback {
-    transition: opacity 0.3s ease;
-    opacity: 0;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.02);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.pulse {
-    animation: pulse 0.5s ease-in-out;
-}
-
-.rating-container {
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-}
-
-.rating-star.active + .rating-container {
-    border-color: #F59E0B;
+.custom-radio-checkbox input[type="checkbox"]:checked + label:after {
+    content: "✓";
+    position: absolute;
+    left: 3px;
+    top: 0;
+    font-size: 14px;
+    color: white;
 }
 </style>
 @endpush
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-b from-gray-100 to-white lg:mt-24 md:mt-24 mt-16 to-white/80 py-16">
-    <div class="container mx-auto px-4">
-        <!-- Header Section with Fade Effect -->
+<div class="container mx-auto bg-white px-4 py-8 mt-16">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="bg-[#004080] text-white p-4 review-container">
+            <h1 class="text-xl font-bold mb-0">Whistler Sky Sports Customer Feedback</h1>
+        </div>
         
-        <!-- Success Message -->
-        @if(session('success'))
-        <div class="max-w-2xl mx-auto mb-6">
-            <div class="bg-green-50 border border-green-200 rounded-xl p-4">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <div class="ml-3">
-                        <p class="text-sm font-medium text-green-800">
-                            {{ session('success') }}
-                        </p>
+        <!-- Form Content -->
+        <div class="bg-white border border-[#004080] border-t-0 p-5">
+            <p class="mb-6 text-sm">
+                Thank you for being a valued customer at Whistler Sky Sports! This survey helps us gain 
+                deeper insights into your preferences and experiences. We welcome all feedback—positive, 
+                constructive, or otherwise—as it drives our commitment to improving and serving you better. 
+                Please share your thoughts on how we can enhance your experience and empower you 
+                further. Suggestions are always appreciated, and we'll strive to incorporate them wherever 
+                possible.
+            </p>
+            
+            <form action="{{ route('reviews.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                
+                <!-- Email Address -->
+                <div class="mb-6">
+                    <label for="email" class="block mb-2 font-medium">
+                        What's your email address?<span class="text-red-500">*</span>
+                    </label>
+                    <input type="email" 
+                           id="email" 
+                           name="email" 
+                           class="w-full p-2 border border-gray-300 rounded"
+                           required>
+                </div>
+                
+                <!-- Date Selection -->
+                <div class="mb-6">
+                    <label for="flight_date" class="block mb-2 font-medium">
+                        When did you fly with us?<span class="text-red-500">*</span>
+                    </label>
+                    <input type="date" 
+                           id="flight_date" 
+                           name="flight_date" 
+                           class="w-full md:w-60 p-2 border border-gray-300 rounded"
+                           required>
+                </div>
+                
+                <div class="border-t border-dashed border-gray-300 my-6"></div>
+                
+                <!-- Aircraft Type -->
+                <div class="mb-6">
+                    <label class="block mb-2 font-medium">
+                        "Which type of aircraft did you fly?"<span class="text-red-500">*</span>
+                    </label>
+                    <div class="flex gap-5">
+                        <div class="border border-gray-300 p-4 min-w-[120px] text-center custom-radio-checkbox">
+                            <input type="checkbox" id="open_cockpit" name="aircraft_type[]" value="Open-cockpit trike">
+                            <label for="open_cockpit">Open-cockpit trike</label>
+                        </div>
+                        <div class="border border-gray-300 p-4 min-w-[120px] text-center custom-radio-checkbox">
+                            <input type="checkbox" id="fixed_wing" name="aircraft_type[]" value="Fixed-wing, closed-cockpit aircraft">
+                            <label for="fixed_wing">Fixed-wing, closed-cockpit aircraft</label>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        @endif
-
-        <!-- Review Form with Blue Background -->
-        <div class="max-w-2xl mx-auto rounded-3xl p-4 sm:p-8">
-            <div class="bg-blue-50 rounded-2xl p-4 sm:p-8">
-                <form action="{{ route('reviews.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4 sm:space-y-6">
-                    @csrf
+                
+                <div class="border-t border-dashed border-gray-300 my-6"></div>
+                
+                <!-- Instructor Rating -->
+                <div class="mb-6">
+                    <label class="block mb-2 font-medium">
+                        How clear and helpful was your instructor during your ultralight flight lesson?<span class="text-red-500">*</span>
+                    </label>
+                    <div class="rating-stars flex gap-1" id="instructor_rating_stars">
+                        <input type="radio" id="instructor_rating_1" name="instructor_rating" value="1">
+                        <label for="instructor_rating_1">★</label>
+                        <input type="radio" id="instructor_rating_2" name="instructor_rating" value="2">
+                        <label for="instructor_rating_2">★</label>
+                        <input type="radio" id="instructor_rating_3" name="instructor_rating" value="3">
+                        <label for="instructor_rating_3">★</label>
+                        <input type="radio" id="instructor_rating_4" name="instructor_rating" value="4">
+                        <label for="instructor_rating_4">★</label>
+                        <input type="radio" id="instructor_rating_5" name="instructor_rating" value="5">
+                        <label for="instructor_rating_5">★</label>
+                    </div>
+                </div>
+                
+                <!-- Fun Experience Rating -->
+                <div class="mb-6">
+                    <label class="block mb-2 font-medium">
+                        How fun was your ultralight flying experience with us?<span class="text-red-500">*</span>
+                    </label>
+                    <div class="rating-stars flex gap-1" id="fun_rating_stars">
+                        <input type="radio" id="fun_rating_1" name="fun_rating" value="1">
+                        <label for="fun_rating_1">★</label>
+                        <input type="radio" id="fun_rating_2" name="fun_rating" value="2">
+                        <label for="fun_rating_2">★</label>
+                        <input type="radio" id="fun_rating_3" name="fun_rating" value="3">
+                        <label for="fun_rating_3">★</label>
+                        <input type="radio" id="fun_rating_4" name="fun_rating" value="4">
+                        <label for="fun_rating_4">★</label>
+                        <input type="radio" id="fun_rating_5" name="fun_rating" value="5">
+                        <label for="fun_rating_5">★</label>
+                    </div>
+                </div>
+                
+                <!-- Safety Rating -->
+                <div class="mb-6">
+                    <label class="block mb-2 font-medium">
+                        How safe did you feel training in your ultralight aircraft?<span class="text-red-500">*</span>
+                    </label>
+                    <div class="rating-stars flex gap-1" id="safety_rating_stars">
+                        <input type="radio" id="safety_rating_1" name="safety_rating" value="1">
+                        <label for="safety_rating_1">★</label>
+                        <input type="radio" id="safety_rating_2" name="safety_rating" value="2">
+                        <label for="safety_rating_2">★</label>
+                        <input type="radio" id="safety_rating_3" name="safety_rating" value="3">
+                        <label for="safety_rating_3">★</label>
+                        <input type="radio" id="safety_rating_4" name="safety_rating" value="4">
+                        <label for="safety_rating_4">★</label>
+                        <input type="radio" id="safety_rating_5" name="safety_rating" value="5">
+                        <label for="safety_rating_5">★</label>
+                    </div>
+                </div>
+                
+                <!-- Likelihood Scale -->
+                <div class="mb-6">
+                    <label class="block mb-2 font-medium">
+                        How likely are you to fly with us again?<span class="text-red-500">*</span>
+                    </label>
+                    <div>
+                        <input type="range" 
+                               id="likelihood" 
+                               name="likelihood" 
+                               min="1" 
+                               max="5" 
+                               class="w-full"
+                               required>
+                        <div class="flex justify-between w-full mt-1 text-xs">
+                            <div class="text-center max-w-[80px]">I am not coming</div>
+                            <div class="text-center max-w-[80px]">My spouse needs to convince</div>
+                            <div class="text-center max-w-[80px]">Maybe</div>
+                            <div class="text-center max-w-[80px]">I am coming</div>
+                            <div class="text-center max-w-[80px]">Gosh! Yess!!</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border-t border-dashed border-gray-300 my-6"></div>
+                
+                <!-- Photo Upload -->
+                <div class="mb-6">
+                    <label class="block mb-2 font-medium">
+                        Feel free to upload a photo or a short 5-second clip of your best moments with us!
+                    </label>
+                    <div class="border border-dashed border-gray-300 p-4 text-center mt-2 relative">
+                        <div id="drop-area" class="cursor-pointer">
+                            <p>Drop image here or select image</p>
+                            <input type="file" 
+                                   id="media_upload" 
+                                   name="media_upload" 
+                                   class="hidden"
+                                   accept="image/*,video/*">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Social Media -->
+                <div class="mb-6">
+                    <label class="block mb-2 font-medium">
+                        Do you currently maintain an account on a social media site?
+                    </label>
+                    <div class="custom-radio-checkbox">
+                        <input type="radio" id="social_yes" name="has_social_media" value="yes">
+                        <label for="social_yes">Yes - then why don't you follow us and show some love!</label>
+                    </div>
                     
-                    <!-- Star Rating Section -->
-                    <div class="text-center mb-6 sm:mb-8">
-                        <h3 class="text-xl sm:text-2xl font-semibold text-gray-700 mb-4 sm:mb-6">How would you rate your experience? <span class="text-red-500">*</span></h3>
-                        <div class="rating-container p-4 sm:p-6 mb-4">
-                            <div class="flex justify-center space-x-2 sm:space-x-6 mb-4">
-                                <div class="rating-star" data-rating="1">
-                                    <div class="star-wrapper">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 sm:h-12 sm:w-12 text-gray-300 cursor-pointer transition-all duration-300" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="rating-star" data-rating="2">
-                                    <div class="star-wrapper">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 sm:h-12 sm:w-12 text-gray-300 cursor-pointer transition-all duration-300" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="rating-star" data-rating="3">
-                                    <div class="star-wrapper">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 sm:h-12 sm:w-12 text-gray-300 cursor-pointer transition-all duration-300" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="rating-star" data-rating="4">
-                                    <div class="star-wrapper">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 sm:h-12 sm:w-12 text-gray-300 cursor-pointer transition-all duration-300" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="rating-star" data-rating="5">
-                                    <div class="star-wrapper">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 sm:h-12 sm:w-12 text-gray-300 cursor-pointer transition-all duration-300" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="rating-feedback text-gray-500 text-xs sm:text-sm text-center"></div>
-                            <div class="selected-rating text-amber-500 font-medium text-base sm:text-lg mt-2 text-center"></div>
-                        </div>
-                        <input type="hidden" name="rating" id="rating" required>
+                    <div class="custom-radio-checkbox">
+                        <input type="radio" id="social_no" name="has_social_media" value="no">
+                        <label for="social_no">Nay that's not for me</label>
                     </div>
-
-                    <!-- Name Field -->
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Your Name <span class="text-red-500">*</span></label>
-                        <input type="text" 
-                               id="name" 
-                               name="name" 
-                               required 
-                               class="w-full bg-white px-3 sm:px-4 py-2 sm:py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
-                               placeholder="Enter your name">
-                    </div>
-
-                    <!-- Profile Picture Field -->
-                    <div>
-                        <label for="profile_picture" class="block text-sm font-medium text-gray-700 mb-2">Picture</label>
-                        <div class="flex items-center space-x-2 sm:space-x-4">
-                            <div class="relative">
-                                <input type="file" 
-                                       id="profile_picture" 
-                                       name="profile_picture" 
-                                       accept="image/*"
-                                       class="hidden"
-                                       onchange="previewImage(this)">
-                                <label for="profile_picture" 
-                                       class="cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-600 px-3 sm:px-4 py-2 rounded-lg transition-colors duration-200 text-sm">
-                                    Choose File
-                                </label>
-                            </div>
-                            <div id="image-preview" class="hidden">
-                                <img src="" alt="Preview" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Email Field -->
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address <span class="text-red-500">*</span></label>
-                        <input type="email" 
-                               id="email" 
-                               name="email" 
-                               required 
-                               class="w-full bg-white px-3 sm:px-4 py-2 sm:py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
-                               placeholder="Enter your email">
-                    </div>
-
-                    <!-- Feedback Field -->
-                    <div>
-                        <label for="feedback" class="block text-sm font-medium text-gray-700 mb-2">Your Experience <span class="text-red-500">*</span></label>
-                        <textarea id="feedback" 
-                                  name="feedback" 
-                                  required 
-                                  rows="4" 
-                                  class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border bg-white border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
-                                  placeholder="Share your experience with us..."></textarea>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div class="text-center">
-                        <button type="submit" 
-                                class="bg-[#F05052] hover:bg-[#f05060] hover:cursor-pointer text-white font-semibold px-6 sm:px-8 py-2 sm:py-3 rounded-lg transition-colors duration-200 transform hover:scale-105 text-sm sm:text-base">
-                            Submit
-                        </button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" 
+                           class="bg-[#004080] text-white font-semibold px-8 py-2 rounded hover:bg-[#003366] transition-colors">
+                        Submit
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+<!-- Include Testimonials Section -->
 @include('components.testimonials')
+
 @endsection
 
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Rating functionality
-    const ratingStars = document.querySelectorAll('.rating-star');
-    const ratingInput = document.getElementById('rating');
-    const ratingFeedback = document.querySelector('.rating-feedback');
-    const selectedRating = document.querySelector('.selected-rating');
-    const ratingContainer = document.querySelector('.rating-container');
-
-    const ratingLabels = {
-        1: "Poor",
-        2: "Fair",
-        3: "Good",
-        4: "Very Good",
-        5: "Excellent"
-    };
-
-    const feedbackMessages = {
-        1: "We're sorry to hear that. We'll work hard to improve!",
-        2: "Thank you for your feedback. We'll take it into consideration.",
-        3: "Glad you had a good experience!",
-        4: "We're happy you enjoyed your time with us!",
-        5: "Thank you for the excellent rating! We're thrilled!"
-    };
-
-    ratingStars.forEach(star => {
-        star.addEventListener('click', function() {
-            const rating = this.getAttribute('data-rating');
-            ratingInput.value = rating;
-            
-            // Remove active class from all stars
-            ratingStars.forEach(s => {
-                s.classList.remove('active');
-                s.querySelector('.star-wrapper').style.transform = 'scale(1)';
-                s.querySelector('svg').classList.remove('text-amber-400');
-                s.querySelector('svg').classList.add('text-gray-300');
-            });
-            
-            // Add active class to selected star and all stars before it
-            for (let i = 0; i < rating; i++) {
-                ratingStars[i].classList.add('active');
-                ratingStars[i].querySelector('.star-wrapper').style.transform = 'scale(1.2)';
-                ratingStars[i].querySelector('svg').classList.remove('text-gray-300');
-                ratingStars[i].querySelector('svg').classList.add('text-amber-400');
-            }
-            
-            // Show selected rating text
-            selectedRating.textContent = ratingLabels[rating];
-            selectedRating.style.opacity = '1';
-            
-            // Show feedback message
-            ratingFeedback.textContent = feedbackMessages[rating];
-            ratingFeedback.style.opacity = '1';
-            
-            // Add pulse animation to container
-            ratingContainer.classList.add('pulse');
-            setTimeout(() => {
-                ratingContainer.classList.remove('pulse');
-            }, 500);
-        });
-
-        // Hover effect
-        star.addEventListener('mouseenter', function() {
-            if (!this.classList.contains('active')) {
-                this.querySelector('.star-wrapper').style.transform = 'scale(1.1)';
-            }
-        });
-
-        star.addEventListener('mouseleave', function() {
-            if (!this.classList.contains('active')) {
-                this.querySelector('.star-wrapper').style.transform = 'scale(1)';
-            }
-        });
-    });
-});
-
-// Image preview functionality
-function previewImage(input) {
-    const preview = document.getElementById('image-preview');
-    const previewImg = preview.querySelector('img');
+    // File upload handling
+    const dropArea = document.getElementById('drop-area');
+    const fileInput = document.getElementById('media_upload');
     
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
+    dropArea.addEventListener('click', function() {
+        fileInput.click();
+    });
+    
+    dropArea.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        dropArea.classList.add('border-blue-500');
+    });
+    
+    dropArea.addEventListener('dragleave', function() {
+        dropArea.classList.remove('border-blue-500');
+    });
+    
+    dropArea.addEventListener('drop', function(e) {
+        e.preventDefault();
+        dropArea.classList.remove('border-blue-500');
         
-        reader.onload = function(e) {
-            previewImg.src = e.target.result;
-            preview.classList.remove('hidden');
+        if (e.dataTransfer.files.length) {
+            fileInput.files = e.dataTransfer.files;
+            updateFilePreview(e.dataTransfer.files[0]);
+        }
+    });
+    
+    fileInput.addEventListener('change', function() {
+        if (fileInput.files.length) {
+            updateFilePreview(fileInput.files[0]);
+        }
+    });
+    
+    function updateFilePreview(file) {
+        const fileType = file.type.split('/')[0];
+        
+        // Clear previous preview
+        while (dropArea.firstChild) {
+            dropArea.removeChild(dropArea.firstChild);
         }
         
-        reader.readAsDataURL(input.files[0]);
+        if (fileType === 'image') {
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(file);
+            img.style.maxHeight = '100px';
+            img.style.margin = '0 auto';
+            dropArea.appendChild(img);
+        } else if (fileType === 'video') {
+            const video = document.createElement('video');
+            video.src = URL.createObjectURL(file);
+            video.style.maxHeight = '100px';
+            video.style.margin = '0 auto';
+            video.controls = true;
+            dropArea.appendChild(video);
+        }
+        
+        const fileName = document.createElement('p');
+        fileName.textContent = file.name;
+        fileName.className = 'mt-2 text-sm text-gray-600';
+        dropArea.appendChild(fileName);
     }
-}
+    
+    // Add star rating functionality
+    const ratingContainers = [
+        document.getElementById('instructor_rating_stars'),
+        document.getElementById('fun_rating_stars'),
+        document.getElementById('safety_rating_stars')
+    ];
+    
+    ratingContainers.forEach(container => {
+        const stars = container.querySelectorAll('label');
+        stars.forEach(star => {
+            star.addEventListener('mouseover', function() {
+                const ratingValue = this.getAttribute('for').split('_').pop();
+                highlightStars(container, ratingValue);
+            });
+            
+            star.addEventListener('mouseout', function() {
+                resetStars(container);
+                const selectedRating = container.querySelector('input:checked');
+                if (selectedRating) {
+                    const ratingValue = selectedRating.value;
+                    highlightStars(container, ratingValue);
+                }
+            });
+        });
+    });
+    
+    function highlightStars(container, rating) {
+        const stars = container.querySelectorAll('label');
+        for (let i = 0; i < stars.length; i++) {
+            if (i < rating) {
+                stars[i].style.color = '#FFD700';
+            } else {
+                stars[i].style.color = '#ccc';
+            }
+        }
+    }
+    
+    function resetStars(container) {
+        const stars = container.querySelectorAll('label');
+        stars.forEach(star => {
+            star.style.color = '#ccc';
+        });
+    }
+});
 </script>
-@endpush 
+@endpush

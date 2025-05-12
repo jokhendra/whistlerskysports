@@ -87,10 +87,81 @@
                 <!-- MAD Mr Bert -->
                 <li>
                     <a href="/mad-mr-bert" class="block px-3 py-2 text-[rgb(241,97,98,1)] font-bold italic tracking-wider rounded hover:text-[rgb(241,97,98,0.8)] transition-colors duration-200 whitespace-nowrap relative group">
-                        MAD Mr Bert
+                        MAD Mr Bert's
                         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[rgb(241,97,98,1)] transition-all duration-300 group-hover:w-full"></span>
                     </a>
                 </li>
+                
+                @php
+                    $cartItemCount = 0;
+                    if (session()->has('cart_id')) {
+                        $cart = \App\Models\Cart::find(session('cart_id'));
+                        if ($cart) {
+                            $cartItemCount = $cart->items->sum('quantity');
+                        }
+                    } elseif (auth()->check()) {
+                        $cart = \App\Models\Cart::where('user_id', auth()->id())
+                            ->where('status', 'active')
+                            ->first();
+                        if ($cart) {
+                            $cartItemCount = $cart->items->sum('quantity');
+                        }
+                    }
+                @endphp
+                
+                @if(auth()->check())
+                <!-- User Profile Dropdown -->
+                <li class="relative group ml-2">
+                    <button type="button" 
+                            class="flex items-center px-3 py-2 text-gray-900 rounded-full hover:bg-gray-100 transition-colors duration-200"
+                            aria-haspopup="true" aria-expanded="false">
+                        <span class="mr-1 font-medium">{{ auth()->user()->name }}</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                        <span class="cart-count absolute -top-1 -right-1 bg-[rgb(241,97,98)] text-white text-xs font-bold px-1.5 py-0.5 rounded-full {{ $cartItemCount == 0 ? 'hidden' : '' }}">
+                            {{ $cartItemCount }}
+                        </span>
+                    </button>
+                    <div class="hidden group-hover:block absolute right-0 w-48 bg-white rounded-lg shadow-lg border border-gray-200 mt-1 z-50">
+                        <ul class="py-1">
+                            <li class="px-4 py-3 border-b border-gray-100">
+                                <div class="font-medium text-gray-900">{{ auth()->user()->name }}</div>
+                                <div class="text-sm text-gray-500">{{ auth()->user()->email }}</div>
+                            </li>
+                            <li>
+                                <a href="{{ route('mad-mr-bert.cart') }}" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                    </svg>
+                                    My Cart
+                                    <span class="ml-auto bg-[rgb(241,97,98)] text-white text-xs font-bold px-1.5 py-0.5 rounded-full cart-count {{ $cartItemCount == 0 ? 'hidden' : '' }}">
+                                        {{ $cartItemCount }}
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="flex w-full items-center px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                        </svg>
+                                        Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                @else
+                <!-- Login Link for Guests (No Cart Icon, No Register) -->
+                <li>
+                    <a href="{{ route('login') }}" class="flex items-center px-3 py-2 text-gray-900 rounded hover:text-blue-600 transition-colors duration-200">
+                        Login
+                    </a>
+                </li>
+                @endif
             </ul>
         </div>
     </div>
@@ -123,6 +194,57 @@
                     </a>
                 </div>
             </div>
+            
+            <!-- MAD Mr Bert's Link (Mobile) -->
+            <a href="/mad-mr-bert" class="block px-3 py-2 text-base font-medium text-[rgb(241,97,98,1)] italic hover:bg-gray-100 rounded-md mt-2">
+                MAD Mr Bert's
+            </a>
+            
+            @if(auth()->check())
+            <!-- User Info (Mobile) -->
+            <div class="px-3 py-2 mt-2 border-t border-gray-200">
+                <div class="flex items-center py-2">
+                    <div class="flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <div class="text-base font-medium text-gray-800">{{ auth()->user()->name }}</div>
+                        <div class="text-sm font-medium text-gray-500">{{ auth()->user()->email }}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Shopping Cart Link (Mobile) for Logged In Users -->
+            <a href="{{ route('mad-mr-bert.cart') }}" class="flex items-center justify-between px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 rounded-md">
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    My Cart
+                </div>
+                <span class="cart-count-mobile bg-[rgb(241,97,98)] text-white text-xs font-bold px-2 py-1 rounded-full {{ $cartItemCount == 0 ? 'hidden' : '' }}">
+                    {{ $cartItemCount }}
+                </span>
+            </a>
+            
+            <!-- Logout Link (Mobile) -->
+            <form method="POST" action="{{ route('logout') }}" class="mt-2">
+                @csrf
+                <button type="submit" class="flex w-full items-center px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 rounded-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    Logout
+                </button>
+            </form>
+            @else
+            <!-- Login Link (Mobile) for Guests (No Cart Icon, No Register) -->
+            <a href="{{ route('login') }}" class="block px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 rounded-md">
+                Login
+            </a>
+            @endif
         </div>
     </div>
 </nav>

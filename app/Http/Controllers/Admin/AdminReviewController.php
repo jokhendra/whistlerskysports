@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class AdminReviewController extends Controller
 {
@@ -23,37 +24,52 @@ class AdminReviewController extends Controller
             $query->where(function($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
                   ->orWhere('email', 'like', "%{$search}%")
-                  ->orWhere('review', 'like', "%{$search}%");
+                  ->orWhere('feedback', 'like', "%{$search}%");
             });
         }
         
         // Apply date filters if provided
         if ($fromDate = $request->input('from_date')) {
-            $query->whereDate('created_at', '>=', $fromDate);
+            $query->whereDate('flight_date', '>=', $fromDate);
         }
         if ($toDate = $request->input('to_date')) {
-            $query->whereDate('created_at', '<=', $toDate);
+            $query->whereDate('flight_date', '<=', $toDate);
         }
 
-        // Apply rating filter if provided
-        if ($rating = $request->input('rating')) {
-            $query->where('rating', $rating);
+        // Apply rating filters if provided
+        if ($rating = $request->input('instructor_rating')) {
+            $query->where('instructor_rating', $rating);
+        }
+        
+        if ($rating = $request->input('fun_rating')) {
+            $query->where('fun_rating', $rating);
+        }
+        
+        if ($rating = $request->input('safety_rating')) {
+            $query->where('safety_rating', $rating);
+        }
+        
+        // Apply aircraft type filter if provided
+        if ($aircraftType = $request->input('aircraft_type')) {
+            $query->whereJsonContains('aircraft_type', $aircraftType);
         }
 
         // Apply status filter if provided
-        // if ($status = $request->input('status')) {
-        //     $query->where('status', $status);
-        // }
+        if ($status = $request->input('status')) {
+            $query->where('status', $status);
+        }
 
         $reviews = $query->latest()->paginate(10)->withQueryString();
 
         // Get statistics
         $stats = [
             'total' => Review::count(),
-            'average_rating' => Review::avg('rating'),
-            // 'pending' => Review::where('status', 'pending')->count(),
-            'pending' => 0,
-            'today' => Review::whereDate('created_at', today())->count(),
+            'average_instructor_rating' => Review::avg('instructor_rating') ?? 0,
+            'average_fun_rating' => Review::avg('fun_rating') ?? 0,
+            'average_safety_rating' => Review::avg('safety_rating') ?? 0,
+            'average_likelihood' => Review::avg('likelihood') ?? 0,
+            'pending' => Review::where('status', 'pending')->count(),
+            'today' => Review::whereDate('created_at', Carbon::today())->count(),
         ];
 
         return view('admin.reviews.index', compact('reviews', 'stats'));
@@ -103,19 +119,31 @@ class AdminReviewController extends Controller
             $query->where(function($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
                   ->orWhere('email', 'like', "%{$search}%")
-                  ->orWhere('review', 'like', "%{$search}%");
+                  ->orWhere('feedback', 'like', "%{$search}%");
             });
         }
 
         if ($fromDate = $request->input('from_date')) {
-            $query->whereDate('created_at', '>=', $fromDate);
+            $query->whereDate('flight_date', '>=', $fromDate);
         }
         if ($toDate = $request->input('to_date')) {
-            $query->whereDate('created_at', '<=', $toDate);
+            $query->whereDate('flight_date', '<=', $toDate);
         }
 
-        if ($rating = $request->input('rating')) {
-            $query->where('rating', $rating);
+        if ($rating = $request->input('instructor_rating')) {
+            $query->where('instructor_rating', $rating);
+        }
+        
+        if ($rating = $request->input('fun_rating')) {
+            $query->where('fun_rating', $rating);
+        }
+        
+        if ($rating = $request->input('safety_rating')) {
+            $query->where('safety_rating', $rating);
+        }
+        
+        if ($aircraftType = $request->input('aircraft_type')) {
+            $query->whereJsonContains('aircraft_type', $aircraftType);
         }
 
         if ($status = $request->input('status')) {
@@ -132,8 +160,14 @@ class AdminReviewController extends Controller
             'ID',
             'Name',
             'Email',
-            'Rating',
-            'Review',
+            'Flight Date',
+            'Aircraft Type',
+            'Instructor Rating',
+            'Fun Rating',
+            'Safety Rating',
+            'Likelihood to Return',
+            'Social Media',
+            'Feedback',
             'Status',
             'Created At'
         ];
@@ -147,9 +181,15 @@ class AdminReviewController extends Controller
                     $review->id,
                     $review->name,
                     $review->email,
-                    $review->rating,
-                    $review->review,
-                    $review->status,
+                    $review->flight_date->format('Y-m-d'),
+                    is_array($review->aircraft_type) ? implode(', ', $review->aircraft_type) : $review->aircraft_type,
+                    $review->instructor_rating,
+                    $review->fun_rating,
+                    $review->safety_rating,
+                    $review->likelihood,
+                    $review->has_social_media,
+                    $review->feedback,
+                    $review->status ?? 'pending',
                     $review->created_at->format('Y-m-d H:i:s')
                 ]);
             }

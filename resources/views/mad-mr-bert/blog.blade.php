@@ -11,53 +11,276 @@
     </div>
 </div>
 
-<!-- Coming Soon Section -->
+<!-- Blog Section -->
 <div class="py-16 bg-white">
     <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto text-center">
-            <!-- Coming Soon Message -->
-            <div class="bg-white p-8 rounded-lg shadow-lg border border-[rgb(241,97,98,0.2)] mb-12">
-                <div class="mb-8">
-                    <svg class="w-24 h-24 mx-auto text-[rgb(241,97,98)] mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Coming Soon!</h2>
-                    <p class="text-xl text-gray-600 mb-6">We're crafting amazing content for you.</p>
-                    <p class="text-gray-600">MAD Mr Bert's blog will feature:</p>
-                    <ul class="mt-4 space-y-3 max-w-lg mx-auto">
-                        <li class="flex items-center justify-center">
-                            <span class="w-2 h-2 bg-[rgb(241,97,98)] rounded-full mr-2"></span>
-                            <span class="text-gray-600">Expert Aviation Tips & Techniques</span>
-                        </li>
-                        <li class="flex items-center justify-center">
-                            <span class="w-2 h-2 bg-[rgb(241,97,98)] rounded-full mr-2"></span>
-                            <span class="text-gray-600">Behind-the-Scenes Stories</span>
-                        </li>
-                        <li class="flex items-center justify-center">
-                            <span class="w-2 h-2 bg-[rgb(241,97,98)] rounded-full mr-2"></span>
-                            <span class="text-gray-600">Flight Training Insights</span>
-                        </li>
-                        <li class="flex items-center justify-center">
-                            <span class="w-2 h-2 bg-[rgb(241,97,98)] rounded-full mr-2"></span>
-                            <span class="text-gray-600">Aviation Industry Updates</span>
-                        </li>
-                    </ul>
+        <div class="max-w-7xl mx-auto">
+            <!-- Main Content Area -->
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Main Content -->
+                <div class="lg:w-2/3">
+                    @if($blogPosts->isEmpty())
+                        <!-- Coming Soon Section -->
+                        <div class="max-w-4xl mx-auto text-center">
+                            <div class="bg-white p-8 rounded-lg shadow-lg border border-[rgb(241,97,98,0.2)] mb-12">
+                                <div class="mb-8">
+                                    <svg class="w-24 h-24 mx-auto text-[rgb(241,97,98)] mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Coming Soon!</h2>
+                                    <p class="text-xl text-gray-600 mb-6">We're crafting amazing content for you.</p>
+                                    <p class="text-gray-600">MAD Mr Bert's blog will feature:</p>
+                                    <ul class="mt-4 space-y-3 max-w-lg mx-auto">
+                                        <li class="flex items-center justify-center">
+                                            <span class="w-2 h-2 bg-[rgb(241,97,98)] rounded-full mr-2"></span>
+                                            <span class="text-gray-600">Expert Aviation Tips & Techniques</span>
+                                        </li>
+                                        <li class="flex items-center justify-center">
+                                            <span class="w-2 h-2 bg-[rgb(241,97,98)] rounded-full mr-2"></span>
+                                            <span class="text-gray-600">Behind-the-Scenes Stories</span>
+                                        </li>
+                                        <li class="flex items-center justify-center">
+                                            <span class="w-2 h-2 bg-[rgb(241,97,98)] rounded-full mr-2"></span>
+                                            <span class="text-gray-600">Flight Training Insights</span>
+                                        </li>
+                                        <li class="flex items-center justify-center">
+                                            <span class="w-2 h-2 bg-[rgb(241,97,98)] rounded-full mr-2"></span>
+                                            <span class="text-gray-600">Aviation Industry Updates</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <!-- Newsletter Signup -->
+                                <div class="max-w-md mx-auto">
+                                    <h3 class="text-xl font-bold text-[rgb(241,97,98)] mb-4">Get Notified When We Launch!</h3>
+                                    <div class="flex gap-2">
+                                        <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[rgb(241,97,98)]">
+                                        <button class="px-6 py-2 bg-[rgb(241,97,98)] text-white rounded-lg hover:bg-[rgb(200,60,60)] transition-colors duration-300">
+                                            Notify Me
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <!-- Blog Posts Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            @foreach($blogPosts as $post)
+                                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+                                    <!-- Featured Image -->
+                                    <div class="aspect-video overflow-hidden">
+                                        @if($post->featured_image)
+                                            <img src="{{ $post->featured_image_url }}" alt="{{ $post->title }}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                                        @else
+                                            <div class="w-full h-full bg-gradient-to-br from-[rgb(241,97,98,0.1)] to-[rgb(241,97,98,0.3)] flex items-center justify-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-[rgb(241,97,98,0.5)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                                                </svg>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    
+                                    <!-- Content -->
+                                    <div class="p-6">
+                                        <!-- Category and Date -->
+                                        <div class="flex items-center justify-between mb-3 text-sm text-gray-500">
+                                            @if($post->category)
+                                                <a href="{{ route('mad-mr-bert.blog', ['category' => $post->category]) }}" class="inline-block bg-[rgb(241,97,98,0.1)] text-[rgb(241,97,98)] rounded-full px-3 py-1 hover:bg-[rgb(241,97,98,0.2)] transition-colors duration-300">
+                                                    {{ $post->category }}
+                                                </a>
+                                            @else
+                                                <span></span>
+                                            @endif
+                                            <span>{{ $post->published_at->format('M d, Y') }}</span>
+                                        </div>
+                                        
+                                        <!-- Title -->
+                                        <h3 class="text-xl font-bold text-gray-900 mb-3 hover:text-[rgb(241,97,98)] transition-colors duration-300">
+                                            @auth
+                                                <a href="{{ route('mad-mr-bert.blog.show', $post->slug) }}">{{ $post->title }}</a>
+                                            @else
+                                                <a href="{{ route('mad-mr-bert.blog.preview', $post->slug) }}">{{ $post->title }}</a>
+                                            @endauth
+                                        </h3>
+                                        
+                                        <!-- Excerpt -->
+                                        <p class="text-gray-600 mb-4 line-clamp-3">
+                                            {{ $post->excerpt ?? Str::limit(strip_tags($post->content), 150) }}
+                                        </p>
+                                        
+                                        <!-- Tags -->
+                                        @if(!empty($post->tags))
+                                            <div class="flex flex-wrap gap-2 mb-4">
+                                                @foreach($post->tags as $tag)
+                                                    <a href="{{ route('mad-mr-bert.blog', ['tag' => $tag]) }}" class="text-xs text-gray-500 hover:text-[rgb(241,97,98)] hover:underline">
+                                                        #{{ $tag }}
+                                                    </a>
+                                                @endforeach
+                                            </div>
+                                        @endif
+                                        
+                                        <!-- Read More Link -->
+                                        <div class="pt-3 border-t border-gray-100">
+                                            @auth
+                                                <a href="{{ route('mad-mr-bert.blog.show', $post->slug) }}" class="inline-flex items-center text-[rgb(241,97,98)] hover:text-[rgb(200,60,60)] transition-colors duration-300 group">
+                                                    Read More
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                    </svg>
+                                                </a>
+                                            @else
+                                                <a href="{{ route('mad-mr-bert.blog.preview', $post->slug) }}" class="inline-flex items-center text-[rgb(241,97,98)] hover:text-[rgb(200,60,60)] transition-colors duration-300 group">
+                                                    Read More
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                    </svg>
+                                                </a>
+                                            @endauth
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        
+                        <!-- Pagination -->
+                        <div class="mt-12 flex justify-center">
+                            {{ $blogPosts->links() }}
+                        </div>
+                    @endif
                 </div>
-                
-                <!-- Newsletter Signup -->
-                <div class="max-w-md mx-auto">
-                    <h3 class="text-xl font-bold text-[rgb(241,97,98)] mb-4">Get Notified When We Launch!</h3>
-                    <div class="flex gap-2">
-                        <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[rgb(241,97,98)]">
-                        <button class="px-6 py-2 bg-[rgb(241,97,98)] text-white rounded-lg hover:bg-[rgb(200,60,60)] transition-colors duration-300">
-                            Notify Me
-                        </button>
+
+                <!-- Sidebar -->
+                <div class="lg:w-1/3 mt-8 lg:mt-0">
+                    <!-- Search Box -->
+                    <div class="bg-white rounded-lg shadow p-6 border border-gray-100 mb-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Search Posts</h3>
+                        <form action="{{ route('mad-mr-bert.blog') }}" method="GET" class="relative">
+                            <input type="text" name="search" value="{{ request('search') }}" placeholder="What are you looking for?" class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:border-[rgb(241,97,98)]">
+                            <button type="submit" class="absolute right-3 top-2.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Categories -->
+                    <div class="bg-white rounded-lg shadow p-6 border border-gray-100 mb-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Categories</h3>
+                        <div class="flex flex-wrap gap-2">
+                            @forelse($categories as $category)
+                                <a href="{{ route('mad-mr-bert.blog', ['category' => $category]) }}" class="inline-block bg-white text-gray-700 rounded-full px-3 py-1 text-sm border border-gray-200 hover:bg-[rgb(241,97,98)] hover:text-white hover:border-[rgb(241,97,98)] transition-colors duration-300 {{ request('category') == $category ? 'bg-[rgb(241,97,98)] text-white border-[rgb(241,97,98)]' : '' }}">
+                                    {{ $category }}
+                                </a>
+                            @empty
+                                <span class="text-sm text-gray-500">No categories yet</span>
+                            @endforelse
+                        </div>
+                    </div>
+
+                    <!-- Popular Tags -->
+                    <div class="bg-white rounded-lg shadow p-6 border border-gray-100 mb-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Popular Tags</h3>
+                        <div class="flex flex-wrap gap-2">
+                            @forelse($tags as $tag)
+                                <a href="{{ route('mad-mr-bert.blog', ['tag' => $tag]) }}" class="inline-block text-sm text-gray-600 hover:text-[rgb(241,97,98)] hover:underline {{ request('tag') == $tag ? 'text-[rgb(241,97,98)] font-medium' : '' }}">
+                                    #{{ $tag }}
+                                </a>
+                            @empty
+                                <span class="text-sm text-gray-500">No tags yet</span>
+                            @endforelse
+                        </div>
+                    </div>
+
+                    <!-- Popular Posts -->
+                    @if(isset($popularPosts) && $popularPosts->isNotEmpty())
+                    <div class="bg-white rounded-lg shadow p-6 border border-gray-100 mb-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Popular Posts</h3>
+                        <div class="space-y-4">
+                            @foreach($popularPosts as $post)
+                            <div class="flex gap-3">
+                                <div class="flex-shrink-0 w-16 h-16 bg-gray-100 rounded overflow-hidden">
+                                    @if($post->featured_image)
+                                        <img src="{{ $post->featured_image_url }}" alt="{{ $post->title }}" class="w-full h-full object-cover">
+                                    @else
+                                        <div class="w-full h-full flex items-center justify-center bg-gray-200">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="text-sm font-medium line-clamp-2 mb-1">
+                                        @auth
+                                            <a href="{{ route('mad-mr-bert.blog.show', $post->slug) }}" class="hover:text-[rgb(241,97,98)]">
+                                                {{ $post->title }}
+                                            </a>
+                                        @else
+                                            <a href="{{ route('mad-mr-bert.blog.preview', $post->slug) }}" class="hover:text-[rgb(241,97,98)]">
+                                                {{ $post->title }}
+                                            </a>
+                                        @endauth
+                                    </h4>
+                                    <div class="text-xs text-gray-500">
+                                        {{ $post->published_at->format('M d, Y') }}
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+
+                    <!-- Recent Posts -->
+                    @if(isset($recentPosts) && $recentPosts->isNotEmpty())
+                    <div class="bg-white rounded-lg shadow p-6 border border-gray-100 mb-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Recent Posts</h3>
+                        <div class="space-y-4">
+                            @foreach($recentPosts as $post)
+                            <div class="border-b border-gray-100 pb-3 last:border-0 last:pb-0">
+                                <h4 class="text-sm font-medium line-clamp-2 mb-1">
+                                    @auth
+                                        <a href="{{ route('mad-mr-bert.blog.show', $post->slug) }}" class="hover:text-[rgb(241,97,98)]">
+                                            {{ $post->title }}
+                                        </a>
+                                    @else
+                                        <a href="{{ route('mad-mr-bert.blog.preview', $post->slug) }}" class="hover:text-[rgb(241,97,98)]">
+                                            {{ $post->title }}
+                                        </a>
+                                    @endauth
+                                </h4>
+                                <div class="text-xs text-gray-500 flex items-center gap-2">
+                                    <span>{{ $post->published_at->format('M d, Y') }}</span>
+                                    @if($post->category)
+                                    <span>•</span>
+                                    <a href="{{ route('mad-mr-bert.blog', ['category' => $post->category]) }}" class="text-[rgb(241,97,98)] hover:underline">
+                                        {{ $post->category }}
+                                    </a>
+                                    @endif
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+
+                    <!-- Newsletter Signup -->
+                    <div class="bg-[rgb(241,97,98,0.05)] rounded-lg p-6 border border-[rgb(241,97,98,0.1)]">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Subscribe to Our Newsletter</h3>
+                        <p class="text-sm text-gray-600 mb-4">Get the latest aviation tips and stories delivered straight to your inbox.</p>
+                        <form action="#" method="POST" class="space-y-3">
+                            <input type="email" name="email" placeholder="Your email address" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[rgb(241,97,98)]">
+                            <button type="submit" class="w-full py-2 bg-[rgb(241,97,98)] text-white rounded-lg hover:bg-[rgb(200,60,60)] transition-colors duration-300">
+                                Subscribe
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
 
             <!-- Social Media Links -->
-            <div class="text-center">
+            <div class="text-center mt-16">
                 <h3 class="text-xl font-bold text-gray-900 mb-4">Follow Us for Updates</h3>
                 <div class="flex justify-center space-x-6">
                     <a href="#" class="text-[rgb(241,97,98)] hover:text-[rgb(200,60,60)] transition-colors duration-300">

@@ -101,8 +101,39 @@ class AdminController extends Controller
         return view('admin.products.hang-glider');
     }
 
-    public function merchandiseProducts()
+    public function merchandiseProducts(Request $request)
     {
-        return view('admin.products.merchandise');
+        $query = \App\Models\Product::query();
+        
+        // Always filter for merchandise categories
+        $query->whereIn('category', ['clothing', 'accessories', 'equipment', 'books']);
+        
+        // Filter by search term
+        if($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%")
+                  ->orWhere('category', 'like', "%{$search}%");
+            });
+        }
+        
+        // Filter by category
+        if($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
+        
+        // Filter by stock status
+        if($request->stock === 'in_stock') {
+            $query->where('stock', '>', 0);
+        } elseif($request->stock === 'low_stock') {
+            $query->where('stock', '>', 0)->where('stock', '<', 5);
+        } elseif($request->stock === 'out_of_stock') {
+            $query->where('stock', 0);
+        }
+        
+        $products = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
+        
+        return view('admin.products.merchandise', compact('products'));
     }
 } 

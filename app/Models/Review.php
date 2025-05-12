@@ -15,12 +15,23 @@ class Review extends Model
         'name',
         'email',
         'profile_picture',
-        'rating',
+        'flight_date',
+        'aircraft_type',
+        'instructor_rating',
+        'fun_rating',
+        'safety_rating',
+        'likelihood',
+        'has_social_media',
         'feedback'
     ];
 
     protected $casts = [
-        'rating' => 'integer',
+        'instructor_rating' => 'integer',
+        'fun_rating' => 'integer',
+        'safety_rating' => 'integer',
+        'likelihood' => 'integer',
+        'aircraft_type' => 'array',
+        'flight_date' => 'date',
     ];
 
     /**

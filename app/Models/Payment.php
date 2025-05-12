@@ -17,8 +17,9 @@ class Payment extends Model
      */
     protected $fillable = [
         'booking_id',
-        'provider',
         'order_id',
+        'provider',
+        'payment_type',
         'payment_id',
         'payment_order_id',
         'amount',
@@ -29,6 +30,7 @@ class Payment extends Model
         'refund_date',
         'payer_email',
         'payer_name',
+        'payer_phone',
         'payer_id',
         'provider_response',
     ];
@@ -47,11 +49,19 @@ class Payment extends Model
     ];
 
     /**
-     * Get the booking that owns the payment.
+     * Get the booking associated with the payment (if any).
      */
     public function booking()
     {
         return $this->belongsTo(Booking::class);
+    }
+
+    /**
+     * Get the order associated with the payment (if any).
+     */
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
     }
     
     /**
@@ -81,6 +91,8 @@ class Payment extends Model
             Log::info('Payment refunded', [
                 'payment_id' => $this->id,
                 'booking_id' => $this->booking_id,
+                'order_id' => $this->order_id,
+                'payment_type' => $this->payment_type,
                 'amount' => $refundAmount,
                 'refund_details' => $refundDetails
             ]);

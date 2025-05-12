@@ -5,14 +5,14 @@
       <!-- Brand Section -->
       <div class="space-y-6">
         <div class="flex items-center space-x-3">
-          <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
+          <!-- <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
             </svg>
-          </div>
+          </div> -->
           <h3 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-100">WhistlerSkySports</h3>
         </div>
-        <p class="text-blue-100 text-lg leading-relaxed">Experience the thrill of flight with Whistler's premier hang gliding and paragliding school. Your adventure in the sky starts here.</p>
+        <p class="text-blue-100 text-lg leading-relaxed">Experience the dream of flight training on our ultralight aircraft at Whistler Sky sports.</p>
         <div class="flex space-x-4">
           <a href="https://www.facebook.com/profile.php?id=61574486327134" target="_blank" class="w-10 h-10 bg-[#1877F2] rounded-lg flex items-center justify-center hover:bg-[#1877F2]/90 transition-all duration-300 transform hover:scale-110">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">

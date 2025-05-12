@@ -13,314 +13,252 @@
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
+
+.windy-container {
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
+    transition: all 0.3s ease;
+}
+
+.windy-container:hover {
+    box-shadow: 0 20px 30px -10px rgba(59, 130, 246, 0.4);
+    transform: translateY(-5px);
+}
+
+.weather-card {
+    transition: all 0.3s ease;
+}
+
+.weather-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.2);
+}
 </style>
 @endpush
 
 @section('content')
-<!DOCTYPE html>
-<html lang="en">
-<body class="bg-gradient-to-br">
   <div class="container mx-auto px-4 py-8 sm:py-12 mt-24">
-    <div class="max-w-5xl mx-auto">
-      <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold text-center mb-4 text-blue-900 bg-clip-text bg-gradient-to-r from-blue-900 to-blue-600">Weather Information</h1>
-      <p class="text-center text-gray-600 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">Stay informed about current conditions and forecasts for optimal flying experiences</p>
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold text-center mb-4 text-blue-900 bg-clip-text bg-gradient-to-r from-blue-900 to-blue-600">Interactive Weather Map</h1>
+        <p class="text-center text-gray-600 mb-8 sm:mb-12 max-w-3xl mx-auto text-sm sm:text-base">
+            Explore real-time weather conditions with our interactive Windy.com integration. Monitor wind patterns, precipitation, temperature, and more to plan your perfect flying experience.
+        </p>
 
-      <!-- Current Weather -->
-      <div class="bg-gradient-to-br from-white to-blue-50 rounded-2xl p-4 sm:p-8 mt-8 sm:mt-12 border border-blue-100">
-        <div class="grid grid-cols-1 md:grid-cols-1 gap-4 sm:gap-8">
-          <!-- Current Weather -->
-          <div class="bg-gradient-to-br from-blue-50 to-white rounded-xl p-4 sm:p-8">
-            <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 mb-6 sm:mb-8">Current Conditions</h2>
-            
-            <!-- Main Temperature Display -->
-            <div class="flex flex-col sm:flex-row items-center mb-6 sm:mb-10 bg-gradient-to-r from-white to-blue-50 rounded-xl p-4 sm:p-6 border border-blue-100">
-              <div class="text-5xl sm:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-blue-600">{{ $currentTemp }}°C</div>
-              <div class="sm:ml-8 sm:border-l sm:pl-8 border-blue-200 mt-4 sm:mt-0">
-                <div class="text-xl sm:text-2xl font-semibold text-blue-900">{{ $weatherDescription }}</div>
-                <div class="text-blue-700 text-lg sm:text-xl">Feels like {{ $feelsLike }}°C</div>
-              </div>
+        <!-- Interactive Windy Map -->
+        <div class="bg-gradient-to-br from-white to-blue-50 rounded-2xl p-4 sm:p-8 border border-blue-100 windy-container">
+            <div class="flex flex-col lg:flex-row lg:items-start gap-8">
+                <!-- Main Windy Iframe -->
+                <div class="w-full lg:w-3/4 overflow-hidden rounded-xl border-2 border-blue-200 bg-white">
+                    <iframe 
+                        width="100%" 
+                        height="650" 
+                        src="https://embed.windy.com/embed2.html?lat=50.303&lon=-122.738&zoom=11&level=surface&overlay=satellite&product=ecmwf&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&metricWind=kts&metricTemp=%C2%B0C&airport=CYPS" 
+                        frameborder="0"
+                        class="w-full"
+                        title="Windy.com Interactive Weather Map"
+                        loading="lazy">
+                    </iframe>
             </div>
 
-            <!-- Wind Information -->
-            <div class="bg-gradient-to-r from-white to-blue-50 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8">
-              <div class="flex flex-col sm:flex-row items-center justify-between">
-                <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-8 w-full sm:w-auto">
-                  <div class="text-center sm:text-left">
-                    <h3 class="text-blue-700 font-medium mb-2">Wind Speed</h3>
-                    <p class="text-2xl sm:text-3xl font-bold text-blue-900">{{ $windSpeed }} km/h</p>
+                <!-- Weather Info Sidebar -->
+                <div class="w-full lg:w-1/4">
+                    <!-- Controls Section -->
+                    <div class="bg-gradient-to-br from-blue-50 to-white rounded-xl p-4 sm:p-6 mb-6 border border-blue-100 weather-card">
+                        <h2 class="text-xl font-bold text-blue-900 mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            Map Controls
+                        </h2>
+                        <p class="text-sm text-blue-700 mb-4">Use these options to customize your weather view:</p>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-start">
+                                <span class="bg-blue-100 text-blue-800 p-1 rounded-full flex-shrink-0 mt-0.5 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </span>
+                                <span>Click and drag to move the map</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-blue-100 text-blue-800 p-1 rounded-full flex-shrink-0 mt-0.5 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </span>
+                                <span>Use the menu to switch between wind, rain, temperature layers</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-blue-100 text-blue-800 p-1 rounded-full flex-shrink-0 mt-0.5 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </span>
+                                <span>Use the time slider to view forecast predictions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-blue-100 text-blue-800 p-1 rounded-full flex-shrink-0 mt-0.5 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </span>
+                                <span>Zoom in/out for detailed local conditions</span>
+                            </li>
+                        </ul>
                   </div>
                   
-                  <!-- Wind Direction Compass -->
-                  <div class="relative">
-                    <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 border-blue-900 relative bg-gradient-to-br from-blue-900 to-blue-800 overflow-hidden">
-                      <!-- Degree Markers (36 marks for every 10 degrees) -->
-                      @php
-                        for($i = 0; $i < 36; $i++) {
-                          $length = $i % 9 === 0 ? '10px' : '5px';
-                          $width = $i % 9 === 0 ? '2px' : '1px';
-                          echo '<div class="absolute top-1/2 left-1/2 bg-blue-400" style="width: ' . $width . '; height: ' . $length . '; transform-origin: center; transform: translate(-50%, -50%) rotate(' . ($i * 10) . 'deg) translateY(-32px);"></div>';
-                        }
-                      @endphp
-
-                      <!-- Cardinal Lines -->
-                      <div class="absolute inset-0">
-                        <!-- North Line (Red) -->
-                        <div class="absolute top-1/2 left-1/2 w-0.5 h-[50%] bg-gradient-to-t from-transparent to-red-500" style="transform: translate(-50%, -50%) rotate(0deg)"></div>
-                        <!-- South Line -->
-                        <div class="absolute top-1/2 left-1/2 w-0.5 h-[50%] bg-gradient-to-b from-transparent to-white" style="transform: translate(-50%, -50%) rotate(180deg)"></div>
-                        <!-- East Line -->
-                        <div class="absolute top-1/2 left-1/2 w-0.5 h-[50%] bg-gradient-to-t from-transparent to-white" style="transform: translate(-50%, -50%) rotate(90deg)"></div>
-                        <!-- West Line -->
-                        <div class="absolute top-1/2 left-1/2 w-0.5 h-[50%] bg-gradient-to-t from-transparent to-white" style="transform: translate(-50%, -50%) rotate(270deg)"></div>
-                      </div>
-
-                      <!-- Cardinal Letters -->
-                      <div class="absolute inset-0">
-                        <span class="absolute top-2 left-1/2 -translate-x-1/2 text-xs sm:text-sm font-bold text-red-500">N</span>
-                        <span class="absolute bottom-2 left-1/2 -translate-x-1/2 text-xs sm:text-sm font-bold text-white">S</span>
-                        <span class="absolute top-1/2 right-2 -translate-y-1/2 text-xs sm:text-sm font-bold text-white">E</span>
-                        <span class="absolute top-1/2 left-2 -translate-y-1/2 text-xs sm:text-sm font-bold text-white">W</span>
-                      </div>
-
-                      <!-- Center Point and Current Direction -->
-                      <div class="absolute inset-0">
-                        <!-- Center Circle -->
-                        <div class="absolute top-1/2 left-1/2 w-2 sm:w-3 h-2 sm:h-3 bg-blue-400 rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
-                        
-                        <!-- Direction Pointer -->
-                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -rotate-45">
-                          <!-- Line -->
-                          <div class="h-[46px] sm:h-[62px] w-0.5 bg-gradient-to-t from-red-600 to-red-500 origin-bottom"></div>
-                          <!-- Triangle -->
-                          <div class="absolute -top-1 left-1/2 w-2 sm:w-3 h-2 sm:h-3 bg-red-500 transform -translate-x-1/2 rotate-45"></div>
-                        </div>
-                      </div>
+                    <!-- Flying Conditions -->
+                    <div class="bg-gradient-to-br from-blue-50 to-white rounded-xl p-4 sm:p-6 mb-6 border border-blue-100 weather-card">
+                        <h2 class="text-xl font-bold text-blue-900 mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                            </svg>
+                            Ideal Flying Conditions
+                        </h2>
+                        <ul class="space-y-2">
+                            <li class="flex items-center text-sm">
+                                <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                Wind below 15 knots
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                Visibility over 3 miles
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                Cloud ceiling above 2,500 ft
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                No precipitation
+                            </li>
+                        </ul>
                     </div>
                     
-                    <!-- Direction Label -->
-                    <div class="text-center mt-2 sm:mt-4">
-                      <span class="px-3 py-1 bg-blue-900 rounded-full text-red-500 text-xs sm:text-sm font-bold">NW</span>
+                    <!-- No-Fly Conditions -->
+                    <div class="bg-gradient-to-br from-red-50 to-white rounded-xl p-4 sm:p-6 border border-red-100 weather-card">
+                        <h2 class="text-xl font-bold text-red-900 mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-red-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                            No-Fly Conditions
+                        </h2>
+                        <ul class="space-y-2">
+                            <li class="flex items-center text-sm">
+                                <svg class="w-4 h-4 text-red-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                Strong, gusting winds (>20 knots)
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <svg class="w-4 h-4 text-red-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                Low solid cloud ceiling
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <svg class="w-4 h-4 text-red-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                Rain or snow conditions
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <svg class="w-4 h-4 text-red-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                Thunderstorms in vicinity
+                            </li>
+                        </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        <!-- Feature Callouts -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+            <!-- Wind Feature -->
+            <div class="bg-gradient-to-br from-blue-50 to-white rounded-xl p-6 border border-blue-100 weather-card">
+                <div class="flex items-center mb-4">
+                    <div class="p-3 bg-blue-100 rounded-lg mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                  </svg>
                     </div>
-                  </div>
-                  
-                  <div class="text-center sm:text-left">
-                    <h3 class="text-blue-700 font-medium mb-2">Wind Gusts</h3>
-                    <p class="text-2xl sm:text-3xl font-bold text-blue-900">{{ $windGusts }} km/h</p>
-                  </div>
+                    <h3 class="text-lg font-bold text-blue-900">Wind Patterns</h3>
                 </div>
-              </div>
-            </div>
-
-            <!-- Additional Weather Info -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
-              <!-- Visibility -->
-              <div class="bg-gradient-to-br from-white to-blue-50 rounded-xl p-4 sm:p-6 border border-blue-100">
-                <div class="flex items-center mb-2 sm:mb-3">
-                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-blue-700 mr-2 sm:mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                  </svg>
-                  <h3 class="text-blue-700 font-medium text-sm sm:text-base">Visibility</h3>
-                </div>
-                <p class="text-xl sm:text-2xl font-bold text-blue-900">{{ $visibility }} km</p>
+                <p class="text-sm text-gray-700">Monitor real-time wind speeds and directions to select optimal launch times. Visualize wind patterns at various altitudes.</p>
               </div>
 
-              <!-- Humidity -->
-              <div class="bg-gradient-to-br from-white to-blue-50 rounded-xl p-4 sm:p-6 border border-blue-100">
-                <div class="flex items-center mb-2 sm:mb-3">
-                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-blue-700 mr-2 sm:mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/>
+            <!-- Precipitation Feature -->
+            <div class="bg-gradient-to-br from-blue-50 to-white rounded-xl p-6 border border-blue-100 weather-card">
+                <div class="flex items-center mb-4">
+                    <div class="p-3 bg-blue-100 rounded-lg mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                   </svg>
-                  <h3 class="text-blue-700 font-medium text-sm sm:text-base">Humidity</h3>
                 </div>
-                <p class="text-xl sm:text-2xl font-bold text-blue-900">{{ $humidity }}%</p>
+                    <h3 class="text-lg font-bold text-blue-900">Precipitation</h3>
+                </div>
+                <p class="text-sm text-gray-700">Track rain and snow patterns to avoid adverse weather. View precipitation intensity and forecast to plan your activities accordingly.</p>
               </div>
 
-              <!-- Sunrise -->
-              <div class="bg-gradient-to-br from-white to-blue-50 rounded-xl p-4 sm:p-6 border border-blue-100">
-                <div class="flex items-center mb-2 sm:mb-3">
-                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-blue-700 mr-2 sm:mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/>
+            <!-- Temperature Feature -->
+            <div class="bg-gradient-to-br from-blue-50 to-white rounded-xl p-6 border border-blue-100 weather-card">
+                <div class="flex items-center mb-4">
+                    <div class="p-3 bg-blue-100 rounded-lg mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                   </svg>
-                  <h3 class="text-blue-700 font-medium text-sm sm:text-base">Sunrise</h3>
                 </div>
-                <p class="text-xl sm:text-2xl font-bold text-blue-900">6:30 AM</p>
-              </div>
-
-              <!-- Sunset -->
-              <div class="bg-gradient-to-br from-white to-blue-50 rounded-xl p-4 sm:p-6 border border-blue-100">
-                <div class="flex items-center mb-2 sm:mb-3">
-                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-blue-700 mr-2 sm:mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
-                  </svg>
-                  <h3 class="text-blue-700 font-medium text-sm sm:text-base">Sunset</h3>
+                    <h3 class="text-lg font-bold text-blue-900">Temperature</h3>
                 </div>
-                <p class="text-xl sm:text-2xl font-bold text-blue-900">8:45 PM</p>
-              </div>
-
-              <!-- Circuit Ceiling -->
-              <div class="bg-gradient-to-br from-white to-blue-50 rounded-xl p-4 sm:p-6 border border-blue-100">
-                <div class="flex items-center mb-2 sm:mb-3">
-                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-blue-700 mr-2 sm:mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 9l7-7 7 7"/>
-                  </svg>
-                  <h3 class="text-blue-700 font-medium text-sm sm:text-base">Circuit Ceiling</h3>
-                </div>
-                <p class="text-xl sm:text-2xl font-bold text-blue-900">13,000 ft</p>
-                <p class="text-xs sm:text-sm text-blue-600">Max altitude</p>
-              </div>
-            </div>
-          </div>
+                <p class="text-sm text-gray-700">Check ground and altitude temperatures to prepare properly. Temperature gradients affect air density and flying conditions.</p>
         </div>
         
-        <!-- Forecast -->
-        <div class="mt-8 sm:mt-12">
-          <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 mb-4 sm:mb-6">Hourly Forecast</h2>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
-            @foreach($hourlyForecast as $hour)
-            <div class="bg-gradient-to-br from-blue-50 to-white rounded-xl p-3 sm:p-4 text-center border border-blue-100">
-              <p class="font-semibold text-blue-900 text-sm sm:text-base">{{ $hour['time'] }}</p>
-              <div class="my-2 sm:my-3">
-                <span class="text-xl sm:text-2xl font-bold text-blue-900">{{ $hour['temp'] }}°C</span>
-              </div>
-              <p class="text-xs sm:text-sm text-blue-700">Wind: {{ $hour['wind'] }} km/h</p>
-              <p class="text-xs sm:text-sm text-blue-700">Gusts: {{ $hour['gusts'] }} km/h</p>
-              <p class="mt-2 sm:mt-3">
-                <span class="px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold text-white {{ $hour['safety'] === 'Good' ? 'bg-green-500' : ($hour['safety'] === 'Moderate' ? 'bg-yellow-500' : 'bg-red-500') }}">
-                  {{ $hour['safety'] }}
-                </span>
-              </p>
-            </div>
-            @endforeach
-          </div>
-        </div>
-        
-        <!-- Launch Sites -->
-        <div class="mt-8 sm:mt-12">
-          <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 mb-4 sm:mb-6">Launch Sites Conditions</h2>
-          <div class="overflow-x-auto rounded-xl border border-blue-100">
-            <table class="min-w-full">
-              <thead>
-                <tr class="bg-gradient-to-r from-blue-50 to-white">
-                  <th class="py-3 sm:py-4 px-4 sm:px-6 text-left text-xs sm:text-sm font-semibold text-blue-900">Site</th>
-                  <th class="py-3 sm:py-4 px-4 sm:px-6 text-left text-xs sm:text-sm font-semibold text-blue-900">Wind</th>
-                  <th class="py-3 sm:py-4 px-4 sm:px-6 text-left text-xs sm:text-sm font-semibold text-blue-900">Gusts</th>
-                  <th class="py-3 sm:py-4 px-4 sm:px-6 text-left text-xs sm:text-sm font-semibold text-blue-900">Direction</th>
-                  <th class="py-3 sm:py-4 px-4 sm:px-6 text-left text-xs sm:text-sm font-semibold text-blue-900">Status</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-blue-100">
-                @foreach($launchSites as $site)
-                <tr class="bg-white hover:bg-blue-50 transition-colors duration-200">
-                  <td class="py-3 sm:py-4 px-4 sm:px-6 text-xs sm:text-sm text-blue-900">{{ $site['name'] }}</td>
-                  <td class="py-3 sm:py-4 px-4 sm:px-6 text-xs sm:text-sm text-blue-900">{{ $site['wind'] }} km/h</td>
-                  <td class="py-3 sm:py-4 px-4 sm:px-6 text-xs sm:text-sm text-blue-900">{{ $site['gusts'] }} km/h</td>
-                  <td class="py-3 sm:py-4 px-4 sm:px-6 text-xs sm:text-sm text-blue-900">{{ $site['direction'] }}</td>
-                  <td class="py-3 sm:py-4 px-4 sm:px-6">
-                    <span class="px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold text-white {{ $site['status'] === 'Good' ? 'bg-green-500' : ($site['status'] === 'Moderate' ? 'bg-yellow-500' : 'bg-red-500') }}">
-                      {{ $site['status'] }}
-                    </span>
-                  </td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
-        
-        <!-- 7-Day Forecast -->
-        <div class="mt-8 sm:mt-12">
-          <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 mb-4 sm:mb-6">7-Day Forecast</h2>
-          <div class="bg-gradient-to-br from-white to-blue-50 rounded-xl border border-blue-100 overflow-hidden">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 divide-y sm:divide-y-0 sm:divide-x divide-blue-100">
-              @foreach($dailyForecast as $day)
-              <div class="p-4 sm:p-6">
-                <div class="text-center">
-                  <p class="font-bold text-blue-900 text-sm sm:text-base">{{ $day['day'] }}</p>
-                  <p class="text-xs sm:text-sm text-blue-600">{{ $day['date'] }}</p>
-                  <div class="my-2 sm:my-3">
-                    <span class="text-xl sm:text-2xl font-bold text-blue-900">{{ $day['highTemp'] }}°</span>
-                    <span class="text-blue-600 text-sm sm:text-base">/{{ $day['lowTemp'] }}°</span>
-                  </div>
-                  <div class="flex flex-col space-y-1 sm:space-y-2 mt-2 sm:mt-3">
-                    <div class="flex justify-between text-xs sm:text-sm">
-                      <span class="text-blue-700">Wind:</span>
-                      <span class="text-blue-900">{{ $day['windSpeed'] }} km/h</span>
+            <!-- Cloud Coverage Feature -->
+            <div class="bg-gradient-to-br from-blue-50 to-white rounded-xl p-6 border border-blue-100 weather-card">
+                <div class="flex items-center mb-4">
+                    <div class="p-3 bg-blue-100 rounded-lg mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                        </svg>
                     </div>
-                    <div class="flex justify-between text-xs sm:text-sm">
-                      <span class="text-blue-700">Gusts:</span>
-                      <span class="text-blue-900">{{ $day['windGusts'] }} km/h</span>
-                    </div>
-                    <div class="flex justify-between text-xs sm:text-sm">
-                      <span class="text-blue-700">Precip:</span>
-                      <span class="text-blue-900">{{ $day['precipitation'] }}%</span>
-                    </div>
-                  </div>
-                  <p class="text-xs sm:text-sm text-blue-700 mt-2 sm:mt-3">{{ $day['description'] }}</p>
-                  <div class="mt-2 sm:mt-4">
-                    <span class="px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold text-white {{ $day['safety'] === 'Good' ? 'bg-green-500' : ($day['safety'] === 'Moderate' ? 'bg-yellow-500' : 'bg-red-500') }}">
-                      {{ $day['safety'] }}
-                    </span>
-                  </div>
+                    <h3 class="text-lg font-bold text-blue-900">Cloud Coverage</h3>
                 </div>
-              </div>
-              @endforeach
-            </div>
-          </div>
+                <p class="text-sm text-gray-700">Assess cloud ceiling heights and coverage percentages. Determine visibility conditions and potential flying hazards.</p>
         </div>
       </div>
       
-      <!-- Weather Information Box -->
-      <div class="bg-gradient-to-br from-white to-blue-50 rounded-2xl p-4 sm:p-8 mt-8 sm:mt-12 border border-blue-100">
-        <h2 class="text-2xl sm:text-3xl font-bold text-blue-900 mb-4 sm:mb-6 flex items-center">
-          <span class="inline-block mr-2 sm:mr-3 p-2 bg-gradient-to-br from-blue-100 to-blue-50 rounded-xl">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-8 sm:w-8 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <!-- Weather Disclaimer -->
+        <div class="bg-gradient-to-br from-white to-blue-50 rounded-2xl p-6 mt-12 border border-blue-100">
+            <h2 class="text-2xl font-bold text-blue-900 mb-4 flex items-center">
+                <span class="inline-block mr-3 p-2 bg-gradient-to-br from-blue-100 to-blue-50 rounded-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </span>
-          Pemberton Weather
+                Weather Policy
         </h2>
         <div class="prose max-w-none text-gray-700">
-          <p class="mb-4 sm:mb-6 text-base sm:text-lg">The weather is important, few clouds and light winds are ideal for skydiving but are not always the case.</p>
-          
-          <div class="bg-gradient-to-r from-red-50 to-red-100 border-l-4 border-red-500 p-4 sm:p-6 mb-4 sm:mb-6 rounded-r-xl">
-            <p class="font-semibold text-red-900 text-base sm:text-lg">We do not skydive in:</p>
-            <ul class="list-none mt-2 sm:mt-3 space-y-1 sm:space-y-2">
-              <li class="flex items-center text-sm sm:text-base">
-                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-                Strong, gusting winds
-              </li>
-              <li class="flex items-center text-sm sm:text-base">
-                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-                Low solid cloud ceiling
-              </li>
-              <li class="flex items-center text-sm sm:text-base">
-                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-                Rain conditions
-              </li>
-            </ul>
+                <p class="mb-4">Mountain weather can change rapidly and unpredictably. While we use advanced forecasting tools, our qualified staff will make final weather evaluations on the day of your scheduled activity.</p>
+                
+                <div class="bg-gradient-to-r from-blue-50 to-blue-100 border-l-4 border-blue-500 p-4 mb-4 rounded-r-xl">
+                    <p class="text-blue-900 text-sm">If we need to cancel due to weather conditions, you can reschedule for another time or receive a full refund.</p>
           </div>
 
-          <p class="mb-4 sm:mb-6 text-base sm:text-lg">If we need to cancel due to the weather you can reschedule for another time and date or you will get a full refund.</p>
-          
-          <div class="bg-gradient-to-r from-blue-50 to-blue-100 border-l-4 border-blue-500 p-4 sm:p-6 mb-4 sm:mb-6 rounded-r-xl">
-            <p class="text-blue-900 text-sm sm:text-base">The weather can change so quickly here in the mountains and we cannot confidently rely on the weather forecast. Our qualified staff will make a weather evaluation on the day of the jump.</p>
+                <div class="bg-gradient-to-r from-yellow-50 to-yellow-100 border-l-4 border-yellow-500 p-4 rounded-r-xl">
+                    <p class="text-yellow-900 text-sm"><strong>Important:</strong> If you're concerned about the weather forecast for your booking date and wish to reschedule proactively, our normal cancellation policy applies.</p>
           </div>
-
-          <div class="bg-gradient-to-r from-yellow-50 to-yellow-100 border-l-4 border-yellow-500 p-4 sm:p-6 rounded-r-xl">
-            <p class="text-yellow-900 text-sm sm:text-base"><strong>Important:</strong> If you are concerned about the weather forecast for the day of your booking and wish to reschedule or get a refund, our normal cancellation policy applies.</p>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</body>
-</html>
 @endsection

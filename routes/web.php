@@ -8,6 +8,9 @@ use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\ProductImageController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -257,13 +260,34 @@ Route::get('/mad-mr-bert', function() {
     return view('mad-mr-bert');
 });
 
+Route::get('/mad-mr-bert/aircraft-catalog', function () {
+    return view('mad-mr-bert.aircraft-catalog');
+});
+
+Route::get('/mad-mr-bert/tanarg-neo', function () {
+    return view('mad-mr-bert.tanarg-neo');
+});
+
+Route::get('/mad-mr-bert/skypper-evo', function () {
+    return view('mad-mr-bert.skypper-evo');
+});
+
+Route::get('/mad-mr-bert/skypper-bushan', function () {
+    return view('mad-mr-bert.skypper-bushan');
+})->name('mad-mr-bert.skypper-bushan');
+
+Route::get('/mad-mr-bert/pixel-ultralight', function () {
+    return view('mad-mr-bert.pixel-ultralight');
+})->name('mad-mr-bert.pixel-ultralight');
+
 Route::get('/mad-mr-bert/magazine', function () {
     return view('mad-mr-bert.magazine');
 });
 
-Route::get('/mad-mr-bert/blog', function () {
-    return view('mad-mr-bert.blog');
-});
+// Blog routes
+Route::get('/mad-mr-bert/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('mad-mr-bert.blog');
+Route::get('/mad-mr-bert/blog/{slug}/preview', [App\Http\Controllers\BlogController::class, 'preview'])->name('mad-mr-bert.blog.preview');
+Route::get('/mad-mr-bert/blog/{slug}', [App\Http\Controllers\BlogController::class, 'show'])->name('mad-mr-bert.blog.show')->middleware('auth');
 
 Route::get('/mad-mr-bert/podcast', function () {
     return view('mad-mr-bert.podcast');
@@ -275,6 +299,37 @@ Route::get('/mad-mr-bert/thaichi', function () {
 
 Route::get('/mad-mr-bert/merchandise', function () {
     return view('mad-mr-bert.merchandise');
+});
+
+Route::get('/mad-mr-bert/microavionics', function () {
+    return view('mad-mr-bert.microavionics');
+});
+
+Route::prefix('mad-mr-bert')->group(function() {
+    // Merchandise page
+    Route::get('/merchandise', function() {
+        return view('mad-mr-bert.merchandise');
+    })->name('mad-mr-bert.merchandise');
+    
+    // Cart Routes
+    Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('mad-mr-bert.add-to-cart');
+    Route::get('/cart', [CartController::class, 'viewCart'])->name('mad-mr-bert.cart');
+    Route::post('/update-cart', [CartController::class, 'updateCart'])->name('mad-mr-bert.update-cart');
+    Route::delete('/remove-item', [CartController::class, 'removeItem'])->name('mad-mr-bert.remove-item');
+    
+    // Checkout Routes
+    Route::get('/checkout', [CartController::class, 'checkout'])->name('mad-mr-bert.checkout');
+    Route::post('/process-order', [CartController::class, 'processOrder'])->name('mad-mr-bert.process-order');
+    Route::get('/order-confirmation', [CartController::class, 'orderConfirmation'])->name('mad-mr-bert.order-confirmation');
+    
+    // Cart API Routes for AJAX
+    Route::middleware('web')->prefix('api')->group(function () {
+        Route::get('/cart-count', [CartController::class, 'getCartCount'])->name('mad-mr-bert.cart-count');
+    });
+
+    // PayPal routes
+    Route::get('/paypal/success', [CartController::class, 'paypalSuccess'])->name('mad-mr-bert.paypal.success');
+    Route::get('/paypal/cancel', [CartController::class, 'paypalCancel'])->name('mad-mr-bert.paypal.cancel');
 });
 
 /*
@@ -311,7 +366,7 @@ Route::prefix('admin')->name('admin.')->middleware('web')->group(function () {
         Route::get('login', [App\Http\Controllers\Admin\AuthController::class, 'showLoginForm'])->name('login');
         Route::post('login', [App\Http\Controllers\Admin\AuthController::class, 'login']);
     });
-
+    
     // Protected admin routes
     Route::middleware('auth:admin')->group(function () {
         Route::post('logout', [App\Http\Controllers\Admin\AuthController::class, 'logout'])->name('logout');
@@ -319,62 +374,14 @@ Route::prefix('admin')->name('admin.')->middleware('web')->group(function () {
         
         // Bookings routes
         Route::prefix('bookings')->name('bookings.')->group(function () {
-            Route::get('/{filter?}', [App\Http\Controllers\Admin\AdminBookingController::class, 'index'])
-                ->where('filter', 'today|confirmed|pending|canceled|all')
-                ->name('index');
-            Route::get('/export', [App\Http\Controllers\Admin\AdminBookingController::class, 'export'])
-                ->name('export');
-            Route::patch('/{booking}/update-status', [App\Http\Controllers\Admin\AdminBookingController::class, 'updateStatus'])
-                ->name('update-status');
+            Route::get('/', [App\Http\Controllers\Admin\AdminBookingController::class, 'index'])->name('index');
+            Route::get('/{id}', [App\Http\Controllers\Admin\AdminBookingController::class, 'show'])->name('show');
+            Route::put('/{id}/status', [App\Http\Controllers\Admin\AdminBookingController::class, 'updateStatus'])->name('update-status');
+            Route::delete('/{id}', [App\Http\Controllers\Admin\AdminBookingController::class, 'destroy'])->name('destroy');
+            Route::get('/export/csv', [App\Http\Controllers\Admin\AdminBookingController::class, 'exportCsv'])->name('export.csv');
         });
         
-        // Training routes
-        Route::prefix('training')->name('training.')->group(function () {
-            Route::get('beginner', [App\Http\Controllers\Admin\AdminController::class, 'beginnerTraining'])->name('beginner');
-            Route::get('advanced', [App\Http\Controllers\Admin\AdminController::class, 'advancedTraining'])->name('advanced');
-            Route::get('certification', [App\Http\Controllers\Admin\AdminController::class, 'certificationTraining'])->name('certification');
-        });
-
-        // Products routes
-        Route::prefix('products')->name('products.')->group(function () {
-            Route::get('hang-glider', [App\Http\Controllers\Admin\AdminController::class, 'hangGliderProducts'])->name('hang-glider');
-            Route::get('merchandise', [App\Http\Controllers\Admin\AdminController::class, 'merchandiseProducts'])->name('merchandise');
-        });
-
-        // Contacts routes
-        Route::prefix('contacts')->name('contacts.')->group(function () {
-            Route::get('/', [App\Http\Controllers\Admin\AdminContactController::class, 'index'])->name('index');
-            Route::get('/export', [App\Http\Controllers\Admin\AdminContactController::class, 'export'])->name('export');
-            Route::get('/{contact}', [App\Http\Controllers\Admin\AdminContactController::class, 'show'])->name('show');
-            Route::patch('/{contact}/status', [App\Http\Controllers\Admin\AdminContactController::class, 'updateStatus'])->name('update-status');
-            Route::delete('/{contact}', [App\Http\Controllers\Admin\AdminContactController::class, 'destroy'])->name('destroy');
-        });
-
-        // Reviews routes
-        Route::prefix('reviews')->name('reviews.')->group(function () {
-            Route::get('/', [App\Http\Controllers\Admin\AdminReviewController::class, 'index'])->name('index');
-            Route::get('/export', [App\Http\Controllers\Admin\AdminReviewController::class, 'export'])->name('export');
-            Route::get('/{review}', [App\Http\Controllers\Admin\AdminReviewController::class, 'show'])->name('show');
-            Route::patch('/{review}/status', [App\Http\Controllers\Admin\AdminReviewController::class, 'updateStatus'])->name('update-status');
-            Route::delete('/{review}', [App\Http\Controllers\Admin\AdminReviewController::class, 'destroy'])->name('destroy');
-        });
-
-        // Promotional Emails routes
-        Route::prefix('promotional-emails')->name('promotional-emails.')->group(function () {
-            Route::get('/', [App\Http\Controllers\Admin\AdminPromotionalEmailController::class, 'index'])->name('index');
-            Route::get('/create', [App\Http\Controllers\Admin\AdminPromotionalEmailController::class, 'create'])->name('create');
-            Route::post('/', [App\Http\Controllers\Admin\AdminPromotionalEmailController::class, 'store'])->name('store');
-            Route::get('/{promotionalEmail}', [App\Http\Controllers\Admin\AdminPromotionalEmailController::class, 'show'])->name('show');
-            Route::get('/{promotionalEmail}/edit', [App\Http\Controllers\Admin\AdminPromotionalEmailController::class, 'edit'])->name('edit');
-            Route::put('/{promotionalEmail}', [App\Http\Controllers\Admin\AdminPromotionalEmailController::class, 'update'])->name('update');
-            Route::post('/{promotionalEmail}/send-test', [App\Http\Controllers\Admin\AdminPromotionalEmailController::class, 'sendTest'])->name('send-test');
-            Route::post('/{promotionalEmail}/send', [App\Http\Controllers\Admin\AdminPromotionalEmailController::class, 'send'])->name('send');
-            Route::delete('/{promotionalEmail}', [App\Http\Controllers\Admin\AdminPromotionalEmailController::class, 'destroy'])->name('destroy');
-        });
-
-        Route::get('users', [App\Http\Controllers\Admin\AdminController::class, 'users'])->name('users');
-        
-        // Settings Routes
+        // Settings routes
         Route::prefix('settings')->name('settings.')->group(function () {
             Route::get('/', [App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('index');
             Route::post('/', [App\Http\Controllers\Admin\SettingsController::class, 'update'])->name('update');
@@ -395,6 +402,93 @@ Route::prefix('admin')->name('admin.')->middleware('web')->group(function () {
             Route::post('/categories', [GalleryController::class, 'storeCategory'])->name('categories.store');
             Route::put('/categories/{category}', [GalleryController::class, 'updateCategory'])->name('categories.update');
             Route::delete('/categories/{category}', [GalleryController::class, 'destroyCategory'])->name('categories.destroy');
+        });
+        
+        // Product Image Management Routes
+        Route::prefix('products')->name('products.')->group(function () {
+            // Main product CRUD routes
+            Route::get('/', [App\Http\Controllers\Admin\ProductController::class, 'index'])->name('index');
+            Route::get('/create', [App\Http\Controllers\Admin\ProductController::class, 'create'])->name('create');
+            Route::post('/', [App\Http\Controllers\Admin\ProductController::class, 'store'])->name('store');
+            
+            // Special product type routes - must be before /{id} routes
+            Route::get('/hang-glider', [App\Http\Controllers\Admin\AdminController::class, 'hangGliderProducts'])->name('hang-glider');
+            Route::get('/merchandise', [App\Http\Controllers\Admin\AdminController::class, 'merchandiseProducts'])->name('merchandise');
+            
+            Route::get('/{id}', [App\Http\Controllers\Admin\ProductController::class, 'show'])->name('show');
+            Route::get('/{id}/edit', [App\Http\Controllers\Admin\ProductController::class, 'edit'])->name('edit');
+            Route::put('/{id}', [App\Http\Controllers\Admin\ProductController::class, 'update'])->name('update');
+            Route::delete('/{id}', [App\Http\Controllers\Admin\ProductController::class, 'destroy'])->name('destroy');
+            Route::patch('/{id}/stock', [App\Http\Controllers\Admin\ProductController::class, 'updateStock'])->name('update-stock');
+            Route::patch('/{id}/toggle-featured', [App\Http\Controllers\Admin\ProductController::class, 'toggleFeatured'])->name('toggle-featured');
+
+            // Product image routes
+            Route::get('/{productId}/images', [ProductImageController::class, 'index'])->name('images.index');
+            Route::get('/{productId}/images/create', [ProductImageController::class, 'create'])->name('images.create');
+            Route::post('/{productId}/images', [ProductImageController::class, 'store'])->name('images.store');
+            Route::get('/{productId}/images/{imageId}/edit', [ProductImageController::class, 'edit'])->name('images.edit');
+            Route::put('/{productId}/images/{imageId}', [ProductImageController::class, 'update'])->name('images.update');
+            Route::delete('/{productId}/images/{imageId}', [ProductImageController::class, 'destroy'])->name('images.destroy');
+            Route::post('/{productId}/images/{imageId}/primary', [ProductImageController::class, 'setPrimary'])->name('images.set-primary');
+            Route::post('/{productId}/images/reorder', [ProductImageController::class, 'reorder'])->name('images.reorder');
+        });
+        
+        // Contact Management Routes
+        Route::prefix('contacts')->name('contacts.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Admin\AdminContactController::class, 'index'])->name('index');
+            Route::get('/{contact}', [App\Http\Controllers\Admin\AdminContactController::class, 'show'])->name('show');
+            Route::put('/{contact}/status', [App\Http\Controllers\Admin\AdminContactController::class, 'updateStatus'])->name('update-status');
+            Route::delete('/{contact}', [App\Http\Controllers\Admin\AdminContactController::class, 'destroy'])->name('destroy');
+            Route::get('/export/csv', [App\Http\Controllers\Admin\AdminContactController::class, 'export'])->name('export');
+        });
+        
+        // Promotional Emails Routes
+        Route::prefix('promotional-emails')->name('promotional-emails.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Admin\AdminPromotionalEmailController::class, 'index'])->name('index');
+            Route::get('/create', [App\Http\Controllers\Admin\AdminPromotionalEmailController::class, 'create'])->name('create');
+            Route::post('/', [App\Http\Controllers\Admin\AdminPromotionalEmailController::class, 'store'])->name('store');
+            Route::get('/{promotionalEmail}', [App\Http\Controllers\Admin\AdminPromotionalEmailController::class, 'show'])->name('show');
+            Route::get('/{promotionalEmail}/edit', [App\Http\Controllers\Admin\AdminPromotionalEmailController::class, 'edit'])->name('edit');
+            Route::put('/{promotionalEmail}', [App\Http\Controllers\Admin\AdminPromotionalEmailController::class, 'update'])->name('update');
+            Route::delete('/{promotionalEmail}', [App\Http\Controllers\Admin\AdminPromotionalEmailController::class, 'destroy'])->name('destroy');
+            Route::post('/{promotionalEmail}/send-test', [App\Http\Controllers\Admin\AdminPromotionalEmailController::class, 'sendTest'])->name('send-test');
+            Route::post('/{promotionalEmail}/send', [App\Http\Controllers\Admin\AdminPromotionalEmailController::class, 'send'])->name('send');
+        });
+        
+        // Reviews Management Routes
+        Route::prefix('reviews')->name('reviews.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Admin\AdminReviewController::class, 'index'])->name('index');
+            Route::get('/{review}', [App\Http\Controllers\Admin\AdminReviewController::class, 'show'])->name('show');
+            Route::put('/{review}/status', [App\Http\Controllers\Admin\AdminReviewController::class, 'updateStatus'])->name('update-status');
+            Route::delete('/{review}', [App\Http\Controllers\Admin\AdminReviewController::class, 'destroy'])->name('destroy');
+            Route::get('/export/csv', [App\Http\Controllers\Admin\AdminReviewController::class, 'export'])->name('export');
+        });
+        
+        // Order Management Routes
+        Route::prefix('orders')->name('orders.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('index');
+            Route::get('/{order}', [App\Http\Controllers\Admin\OrderController::class, 'show'])->name('show');
+            Route::put('/{order}', [App\Http\Controllers\Admin\OrderController::class, 'update'])->name('update');
+            Route::get('/export/csv', [App\Http\Controllers\Admin\OrderController::class, 'export'])->name('export');
+        });
+        
+        // Training Management Routes
+        Route::prefix('training')->name('training.')->group(function () {
+            Route::get('/beginner', [App\Http\Controllers\Admin\AdminController::class, 'beginnerTraining'])->name('beginner');
+            Route::get('/advanced', [App\Http\Controllers\Admin\AdminController::class, 'advancedTraining'])->name('advanced');
+            Route::get('/certification', [App\Http\Controllers\Admin\AdminController::class, 'certificationTraining'])->name('certification');
+        });
+
+        // Blog Post Management Routes
+        Route::prefix('blog-posts')->name('blog-posts.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Admin\BlogPostController::class, 'index'])->name('index');
+            Route::get('/create', [App\Http\Controllers\Admin\BlogPostController::class, 'create'])->name('create');
+            Route::post('/', [App\Http\Controllers\Admin\BlogPostController::class, 'store'])->name('store');
+            Route::get('/{blogPost}', [App\Http\Controllers\Admin\BlogPostController::class, 'show'])->name('show');
+            Route::get('/{blogPost}/edit', [App\Http\Controllers\Admin\BlogPostController::class, 'edit'])->name('edit');
+            Route::put('/{blogPost}', [App\Http\Controllers\Admin\BlogPostController::class, 'update'])->name('update');
+            Route::delete('/{blogPost}', [App\Http\Controllers\Admin\BlogPostController::class, 'destroy'])->name('destroy');
+            Route::patch('/{blogPost}/toggle-published', [App\Http\Controllers\Admin\BlogPostController::class, 'togglePublished'])->name('toggle-published');
         });
     });
 });

@@ -20,7 +20,7 @@
                 </div>
             </div>
 
-            <!-- Average Rating -->
+            <!-- Average Instructor Rating -->
             <div class="bg-white rounded-lg shadow-sm p-6">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 bg-yellow-500 rounded-md p-3">
@@ -29,38 +29,38 @@
                         </svg>
                     </div>
                     <div class="ml-4">
-                        <h2 class="text-sm font-medium text-gray-600">Average Rating</h2>
-                        <p class="text-2xl font-semibold text-gray-900">{{ number_format($stats['average_rating'], 1) }}</p>
+                        <h2 class="text-sm font-medium text-gray-600">Avg. Instructor Rating</h2>
+                        <p class="text-2xl font-semibold text-gray-900">{{ number_format($stats['average_instructor_rating'], 1) }}</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Pending Reviews -->
-            <div class="bg-white rounded-lg shadow-sm p-6">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0 bg-orange-500 rounded-md p-3">
-                        <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <div class="ml-4">
-                        <h2 class="text-sm font-medium text-gray-600">Pending Reviews</h2>
-                        <p class="text-2xl font-semibold text-gray-900">{{ $stats['pending'] }}</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Today's Reviews -->
+            <!-- Average Fun Rating -->
             <div class="bg-white rounded-lg shadow-sm p-6">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 bg-green-500 rounded-md p-3">
                         <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
                     <div class="ml-4">
-                        <h2 class="text-sm font-medium text-gray-600">Today's Reviews</h2>
-                        <p class="text-2xl font-semibold text-gray-900">{{ $stats['today'] }}</p>
+                        <h2 class="text-sm font-medium text-gray-600">Avg. Fun Rating</h2>
+                        <p class="text-2xl font-semibold text-gray-900">{{ number_format($stats['average_fun_rating'], 1) }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Average Safety Rating -->
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 bg-blue-500 rounded-md p-3">
+                        <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="text-sm font-medium text-gray-600">Avg. Safety Rating</h2>
+                        <p class="text-2xl font-semibold text-gray-900">{{ number_format($stats['average_safety_rating'], 1) }}</p>
                     </div>
                 </div>
             </div>
@@ -70,8 +70,8 @@
         <div class="bg-white rounded-lg shadow-sm mb-6">
             <div class="p-4">
                 <form action="{{ route('admin.reviews.index') }}" method="GET" class="space-y-4">
-                    <div class="flex items-center space-x-4">
-                        <div class="flex-1">
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex-1 min-w-[300px]">
                             <label for="search" class="sr-only">Search</label>
                             <div class="relative">
                                 <input type="text" 
@@ -79,7 +79,7 @@
                                        id="search"
                                        value="{{ request('search') }}"
                                        class="block w-full rounded-md border-gray-300 pl-10 focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                                       placeholder="Search by name, email, or review...">
+                                       placeholder="Search by name, email, or feedback...">
                                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                     <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -88,19 +88,30 @@
                             </div>
                         </div>
 
-                        <div class="w-48">
-                            <label for="rating" class="sr-only">Rating</label>
-                            <select name="rating" 
-                                    id="rating" 
+                        <div class="w-40">
+                            <label for="instructor_rating" class="sr-only">Instructor Rating</label>
+                            <select name="instructor_rating" 
+                                    id="instructor_rating" 
                                     class="block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                                <option value="">All Ratings</option>
+                                <option value="">All Instructor Ratings</option>
                                 @for($i = 5; $i >= 1; $i--)
-                                    <option value="{{ $i }}" {{ request('rating') == $i ? 'selected' : '' }}>{{ $i }} Stars</option>
+                                    <option value="{{ $i }}" {{ request('instructor_rating') == $i ? 'selected' : '' }}>{{ $i }} Stars</option>
                                 @endfor
                             </select>
                         </div>
 
-                        <div class="w-48">
+                        <div class="w-40">
+                            <label for="aircraft_type" class="sr-only">Aircraft Type</label>
+                            <select name="aircraft_type" 
+                                    id="aircraft_type" 
+                                    class="block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                                <option value="">All Aircraft Types</option>
+                                <option value="Open-cockpit trike" {{ request('aircraft_type') === 'Open-cockpit trike' ? 'selected' : '' }}>Open-cockpit trike</option>
+                                <option value="Fixed-wing, closed-cockpit aircraft" {{ request('aircraft_type') === 'Fixed-wing, closed-cockpit aircraft' ? 'selected' : '' }}>Fixed-wing, closed-cockpit</option>
+                            </select>
+                        </div>
+
+                        <div class="w-40">
                             <label for="status" class="sr-only">Status</label>
                             <select name="status" 
                                     id="status" 
@@ -135,7 +146,7 @@
                             Filter
                         </button>
 
-                        @if(request()->hasAny(['search', 'rating', 'status', 'from_date', 'to_date']))
+                        @if(request()->hasAny(['search', 'instructor_rating', 'fun_rating', 'safety_rating', 'aircraft_type', 'status', 'from_date', 'to_date']))
                             <a href="{{ route('admin.reviews.index') }}" 
                                class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                 Clear
@@ -164,13 +175,13 @@
                                 Reviewer
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Rating & Review
+                                Flight Details
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Ratings
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Status
-                            </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Date
                             </th>
                             <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Actions
@@ -185,7 +196,7 @@
                                         <div class="flex-shrink-0 h-10 w-10">
                                             <div class="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center">
                                                 @if($review->image_url)
-                                                    <img src="{{ $review->image_url }}" alt="{{ $review->name }}'s profile picture" class="h-10 w-10 rounded-full">
+                                                    <img src="{{ $review->image_url }}" alt="{{ $review->name }}'s profile picture" class="h-10 w-10 rounded-full object-cover">
                                                 @endif
                                             </div>
                                         </div>
@@ -196,15 +207,34 @@
                                             <div class="text-sm text-gray-500">
                                                 {{ $review->email }}
                                             </div>
+                                            <div class="text-xs text-gray-400">
+                                                {{ $review->created_at->format('M d, Y') }}
+                                            </div>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="flex items-center">
-                                        <div class="flex-shrink-0">
-                                            <div class="flex items-center">
+                                    <div class="text-sm text-gray-900">
+                                        <div><span class="font-medium">Date:</span> {{ $review->flight_date->format('M d, Y') }}</div>
+                                        <div><span class="font-medium">Aircraft:</span> 
+                                            @if(is_array($review->aircraft_type))
+                                                {{ implode(', ', $review->aircraft_type) }}
+                                            @else
+                                                {{ $review->aircraft_type }}
+                                            @endif
+                                        </div>
+                                        <div class="mt-2 text-xs">
+                                            <span class="font-medium">Feedback:</span> {{ Str::limit($review->feedback, 100) }}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="text-sm">
+                                        <div class="flex items-center">
+                                            <span class="font-medium mr-2">Instructor:</span>
+                                            <div class="flex">
                                                 @for($i = 1; $i <= 5; $i++)
-                                                    <svg class="h-5 w-5 {{ $i <= $review->rating ? 'text-yellow-400' : 'text-gray-300' }}" 
+                                                    <svg class="h-4 w-4 {{ $i <= $review->instructor_rating ? 'text-yellow-400' : 'text-gray-300' }}" 
                                                          fill="currentColor" 
                                                          viewBox="0 0 20 20">
                                                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -212,21 +242,42 @@
                                                 @endfor
                                             </div>
                                         </div>
-                                        <div class="ml-4">
-                                            <div class="text-sm text-gray-900">{{ Str::limit($review->review, 100) }}</div>
+                                        <div class="flex items-center mt-1">
+                                            <span class="font-medium mr-2">Fun:</span>
+                                            <div class="flex">
+                                                @for($i = 1; $i <= 5; $i++)
+                                                    <svg class="h-4 w-4 {{ $i <= $review->fun_rating ? 'text-yellow-400' : 'text-gray-300' }}" 
+                                                         fill="currentColor" 
+                                                         viewBox="0 0 20 20">
+                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                    </svg>
+                                                @endfor
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center mt-1">
+                                            <span class="font-medium mr-2">Safety:</span>
+                                            <div class="flex">
+                                                @for($i = 1; $i <= 5; $i++)
+                                                    <svg class="h-4 w-4 {{ $i <= $review->safety_rating ? 'text-yellow-400' : 'text-gray-300' }}" 
+                                                         fill="currentColor" 
+                                                         viewBox="0 0 20 20">
+                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                    </svg>
+                                                @endfor
+                                            </div>
+                                        </div>
+                                        <div class="mt-2">
+                                            <span class="font-medium">Return Likelihood:</span> {{ $review->likelihood }}/5
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
                                         {{ $review->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 
                                            ($review->status === 'approved' ? 'bg-green-100 text-green-800' : 
                                            'bg-red-100 text-red-800') }}">
-                                        {{ ucfirst($review->status) }}
+                                        {{ ucfirst($review->status ?? 'pending') }}
                                     </span>
-                                </td>
-                                <td class="px-6 py-4 text-sm text-gray-500">
-                                    {{ $review->created_at->format('M d, Y H:i') }}
                                 </td>
                                 <td class="px-6 py-4 text-right text-sm font-medium">
                                     <div class="flex justify-end space-x-3">
@@ -254,14 +305,16 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" 
-                                                    class="text-red-600 hover:text-red-900">Delete</button>
+                                                    class="text-red-600 hover:text-red-900">
+                                                Delete
+                                            </button>
                                         </form>
                                     </div>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                                <td colspan="5" class="px-6 py-4 text-center text-sm text-gray-500">
                                     No reviews found
                                 </td>
                             </tr>
@@ -269,9 +322,9 @@
                     </tbody>
                 </table>
             </div>
-
+            
             <!-- Pagination -->
-            <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
+            <div class="px-4 py-3 bg-white border-t border-gray-200 sm:px-6">
                 {{ $reviews->links() }}
             </div>
         </div>

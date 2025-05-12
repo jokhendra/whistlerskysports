@@ -39,6 +39,12 @@ class AuthController extends Controller
 
         Auth::login($user);
 
+        // Handle redirect if provided
+        $redirect = $request->input('redirect');
+        if ($redirect) {
+            return redirect($redirect);
+        }
+
         return redirect()->route('home')
             ->with('success', 'Account created successfully!');
     }
@@ -53,6 +59,12 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             Log::info('User logged in: ' . Auth::user()->email);
+            
+            // Handle redirect if provided
+            $redirect = $request->input('redirect');
+            if ($redirect) {
+                return redirect($redirect);
+            }
 
             return redirect()->intended(route('home'));
         }
