@@ -115,6 +115,20 @@
                            id="email" 
                            name="email" 
                            class="w-full p-2 border border-gray-300 rounded"
+                           value="{{ old('email','nothing@gmail.com') }}"
+                           required>
+                </div>
+                
+                <!-- Name -->
+                <div class="mb-6">
+                    <label for="name" class="block mb-2 font-medium">
+                        What's your name?<span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" 
+                           id="name" 
+                           name="name" 
+                           class="w-full p-2 border border-gray-300 rounded"
+                           value="{{ old('name','John Doe') }}"
                            required>
                 </div>
                 
@@ -127,6 +141,7 @@
                            id="flight_date" 
                            name="flight_date" 
                            class="w-full md:w-60 p-2 border border-gray-300 rounded"
+                           value="{{ old('flight_date', '2025-01-01') }}"
                            required>
                 </div>
                 
@@ -220,6 +235,7 @@
                                min="1" 
                                max="5" 
                                class="w-full"
+                               value="{{ old('likelihood', '3') }}"
                                required>
                         <div class="flex justify-between w-full mt-1 text-xs">
                             <div class="text-center max-w-[80px]">I am not coming</div>
@@ -233,21 +249,43 @@
                 
                 <div class="border-t border-dashed border-gray-300 my-6"></div>
                 
+                <!-- Feedback -->
+                <div class="mb-6">
+                    <label for="feedback" class="block mb-2 font-medium">
+                        Your feedback on the experience (minimum 10 characters)<span class="text-red-500">*</span>
+                    </label>
+                    <textarea 
+                           id="feedback" 
+                           name="feedback" 
+                           rows="4"
+                           class="w-full p-2 border border-gray-300 rounded"
+                           value="{{ old('feedback', 'This is a test feedback') }}"
+                           required
+                           minlength="10"></textarea>
+                </div>
+                
                 <!-- Photo Upload -->
                 <div class="mb-6">
                     <label class="block mb-2 font-medium">
                         Feel free to upload a photo or a short 5-second clip of your best moments with us!
                     </label>
                     <div class="border border-dashed border-gray-300 p-4 text-center mt-2 relative">
-                        <div id="drop-area" class="cursor-pointer">
-                            <p>Drop image here or select image</p>
+                        <div id="drop-area" class="cursor-pointer min-h-[120px] flex flex-col items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <p class="text-gray-600">Drop image/video here or click to select</p>
+                            <p class="text-xs text-gray-500 mt-1">Supported: JPG, PNG, GIF, MP4, MOV (max 10MB)</p>
                             <input type="file" 
                                    id="media_upload" 
                                    name="media_upload" 
-                                   class="hidden"
+                                   class="opacity-0 absolute inset-0 w-full h-full cursor-pointer"
                                    accept="image/*,video/*">
                         </div>
+                        <div id="file-preview" class="hidden flex flex-col items-center justify-center mt-4"></div>
                     </div>
+                    <!-- Debug info for file upload -->
+                    <div id="upload-debug" class="mt-2 text-xs text-gray-500"></div>
                 </div>
                 
                 <!-- Social Media -->
@@ -256,12 +294,12 @@
                         Do you currently maintain an account on a social media site?
                     </label>
                     <div class="custom-radio-checkbox">
-                        <input type="radio" id="social_yes" name="has_social_media" value="yes">
+                        <input type="radio" id="social_yes" name="has_social_media" value="yes" {{ old('has_social_media', 'yes') == 'yes' ? 'checked' : '' }}>
                         <label for="social_yes">Yes - then why don't you follow us and show some love!</label>
                     </div>
                     
                     <div class="custom-radio-checkbox">
-                        <input type="radio" id="social_no" name="has_social_media" value="no">
+                        <input type="radio" id="social_no" name="has_social_media" value="no" {{ old('has_social_media', 'no') == 'no' ? 'checked' : '' }}>
                         <label for="social_no">Nay that's not for me</label>
                     </div>
                 </div>
@@ -289,64 +327,167 @@ document.addEventListener('DOMContentLoaded', function() {
     // File upload handling
     const dropArea = document.getElementById('drop-area');
     const fileInput = document.getElementById('media_upload');
+    const filePreview = document.getElementById('file-preview');
+    const uploadDebug = document.getElementById('upload-debug');
     
-    dropArea.addEventListener('click', function() {
-        fileInput.click();
+    // Update debug info 
+    function updateDebugInfo(message) {
+        uploadDebug.textContent = message;
+    }
+    
+    updateDebugInfo('File upload ready. No file selected.');
+    
+    // Direct file input change event
+    fileInput.addEventListener('change', function(e) {
+        if (fileInput.files.length) {
+            const file = fileInput.files[0];
+            updateDebugInfo('File selected via input: ' + file.name + ' (' + formatFileSize(file.size) + ')');
+            handleFileSelection(file);
+        } else {
+            updateDebugInfo('No file selected from input.');
+        }
     });
     
+    // Click on drop area
+    dropArea.addEventListener('click', function(e) {
+        // Don't trigger another click if we're already clicking the input
+        if (e.target !== fileInput) {
+            fileInput.click();
+        }
+    });
+    
+    // Drag events
     dropArea.addEventListener('dragover', function(e) {
         e.preventDefault();
         dropArea.classList.add('border-blue-500');
+        dropArea.classList.add('bg-blue-50');
+        updateDebugInfo('Drop file here...');
     });
     
     dropArea.addEventListener('dragleave', function() {
         dropArea.classList.remove('border-blue-500');
+        dropArea.classList.remove('bg-blue-50');
+        if (!fileInput.files.length) {
+            updateDebugInfo('File upload ready. No file selected.');
+        }
     });
     
     dropArea.addEventListener('drop', function(e) {
         e.preventDefault();
         dropArea.classList.remove('border-blue-500');
+        dropArea.classList.remove('bg-blue-50');
         
         if (e.dataTransfer.files.length) {
-            fileInput.files = e.dataTransfer.files;
-            updateFilePreview(e.dataTransfer.files[0]);
+            const file = e.dataTransfer.files[0];
+            updateDebugInfo('File dropped: ' + file.name + ' (' + formatFileSize(file.size) + ')');
+            
+            // Manually set the file input value for the form
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            fileInput.files = dataTransfer.files;
+            
+            handleFileSelection(file);
         }
     });
     
-    fileInput.addEventListener('change', function() {
-        if (fileInput.files.length) {
-            updateFilePreview(fileInput.files[0]);
+    function handleFileSelection(file) {
+        // Check file size (10MB max)
+        const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+        if (file.size > maxSize) {
+            alert('File is too large. Maximum size is 10MB.');
+            updateDebugInfo('Error: File too large (' + formatFileSize(file.size) + '). Maximum is 10MB.');
+            return;
         }
-    });
-    
-    function updateFilePreview(file) {
-        const fileType = file.type.split('/')[0];
         
         // Clear previous preview
-        while (dropArea.firstChild) {
-            dropArea.removeChild(dropArea.firstChild);
-        }
+        filePreview.innerHTML = '';
+        filePreview.classList.remove('hidden');
+        
+        // Show appropriate preview based on file type
+        const fileType = file.type.split('/')[0];
         
         if (fileType === 'image') {
-            const img = document.createElement('img');
-            img.src = URL.createObjectURL(file);
-            img.style.maxHeight = '100px';
-            img.style.margin = '0 auto';
-            dropArea.appendChild(img);
+            createImagePreview(file);
+            updateDebugInfo('Image selected: ' + file.name + ' (' + formatFileSize(file.size) + ')');
         } else if (fileType === 'video') {
-            const video = document.createElement('video');
-            video.src = URL.createObjectURL(file);
-            video.style.maxHeight = '100px';
-            video.style.margin = '0 auto';
-            video.controls = true;
-            dropArea.appendChild(video);
+            createVideoPreview(file);
+            updateDebugInfo('Video selected: ' + file.name + ' (' + formatFileSize(file.size) + ')');
+        } else {
+            alert('Unsupported file type. Please upload an image or video.');
+            updateDebugInfo('Error: Unsupported file type (' + file.type + ')');
+            return;
         }
         
-        const fileName = document.createElement('p');
-        fileName.textContent = file.name;
-        fileName.className = 'mt-2 text-sm text-gray-600';
-        dropArea.appendChild(fileName);
+        // Add file info
+        const fileInfo = document.createElement('div');
+        fileInfo.className = 'mt-2 text-sm text-gray-600 flex items-center justify-between w-full';
+        fileInfo.innerHTML = `
+            <span class="truncate max-w-[200px]">${file.name}</span>
+            <span class="ml-2">(${formatFileSize(file.size)})</span>
+        `;
+        filePreview.appendChild(fileInfo);
+        
+        // Add remove button
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.className = 'mt-2 text-red-500 text-sm hover:text-red-700';
+        removeButton.textContent = 'Remove file';
+        removeButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            resetFileUpload();
+        });
+        filePreview.appendChild(removeButton);
+        
+        // Hide the original drop area content
+        dropArea.classList.add('hidden');
     }
+    
+    function createImagePreview(file) {
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        img.className = 'max-h-[200px] rounded-lg shadow-md';
+        filePreview.appendChild(img);
+    }
+    
+    function createVideoPreview(file) {
+        const video = document.createElement('video');
+        video.src = URL.createObjectURL(file);
+        video.className = 'max-h-[200px] rounded-lg shadow-md';
+        video.controls = true;
+        video.muted = true;
+        filePreview.appendChild(video);
+    }
+    
+    function resetFileUpload() {
+        // Clear the file input
+        fileInput.value = '';
+        
+        // Hide preview
+        filePreview.innerHTML = '';
+        filePreview.classList.add('hidden');
+        
+        // Show the original drop area content
+        dropArea.classList.remove('hidden');
+        
+        updateDebugInfo('File removed. No file selected.');
+    }
+    
+    function formatFileSize(bytes) {
+        if (bytes < 1024) return bytes + ' bytes';
+        else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+        else return (bytes / 1048576).toFixed(1) + ' MB';
+    }
+    
+    // Add form submit event listener to verify file is included
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(e) {
+        if (fileInput.files.length) {
+            updateDebugInfo('Submitting form with file: ' + fileInput.files[0].name);
+        } else {
+            updateDebugInfo('Submitting form without a file.');
+        }
+    });
     
     // Add star rating functionality
     const ratingContainers = [

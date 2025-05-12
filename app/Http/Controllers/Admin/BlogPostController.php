@@ -43,7 +43,11 @@ class BlogPostController extends Controller
             }
         }
         
-        $blogPosts = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
+        // Get per page value from request or default to 10
+        $perPage = $request->input('perPage', 10);
+        $perPage = in_array($perPage, [10, 25, 50, 100]) ? $perPage : 10;
+        
+        $blogPosts = $query->orderBy('created_at', 'desc')->paginate($perPage)->withQueryString();
         
         return view('admin.blog-posts.index', compact('blogPosts'));
     }

@@ -74,28 +74,28 @@
                         </svg>
                     </button>
                     <div x-show="open" x-collapse class="pl-4 mt-2" x-show="!sidebarCollapsed">
-                        <a href="{{ route('admin.bookings.index', ['filter' => 'today']) }}" 
-                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.bookings.index', ['filter' => 'today']) ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
+                        <a href="{{ route('admin.bookings.filter', 'today') }}" 
+                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.bookings.filter', 'today') ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
                             <span class="w-2 h-2 mr-3 rounded-full bg-blue-500"></span>
                             Today's Bookings
                         </a>
-                        <a href="{{ route('admin.bookings.index', ['filter' => 'confirmed']) }}" 
-                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.bookings.index', ['filter' => 'confirmed']) ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
+                        <a href="{{ route('admin.bookings.filter', 'confirmed') }}" 
+                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.bookings.filter', 'confirmed') ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
                             <span class="w-2 h-2 mr-3 rounded-full bg-green-500"></span>
                             Confirmed Bookings
                             </a>
-                        <a href="{{ route('admin.bookings.index', ['filter' => 'pending']) }}" 
-                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.bookings.index', ['filter' => 'pending']) ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
+                        <a href="{{ route('admin.bookings.filter', 'pending') }}" 
+                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.bookings.filter', 'pending') ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
                             <span class="w-2 h-2 mr-3 rounded-full bg-yellow-500"></span>
                             Pending Bookings
                             </a>
-                        <a href="{{ route('admin.bookings.index', ['filter' => 'canceled']) }}" 
-                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.bookings.index', ['filter' => 'canceled']) ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
+                        <a href="{{ route('admin.bookings.filter', 'canceled') }}" 
+                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.bookings.filter', 'canceled') ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
                             <span class="w-2 h-2 mr-3 rounded-full bg-red-500"></span>
                             Canceled Bookings
                         </a>
-                        <a href="{{ route('admin.bookings.index', ['filter' => 'all']) }}" 
-                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.bookings.index', ['filter' => 'all']) ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
+                        <a href="{{ route('admin.bookings.index') }}" 
+                           class="flex items-center py-2 text-sm {{ request()->routeIs('admin.bookings.index') && !request()->route('filter') ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
                             <span class="w-2 h-2 mr-3 rounded-full bg-gray-500"></span>
                             All Bookings
                             </a>

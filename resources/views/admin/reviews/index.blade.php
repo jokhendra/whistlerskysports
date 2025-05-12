@@ -208,14 +208,16 @@
                                                 {{ $review->email }}
                                             </div>
                                             <div class="text-xs text-gray-400">
-                                                {{ $review->created_at->format('M d, Y') }}
+                                                {{ $review->created_at ? $review->created_at->format('M d, Y') : 'N/A' }}
                                             </div>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="text-sm text-gray-900">
-                                        <div><span class="font-medium">Date:</span> {{ $review->flight_date->format('M d, Y') }}</div>
+                                        <div><span class="font-medium">Date:</span> 
+                                            {{ $review->flight_date ? $review->flight_date->format('M d, Y') : 'Not specified' }}
+                                        </div>
                                         <div><span class="font-medium">Aircraft:</span> 
                                             @if(is_array($review->aircraft_type))
                                                 {{ implode(', ', $review->aircraft_type) }}
@@ -224,7 +226,7 @@
                                             @endif
                                         </div>
                                         <div class="mt-2 text-xs">
-                                            <span class="font-medium">Feedback:</span> {{ Str::limit($review->feedback, 100) }}
+                                            <span class="font-medium">Feedback:</span> {{ Str::limit($review->feedback ?? 'No feedback provided', 100) }}
                                         </div>
                                     </div>
                                 </td>
@@ -288,7 +290,7 @@
                                               method="POST" 
                                               class="inline">
                                             @csrf
-                                            @method('PATCH')
+                                            @method('PUT')
                                             <input type="hidden" 
                                                    name="status" 
                                                    value="{{ $review->status === 'pending' ? 'approved' : 'pending' }}">
@@ -325,7 +327,69 @@
             
             <!-- Pagination -->
             <div class="px-4 py-3 bg-white border-t border-gray-200 sm:px-6">
-                {{ $reviews->links() }}
+                <div class="flex flex-col sm:flex-row items-center justify-between">
+                    <div class="mb-4 sm:mb-0 text-sm text-gray-500">
+                        Showing 
+                        <span class="font-semibold">{{ $reviews->firstItem() ?? 0 }}</span> 
+                        to 
+                        <span class="font-semibold">{{ $reviews->lastItem() ?? 0 }}</span> 
+                        of 
+                        <span class="font-semibold">{{ $reviews->total() }}</span> 
+                        reviews
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="mr-4 mb-3 md:mb-0">
+                            <label for="per-page" class="sr-only">Per Page</label>
+                            <select id="per-page" onchange="window.location.href=this.value" class="block w-full rounded-md border-gray-300 py-1.5 text-sm focus:border-blue-500 focus:ring-blue-500">
+                                @foreach([10, 25, 50, 100] as $perPage)
+                                    <option value="{{ request()->fullUrlWithQuery(['perPage' => $perPage]) }}" 
+                                            {{ request('perPage', 10) == $perPage ? 'selected' : '' }}>
+                                        {{ $perPage }} per page
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            @if($reviews->onFirstPage())
+                                <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-300 bg-white border border-gray-300 cursor-not-allowed rounded-l-md">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                    </svg>
+                                    Previous
+                                </span>
+                            @else
+                                <a href="{{ $reviews->previousPageUrl() }}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                    </svg>
+                                    Previous
+                                </a>
+                            @endif
+                            
+                            <div class="hidden sm:flex mx-2">
+                                {{ $reviews->onEachSide(1)->links() }}
+                            </div>
+                            
+                            @if($reviews->hasMorePages())
+                                <a href="{{ $reviews->nextPageUrl() }}" class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50">
+                                    Next
+                                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            @else
+                                <span class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-300 bg-white border border-gray-300 cursor-not-allowed rounded-r-md">
+                                    Next
+                                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

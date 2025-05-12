@@ -315,11 +315,11 @@
                            class="px-3 py-2 rounded-md text-sm font-medium {{ !$filter ? 'bg-blue-100 text-blue-700' : 'text-gray-500 hover:text-gray-700' }}">
                             All
                         </a>
-                        <a href="{{ route('admin.bookings.index', ['filter' => 'today']) }}" 
+                        <a href="{{ route('admin.bookings.filter', 'today') }}" 
                            class="px-3 py-2 rounded-md text-sm font-medium {{ $filter === 'today' ? 'bg-blue-100 text-blue-700' : 'text-gray-500 hover:text-gray-700' }}">
                             Today
                         </a>
-                        <a href="{{ route('admin.bookings.index', ['filter' => 'pending']) }}" 
+                        <a href="{{ route('admin.bookings.filter', 'pending') }}" 
                            class="px-3 py-2 rounded-md text-sm font-medium {{ $filter === 'pending' ? 'bg-yellow-100 text-yellow-700' : 'text-gray-500 hover:text-gray-700' }}">
                             Pending
                             @if($stats['pending_bookings'] > 0)
@@ -328,11 +328,11 @@
                                 </span>
                             @endif
                         </a>
-                        <a href="{{ route('admin.bookings.index', ['filter' => 'confirmed']) }}" 
+                        <a href="{{ route('admin.bookings.filter', 'confirmed') }}" 
                            class="px-3 py-2 rounded-md text-sm font-medium {{ $filter === 'confirmed' ? 'bg-green-100 text-green-700' : 'text-gray-500 hover:text-gray-700' }}">
                             Confirmed
                         </a>
-                        <a href="{{ route('admin.bookings.index', ['filter' => 'canceled']) }}" 
+                        <a href="{{ route('admin.bookings.filter', 'canceled') }}" 
                            class="px-3 py-2 rounded-md text-sm font-medium {{ $filter === 'canceled' ? 'bg-red-100 text-red-700' : 'text-gray-500 hover:text-gray-700' }}">
                             Canceled
                         </a>
@@ -394,6 +394,14 @@
                                     <div class="text-sm text-gray-500">
                                         {{ $booking->sunrise_flight ? 'Sunrise Flight' : 'Regular Flight' }}
                                     </div>
+                                    @if($booking->flying_time && $booking->flying_status === 'confirmed')
+                                    <div class="text-sm font-medium text-green-600 mt-1">
+                                        <svg class="inline-block h-4 w-4 mr-1 -mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        </svg>
+                                        Scheduled: {{ \Carbon\Carbon::parse($booking->flying_time)->format('M d, Y g:i A') }}
+                                    </div>
+                                    @endif
                                     <div class="text-sm text-gray-500">
                                         Weight: {{ $booking->weight }} kg
                                     </div>
@@ -433,6 +441,17 @@
                                            ($booking->flying_status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 
                                            'bg-red-100 text-red-800') }}">
                                         {{ ucfirst($booking->flying_status) }}
+                                        @if($booking->flying_status === 'canceled' && $booking->cancellation_reason)
+                                        <span class="ml-1 cursor-help group relative" x-data="{ showTooltip: false }" @mouseenter="showTooltip = true" @mouseleave="showTooltip = false">
+                                            <svg class="h-3.5 w-3.5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            <div x-show="showTooltip" class="absolute z-10 bottom-full left-1/2 transform -translate-x-1/2 -translate-y-1 w-48 bg-gray-900 text-white text-xs rounded py-1 px-2">
+                                                <div class="text-left">{{ $booking->cancellation_reason }}</div>
+                                                <div class="absolute left-1/2 transform -translate-x-1/2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+                                            </div>
+                                        </span>
+                                        @endif
                                     </span>
                                     <div class="mt-1 text-sm font-medium text-gray-900">
                                         ${{ number_format($booking->total_amount, 2) }}
@@ -443,7 +462,7 @@
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium">
                                     <div class="flex flex-col space-y-2">
-                                        <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-900">
+                                        <a href="{{ route('admin.bookings.show', $booking->id) }}" class="inline-flex items-center text-blue-600 hover:text-blue-900">
                                             <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -499,8 +518,70 @@
             </div>
             
             <!-- Pagination -->
-            <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
-                {{ $bookings->links() }}
+            <div class="bg-white px-6 py-3 border-t border-gray-200 sm:px-6">
+                <div class="flex flex-col sm:flex-row items-center justify-between">
+                    <div class="mb-4 sm:mb-0 text-sm text-gray-500">
+                        Showing 
+                        <span class="font-semibold">{{ $bookings->firstItem() ?? 0 }}</span> 
+                        to 
+                        <span class="font-semibold">{{ $bookings->lastItem() ?? 0 }}</span> 
+                        of 
+                        <span class="font-semibold">{{ $bookings->total() }}</span> 
+                        bookings
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="mr-4 mb-3 md:mb-0">
+                            <label for="per-page" class="sr-only">Per Page</label>
+                            <select id="per-page" onchange="window.location.href=this.value" class="block w-full rounded-md border-gray-300 py-1.5 text-sm focus:border-blue-500 focus:ring-blue-500">
+                                @foreach([10, 25, 50, 100] as $perPage)
+                                    <option value="{{ request()->fullUrlWithQuery(['perPage' => $perPage]) }}" 
+                                            {{ request('perPage', 10) == $perPage ? 'selected' : '' }}>
+                                        {{ $perPage }} per page
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            @if($bookings->onFirstPage())
+                                <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-300 bg-white border border-gray-300 cursor-not-allowed rounded-l-md">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                    </svg>
+                                    Previous
+                                </span>
+                            @else
+                                <a href="{{ $bookings->previousPageUrl() }}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                    </svg>
+                                    Previous
+                                </a>
+                            @endif
+                            
+                            <div class="hidden sm:flex mx-2">
+                                {{ $bookings->onEachSide(1)->links() }}
+                            </div>
+                            
+                            @if($bookings->hasMorePages())
+                                <a href="{{ $bookings->nextPageUrl() }}" class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50">
+                                    Next
+                                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            @else
+                                <span class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-300 bg-white border border-gray-300 cursor-not-allowed rounded-r-md">
+                                    Next
+                                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

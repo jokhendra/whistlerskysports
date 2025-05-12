@@ -51,7 +51,10 @@ class OrderController extends Controller
             });
         }
         
-        $orders = $query->paginate(15)->withQueryString();
+        // Get perPage parameter from request, default to 10
+        $perPage = $request->input('perPage', 10);
+        
+        $orders = $query->paginate($perPage)->withQueryString();
         
         // Get order status options for filter dropdown
         $statuses = [

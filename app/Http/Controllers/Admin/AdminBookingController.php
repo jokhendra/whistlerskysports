@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\BookingCancelled;
+use App\Mail\BookingPostponed;
+use App\Mail\BookingStatusUpdated;
 use App\Models\Booking;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
 
 class AdminBookingController extends Controller
 {
@@ -79,7 +84,11 @@ class AdminBookingController extends Controller
     {
         $query = Booking::query();
         $this->applyFilters($query, $filter);
-        $bookings = $query->latest()->paginate(10)->withQueryString();
+        
+        // Get perPage parameter from request, default to 10
+        $perPage = request()->input('perPage', 10);
+        
+        $bookings = $query->latest()->paginate($perPage)->withQueryString();
 
         // Calculate statistics
         $stats = [
@@ -113,15 +122,86 @@ class AdminBookingController extends Controller
     public function updateStatus(Request $request, Booking $booking)
     {
         $request->validate([
-            'status' => 'required|in:confirmed,canceled'
+            'status' => 'required|in:confirmed,canceled',
+            'flying_time' => 'required_if:status,confirmed|nullable|date_format:Y-m-d\TH:i',
         ]);
 
-        $booking->update([
+        $data = [
             'flying_status' => $request->status
-        ]);
+        ];
+        
+        // Add flying time if provided
+        if ($request->status === 'confirmed' && $request->flying_time) {
+            // Convert from HTML datetime-local format to the required database format
+            $flyingTime = Carbon::createFromFormat('Y-m-d\TH:i', $request->flying_time)->format('Y-m-d H:i:00');
+            $data['flying_time'] = $flyingTime;
+        }
+        
+        $booking->update($data);
 
         $statusMessage = ucfirst($request->status);
+        
+        // Send appropriate email based on status
+        try {
+            if ($request->status === 'confirmed') {
+                Mail::to($booking->email)->send(new BookingStatusUpdated($booking));
+            } elseif ($request->status === 'canceled') {
+                // Add cancellation reason if provided
+                if ($request->filled('cancellation_reason')) {
+                    $booking->update(['cancellation_reason' => $request->cancellation_reason]);
+                }
+                
+                Mail::to($booking->email)->send(new BookingCancelled($booking));
+            }
+        } catch (\Exception $e) {
+            // Log the error but don't stop execution
+            Log::error('Failed to send booking ' . $request->status . ' email: ' . $e->getMessage());
+        }
+        
         return back()->with('success', "Booking #{$booking->id} has been {$statusMessage}");
+    }
+
+    /**
+     * Postpone a booking to a new date
+     *
+     * @param Request $request
+     * @param Booking $booking
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postponeBooking(Request $request, Booking $booking)
+    {
+        $request->validate([
+            'flying_time' => 'required|date_format:Y-m-d\TH:i',
+            'postponement_reason' => 'nullable|string|max:255',
+        ]);
+
+        // Store the original date for the email notification
+        $originalDate = $booking->flying_time 
+            ? Carbon::parse($booking->flying_time)->format('F d, Y g:i A')
+            : Carbon::parse($booking->preferred_dates)->format('F d, Y');
+
+        // Convert from HTML datetime-local format to the required database format
+        $flyingTime = Carbon::createFromFormat('Y-m-d\TH:i', $request->flying_time)->format('Y-m-d H:i:00');
+        
+        // Update the booking with the new flying time
+        $booking->update([
+            'flying_time' => $flyingTime,
+            'flying_status' => 'confirmed' // Ensure the status is confirmed
+        ]);
+
+        // Send postponement email notification
+        try {
+            Mail::to($booking->email)->send(new BookingPostponed(
+                $booking, 
+                $originalDate, 
+                $request->postponement_reason
+            ));
+        } catch (\Exception $e) {
+            // Log the error but don't stop execution
+            Log::error('Failed to send booking postponement email: ' . $e->getMessage());
+        }
+        
+        return back()->with('success', "Booking #{$booking->id} has been postponed to " . Carbon::parse($flyingTime)->format('F d, Y g:i A'));
     }
 
     /**
@@ -133,8 +213,13 @@ class AdminBookingController extends Controller
     {
         $query = Booking::query();
         
-        // Apply all filters including status filter
-        $this->applyFilters($query, request('filter'));
+        // Check if a specific booking ID is requested
+        if (request('id')) {
+            $query->where('id', request('id'));
+        } else {
+            // Apply all filters including status filter
+            $this->applyFilters($query, request('filter'));
+        }
 
         $fileName = 'bookings-' . now()->format('Y-m-d') . '.csv';
         $headers = [
@@ -173,5 +258,18 @@ class AdminBookingController extends Controller
         };
 
         return response()->stream($callback, 200, $headers);
+    }
+    
+    /**
+     * Display the specified booking.
+     *
+     * @param int $id
+     * @return \Illuminate\View\View
+     */
+    public function show($id)
+    {
+        $booking = Booking::findOrFail($id);
+        
+        return view('admin.bookings.show', compact('booking'));
     }
 } 

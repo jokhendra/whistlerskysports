@@ -14,7 +14,7 @@
                             <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
-                            Submitted {{ $review->created_at->format('M d, Y H:i') }}
+                            Submitted {{ $review->created_at ? $review->created_at->format('M d, Y H:i') : 'Date unknown' }}
                         </div>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                               method="POST" 
                               class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
                             @csrf
-                            @method('PATCH')
+                            @method('PUT')
                             <input type="hidden" 
                                    name="status" 
                                    value="{{ $review->status === 'pending' ? 'approved' : 'pending' }}">
@@ -37,7 +37,7 @@
                               method="POST" 
                               class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
                             @csrf
-                            @method('PATCH')
+                            @method('PUT')
                             <input type="hidden" name="status" value="rejected">
                             <button type="submit">Reject Review</button>
                         </form>
@@ -124,9 +124,28 @@
                             Review
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 whitespace-pre-wrap">
-                            {{ $review->review }}
+                            {{ $review->feedback ?? 'No feedback provided' }}
                         </dd>
                     </div>
+                    
+                    @if($review->media_upload)
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Uploaded Media
+                        </dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            @if($review->is_image)
+                                <img src="{{ $review->media_url }}" alt="Review media" class="max-h-64 rounded-lg shadow-md">
+                            @elseif($review->is_video)
+                                <video src="{{ $review->media_url }}" controls class="max-h-64 rounded-lg shadow-md"></video>
+                            @else
+                                <a href="{{ $review->media_url }}" target="_blank" class="text-blue-600 hover:text-blue-900">
+                                    View uploaded file
+                                </a>
+                            @endif
+                        </dd>
+                    </div>
+                    @endif
                 </dl>
             </div>
         </div>

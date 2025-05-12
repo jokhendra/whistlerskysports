@@ -375,10 +375,12 @@ Route::prefix('admin')->name('admin.')->middleware('web')->group(function () {
         // Bookings routes
         Route::prefix('bookings')->name('bookings.')->group(function () {
             Route::get('/', [App\Http\Controllers\Admin\AdminBookingController::class, 'index'])->name('index');
-            Route::get('/{id}', [App\Http\Controllers\Admin\AdminBookingController::class, 'show'])->name('show');
-            Route::put('/{id}/status', [App\Http\Controllers\Admin\AdminBookingController::class, 'updateStatus'])->name('update-status');
+            Route::get('/export', [App\Http\Controllers\Admin\AdminBookingController::class, 'export'])->name('export');
+            Route::get('/filter/{filter?}', [App\Http\Controllers\Admin\AdminBookingController::class, 'index'])->name('filter');
+            Route::get('/{id}', [App\Http\Controllers\Admin\AdminBookingController::class, 'show'])->name('show')->where('id', '[0-9]+');
+            Route::patch('/{booking}/status', [App\Http\Controllers\Admin\AdminBookingController::class, 'updateStatus'])->name('update-status');
+            Route::patch('/{booking}/postpone', [App\Http\Controllers\Admin\AdminBookingController::class, 'postponeBooking'])->name('postpone');
             Route::delete('/{id}', [App\Http\Controllers\Admin\AdminBookingController::class, 'destroy'])->name('destroy');
-            Route::get('/export/csv', [App\Http\Controllers\Admin\AdminBookingController::class, 'exportCsv'])->name('export.csv');
         });
         
         // Settings routes

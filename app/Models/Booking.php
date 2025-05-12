@@ -41,7 +41,8 @@ class Booking extends Model
         'weight',
         'emergency_name',
         'emergency_relationship',
-        'emergency_phone'
+        'emergency_phone',
+        'cancellation_reason'
     ];
 
     protected $casts = [

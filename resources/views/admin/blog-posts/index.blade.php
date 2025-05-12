@@ -155,8 +155,70 @@
         </div>
         
         <!-- Pagination -->
-        <div class="mt-4">
-            {{ $blogPosts->links() }}
+        <div class="mt-4 px-4 py-3 bg-white border-t border-gray-200 sm:px-6 rounded-b-lg">
+            <div class="flex flex-col sm:flex-row items-center justify-between">
+                <div class="mb-4 sm:mb-0 text-sm text-gray-500">
+                    Showing 
+                    <span class="font-semibold">{{ $blogPosts->firstItem() ?? 0 }}</span> 
+                    to 
+                    <span class="font-semibold">{{ $blogPosts->lastItem() ?? 0 }}</span> 
+                    of 
+                    <span class="font-semibold">{{ $blogPosts->total() }}</span> 
+                    posts
+                </div>
+                
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="mr-4 mb-3 md:mb-0">
+                        <label for="per-page" class="sr-only">Per Page</label>
+                        <select id="per-page" onchange="window.location.href=this.value" class="block w-full rounded-md border-gray-300 py-1.5 text-sm focus:border-blue-500 focus:ring-blue-500">
+                            @foreach([10, 25, 50, 100] as $perPage)
+                                <option value="{{ request()->fullUrlWithQuery(['perPage' => $perPage]) }}" 
+                                        {{ request('perPage', 10) == $perPage ? 'selected' : '' }}>
+                                    {{ $perPage }} per page
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        @if($blogPosts->onFirstPage())
+                            <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-300 bg-white border border-gray-300 cursor-not-allowed rounded-l-md">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                                Previous
+                            </span>
+                        @else
+                            <a href="{{ $blogPosts->previousPageUrl() }}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                                Previous
+                            </a>
+                        @endif
+                        
+                        <div class="hidden sm:flex mx-2">
+                            {{ $blogPosts->onEachSide(1)->links() }}
+                        </div>
+                        
+                        @if($blogPosts->hasMorePages())
+                            <a href="{{ $blogPosts->nextPageUrl() }}" class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50">
+                                Next
+                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        @else
+                            <span class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-300 bg-white border border-gray-300 cursor-not-allowed rounded-r-md">
+                                Next
+                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

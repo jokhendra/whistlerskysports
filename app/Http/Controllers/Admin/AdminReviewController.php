@@ -59,7 +59,11 @@ class AdminReviewController extends Controller
             $query->where('status', $status);
         }
 
-        $reviews = $query->latest()->paginate(10)->withQueryString();
+        // Get per page value from request or default to 10
+        $perPage = $request->input('perPage', 10);
+        $perPage = in_array($perPage, [10, 25, 50, 100]) ? $perPage : 10;
+        
+        $reviews = $query->latest()->paginate($perPage)->withQueryString();
 
         // Get statistics
         $stats = [
