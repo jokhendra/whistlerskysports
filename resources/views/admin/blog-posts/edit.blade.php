@@ -91,7 +91,7 @@
                         <div id="editor" class="block w-full rounded-lg border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 min-h-[300px]">
                             {!! old('content', $blogPost->content) !!}
                         </div>
-                        <input type="hidden" name="content" id="content" required>
+                        <input type="hidden" name="content" id="content" value="{{ old('content', $blogPost->content) }}">
                         @error('content')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
@@ -323,11 +323,24 @@
             document.querySelector('#editor').parentNode.insertBefore(toolbarContainer, document.querySelector('#editor'));
             toolbarContainer.appendChild(editor.ui.view.toolbar.element);
 
-            // Update hidden input before form submission
-            const form = document.querySelector('form');
-            form.addEventListener('submit', function() {
+            // Update hidden input whenever content changes
+            editor.model.document.on('change:data', () => {
                 document.querySelector('#content').value = editor.getData();
             });
+
+            // Update hidden input before form submission
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(e) {
+                document.querySelector('#content').value = editor.getData();
+                // Prevent submission if empty content
+                if (!document.querySelector('#content').value.trim()) {
+                    e.preventDefault();
+                    alert('Content is required. Please add some content to your post.');
+                }
+            });
+
+            // Initialize the hidden field with the current content
+            document.querySelector('#content').value = editor.getData();
 
             // Add custom styles to match your form theme
             editor.editing.view.change(writer => {

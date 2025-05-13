@@ -50,7 +50,7 @@ class ReviewController extends Controller
             'likelihood' => 'required|integer|min:1|max:5',
             'has_social_media' => 'nullable|string|in:yes,no',
             'media_upload' => 'nullable|file|max:10240|mimes:jpeg,jpg,png,gif,mp4,mov,avi', // Max 10MB, common image and video formats
-            'feedback' => 'required|string|min:10',
+            'feedback' => 'nullable|string|min:10',
         ]);
         
         if ($request->hasFile('media_upload')) {

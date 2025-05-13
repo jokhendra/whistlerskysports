@@ -331,10 +331,20 @@
                         <a href="{{ route('admin.bookings.filter', 'confirmed') }}" 
                            class="px-3 py-2 rounded-md text-sm font-medium {{ $filter === 'confirmed' ? 'bg-green-100 text-green-700' : 'text-gray-500 hover:text-gray-700' }}">
                             Confirmed
+                            @if($stats['confirmed_bookings'] > 0)
+                                <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    {{ $stats['confirmed_bookings'] }}
+                                </span>
+                            @endif
                         </a>
                         <a href="{{ route('admin.bookings.filter', 'canceled') }}" 
                            class="px-3 py-2 rounded-md text-sm font-medium {{ $filter === 'canceled' ? 'bg-red-100 text-red-700' : 'text-gray-500 hover:text-gray-700' }}">
                             Canceled
+                            @if($stats['canceled_bookings'] > 0)
+                                <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                    {{ $stats['canceled_bookings'] }}
+                                </span>
+                            @endif
                         </a>
                     </div>
                 </div>
@@ -470,30 +480,136 @@
                                             View
                                         </a>
                                         @if($booking->flying_status === 'pending')
-                                            <form action="{{ route('admin.bookings.update-status', $booking) }}" method="POST" class="inline">
-                                                @csrf
-                                                @method('PATCH')
-                                                <input type="hidden" name="status" value="confirmed">
-                                                <button type="submit" class="inline-flex items-center text-green-600 hover:text-green-900">
+                                            <div x-data="{ showDateTimePicker: false }">
+                                                <button type="button" @click="showDateTimePicker = true" class="inline-flex items-center text-green-600 hover:text-green-900">
                                                     <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                                     </svg>
                                                     Confirm
                                                 </button>
-                                            </form>
+
+                                                <!-- Date and Time Picker Modal -->
+                                                <div x-show="showDateTimePicker" class="fixed inset-0 overflow-y-auto z-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                                                    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                                        <!-- Background overlay -->
+                                                        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+                                                        
+                                                        <!-- Modal panel -->
+                                                        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                                                            <form action="{{ route('admin.bookings.update-status', $booking) }}" method="POST">
+                                                                @csrf
+                                                                @method('PATCH')
+                                                                <input type="hidden" name="status" value="confirmed">
+
+                                                                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                                                    <div class="sm:flex sm:items-start">
+                                                                        <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                                                                            <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                                            </svg>
+                                                                        </div>
+                                                                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                                                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                                                                Schedule Flight Date and Time
+                                                                            </h3>
+                                                                            <div class="mt-4">
+                                                                                <p class="text-sm text-gray-500 mb-4">
+                                                                                    Please select the date and time for this flight. A confirmation email will be sent to the customer.
+                                                                                </p>
+                                                                                
+                                                                                <div class="mb-4">
+                                                                                    <label for="flying_time_{{ $booking->id }}" class="block text-sm font-medium text-gray-700 mb-1">Flight Date and Time</label>
+                                                                                    <input type="datetime-local" 
+                                                                                        id="flying_time_{{ $booking->id }}" 
+                                                                                        name="flying_time" 
+                                                                                        value="{{ old('flying_time', $booking->flying_time ? date('Y-m-d\TH:i', strtotime($booking->flying_time)) : date('Y-m-d\TH:i', strtotime('+3 days'))) }}" 
+                                                                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                                                                        required>
+                                                                                    <p class="mt-1 text-xs text-gray-500">Select the date and time for the flight</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                                                                    <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                                                        Confirm and Schedule
+                                                                    </button>
+                                                                    <button type="button" @click="showDateTimePicker = false" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                                                                        Cancel
+                                                                    </button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @endif
                                         @if($booking->flying_status !== 'canceled')
-                                            <form action="{{ route('admin.bookings.update-status', $booking) }}" method="POST" class="inline">
-                                                @csrf
-                                                @method('PATCH')
-                                                <input type="hidden" name="status" value="canceled">
-                                                <button type="submit" class="inline-flex items-center text-red-600 hover:text-red-900">
+                                            <div x-data="{ showCancellationForm: false }">
+                                                <button type="button" @click="showCancellationForm = true" class="inline-flex items-center text-red-600 hover:text-red-900">
                                                     <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                                     </svg>
                                                     Cancel
                                                 </button>
-                                            </form>
+                                                
+                                                <!-- Cancellation Reason Modal -->
+                                                <div x-show="showCancellationForm" class="fixed inset-0 overflow-y-auto z-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                                                    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                                        <!-- Background overlay -->
+                                                        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+                                                        
+                                                        <!-- Modal panel -->
+                                                        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                                                            <form action="{{ route('admin.bookings.update-status', $booking) }}" method="POST">
+                                                                @csrf
+                                                                @method('PATCH')
+                                                                <input type="hidden" name="status" value="canceled">
+                                                                
+                                                                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                                                    <div class="sm:flex sm:items-start">
+                                                                        <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                                                                            <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                                                            </svg>
+                                                                        </div>
+                                                                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                                                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                                                                Cancel Booking
+                                                                            </h3>
+                                                                            <div class="mt-4">
+                                                                                <p class="text-sm text-gray-500 mb-4">
+                                                                                    Are you sure you want to cancel this booking? This action will send a cancellation email to the customer.
+                                                                                </p>
+                                                                                
+                                                                                <div class="mb-4">
+                                                                                    <label for="cancellation_reason_{{ $booking->id }}" class="block text-sm font-medium text-gray-700 mb-1">Cancellation Reason</label>
+                                                                                    <textarea 
+                                                                                        id="cancellation_reason_{{ $booking->id }}" 
+                                                                                        name="cancellation_reason" 
+                                                                                        rows="3"
+                                                                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 resize-none"
+                                                                                        placeholder="Please provide a reason for the cancellation (optional)"></textarea>
+                                                                                    <p class="mt-1 text-xs text-gray-500">This reason will be included in the cancellation email sent to the customer.</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                                                                    <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                                                        Confirm Cancellation
+                                                                    </button>
+                                                                    <button type="button" @click="showCancellationForm = false" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                                                                        Go Back
+                                                                    </button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @endif
                                     </div>
                                 </td>
@@ -617,16 +733,7 @@
 
 @push('scripts')
 <script>
-    // Confirm booking cancellation
-    document.querySelectorAll('form').forEach(form => {
-        if (form.querySelector('input[value="canceled"]')) {
-            form.addEventListener('submit', function(e) {
-                if (!confirm('Are you sure you want to cancel this booking?')) {
-                    e.preventDefault();
-                }
-            });
-        }
-    });
+    // No need for the old confirm booking cancellation code as we now use modals
 </script>
 @endpush
 @endsection 

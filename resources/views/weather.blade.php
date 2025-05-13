@@ -254,9 +254,9 @@
                     <p class="text-blue-900 text-sm">If we need to cancel due to weather conditions, you can reschedule for another time or receive a full refund.</p>
           </div>
 
-                <div class="bg-gradient-to-r from-yellow-50 to-yellow-100 border-l-4 border-yellow-500 p-4 rounded-r-xl">
+                <!-- <div class="bg-gradient-to-r from-yellow-50 to-yellow-100 border-l-4 border-yellow-500 p-4 rounded-r-xl">
                     <p class="text-yellow-900 text-sm"><strong>Important:</strong> If you're concerned about the weather forecast for your booking date and wish to reschedule proactively, our normal cancellation policy applies.</p>
-          </div>
+                </div> -->
           </div>
         </div>
       </div>

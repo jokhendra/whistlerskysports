@@ -232,6 +232,7 @@ class BookingController extends Controller
      */
     private function generateWaiverPDF($request, $totalAmount)
     {
+        try {
         $data = [
             'name' => $request->name,
             'email' => $request->email,
@@ -245,13 +246,48 @@ class BookingController extends Controller
             'emergency_phone' => $request->emergency_phone
         ];
         
+            // Generate PDF from view
         $pdf = PDF::loadView('pdfs.waiver', $data);
         
+            // Generate a unique filename
         $fileName = 'waiver_' . str_replace(' ', '_', $request->name) . '_' . time() . '.pdf';
         $pdfPath = 'waivers/' . $fileName;
+            
+            // Store in public disk as fallback
         Storage::disk('public')->put($pdfPath, $pdf->output());
 
+            // Store in S3
+            try {
+                Log::info('Storing waiver PDF in S3', ['path' => $pdfPath]);
+                
+                // Store the PDF on S3
+                if (Storage::disk('s3')->put($pdfPath, $pdf->output())) {
+                    Log::info('Successfully stored waiver PDF in S3', ['path' => $pdfPath]);
+                    
+                    // We don't need the URL here, just log that it was stored successfully
+                    // The path is sufficient for database storage
+                    Log::info('PDF stored in S3', ['path' => $pdfPath]);
+                    
+                    // Return S3 path for storage in database
         return $pdfPath;
+                } else {
+                    Log::error('Failed to store waiver PDF in S3', ['path' => $pdfPath]);
+                    return $pdfPath; // Return local path as fallback
+                }
+            } catch (\Exception $e) {
+                Log::error('Exception storing waiver PDF in S3', [
+                    'error' => $e->getMessage(),
+                    'path' => $pdfPath
+                ]);
+                return $pdfPath; // Return local path as fallback
+            }
+        } catch (\Exception $e) {
+            Log::error('Failed to generate waiver PDF', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            throw $e;
+        }
     }
 
     /**
@@ -417,6 +453,11 @@ class BookingController extends Controller
                 $sanitized[$field] = htmlspecialchars(strip_tags($data[$field]), ENT_QUOTES, 'UTF-8');
             }
         }
+
+        // Set default values for required emergency contact fields if not provided
+        $sanitized['emergency_name'] = $sanitized['emergency_name'] ?? $sanitized['name'];
+        $sanitized['emergency_relationship'] = $sanitized['emergency_relationship'] ?? 'Self';
+        $sanitized['emergency_phone'] = $sanitized['emergency_phone'] ?? $sanitized['primary_phone'];
 
         // Sanitize boolean fields
         $booleanFields = ['video_package', 'deluxe_package'];

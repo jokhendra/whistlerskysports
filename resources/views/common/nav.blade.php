@@ -24,6 +24,7 @@
             <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0">
                 @php
                     $navItems = [
+                        ['url' => '/', 'text' => 'Home'],
                         ['url' => '/about', 'text' => 'About Us'],
                         ['url' => '/gallery', 'text' => 'Gallery'],
                         ['url' => '/review', 'text' => 'Reviews'],
@@ -113,7 +114,7 @@
                 <!-- User Profile Dropdown -->
                 <li class="relative group ml-2">
                     <button type="button" 
-                            class="flex items-center px-3 py-2 text-gray-900 rounded-full hover:bg-gray-100 transition-colors duration-200"
+                            class="flex items-center px-3 py-2 text-white font-medium bg-[#204fb4] hover:bg-gray-800 rounded-full transition-colors duration-200"
                             aria-haspopup="true" aria-expanded="false">
                         <span class="mr-1 font-medium">{{ auth()->user()->name }}</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -157,7 +158,7 @@
                 @else
                 <!-- Login Link for Guests (No Cart Icon, No Register) -->
                 <li>
-                    <a href="{{ route('login') }}" class="flex items-center px-3 py-2 text-gray-900 rounded hover:text-blue-600 transition-colors duration-200">
+                    <a href="{{ route('login') }}" class="flex items-center px-3 py-2 font-medium text-gray-800">
                         Login
                     </a>
                 </li>
@@ -203,15 +204,15 @@
             @if(auth()->check())
             <!-- User Info (Mobile) -->
             <div class="px-3 py-2 mt-2 border-t border-gray-200">
-                <div class="flex items-center py-2">
+                <div class="flex items-center py-2 px-3 bg-[#12161c] text-white rounded-md">
                     <div class="flex-shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                     </div>
                     <div class="ml-3">
-                        <div class="text-base font-medium text-gray-800">{{ auth()->user()->name }}</div>
-                        <div class="text-sm font-medium text-gray-500">{{ auth()->user()->email }}</div>
+                        <div class="text-base font-medium text-white">{{ auth()->user()->name }}</div>
+                        <div class="text-sm font-medium text-blue-100">{{ auth()->user()->email }}</div>
                     </div>
                 </div>
             </div>
@@ -241,7 +242,7 @@
             </form>
             @else
             <!-- Login Link (Mobile) for Guests (No Cart Icon, No Register) -->
-            <a href="{{ route('login') }}" class="block px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 rounded-md">
+            <a href="{{ route('login') }}" class="block px-3 py-2 text-white font-medium bg-[#204fb4] hover:bg-gray-800 rounded-full mx-2 my-2 text-center">
                 Login
             </a>
             @endif

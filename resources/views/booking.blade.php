@@ -863,21 +863,24 @@
                     </div>
                     
                     <div class="mt-10">
-                        <h3 class="font-bold text-center mb-4">(OPTIONAL) IN CASE OF AN EMERGENCY, PLEASE NOTIFY:</h3>
+                        <h3 class="font-bold text-center mb-4">EMERGENCY CONTACT DETAILS (REQUIRED)</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="flex flex-col">
-                                <span class="text-sm text-gray-600">Name</span>
-                                <input type="text" id="emergency_name" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Emergency contact name">
+                                <span class="text-sm text-gray-600">Name *</span>
+                                <input type="text" id="emergency_name" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Emergency contact name" required>
+                                <p class="text-xs text-red-500 mt-1 emergency-error hidden">Emergency contact name is required</p>
                             </div>
                             
                             <div class="flex flex-col">
-                                <span class="text-sm text-gray-600">Relationship</span>
-                                <input type="text" id="emergency_relationship" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Relationship to you">
+                                <span class="text-sm text-gray-600">Relationship *</span>
+                                <input type="text" id="emergency_relationship" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Relationship to you" required>
+                                <p class="text-xs text-red-500 mt-1 emergency-error hidden">Relationship is required</p>
                             </div>
                             
                             <div class="flex flex-col">
-                                <span class="text-sm text-gray-600">Phone Number</span>
-                                <input type="tel" id="emergency_phone" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Emergency contact phone">
+                                <span class="text-sm text-gray-600">Phone Number *</span>
+                                <input type="tel" id="emergency_phone" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Emergency contact phone" required>
+                                <p class="text-xs text-red-500 mt-1 emergency-error hidden">Emergency phone is required</p>
                             </div>
                         </div>
                     </div>
@@ -1100,7 +1103,7 @@
             // Initial check for mandatory fields
             checkMandatoryFields();
             
-            // Handle waiver modal opening
+            // Handle opening waiver modal
             window.openWaiverModal = function(event) {
                 event.preventDefault();
                 
@@ -1113,6 +1116,7 @@
                 document.body.style.overflow = 'hidden';
                 fillWaiverForm();
                 initializeSignaturePad();
+                setupEmergencyFieldValidation();
             };
             
             // Handle waiver modal closing
@@ -1124,9 +1128,40 @@
             // Handle waiver acceptance
             waiverElements.acceptButton.addEventListener('click', () => {
                 const signaturePad = document.querySelector('#signature-pad').__signaturePad;
-
+                const emergencyName = document.getElementById('emergency_name').value.trim();
+                const emergencyRelationship = document.getElementById('emergency_relationship').value.trim();
+                const emergencyPhone = document.getElementById('emergency_phone').value.trim();
+                
+                // Reset all error messages
+                document.querySelector('.signature-error').style.display = 'none';
+                document.querySelectorAll('.emergency-error').forEach(el => el.classList.add('hidden'));
+                
+                // Flag to track validation status
+                let isValid = true;
+                
+                // Validate signature
                 if (signaturePad.isEmpty()) {
                     document.querySelector('.signature-error').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Validate emergency contact details
+                if (!emergencyName) {
+                    document.getElementById('emergency_name').nextElementSibling.classList.remove('hidden');
+                    isValid = false;
+                }
+                
+                if (!emergencyRelationship) {
+                    document.getElementById('emergency_relationship').nextElementSibling.classList.remove('hidden');
+                    isValid = false;
+                }
+                
+                if (!emergencyPhone) {
+                    document.getElementById('emergency_phone').nextElementSibling.classList.remove('hidden');
+                    isValid = false;
+                }
+                
+                if (!isValid) {
                     return;
                 }
 
@@ -1141,6 +1176,25 @@
                     mainForm.appendChild(signatureInput);
                 }
                 signatureInput.value = signatureData;
+                    
+                    // Create hidden inputs for emergency contact fields
+                    const emergencyFields = [
+                        { id: 'emergency_name', value: emergencyName },
+                        { id: 'emergency_relationship', value: emergencyRelationship },
+                        { id: 'emergency_phone', value: emergencyPhone }
+                    ];
+                    
+                    emergencyFields.forEach(field => {
+                        let hiddenInput = document.getElementById(`main_form_${field.id}`);
+                        if (!hiddenInput) {
+                            hiddenInput = document.createElement('input');
+                            hiddenInput.type = 'hidden';
+                            hiddenInput.id = `main_form_${field.id}`;
+                            hiddenInput.name = field.id;
+                            mainForm.appendChild(hiddenInput);
+                        }
+                        hiddenInput.value = field.value;
+                    });
 
                     waiverElements.checkbox.disabled = false;
                     waiverElements.checkbox.checked = true;
@@ -1151,6 +1205,32 @@
                     alert('There was an error processing your signature. Please try again.');
                 }
             });
+            
+            // Setup real-time validation for emergency fields
+            function setupEmergencyFieldValidation() {
+                const emergencyFields = ['emergency_name', 'emergency_relationship', 'emergency_phone'];
+                
+                emergencyFields.forEach(fieldId => {
+                    const field = document.getElementById(fieldId);
+                    if (field) {
+                        // Clear error on input
+                        field.addEventListener('input', function() {
+                            if (this.value.trim()) {
+                                this.nextElementSibling.classList.add('hidden');
+                            }
+                        });
+                        
+                        // Validate on blur
+                        field.addEventListener('blur', function() {
+                            if (!this.value.trim()) {
+                                this.nextElementSibling.classList.remove('hidden');
+                            } else {
+                                this.nextElementSibling.classList.add('hidden');
+                            }
+                        });
+                    }
+                });
+            }
         }
 
         /**
@@ -1201,7 +1281,10 @@
                 // Set location
                 document.getElementById('city_province').textContent = 'Whistler, BC';
 
-                // Handle emergency contact information
+                // Reset all error messages
+                document.querySelectorAll('.emergency-error').forEach(el => el.classList.add('hidden'));
+                document.querySelector('.signature-error').style.display = 'none';
+                
             } catch (error) {
                 console.error('Error filling waiver form:', error);
             }

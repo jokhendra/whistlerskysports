@@ -400,7 +400,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         // Redirect after a short delay
                         setTimeout(() => {
-                            window.location.href = '{{ route("booking.success") }}';
+                            // Generate a success token with booking ID and timestamp
+                            const successToken = btoa(`${window.bookingId}-${Date.now()}`);
+                            // Redirect in the same tab with token to verify legitimate access
+                            window.location.href = '{{ route("booking.success") }}?token=' + successToken;
                         }, 2000);
                     } else {
                         hideProcessing();

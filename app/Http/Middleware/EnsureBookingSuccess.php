@@ -40,7 +40,7 @@ class EnsureBookingSuccess
             }
 
             // Verify the booking belongs to the current user (if logged in)
-            if (Auth::check() && $booking->user_id !== Auth::id()) {
+            if (Auth::check() && $booking->user_id && $booking->user_id !== Auth::id()) {
                 $this->logUnauthorizedAccess($request, 'Booking does not belong to user', [
                     'booking_id' => $bookingId,
                     'user_id' => Auth::id()
@@ -48,10 +48,36 @@ class EnsureBookingSuccess
                 return $this->redirectToHome();
             }
 
-            // Verify the booking is not expired (e.g., within last 24 hours)
-            if ($booking->created_at->diffInHours(now()) > 24) {
-                $this->logUnauthorizedAccess($request, 'Booking expired', ['booking_id' => $bookingId]);
+            // Check for the token to prevent direct access
+            $token = $request->query('token');
+            
+            // If there's no token or session confirmation, deny access
+            if (!$token && !Session::has('last_successful_booking_id')) {
+                $this->logUnauthorizedAccess($request, 'Direct access attempt without token', [
+                    'booking_id' => $bookingId
+                ]);
                 return $this->redirectToHome();
+            }
+            
+            // If there's a token, validate it contains the booking ID (basic validation)
+            if ($token) {
+                try {
+                    $decodedToken = base64_decode($token);
+                    if (!str_contains($decodedToken, $bookingId . '-')) {
+                        $this->logUnauthorizedAccess($request, 'Invalid token', [
+                            'booking_id' => $bookingId,
+                            'token' => $token
+                        ]);
+                        return $this->redirectToHome();
+                    }
+                } catch (\Exception $e) {
+                    $this->logUnauthorizedAccess($request, 'Token validation error', [
+                        'booking_id' => $bookingId,
+                        'token' => $token,
+                        'error' => $e->getMessage()
+                    ]);
+                    return $this->redirectToHome();
+                }
             }
 
             // Add booking to request for use in the controller

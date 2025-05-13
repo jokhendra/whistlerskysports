@@ -252,7 +252,7 @@
                 <!-- Feedback -->
                 <div class="mb-6">
                     <label for="feedback" class="block mb-2 font-medium">
-                        Your feedback on the experience (minimum 10 characters)<span class="text-red-500">*</span>
+                        Your feedback on the experience
                     </label>
                     <textarea 
                            id="feedback" 
@@ -260,7 +260,6 @@
                            rows="4"
                            class="w-full p-2 border border-gray-300 rounded"
                            value="{{ old('feedback', 'This is a test feedback') }}"
-                           required
                            minlength="10"></textarea>
                 </div>
                 

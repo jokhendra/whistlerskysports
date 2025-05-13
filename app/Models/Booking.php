@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Booking extends Model
 {
@@ -66,5 +67,38 @@ class Booking extends Model
     public function payments()
     {
         return $this->hasMany(Payment::class);
+    }
+    
+    /**
+     * Get the URL for the waiver PDF.
+     * 
+     * @return string|null
+     */
+    public function getWaiverPdfUrlAttribute()
+    {
+        if (!$this->waiver_pdf_path) {
+            return null;
+        }
+        
+        // If the URL is already fully formed, return it as is
+        if (str_starts_with($this->waiver_pdf_path, 'http')) {
+            return $this->waiver_pdf_path;
+        }
+        
+        // Check if this is available in S3
+        try {
+            if (Storage::disk('s3')->exists($this->waiver_pdf_path)) {
+                // Use direct S3 URL construction similar to Product model
+                $s3Endpoint = config('filesystems.disks.s3.url');
+                $s3Url = rtrim($s3Endpoint, '/') . '/' . ltrim($this->waiver_pdf_path, '/');
+                return $s3Url;
+            }
+        } catch (\Exception $e) {
+            // Log the error if needed
+            // \Log::error('Error accessing S3 for waiver PDF: ' . $e->getMessage());
+        }
+        
+        // Fall back to local storage
+        return asset('storage/' . $this->waiver_pdf_path);
     }
 } 

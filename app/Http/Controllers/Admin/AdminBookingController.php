@@ -94,6 +94,8 @@ class AdminBookingController extends Controller
         $stats = [
             'total_bookings' => Booking::count(),
             'pending_bookings' => Booking::where('flying_status', 'pending')->count(),
+            'confirmed_bookings' => Booking::where('flying_status', 'confirmed')->count(),
+            'canceled_bookings' => Booking::where('flying_status', 'canceled')->count(),
             'today_revenue' => Booking::whereDate('created_at', today())->sum('total_amount'),
             'yesterday_revenue' => Booking::whereDate('created_at', today()->subDay())->sum('total_amount'),
         ];
@@ -104,9 +106,8 @@ class AdminBookingController extends Controller
             : 0;
 
         // Calculate conversion rate (confirmed bookings / total bookings)
-        $confirmedBookings = Booking::where('flying_status', 'confirmed')->count();
         $stats['conversion_rate'] = $stats['total_bookings'] > 0
-            ? round(($confirmedBookings / $stats['total_bookings']) * 100, 1)
+            ? round(($stats['confirmed_bookings'] / $stats['total_bookings']) * 100, 1)
             : 0;
 
         return view('admin.bookings.index', compact('bookings', 'filter', 'stats'));
