@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            // Add billing information fields
-            $table->boolean('same_as_shipping')->default(true)->after('country');
-            $table->string('billing_name')->nullable()->after('same_as_shipping');
+            // Add billing information fields - removed same_as_shipping as it exists already
+            // $table->boolean('same_as_shipping')->default(true)->after('country');
+            $table->string('billing_name')->nullable()->after('country');
             $table->string('billing_email')->nullable()->after('billing_name');
             $table->string('billing_phone')->nullable()->after('billing_email');
             $table->text('billing_address')->nullable()->after('billing_phone');
@@ -31,9 +31,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            // Remove all billing fields
+            // Remove all billing fields except same_as_shipping which is defined elsewhere
             $table->dropColumn([
-                'same_as_shipping',
+                // 'same_as_shipping', - removed as it's defined in create_orders_table
                 'billing_name',
                 'billing_email',
                 'billing_phone',
