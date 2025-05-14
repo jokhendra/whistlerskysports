@@ -25,9 +25,7 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/gallery', function () {
-    return view('gallery');
-});
+Route::get('/gallery', [App\Http\Controllers\GalleryController::class, 'index'])->name('gallery');
 
 Route::get('/terms', function () {
     return view('terms');
@@ -60,11 +58,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 | Contact Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
-Route::post('/contact', [App\Http\Controllers\ContactController::class, 'contact'])->name('contact.store');
+Route::post('/contact', [ContactController::class, 'contact'])->name('contact.store');
 
 /*
 |--------------------------------------------------------------------------

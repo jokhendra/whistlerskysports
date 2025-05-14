@@ -61,6 +61,7 @@
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
             <form action="{{ isset($promotionalEmail) ? route('admin.promotional-emails.update', $promotionalEmail) : route('admin.promotional-emails.store') }}" 
                   method="POST" 
+                  id="promotionalEmailForm"
                   class="space-y-8">
                 @csrf
                 @if(isset($promotionalEmail))
@@ -94,7 +95,7 @@
                             <div id="editor" class="block w-full rounded-lg border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 min-h-[300px]">
                                 {!! old('content', $promotionalEmail->content ?? '') !!}
                             </div>
-                            <input type="hidden" name="content" id="content">
+                            <input type="hidden" name="content" id="content" value="{{ old('content', $promotionalEmail->content ?? '') }}">
                         </div>
                         @error('content')
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -168,6 +169,7 @@
                 <div class="px-8 py-4 bg-gray-50 border-t border-gray-200">
                     <div class="flex justify-end">
                         <button type="submit" 
+                                id="submitButton"
                                 class="inline-flex items-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
                             <svg class="h-5 w-5 mr-2 -ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -226,6 +228,9 @@
 @push('scripts')
 <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/decoupled-document/ckeditor.js"></script>
 <script>
+    let editor;
+    let editorInitialized = false;
+    
     DecoupledEditor
         .create(document.querySelector('#editor'), {
             toolbar: {
@@ -318,18 +323,21 @@
                 }
             }
         })
-        .then(editor => {
+        .then(newEditor => {
+            editor = newEditor;
+            editorInitialized = true;
+            
+            // Populate editor with initial content if available
+            const initialContent = document.querySelector('#content').value;
+            if (initialContent) {
+                editor.setData(initialContent);
+            }
+            
             // Append the toolbar to the dedicated container
             const toolbarContainer = document.createElement('div');
             toolbarContainer.classList.add('ck-toolbar-container');
             document.querySelector('#editor').parentNode.insertBefore(toolbarContainer, document.querySelector('#editor'));
             toolbarContainer.appendChild(editor.ui.view.toolbar.element);
-
-            // Update hidden input before form submission
-            const form = document.querySelector('form');
-            form.addEventListener('submit', function() {
-                document.querySelector('#content').value = editor.getData();
-            });
 
             // Add custom styles to match your form theme
             editor.editing.view.change(writer => {
@@ -338,10 +346,37 @@
                 writer.setStyle('border-radius', '0.5rem', viewRoot);
                 writer.setStyle('padding', '1rem', viewRoot);
             });
+            
+            // Sync editor content on change
+            editor.model.document.on('change:data', () => {
+                document.querySelector('#content').value = editor.getData();
+            });
         })
         .catch(error => {
             console.error(error);
         });
+        
+    // Handle form submission
+    document.getElementById('promotionalEmailForm').addEventListener('submit', function(event) {
+        if (editorInitialized) {
+            // Make sure to update the hidden input with the editor content
+            document.querySelector('#content').value = editor.getData();
+            
+            // If content is empty, prevent form submission
+            if (!document.querySelector('#content').value.trim()) {
+                event.preventDefault();
+                alert('Please enter some content for the email.');
+                return false;
+            }
+        }
+    });
+    
+    // Backup method to ensure content is set
+    document.getElementById('submitButton').addEventListener('click', function() {
+        if (editorInitialized) {
+            document.querySelector('#content').value = editor.getData();
+        }
+    });
 </script>
 
 <style>

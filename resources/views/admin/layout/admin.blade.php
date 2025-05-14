@@ -25,7 +25,7 @@
          @resize.window="window.innerWidth < 1024 ? sidebarCollapsed = false : ''"
          x-init="$watch('sidebarCollapsed', value => localStorage.setItem('sidebarCollapsed', value))">
         <!-- Sidebar -->
-        <div class="fixed inset-y-0 left-0 z-50 bg-white shadow-lg transform transition-all duration-300 ease-in-out"
+        <div class="fixed inset-y-0 left-0 z-50 bg-white shadow-lg transform transition-all duration-300 ease-in-out flex flex-col"
              :class="{
                 'w-64': !sidebarCollapsed,
                 'w-16': sidebarCollapsed,
@@ -48,8 +48,8 @@
                 </button>
                         </div>
 
-                        <!-- Navigation Links -->
-            <nav class="mt-6" :class="{'px-3': !sidebarCollapsed, 'px-2': sidebarCollapsed}">
+                        <!-- Navigation Links - Added overflow-y-auto to make scrollable -->
+            <nav class="mt-6 flex-1 overflow-y-auto" :class="{'px-3': !sidebarCollapsed, 'px-2': sidebarCollapsed}">
                 <!-- Dashboard -->
                             <a href="{{ route('admin.dashboard') }}" 
                    class="flex items-center mb-2 text-gray-700 rounded-lg hover:bg-gray-100 {{ request()->routeIs('admin.dashboard') ? 'bg-blue-50 text-blue-700' : '' }}"

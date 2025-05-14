@@ -94,6 +94,20 @@
         
         <!-- Form Content -->
         <div class="bg-white border border-[#004080] border-t-0 p-5">
+            
+            <!-- Success and Error Messages -->
+            @if (session('success'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
+                    <p>{{ session('success') }}</p>
+                </div>
+            @endif
+            
+            @if (session('error'))
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+                    <p>{{ session('error') }}</p>
+                </div>
+            @endif
+            
             <p class="mb-6 text-sm">
                 Thank you for being a valued customer at Whistler Sky Sports! This survey helps us gain 
                 deeper insights into your preferences and experiences. We welcome all feedback—positive, 
@@ -105,6 +119,17 @@
             
             <form action="{{ route('reviews.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                
+                <!-- Show validation errors if any -->
+                @if ($errors->any())
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+                        <ul class="list-disc list-inside">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 
                 <!-- Email Address -->
                 <div class="mb-6">
@@ -252,15 +277,15 @@
                 <!-- Feedback -->
                 <div class="mb-6">
                     <label for="feedback" class="block mb-2 font-medium">
-                        Your feedback on the experience
+                        Your feedback on the experience <span class="text-sm text-gray-500">(optional)</span>
                     </label>
                     <textarea 
                            id="feedback" 
                            name="feedback" 
                            rows="4"
                            class="w-full p-2 border border-gray-300 rounded"
-                           value="{{ old('feedback', 'This is a test feedback') }}"
-                           minlength="10"></textarea>
+                           placeholder="Share your thoughts about your experience with us..."
+                           >{{ old('feedback') }}</textarea>
                 </div>
                 
                 <!-- Photo Upload -->
@@ -323,6 +348,22 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Ensure CSRF token is included in AJAX requests
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    
+    // Add default ratings (set to 3 stars)
+    document.getElementById('instructor_rating_3').checked = true;
+    document.getElementById('fun_rating_3').checked = true;
+    document.getElementById('safety_rating_3').checked = true;
+    
+    // Highlight default ratings
+    highlightStars(document.getElementById('instructor_rating_stars'), 3);
+    highlightStars(document.getElementById('fun_rating_stars'), 3);
+    highlightStars(document.getElementById('safety_rating_stars'), 3);
+    
+    // Also check at least one aircraft type by default
+    document.getElementById('open_cockpit').checked = true;
+    
     // File upload handling
     const dropArea = document.getElementById('drop-area');
     const fileInput = document.getElementById('media_upload');

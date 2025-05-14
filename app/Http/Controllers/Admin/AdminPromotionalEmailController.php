@@ -4,10 +4,24 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\PromotionalEmail;
+use App\Services\PromotionalMailService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class AdminPromotionalEmailController extends Controller
 {
+    protected $promotionalMailService;
+
+    /**
+     * Constructor with dependency injection
+     * 
+     * @param PromotionalMailService $promotionalMailService
+     */
+    public function __construct(PromotionalMailService $promotionalMailService)
+    {
+        $this->promotionalMailService = $promotionalMailService;
+    }
+
     /**
      * Display a listing of promotional emails.
      *
@@ -145,10 +159,22 @@ class AdminPromotionalEmailController extends Controller
             'test_email' => 'required|email'
         ]);
 
-        // TODO: Implement email sending logic
-        // Mail::to($request->test_email)->send(new PromotionalEmailMailable($promotionalEmail));
-
-        return back()->with('success', 'Test email sent successfully');
+        try {
+            $success = $this->promotionalMailService->sendTestEmail(
+                $request->test_email,
+                $promotionalEmail->subject,
+                $promotionalEmail->content
+            );
+            
+            if ($success) {
+                return back()->with('success', 'Test email sent successfully to ' . $request->test_email);
+            } else {
+                return back()->with('error', 'Failed to send test email. Please check the logs for more details.');
+            }
+        } catch (\Exception $e) {
+            Log::error('Error sending test email: ' . $e->getMessage());
+            return back()->with('error', 'An error occurred while sending the test email: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -159,11 +185,71 @@ class AdminPromotionalEmailController extends Controller
      */
     public function send(PromotionalEmail $promotionalEmail)
     {
-        // TODO: Implement bulk email sending logic
-        // This should probably be handled by a queue job
-        $promotionalEmail->update(['status' => 'sent', 'sent_at' => now()]);
+        try {
+            // If email is already sent, prevent sending again
+            if ($promotionalEmail->status === 'sent') {
+                return back()->with('error', 'This email has already been sent.');
+            }
 
-        return back()->with('success', 'Email scheduled for sending');
+            // For immediate sending, get recipient emails based on group
+            $recipientEmails = [];
+            
+            switch ($promotionalEmail->recipient_group) {
+                case 'all':
+                    $contactEmails = \App\Models\Contact::whereNotNull('email')->pluck('email')->toArray();
+                    $bookingEmails = \App\Models\Booking::whereNotNull('email')->pluck('email')->toArray();
+                    $recipientEmails = array_unique(array_merge($contactEmails, $bookingEmails));
+                    break;
+                    
+                case 'subscribers':
+                    $recipientEmails = \App\Models\Contact::where('newsletter', true)
+                        ->whereNotNull('email')
+                        ->pluck('email')
+                        ->toArray();
+                    break;
+                    
+                case 'customers':
+                    $recipientEmails = \App\Models\Booking::whereNotNull('email')
+                        ->pluck('email')
+                        ->unique()
+                        ->toArray();
+                    break;
+            }
+            
+            if (empty($recipientEmails)) {
+                return back()->with('error', 'No recipients found for the selected group.');
+            }
+            
+            // Queue emails for sending
+            $result = $this->promotionalMailService->queueEmailsForUsers(
+                $recipientEmails,
+                $promotionalEmail->subject,
+                $promotionalEmail->content
+            );
+            
+            // Update email status
+            $promotionalEmail->update([
+                'status' => 'sent', 
+                'sent_at' => now()
+            ]);
+            
+            // Log the result
+            Log::info("Promotional email sent manually", [
+                'email_id' => $promotionalEmail->id,
+                'subject' => $promotionalEmail->subject,
+                'recipients_count' => count($recipientEmails),
+                'queued' => $result['queued'],
+                'not_found' => $result['not_found']
+            ]);
+
+            return back()->with('success', "Email queued for sending to {$result['queued']} recipients.");
+        } catch (\Exception $e) {
+            Log::error('Error sending promotional email: ' . $e->getMessage(), [
+                'email_id' => $promotionalEmail->id
+            ]);
+            
+            return back()->with('error', 'An error occurred while sending the email: ' . $e->getMessage());
+        }
     }
 
     /**

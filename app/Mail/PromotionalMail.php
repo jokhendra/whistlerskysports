@@ -33,7 +33,8 @@ class PromotionalMail extends Mailable
         return $this->subject($this->data['subject'])
                     ->markdown('emails.promotional')
                     ->with([
-                        'content' => $this->data['content']
+                        'content' => $this->data['content'],
+                        'name' => $this->data['name'] ?? 'Valued Customer'
                     ]);
     }
 } 

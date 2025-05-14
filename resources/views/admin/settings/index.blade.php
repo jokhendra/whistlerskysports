@@ -83,6 +83,27 @@
                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200"
                                        value="{{ $settings['instagram_url'] ?? '' }}">
                             </div>
+                            
+                            <div>
+                                <label for="linkedin_url" class="block text-sm font-medium text-gray-700">LinkedIn URL</label>
+                                <input type="url" name="linkedin_url" id="linkedin_url" 
+                                       class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200"
+                                       value="{{ $settings['linkedin_url'] ?? '' }}">
+                            </div>
+                            
+                            <div>
+                                <label for="youtube_url" class="block text-sm font-medium text-gray-700">YouTube URL</label>
+                                <input type="url" name="youtube_url" id="youtube_url" 
+                                       class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200"
+                                       value="{{ $settings['youtube_url'] ?? '' }}">
+                            </div>
+                            
+                            <div>
+                                <label for="pinterest_url" class="block text-sm font-medium text-gray-700">Pinterest URL</label>
+                                <input type="url" name="pinterest_url" id="pinterest_url" 
+                                       class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200"
+                                       value="{{ $settings['pinterest_url'] ?? '' }}">
+                            </div>
                         </div>
                     </div>
 

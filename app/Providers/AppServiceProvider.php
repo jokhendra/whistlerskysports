@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use App\Models\Setting;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,9 +24,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Force HTTPS in production
         // if($this->app->environment('production')) {
         //     \Illuminate\Support\Facades\URL::forceScheme('https');
         // }
+        
+        // Share settings with all views
+        try {
+            $settings = Setting::all()->pluck('value', 'key')->toArray();
+            View::share('settings', $settings);
+        } catch (\Exception $e) {
+            // Handle case where database connection is not available
+            // or table does not exist (e.g. during migrations)
+            View::share('settings', []);
+        }
     }
 }

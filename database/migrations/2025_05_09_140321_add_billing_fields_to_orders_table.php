@@ -27,31 +27,31 @@ return new class extends Migration
             }
             
             if (!Schema::hasColumn('orders', 'billing_email')) {
-                $table->string('billing_email')->nullable()->after('billing_name');
+            $table->string('billing_email')->nullable()->after('billing_name');
             }
             
             if (!Schema::hasColumn('orders', 'billing_phone')) {
-                $table->string('billing_phone')->nullable()->after('billing_email');
+            $table->string('billing_phone')->nullable()->after('billing_email');
             }
             
             if (!Schema::hasColumn('orders', 'billing_address')) {
-                $table->text('billing_address')->nullable()->after('billing_phone');
+            $table->text('billing_address')->nullable()->after('billing_phone');
             }
             
             if (!Schema::hasColumn('orders', 'billing_city')) {
-                $table->string('billing_city')->nullable()->after('billing_address');
+            $table->string('billing_city')->nullable()->after('billing_address');
             }
             
             if (!Schema::hasColumn('orders', 'billing_state')) {
-                $table->string('billing_state')->nullable()->after('billing_city');
+            $table->string('billing_state')->nullable()->after('billing_city');
             }
             
             if (!Schema::hasColumn('orders', 'billing_postal_code')) {
-                $table->string('billing_postal_code')->nullable()->after('billing_state');
+            $table->string('billing_postal_code')->nullable()->after('billing_state');
             }
             
             if (!Schema::hasColumn('orders', 'billing_country')) {
-                $table->string('billing_country')->nullable()->after('billing_postal_code');
+            $table->string('billing_country')->nullable()->after('billing_postal_code');
             }
         });
     }

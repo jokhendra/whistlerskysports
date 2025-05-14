@@ -12,6 +12,9 @@ class SettingsController extends Controller
 {
     public function index()
     {
+        // Ensure default settings exist for all fields
+        $this->ensureDefaultSettings();
+        
         $settings = Setting::all()->pluck('value', 'key')->toArray();
         return view('admin.settings.index', compact('settings'));
     }
@@ -26,6 +29,9 @@ class SettingsController extends Controller
             'facebook_url' => 'nullable|url',
             'twitter_url' => 'nullable|url',
             'instagram_url' => 'nullable|url',
+            'linkedin_url' => 'nullable|url',
+            'youtube_url' => 'nullable|url',
+            'pinterest_url' => 'nullable|url',
             'meta_description' => 'nullable|string',
             'meta_keywords' => 'nullable|string',
         ]);
@@ -63,5 +69,26 @@ class SettingsController extends Controller
         }
 
         return redirect()->route('admin.settings.index')->with('success', 'Settings updated successfully');
+    }
+
+    /**
+     * Ensure all default settings exist in the database
+     */
+    private function ensureDefaultSettings()
+    {
+        $defaultSettings = [
+            'facebook_url' => '',
+            'twitter_url' => '',
+            'instagram_url' => '',
+            'linkedin_url' => '',
+            'youtube_url' => '',
+            'pinterest_url' => '',
+            'meta_description' => '',
+            'meta_keywords' => '',
+        ];
+        
+        foreach ($defaultSettings as $key => $value) {
+            Setting::firstOrCreate(['key' => $key], ['value' => $value]);
+        }
     }
 } 

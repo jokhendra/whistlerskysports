@@ -3,9 +3,15 @@
         <!-- Logo -->
         <div class="flex-shrink-0 flex items-center">
             <a href="/" class="flex items-center">
-                <img src="{{ asset('images/logo/logo.png') }}" 
-                     class="h-6 sm:h-8 md:h-10 transition-all duration-300 hover:scale-105" 
-                     alt="WhistlerSkySports Logo" />
+                @if(isset($settings['site_logo']) && !empty($settings['site_logo']))
+                    <img src="{{ Storage::disk('s3')->url($settings['site_logo']) }}" 
+                         class="h-6 sm:h-8 md:h-10 transition-all duration-300 hover:scale-105" 
+                         alt="{{ $settings['site_name'] ?? 'WhistlerSkySports' }} Logo" />
+                @else
+                    <img src="{{ asset('images/logo/logo.png') }}" 
+                         class="h-6 sm:h-8 md:h-10 transition-all duration-300 hover:scale-105" 
+                         alt="{{ $settings['site_name'] ?? 'WhistlerSkySports' }} Logo" />
+                @endif
             </a>
         </div>
         

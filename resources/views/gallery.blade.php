@@ -146,7 +146,73 @@
   <div class="py-8 bg-gradient-to-b from-white to-gray-50">
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <!-- Gallery Items - Data Driven Approach -->
+        <!-- Gallery Items - Dynamic from Database -->
+        @php
+          // Default animation mapping for categories
+          $animationMap = [
+            'aerial_views' => [
+              'animation' => 'slide-up',
+              'text_animation' => 'float-bottom-top',
+              'bg_color' => 'blue',
+            ],
+            'microlite' => [
+              'animation' => 'slide-diagonal',
+              'text_animation' => 'float-bottom-top',
+              'bg_color' => 'red',
+            ],
+            'fixed_wings' => [
+              'animation' => 'slide-down',
+              'text_animation' => 'float-top-bottom',
+              'bg_color' => 'yellow',
+            ]
+          ];
+
+          // Fallback animations
+          $defaultAnimations = [
+            ['animation' => 'slide-up', 'text_animation' => 'float-bottom-top', 'bg_color' => 'blue'],
+            ['animation' => 'slide-diagonal', 'text_animation' => 'float-right-left', 'bg_color' => 'red'],
+            ['animation' => 'slide-down', 'text_animation' => 'float-top-bottom', 'bg_color' => 'green'],
+            ['animation' => 'slide-left', 'text_animation' => 'float-right-left', 'bg_color' => 'purple'],
+          ];
+        @endphp
+        
+        @if(isset($categoriesWithImages) && $categoriesWithImages->count() > 0)
+          @foreach($categoriesWithImages as $index => $category)
+            @php
+              // Get animation properties based on slug or use fallback
+              $animationProps = $animationMap[$category->slug] ?? $defaultAnimations[$index % count($defaultAnimations)];
+              
+              // Make sure category has images
+              if($category->activeImages->isEmpty()) continue;
+            @endphp
+            
+            <div class="relative overflow-hidden rounded-xl shadow-xl bg-white h-[500px] opacity-0 animate-{{ $animationProps['animation'] }}" 
+                 onclick="openImagePreview('{{ $category->slug }}', {{ json_encode($category->activeImages->pluck('id')) }})">
+              <div class="absolute inset-0 bg-{{ $animationProps['bg_color'] }}-600/10 backdrop-blur-sm z-0"></div>
+              <div class="relative z-10 p-4 h-full">
+                <div class="carousel-container relative h-full">
+                  <div class="carousel-slides h-full">
+                    @foreach($category->activeImages as $index => $image)
+                    <div class="carousel-slide absolute inset-0" data-index="{{ $index }}">
+                      <img src="{{ $image->image_url }}" 
+                           alt="{{ $image->title }}" 
+                           class="w-full h-full object-cover rounded-lg transition-transform duration-1000 hover:scale-110"
+                           loading="lazy">
+                    </div>
+                    @endforeach
+                  </div>
+                  <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                    <h3 class="text-4xl font-bold text-white animate-{{ $animationProps['text_animation'] }}">{{ $category->name }}</h3>
+                  </div>
+                  <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-20">
+                    <div class="carousel-dots flex space-x-2"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          @endforeach
+        @else
+          <!-- Fallback to hardcoded gallery items if no database images -->
         @foreach([
           [
             'category' => 'aerial_views',
@@ -198,6 +264,7 @@
           </div>
         </div>
         @endforeach
+        @endif
       </div>
     </div>
   </div>
@@ -288,14 +355,23 @@
     const imagePreview = {
       currentIndex: 0,
       images: [],
+      imageIds: [],
       category: '',
       modal: document.getElementById('imagePreviewModal'),
       imageElement: document.getElementById('previewImage'),
       countElement: document.getElementById('imageCount'),
       
-      open: function(category) {
+      open: function(category, imageIds = []) {
         this.category = category;
-        this.setImages();
+        
+        if (imageIds && imageIds.length > 0) {
+          // Using DB images
+          this.useDbImages(imageIds);
+        } else {
+          // Fallback to hardcoded images
+          this.useHardcodedImages();
+        }
+        
         this.currentIndex = 0;
         this.update();
         this.modal.classList.remove('hidden');
@@ -318,14 +394,44 @@
       },
       
       update: function() {
+        if (this.imageIds && this.imageIds.length > 0) {
+          // If using DB images
+          this.imageElement.src = this.images[this.currentIndex];
+        } else {
+          // Fallback to hardcoded paths
         const folder = this.category === 'fixed_wings' ? 'fixed_wings' : 
                       this.category === 'microlite' ? 'microlite' : 'aerial_views';
         
         this.imageElement.src = `{{ asset('images/${folder}') }}/${this.images[this.currentIndex]}`;
+        }
+        
         this.countElement.textContent = `${this.currentIndex + 1} / ${this.images.length}`;
       },
       
-      setImages: function() {
+      useDbImages: function(imageIds) {
+        this.imageIds = imageIds;
+        this.images = [];
+        
+        // For each image ID, fetch the image URL
+        const galleryImages = this.getGalleryImages();
+        
+        // Fill images array with actual URLs
+        imageIds.forEach(id => {
+          const image = galleryImages.find(img => img.id === id);
+          if (image) {
+            this.images.push(image.url);
+          }
+        });
+      },
+      
+      getGalleryImages: function() {
+        // This retrieves image data from the script we inject in the template
+        return window.galleryImages || [];
+      },
+      
+      useHardcodedImages: function() {
+        this.imageIds = [];
+        
         if (this.category === 'aerial_views') {
           this.images = [
             'aerial_view1.png', 'aerial_view3.png', 'aerial_view4.png', 
@@ -413,6 +519,17 @@
 
     // Initialize on DOM Load
     document.addEventListener('DOMContentLoaded', function() {
+      // Store gallery images data
+      window.galleryImages = {!! json_encode(isset($categoriesWithImages) ? $categoriesWithImages->flatMap(function($category) {
+        return $category->activeImages->map(function($image) {
+          return [
+            'id' => $image->id,
+            'url' => $image->image_url,
+            'title' => $image->title
+          ];
+        });
+      })->all() : []) !!};
+      
       // Initialize carousels
       document.querySelectorAll('.carousel-container').forEach(container => {
         new Carousel(container);
@@ -456,7 +573,7 @@
     });
 
     // Global functions for HTML onclick handlers
-    window.openImagePreview = (category) => imagePreview.open(category);
+    window.openImagePreview = (category, imageIds) => imagePreview.open(category, imageIds);
     window.closeImagePreview = () => imagePreview.close();
     window.prevPreviewImage = () => imagePreview.prev();
     window.nextPreviewImage = () => imagePreview.next();

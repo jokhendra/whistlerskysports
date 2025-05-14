@@ -4,10 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>WhistlerSkySports</title>
+    <title>{{ $settings['site_name'] ?? 'WhistlerSkySports' }}</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{{ $settings['meta_description'] ?? 'Whistler Sky Sports - Experience the thrill of flight with our ultralight aircraft training and tours in Whistler, BC.' }}">
+    <meta name="keywords" content="{{ $settings['meta_keywords'] ?? 'ultralight aircraft, flight training, Whistler, aviation, sky sports, flying lessons, aircraft tours' }}">
+    <!-- Google Fonts - Roboto Slab -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         [x-cloak] { 
             display: none !important; 
+        }
+        
+        /* Apply Roboto Slab to headings */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Roboto Slab', serif;
         }
     </style>
     @vite('resources/css/app.css')

@@ -8,9 +8,21 @@ use Illuminate\Support\Facades\Log;
 use App\Mail\ContactFormMail;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Contact;
+use App\Models\Setting;
 
 class ContactController extends Controller
 {
+    /**
+     * Display the contact page with settings.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        $settings = Setting::all()->pluck('value', 'key')->toArray();
+        return view('contact', compact('settings'));
+    }
+
     /**
      * Handle the contact form submission.
      * This method validates the form data, saves it to the database,
@@ -55,9 +67,13 @@ class ContactController extends Controller
             // Save contact form submission to database
             Contact::create($formData);
             
+            // Get contact email from settings or use default
+            $contactEmail = Setting::where('key', 'contact_email')->first();
+            $recipientEmail = $contactEmail ? $contactEmail->value : config('mail.contact.address');
+            
             // Queue email notification
             // Using queue() instead of send() for better performance and reliability
-            Mail::to(config('mail.contact.address'))
+            Mail::to($recipientEmail)
                 ->queue(new ContactFormMail($formData));
             
             // Redirect with success message

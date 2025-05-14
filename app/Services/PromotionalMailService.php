@@ -67,4 +67,29 @@ class PromotionalMailService
 
         return $results;
     }
+    
+    /**
+     * Send a single test promotional email
+     *
+     * @param string $email
+     * @param string $subject
+     * @param string $content
+     * @return bool
+     */
+    public function sendTestEmail(string $email, string $subject, string $content): bool
+    {
+        try {
+            Mail::to($email)
+                ->send(new PromotionalMail([
+                    'subject' => $subject,
+                    'content' => $content,
+                    'name' => 'Test Recipient'
+                ]));
+                
+            return true;
+        } catch (\Exception $e) {
+            Log::error("Failed to send test email to {$email}: " . $e->getMessage());
+            return false;
+        }
+    }
 } 

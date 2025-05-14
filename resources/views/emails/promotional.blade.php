@@ -1,7 +1,7 @@
 @component('mail::message')
-# Hello {{ $name }}!
+# Hello {{ $name ?? 'Valued Customer' }}!
 
-{{ $content }}
+{!! $content !!}
 
 @component('mail::button', ['url' => config('app.url')])
 Book Your Adventure Now
