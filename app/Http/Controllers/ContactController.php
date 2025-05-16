@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use App\Mail\ContactFormMail;
+use App\Mail\ContactFormConfirmationMail;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Contact;
 use App\Models\Setting;
@@ -67,21 +68,48 @@ class ContactController extends Controller
             // Save contact form submission to database
             Contact::create($formData);
             
+            // Flag to track if any emails failed
+            $emailSendingFailed = false;
+            
             // Get contact email from settings or use default
             $contactEmail = Setting::where('key', 'contact_email')->first();
             $recipientEmail = $contactEmail ? $contactEmail->value : config('mail.contact.address');
             
-            // Queue email notification
-            // Using queue() instead of send() for better performance and reliability
-            Mail::to($recipientEmail)
-                ->queue(new ContactFormMail($formData));
+            // Try to send admin notification
+            try {
+                // Queue email notification
+                Mail::to($recipientEmail)
+                    ->queue(new ContactFormMail($formData));
+            } catch (\Exception $e) {
+                // Log email sending error but continue
+                Log::error('Admin notification email failed: ' . $e->getMessage());
+                $emailSendingFailed = true;
+            }
             
-            // Redirect with success message
-            return redirect()->back()
-                ->with('success', 'Thank you for your message! Your information has been saved and we will get back to you soon.');
+            // Try to send user confirmation
+            try {
+                // Send confirmation email to the user
+                Mail::to($formData['email'])
+                    ->queue(new ContactFormConfirmationMail($formData));
+            } catch (\Exception $e) {
+                // Log email sending error but continue
+                Log::error('User confirmation email failed: ' . $e->getMessage());
+                $emailSendingFailed = true;
+            }
+            
+            // Show appropriate success message based on email status
+            if ($emailSendingFailed) {
+                // Email failed but data was saved
+                return redirect()->back()
+                    ->with('success', 'Thank you for your message! Your information has been saved, but we encountered an issue sending confirmation emails. Our team will still review your message.');
+            } else {
+                // Everything succeeded
+                return redirect()->back()
+                    ->with('success', 'Thank you for your message! Your information has been saved and we will get back to you soon.');
+            }
 
         } catch (\Exception $e) {
-            // Log any errors that occur during processing
+            // Log any errors that occur during form processing (not email-related)
             Log::error('Contact form submission failed: ' . $e->getMessage());
             
             // Redirect with user-friendly error message
