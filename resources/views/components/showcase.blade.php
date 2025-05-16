@@ -388,12 +388,12 @@ html {
     class="transition-all duration-[800ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
     :style="'transform: translateX(' + translateX + '%)'"
   >
-    <div class="relative flex justify-end perspective-text">
+    <!-- <div class="relative flex justify-end perspective-text">
       <h1 class="text-[5rem] sm:text-[7rem] md:text-[10rem] lg:text-[15rem] xl:text-[20rem] 2xl:text-[24rem] font-black tracking-wider md:tracking-widest hidden md:block mr-[-2rem] sm:mr-[-3rem] md:mr-[-4rem] lg:mr-[-6rem] xl:mr-[-8rem]">
         <span class="we-text">Reach To The</span>
         <span class="fly-text"><span class="text-orange-700">S</span>KY</span>
       </h1>
-    </div>
+    </div> -->
   </div>
 </div>
 

@@ -1,17 +1,20 @@
-<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 bg-white h-16 sm:h-20 md:h-24 shadow-md">
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 nav-bg-image h-16 sm:h-20 md:h-24 shadow-md bg-sky-700">
     <div class="flex items-center justify-between px-4 sm:px-6 md:px-8 w-full h-full">
         <!-- Logo -->
         <div class="flex-shrink-0 flex items-center">
             <a href="/" class="flex items-center">
-                @if(isset($settings['site_logo']) && !empty($settings['site_logo']))
+            <img src="{{ asset('images/logo/Whistler-Sky-Sports_Wordmark-Black.svg') }}" 
+                         class="h-6 sm:h-8 md:h-10 transition-all duration-300 hover:scale-105" 
+                         alt="{{ $settings['site_name'] ?? 'WhistlerSkySports' }} Logo" />
+                <!-- @if(isset($settings['site_logo']) && !empty($settings['site_logo']))
                     <img src="{{ Storage::disk('s3')->url($settings['site_logo']) }}" 
                          class="h-6 sm:h-8 md:h-10 transition-all duration-300 hover:scale-105" 
                          alt="{{ $settings['site_name'] ?? 'WhistlerSkySports' }} Logo" />
                 @else
-                    <img src="{{ asset('images/logo/logo.png') }}" 
+                    <img src="{{ asset('images/logo/Whistler-Sky-Sports_Wordmark-White.png') }}" 
                          class="h-6 sm:h-8 md:h-10 transition-all duration-300 hover:scale-105" 
                          alt="{{ $settings['site_name'] ?? 'WhistlerSkySports' }} Logo" />
-                @endif
+                @endif -->
             </a>
         </div>
         
@@ -256,8 +259,9 @@
     </div>
 </nav>
 
+
 <!-- Add padding to account for the navbar height -->
-<div class=""></div>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

@@ -140,7 +140,6 @@
                            id="email" 
                            name="email" 
                            class="w-full p-2 border border-gray-300 rounded"
-                           value="{{ old('email','nothing@gmail.com') }}"
                            required>
                 </div>
                 
@@ -153,7 +152,6 @@
                            id="name" 
                            name="name" 
                            class="w-full p-2 border border-gray-300 rounded"
-                           value="{{ old('name','John Doe') }}"
                            required>
                 </div>
                 
@@ -166,7 +164,6 @@
                            id="flight_date" 
                            name="flight_date" 
                            class="w-full md:w-60 p-2 border border-gray-300 rounded"
-                           value="{{ old('flight_date', '2025-01-01') }}"
                            required>
                 </div>
                 
@@ -260,7 +257,6 @@
                                min="1" 
                                max="5" 
                                class="w-full"
-                               value="{{ old('likelihood', '3') }}"
                                required>
                         <div class="flex justify-between w-full mt-1 text-xs">
                             <div class="text-center max-w-[80px]">I am not coming</div>
@@ -285,7 +281,7 @@
                            rows="4"
                            class="w-full p-2 border border-gray-300 rounded"
                            placeholder="Share your thoughts about your experience with us..."
-                           >{{ old('feedback') }}</textarea>
+                           ></textarea>
                 </div>
                 
                 <!-- Photo Upload -->
@@ -318,12 +314,12 @@
                         Do you currently maintain an account on a social media site?
                     </label>
                     <div class="custom-radio-checkbox">
-                        <input type="radio" id="social_yes" name="has_social_media" value="yes" {{ old('has_social_media', 'yes') == 'yes' ? 'checked' : '' }}>
+                        <input type="radio" id="social_yes" name="has_social_media" value="yes">
                         <label for="social_yes">Yes - then why don't you follow us and show some love!</label>
                     </div>
                     
                     <div class="custom-radio-checkbox">
-                        <input type="radio" id="social_no" name="has_social_media" value="no" {{ old('has_social_media', 'no') == 'no' ? 'checked' : '' }}>
+                        <input type="radio" id="social_no" name="has_social_media" value="no">
                         <label for="social_no">Nay that's not for me</label>
                     </div>
                 </div>
@@ -350,19 +346,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Ensure CSRF token is included in AJAX requests
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    
-    // Add default ratings (set to 3 stars)
-    document.getElementById('instructor_rating_3').checked = true;
-    document.getElementById('fun_rating_3').checked = true;
-    document.getElementById('safety_rating_3').checked = true;
-    
-    // Highlight default ratings
-    highlightStars(document.getElementById('instructor_rating_stars'), 3);
-    highlightStars(document.getElementById('fun_rating_stars'), 3);
-    highlightStars(document.getElementById('safety_rating_stars'), 3);
-    
-    // Also check at least one aircraft type by default
-    document.getElementById('open_cockpit').checked = true;
     
     // File upload handling
     const dropArea = document.getElementById('drop-area');

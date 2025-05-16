@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Setting;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,9 +14,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
-        if (env('APP_ENV') !== 'local') {
-            \Illuminate\Support\Facades\URL::forceScheme('https');
+        // Force HTTPS in production but use HTTP for local development
+        if (env('APP_ENV') === 'local') {
+            URL::forceScheme('http');
+        } else {
+            URL::forceScheme('https');
         }
     }
 

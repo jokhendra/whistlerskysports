@@ -8,6 +8,8 @@
     <!-- SEO Meta Tags -->
     <meta name="description" content="{{ $settings['meta_description'] ?? 'Whistler Sky Sports - Experience the thrill of flight with our ultralight aircraft training and tours in Whistler, BC.' }}">
     <meta name="keywords" content="{{ $settings['meta_keywords'] ?? 'ultralight aircraft, flight training, Whistler, aviation, sky sports, flying lessons, aircraft tours' }}">
+    <!-- Preload background image -->
+    <link rel="preload" href="{{ asset('images/Background/Whistler-Sky-Sports_Sky-Background.png') }}" as="image" media="(min-width: 768px)" fetchpriority="high" importance="high">
     <!-- Google Fonts - Roboto Slab -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +28,18 @@
     <link rel="stylesheet" href="{{ asset('css/global.css') }}">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @stack('styles')
+    
+    <!-- Image preloading script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Preload background image
+            const bgImagePreloader = new Image();
+            bgImagePreloader.src = "{{ asset('images/Background/Whistler-Sky-Sports_Sky-Background.png') }}";
+            bgImagePreloader.onload = function() {
+                document.querySelector('.nav-bg-image').classList.add('bg-loaded');
+            };
+        });
+    </script>
 </head>
 <body>
     @include('common.nav')

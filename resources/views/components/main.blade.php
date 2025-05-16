@@ -341,7 +341,20 @@
 </style>
 @endpush
 
-<div class="mt-[-15px] w-full">
+<div class="w-full">
+<div class="w-[99.8vw] h-screen header-logo-bg overflow-x-hidden mt-16 flex items-center justify-center">
+    <div class="container mx-auto px-4 relative z-10">
+        <img src="{{ asset('images/logo/Whistler-Sky-Sports_Full-Black.png') }}" alt="Whistler Sky Sports Logo" class="w-3/4 max-w-4xl mx-auto object-contain animate-fadeIn">
+        <div class="text-center mt-8">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-black drop-shadow-lg">
+                Experience the Freedom of Flight
+            </h1>
+            <p class="text-xl md:text-2xl text-black mt-4 max-w-3xl mx-auto">
+                The premier destination for aviation adventures in Whistler
+            </p>
+        </div>
+    </div>
+</div>
   <div class="w-full">
     <!-- Hero Section -->
     <div class="py-8 sm:py-12 relative overflow-hidden w-full">
@@ -398,7 +411,7 @@
       </div>
 
       <!-- Third Feature -->
-      <div class="feature-section flex flex-col md:flex-row items-center mb-8 sm:mb-12 w-full">
+      <div class="feature-section flex flex-col md:flex-row items-center w-full">
         <div class="w-full md:w-1/2 feature-image">
           <img src="{{ asset('images/Airport.jpg') }}" 
                alt="Breathtaking Views" 
@@ -413,8 +426,11 @@
       </div>
     </div>
 
+  @include('components.showcase')
+
+
     <!-- Call to Action Section -->
-    <div class="relative h-64 sm:h-80 md:h-96 overflow-hidden mb-8 sm:mb-12 w-full">
+    <div class="relative h-64 sm:h-80 md:h-96 overflow-hidden mb-8 sm:mb-12 w-full mt-12">
       <img src="{{ asset('images/hero-section.png') }}" alt="Hang gliding over mountains" class="w-full h-full object-cover">
       <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent flex items-center">
         <div class="text-white p-4 sm:p-8 max-w-7xl mx-auto w-full">
@@ -431,7 +447,6 @@
     </div>
   </div>
 </div>
-
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
