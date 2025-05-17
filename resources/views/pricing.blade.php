@@ -73,7 +73,7 @@
             <div class="bg-white/40 rounded-2xl overflow-hidden">
                 <div class="p-8 text-center">
                     <h2 class="text-3xl font-bold mb-2">Open Cockpit Weight Shift Trike - Learn to Fly like a Bird</h2>
-                    <div class="text-4xl font-bold text-[#204fb4] mb-2">USD $229</div>
+                    <div class="text-4xl font-bold text-[#204fb4] mb-2">CAD $229</div>
                     <p class="text-gray-600 mb-4">per person</p>
                     <p class="text-xl text-gray-700 mb-6">30 Minute Lesson</p>
                     <p class="text-lg text-gray-600 mb-8">Spread your wings and reach out to the sky!</p>
@@ -87,7 +87,7 @@
             <div class="bg-white/40 rounded-2xl overflow-hidden">
                 <div class="p-8 text-center">
                     <h2 class="text-3xl font-bold mb-2">Fixed Wing Advanced Ultralight - Lesson for the Nuanced </h2>
-                    <div class="text-4xl font-bold text-[#204fb4] mb-2">USD $199</div>
+                    <div class="text-4xl font-bold text-[#204fb4] mb-2">CAD $199</div>
                     <p class="text-gray-600 mb-4">per person</p>
                     <p class="text-xl text-gray-700 mb-6">30 Minute Lesson</p>
                     <p class="text-lg text-gray-600 mb-8">Master the art of mountain flying with our comprehensive course!</p>
@@ -126,7 +126,7 @@
                     <p class="text-gray-600 text-sm mb-6">
                         High definition video of your entire flight with cockpit audio capturing all the excitement and information during your flight.
                     </p>
-                    <div class="text-2xl font-bold text-[#204fb4]">USD $90</div>
+                    <div class="text-2xl font-bold text-[#204fb4]">CAD $90</div>
                 </div>
             </div>
 
@@ -137,7 +137,7 @@
                     <p class="text-gray-600 text-sm mb-6">
                         Photos, Video and a WhistlerSkySports Cap or shirt and Keyring
                     </p>
-                    <div class="text-2xl font-bold text-[#204fb4]">USD $120</div>
+                    <div class="text-2xl font-bold text-[#204fb4]">CAD $120</div>
                 </div>
             </div>
 
@@ -148,7 +148,7 @@
                     <p class="text-gray-600 text-sm mb-6">
                         WhistlerSkySports Cap or shirt and Keyring
                     </p>
-                    <div class="text-2xl font-bold text-[#204fb4]">USD $40</div>
+                    <div class="text-2xl font-bold text-[#204fb4]">CAD $40</div>
                 </div>
             </div>
         </div>
@@ -264,14 +264,14 @@
                             <tr class="border-b border-purple-100">
                                 <td class="px-4 py-3">Dual Time With Instructor</td>
                                 <td class="px-4 py-3 text-center">22</td>
-                                <td class="px-4 py-3 text-center">USD 299</td>
-                                <td class="px-4 py-3 text-right">USD 6,578.00</td>
+                                <td class="px-4 py-3 text-center">CAD 299</td>
+                                <td class="px-4 py-3 text-right">CAD 6,578.00</td>
                             </tr>
                             <tr class="border-b border-purple-100 bg-purple-50/30">
                                 <td class="px-4 py-3">Flight Brief/ Debrief and Ground School Lesson Review with CFI</td>
                                 <td class="px-4 py-3 text-center">22</td>
-                                <td class="px-4 py-3 text-center">USD 99.7</td>
-                                <td class="px-4 py-3 text-right">USD 2,192.67</td>
+                                <td class="px-4 py-3 text-center">CAD 99.7</td>
+                                <td class="px-4 py-3 text-right">CAD 2,192.67</td>
                             </tr>
                             <tr class="border-b border-purple-100">
                                 <td class="px-4 py-3">Solo Flight Time</td>
@@ -281,8 +281,8 @@
                             <tr class="border-b border-purple-100 bg-purple-50/30">
                                 <td class="px-4 py-3">Solo Flight Ground Instruction</td>
                                 <td class="px-4 py-3 text-center">2</td>
-                                <td class="px-4 py-3 text-center">USD 99.7</td>
-                                <td class="px-4 py-3 text-right">USD 199.33</td>
+                                <td class="px-4 py-3 text-center">CAD 99.7</td>
+                                <td class="px-4 py-3 text-right">CAD 199.33</td>
                             </tr>
                             <tr class="border-b border-purple-100">
                                 <td class="px-4 py-3">Ground School for the Aeronautical Flight, FAA Knowledge test and Checkride</td>
@@ -293,26 +293,26 @@
                                 <td class="px-4 py-3">FAA Knowledge Test</td>
                                 <td class="px-4 py-3 text-center">-</td>
                                 <td class="px-4 py-3 text-center">-</td>
-                                <td class="px-4 py-3 text-right">USD 50.00</td>
+                                <td class="px-4 py-3 text-right">CAD 50.00</td>
                             </tr>
                             <tr class="border-b border-purple-100">
                                 <td class="px-4 py-3">Checkride</td>
                                 <td class="px-4 py-3 text-center">-</td>
                                 <td class="px-4 py-3 text-center">-</td>
-                                <td class="px-4 py-3 text-right">USD 350.00</td>
+                                <td class="px-4 py-3 text-right">CAD 350.00</td>
                             </tr>
                             <tr class="bg-purple-100/50 font-bold">
                                 <td class="px-4 py-3">Total</td>
                                 <td class="px-4 py-3 text-center">-</td>
                                 <td class="px-4 py-3 text-center">-</td>
-                                <td class="px-4 py-3 text-right">USD 9,370.00</td>
+                                <td class="px-4 py-3 text-right">CAD 9,370.00</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <p class="text-sm text-gray-600 mt-4 italic">
-                    Note: If you show up with your own Trike, reduce the cost of CFI from USD 299 to USD 199
+                    Note: If you show up with your own Trike, reduce the cost of CFI from CAD 299 to CAD 199
                 </p>
             </div>
         </div>
@@ -344,14 +344,14 @@
                             <tr class="border-b border-purple-100">
                                 <td class="px-4 py-3">Dual Time With Instructor</td>
                                 <td class="px-4 py-3 text-center">35</td>
-                                <td class="px-4 py-3 text-center">USD 299</td>
-                                <td class="px-4 py-3 text-right">USD 10,465.00</td>
+                                <td class="px-4 py-3 text-center">CAD 299</td>
+                                <td class="px-4 py-3 text-right">CAD 10,465.00</td>
                             </tr>
                             <tr class="border-b border-purple-100 bg-purple-50/30">
                                 <td class="px-4 py-3">Flight Brief/ Debrief and Ground School Lesson Review with CFI</td>
                                 <td class="px-4 py-3 text-center">35</td>
-                                <td class="px-4 py-3 text-center">USD 99.7</td>
-                                <td class="px-4 py-3 text-right">USD 3,488.33</td>
+                                <td class="px-4 py-3 text-center">CAD 99.7</td>
+                                <td class="px-4 py-3 text-right">CAD 3,488.33</td>
                             </tr>
                             <tr class="border-b border-purple-100">
                                 <td class="px-4 py-3">Solo Flight Time</td>
@@ -361,8 +361,8 @@
                             <tr class="border-b border-purple-100 bg-purple-50/30">
                                 <td class="px-4 py-3">Solo Flight Ground Instruction</td>
                                 <td class="px-4 py-3 text-center">3</td>
-                                <td class="px-4 py-3 text-center">USD 99.7</td>
-                                <td class="px-4 py-3 text-right">USD 299.00</td>
+                                <td class="px-4 py-3 text-center">CAD 99.7</td>
+                                <td class="px-4 py-3 text-right">CAD 299.00</td>
                             </tr>
                             <tr class="border-b border-purple-100">
                                 <td class="px-4 py-3">Ground School for the Aeronautical Flight, FAA Knowledge test and Checkride</td>
@@ -373,26 +373,26 @@
                                 <td class="px-4 py-3">FAA Knowledge Test</td>
                                 <td class="px-4 py-3 text-center">-</td>
                                 <td class="px-4 py-3 text-center">-</td>
-                                <td class="px-4 py-3 text-right">USD 50.00</td>
+                                <td class="px-4 py-3 text-right">CAD 50.00</td>
                             </tr>
                             <tr class="border-b border-purple-100">
                                 <td class="px-4 py-3">Checkride</td>
                                 <td class="px-4 py-3 text-center">-</td>
                                 <td class="px-4 py-3 text-center">-</td>
-                                <td class="px-4 py-3 text-right">USD 350.00</td>
+                                <td class="px-4 py-3 text-right">CAD 350.00</td>
                             </tr>
                             <tr class="bg-purple-100/50 font-bold">
                                 <td class="px-4 py-3">Total</td>
                                 <td class="px-4 py-3 text-center">-</td>
                                 <td class="px-4 py-3 text-center">-</td>
-                                <td class="px-4 py-3 text-right">USD 14,652.33</td>
+                                <td class="px-4 py-3 text-right">CAD 14,652.33</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <p class="text-sm text-gray-600 mt-4 italic">
-                    Note: If you show up with your own Trike, reduce the cost of CFI from USD 299 to USD 199
+                    Note: If you show up with your own Trike, reduce the cost of CFI from CAD 299 to CAD 199
                 </p>
             </div>
         </div>
@@ -424,14 +424,14 @@
                             <tr class="border-b border-purple-100">
                                 <td class="px-4 py-3">Dual Time With Instructor</td>
                                 <td class="px-4 py-3 text-center">55</td>
-                                <td class="px-4 py-3 text-center">USD 299</td>
-                                <td class="px-4 py-3 text-right">USD 16,445.00</td>
+                                <td class="px-4 py-3 text-center">CAD 299</td>
+                                <td class="px-4 py-3 text-right">CAD 16,445.00</td>
                             </tr>
                             <tr class="border-b border-purple-100 bg-purple-50/30">
                                 <td class="px-4 py-3">Flight Brief/ Debrief and Ground School Lesson Review with CFI</td>
                                 <td class="px-4 py-3 text-center">35</td>
-                                <td class="px-4 py-3 text-center">USD 99.7</td>
-                                <td class="px-4 py-3 text-right">USD 3,488.33</td>
+                                <td class="px-4 py-3 text-center">CAD 99.7</td>
+                                <td class="px-4 py-3 text-right">CAD 3,488.33</td>
                             </tr>
                             <tr class="border-b border-purple-100">
                                 <td class="px-4 py-3">Solo Flight Time</td>
@@ -441,8 +441,8 @@
                             <tr class="border-b border-purple-100 bg-purple-50/30">
                                 <td class="px-4 py-3">Solo Flight Ground Instruction</td>
                                 <td class="px-4 py-3 text-center">4</td>
-                                <td class="px-4 py-3 text-center">USD 99.7</td>
-                                <td class="px-4 py-3 text-right">USD 398.67</td>
+                                <td class="px-4 py-3 text-center">CAD 99.7</td>
+                                <td class="px-4 py-3 text-right">CAD 398.67</td>
                             </tr>
                             <tr class="border-b border-purple-100">
                                 <td class="px-4 py-3">Ground School for the Aeronautical Flight, FAA Knowledge test and Checkride</td>
@@ -453,26 +453,26 @@
                                 <td class="px-4 py-3">FAA Knowledge Test</td>
                                 <td class="px-4 py-3 text-center">-</td>
                                 <td class="px-4 py-3 text-center">-</td>
-                                <td class="px-4 py-3 text-right">USD 50.00</td>
+                                <td class="px-4 py-3 text-right">CAD 50.00</td>
                             </tr>
                             <tr class="border-b border-purple-100">
                                 <td class="px-4 py-3">Checkride</td>
                                 <td class="px-4 py-3 text-center">-</td>
                                 <td class="px-4 py-3 text-center">-</td>
-                                <td class="px-4 py-3 text-right">USD 350.00</td>
+                                <td class="px-4 py-3 text-right">CAD 350.00</td>
                             </tr>
                             <tr class="bg-purple-100/50 font-bold">
                                 <td class="px-4 py-3">Total</td>
                                 <td class="px-4 py-3 text-center">-</td>
                                 <td class="px-4 py-3 text-center">-</td>
-                                <td class="px-4 py-3 text-right">USD 20,732.00</td>
+                                <td class="px-4 py-3 text-right">CAD 20,732.00</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <p class="text-sm text-gray-600 mt-4 italic">
-                    Note: If you show up with your own Trike, reduce the cost of CFI from USD 299 to USD 199
+                    Note: If you show up with your own Trike, reduce the cost of CFI from CAD 299 to CAD 199
                 </p>
             </div>
         </div>

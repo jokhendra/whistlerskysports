@@ -173,7 +173,7 @@
                             <span class="text-gray-500 text-sm ml-2">({{ random_int(50, 200) }} reviews)</span>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="text-[rgb(241,97,98)] font-bold text-xl">${{ number_format($product->price, 2) }}</span>
+                            <span class="text-[rgb(241,97,98)] font-bold text-xl">CAD ${{ number_format($product->price, 2) }}</span>
                             <button type="button" 
                                 class="add-to-cart-btn px-4 py-2 bg-[rgb(241,97,98)] text-white rounded-lg hover:bg-[rgb(200,60,60)] transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
                                 data-product-id="{{ $product->id }}"

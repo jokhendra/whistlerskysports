@@ -43,13 +43,13 @@ class OrderConfirmation extends Notification implements ShouldQueue
             ->line('We are pleased to confirm your order has been received and is being processed.')
             ->line('Order Number: ' . $this->order->order_number)
             ->line('Order Date: ' . $this->order->created_at->format('F j, Y, g:i A'))
-            ->line('Total Amount: $' . number_format($this->order->total, 2));
+            ->line('Total Amount: CAD $' . number_format($this->order->total, 2));
 
         // Order items
         $mailMessage->line('Ordered Items:');
         foreach ($this->order->items as $item) {
             $mailMessage->line('- ' . $item->product_name . ' x' . $item->quantity . 
-                ' ($' . number_format($item->price, 2) . ' each)');
+                ' (CAD $' . number_format($item->price, 2) . ' each)');
         }
 
         // Shipping details

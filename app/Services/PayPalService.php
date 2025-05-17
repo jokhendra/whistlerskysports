@@ -63,16 +63,16 @@ class PayPalService
      * Create a PayPal order for checkout
      * 
      * @param float $amount Order amount
-     * @param string $currency Currency code (default: USD)
+     * @param string $currency Currency code (default: CAD)
      * @param string $returnUrl Successful payment return URL
      * @param string $cancelUrl Cancelled payment return URL
      * @param string $reference Order reference/number
      * @param string $description Order description
      * @param array $shippingDetails Shipping address details
-     * @param float $shippingCost Shipping cost (default: 20.00)
+     * @param float $shippingCost Shipping cost (default: 0.00)
      * @return array|null Order details or null on failure
      */
-    public function createOrder($amount, $currency = 'USD', $returnUrl, $cancelUrl, $reference, $description = '', $shippingDetails = [], $shippingCost = 20.00)
+    public function createOrder($amount, $currency = 'CAD', $returnUrl, $cancelUrl, $reference, $description = '', $shippingDetails = [], $shippingCost = 0.00)
     {
         $token = $this->getAccessToken();
         if (!$token) {
@@ -81,7 +81,8 @@ class PayPalService
 
         try {
             // Calculate item total (total minus shipping)
-            $itemTotal = max(0, $amount - $shippingCost);
+            $itemTotal = $amount;
+            $shippingAmount = $shippingCost;
             
             $orderPayload = [
                 'intent' => 'CAPTURE',
@@ -96,10 +97,6 @@ class PayPalService
                                 'item_total' => [
                                     'currency_code' => $currency,
                                     'value' => number_format($itemTotal, 2, '.', '')
-                                ],
-                                'shipping' => [
-                                    'currency_code' => $currency,
-                                    'value' => number_format($shippingCost, 2, '.', '')
                                 ]
                             ]
                         ]
@@ -114,6 +111,14 @@ class PayPalService
                     'user_action' => 'PAY_NOW'
                 ]
             ];
+            
+            // Only add shipping to breakdown if it's greater than zero
+            if ($shippingAmount > 0) {
+                $orderPayload['purchase_units'][0]['amount']['breakdown']['shipping'] = [
+                    'currency_code' => $currency,
+                    'value' => number_format($shippingAmount, 2, '.', '')
+                ];
+            }
 
             // Add shipping address if provided
             if (!empty($shippingDetails)) {
@@ -281,7 +286,7 @@ class PayPalService
      * @param string $note Refund note
      * @return array|null Refund details or null on failure
      */
-    public function refundPayment($captureId, $amount = null, $currency = 'USD', $note = '')
+    public function refundPayment($captureId, $amount = null, $currency = 'CAD', $note = '')
     {
         $token = $this->getAccessToken();
         if (!$token) {
@@ -347,7 +352,7 @@ class PayPalService
             'order_id' => $capture['id'] ?? null,
             'payment_id' => null,
             'amount' => 0,
-            'currency' => 'USD',
+            'currency' => 'CAD',
             'status' => $capture['status'] ?? 'unknown',
             'payer_email' => null,
             'payer_name' => null,
@@ -361,10 +366,10 @@ class PayPalService
         
         if (isset($capture['purchase_units'][0]['payments']['captures'][0]['amount'])) {
             $details['amount'] = $capture['purchase_units'][0]['payments']['captures'][0]['amount']['value'] ?? 0;
-            $details['currency'] = $capture['purchase_units'][0]['payments']['captures'][0]['amount']['currency_code'] ?? 'USD';
+            $details['currency'] = $capture['purchase_units'][0]['payments']['captures'][0]['amount']['currency_code'] ?? 'CAD';
         } elseif (isset($capture['purchase_units'][0]['amount'])) {
             $details['amount'] = $capture['purchase_units'][0]['amount']['value'] ?? 0;
-            $details['currency'] = $capture['purchase_units'][0]['amount']['currency_code'] ?? 'USD';
+            $details['currency'] = $capture['purchase_units'][0]['amount']['currency_code'] ?? 'CAD';
         }
         
         if (isset($capture['payer'])) {

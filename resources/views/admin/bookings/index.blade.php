@@ -31,7 +31,7 @@
                     </div>
                     <div class="ml-4">
                         <h2 class="text-sm font-medium text-gray-600">Today's Revenue</h2>
-                        <p class="text-2xl font-semibold text-gray-900">${{ number_format($stats['today_revenue'], 2) }}</p>
+                        <p class="text-2xl font-semibold text-gray-900">CAD ${{ number_format($stats['today_revenue'], 2) }}</p>
                         <p class="text-sm {{ $stats['revenue_change'] >= 0 ? 'text-green-600' : 'text-red-600' }}">
                             {{ $stats['revenue_change'] >= 0 ? '+' : '' }}{{ $stats['revenue_change'] }}% vs yesterday
                         </p>
@@ -464,7 +464,7 @@
                                         @endif
                                     </span>
                                     <div class="mt-1 text-sm font-medium text-gray-900">
-                                        ${{ number_format($booking->total_amount, 2) }}
+                                        CAD ${{ number_format($booking->total_amount, 2) }}
                                     </div>
                                     <div class="text-xs text-gray-500">
                                         Created {{ $booking->created_at->diffForHumans() }}

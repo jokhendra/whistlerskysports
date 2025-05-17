@@ -74,7 +74,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="px-4 py-4 text-center text-gray-700">${{ number_format($item->price, 2) }}</td>
+                                        <td class="px-4 py-4 text-center text-gray-700">CAD ${{ number_format($item->price, 2) }}</td>
                                         <td class="px-4 py-4">
                                             <form action="{{ route('mad-mr-bert.update-cart') }}" method="POST" class="flex justify-center items-center">
                                                 @csrf
@@ -98,7 +98,7 @@
                                                 </button>
                                             </form>
                                         </td>
-                                        <td class="px-4 py-4 text-center font-semibold text-gray-900">${{ number_format($item->price * $item->quantity, 2) }}</td>
+                                        <td class="px-4 py-4 text-center font-semibold text-gray-900">CAD ${{ number_format($item->price * $item->quantity, 2) }}</td>
                                         <td class="px-4 py-4 text-center">
                                             <form action="{{ route('mad-mr-bert.remove-item') }}" method="POST">
                                                 @csrf
@@ -149,16 +149,16 @@
                         <div class="space-y-4 mb-6">
                             <div class="flex justify-between pb-4 border-b border-gray-100">
                                 <span class="text-gray-600">Subtotal</span>
-                                <span class="font-semibold text-gray-900">${{ number_format($cart->total, 2) }}</span>
+                                <span class="font-semibold text-gray-900">CAD ${{ number_format($cart->total, 2) }}</span>
                             </div>
                             <div class="flex justify-between pb-4 border-b border-gray-100">
                                 <span class="text-gray-600">Shipping</span>
-                                <span class="font-semibold text-gray-900">${{ number_format($cart->getShippingCost(), 2) }}</span>
+                                <span class="font-semibold text-gray-900">CAD ${{ number_format($cart->getShippingCost(), 2) }}</span>
                             </div>
                             <div class="pt-2">
                                 <div class="flex justify-between items-center">
                                     <span class="text-lg font-bold text-gray-900">Total</span>
-                                    <span class="text-xl font-bold text-[rgb(241,97,98)]">${{ number_format($cart->getTotal(), 2) }}</span>
+                                    <span class="text-xl font-bold text-[rgb(241,97,98)]">CAD ${{ number_format($cart->getTotal(), 2) }}</span>
                                 </div>
                             </div>
                         </div>

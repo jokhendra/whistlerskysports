@@ -299,8 +299,8 @@
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Select Package *</label>
                                     <select name="package" id="package" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                         <option value="">Choose your adventure</option>
-                                        <option value="intro">Open Cockpit Weight Shift Trike - USD $229 (30 min)</option>
-                                        <option value="basic" selected>Fixed Wing Advanced Ultralight - USD $199 (30 min)</option>
+                                        <option value="intro">Open Cockpit Weight Shift Trike - CAD $229 (30 min)</option>
+                                        <option value="basic" selected>Fixed Wing Advanced Ultralight - CAD $199 (30 min)</option>
                                     </select>
                                 </div>
 
@@ -327,7 +327,7 @@
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Sunrise Flight Option *</label>
                                     <select name="sunrise_flight" id="sunrise_flight" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                         <option value="">Select preference</option>
-                                        <option value="yes">Yes - Sunrise Flight (USD $99)</option>
+                                        <option value="yes">Yes - Sunrise Flight (CAD $99)</option>
                                         <option value="no" selected>No - Regular Time</option>
                                     </select>
                                 </div>
@@ -364,7 +364,7 @@
                                             <h4 class="text-xl font-bold text-gray-800">Video Package</h4>
                                         </div>
                                         <p class="text-gray-600 ml-11 mb-2">Professional flight video with audio</p>
-                                        <p class="text-[#204fb4] font-bold text-xl ml-11">USD $90</p>
+                                        <p class="text-[#204fb4] font-bold text-xl ml-11">CAD $90</p>
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" name="video_package" id="video_package" class="sr-only peer" onchange="updateTotalPrice()">
@@ -386,7 +386,7 @@
                                             <h4 class="text-xl font-bold text-gray-800">Deluxe Package</h4>
                                         </div>
                                         <p class="text-gray-600 ml-11 mb-2">Video + WhistlerSkySports Gear</p>
-                                        <p class="text-[#204fb4] font-bold text-xl ml-11">USD $120</p>
+                                        <p class="text-[#204fb4] font-bold text-xl ml-11">CAD $120</p>
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" name="deluxe_package" id="deluxe_package" class="sr-only peer" onchange="updateTotalPrice()">
@@ -408,7 +408,7 @@
                                     </div>
                                     <p class="text-gray-600 ml-11 mb-2">WhistlerSkySports Gear Pack</p>
                                     <div class="flex justify-between items-center mt-2">
-                                        <p class="text-[#204fb4] font-bold text-xl ml-11">USD $40</p>
+                                        <p class="text-[#204fb4] font-bold text-xl ml-11">CAD $40</p>
                                         <div class="flex items-center gap-1">
                                             <button type="button" onclick="updateQuantity('merch_package', -1)" class="w-6 h-6 flex items-center justify-center rounded-md bg-gray-100 hover:bg-gray-200 text-gray-600">
                                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -441,7 +441,7 @@
                                         <p class="text-sm text-gray-600">Digital delivery within 48 hours</p>
                                     </div>
                                 </div>
-                                <p class="text-2xl font-bold text-[#204fb4]" id="total_price">USD $0</p>
+                                <p class="text-2xl font-bold text-[#204fb4]" id="total_price">CAD $0</p>
                             </div>
                         </div>
                     </div>
@@ -1441,7 +1441,7 @@
                     // Update display with proper formatting
                     const totalElement = document.getElementById('total_price');
                     if (totalElement) {
-                        totalElement.textContent = `USD $${total.toFixed(2)}`;
+                        totalElement.textContent = `CAD $${total.toFixed(2)}`;
         }
 
                     // Store calculated total in hidden input for server validation

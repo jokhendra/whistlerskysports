@@ -70,7 +70,7 @@
                                 </tr>
                                 <tr>
                                     <th scope="row" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-                                    <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-900">${{ number_format($product->price, 2) }}</td>
+                                    <td class="px-6 py-3 whitespace-nowrap text-sm text-gray-900">CAD ${{ number_format($product->price, 2) }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stock</th>

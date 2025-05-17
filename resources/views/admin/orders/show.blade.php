@@ -91,12 +91,12 @@
                         
                         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">Total</dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${{ number_format($order->total, 2) }}</dd>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">CAD ${{ number_format($order->total, 2) }}</dd>
                         </div>
                         
                         <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">Shipping Cost</dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${{ number_format($order->shipping_cost, 2) }}</dd>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">CAD ${{ number_format($order->shipping_cost, 2) }}</dd>
                         </div>
                         
                         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -184,13 +184,13 @@
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            ${{ number_format($item->price, 2) }}
+                                            CAD ${{ number_format($item->price, 2) }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             {{ $item->quantity }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            ${{ number_format($item->subtotal, 2) }}
+                                            CAD ${{ number_format($item->subtotal, 2) }}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -198,15 +198,15 @@
                             <tfoot class="bg-gray-50">
                                 <tr>
                                     <td colspan="3" class="px-6 py-4 text-right text-sm font-medium text-gray-500">Subtotal</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${{ number_format($order->total - $order->shipping_cost, 2) }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">CAD ${{ number_format($order->total - $order->shipping_cost, 2) }}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" class="px-6 py-4 text-right text-sm font-medium text-gray-500">Shipping</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${{ number_format($order->shipping_cost, 2) }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">CAD ${{ number_format($order->shipping_cost, 2) }}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" class="px-6 py-4 text-right text-sm font-medium text-gray-900">Total</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${{ number_format($order->total, 2) }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">CAD ${{ number_format($order->total, 2) }}</td>
                                 </tr>
                             </tfoot>
                         </table>

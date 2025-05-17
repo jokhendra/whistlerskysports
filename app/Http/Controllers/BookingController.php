@@ -791,7 +791,7 @@ class BookingController extends Controller
             'order_id' => $capture['id'] ?? null,
             'payment_id' => null,
             'amount' => 0,
-            'currency' => 'USD',
+            'currency' => 'CAD',
             'status' => $capture['status'] ?? 'unknown',
             'payer_email' => null,
             'payer_name' => null,
@@ -804,7 +804,7 @@ class BookingController extends Controller
         
         if (isset($capture['purchase_units'][0]['payments']['captures'][0]['amount'])) {
             $details['amount'] = $capture['purchase_units'][0]['payments']['captures'][0]['amount']['value'] ?? 0;
-            $details['currency'] = $capture['purchase_units'][0]['payments']['captures'][0]['amount']['currency_code'] ?? 'USD';
+            $details['currency'] = $capture['purchase_units'][0]['payments']['captures'][0]['amount']['currency_code'] ?? 'CAD';
         }
         
         if (isset($capture['payer'])) {
@@ -881,7 +881,7 @@ class BookingController extends Controller
                 'order_id' => $booking->order_id,
                 'payment_id' => null,
                 'amount' => $booking->total_amount ?? 0,
-                'currency' => 'USD',
+                'currency' => 'CAD',
                 'status' => 'failed',
                 'is_refunded' => false,
                 'payer_email' => $booking->email,

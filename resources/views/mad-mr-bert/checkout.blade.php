@@ -114,7 +114,7 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                 <div>
                                     <label for="name" class="block text-gray-700 font-medium mb-2">Full Name</label>
-                                    <input type="text" id="name" name="name" value="{{ old('name','Nothing') }}" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                    <input type="text" id="name" name="name" value="{{ old('name') }}" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
                                     @error('name')
                                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
@@ -122,7 +122,7 @@
                                 
                                 <div>
                                     <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
-                                    <input type="email" id="email" name="email" value="{{ old('email','nothing@nothing.com') }}" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                    <input type="email" id="email" name="email" value="{{ old('email') }}" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
                                     @error('email')
                                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
@@ -131,7 +131,7 @@
                             
                             <div class="mb-6">
                                 <label for="phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
-                                <input type="tel" id="phone" placeholder="Enter your phone number" name="phone" value="{{ old('phone','') }}" class="w-full ps-10 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent transition duration-200" required>
+                                <input type="tel" id="phone" placeholder="Enter your phone number" name="phone" value="{{ old('phone') }}" class="w-full ps-10 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent transition duration-200" required>
                                 @error('phone')
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
@@ -139,7 +139,7 @@
                             
                             <div class="mb-6">
                                 <label for="address" class="block text-gray-700 font-medium mb-2">Shipping Address</label>
-                                <input type="text" id="address" name="address" value="{{ old('address','Lalghti Bhopal (M.P)') }}" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                <input type="text" id="address" name="address" value="{{ old('address') }}" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
                                 @error('address')
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
@@ -148,7 +148,7 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                 <div>
                                     <label for="city" class="block text-gray-700 font-medium mb-2">City</label>
-                                    <input type="text" id="city" name="city" value="{{ old('city','Bhopal') }}" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                    <input type="text" id="city" name="city" value="{{ old('city') }}" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
                                     @error('city')
                                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
@@ -156,7 +156,7 @@
                                 
                                 <div>
                                     <label for="postal_code" class="block text-gray-700 font-medium mb-2">Postal Code</label>
-                                    <input type="text" id="postal_code" name="postal_code" value="{{ old('postal_code','462030') }}" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                    <input type="text" id="postal_code" name="postal_code" value="{{ old('postal_code') }}" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
                                     @error('postal_code')
                                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
@@ -166,7 +166,7 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                 <div>
                                     <label for="state" class="block text-gray-700 font-medium mb-2">State/Province</label>
-                                    <input type="text" id="state" name="state" value="{{ old('state','Madhya Pradesh') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                    <input type="text" id="state" name="state" value="{{ old('state') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
                                     @error('state')
                                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
@@ -174,7 +174,7 @@
                                 
                                 <div>
                                     <label for="country" class="block text-gray-700 font-medium mb-2">Country</label>
-                                    <input type="text" id="country" name="country" value="{{ old('country', 'India') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                    <input type="text" id="country" name="country" value="{{ old('country') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
                                     @error('country')
                                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
@@ -194,7 +194,7 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                     <div>
                                         <label for="billing_name" class="block text-gray-700 font-medium mb-2">Full Name</label>
-                                        <input type="text" id="billing_name" name="billing_name" value="{{ old('billing_name','Nothing') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                        <input type="text" id="billing_name" name="billing_name" value="{{ old('billing_name') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
                                         @error('billing_name')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                         @enderror
@@ -202,7 +202,7 @@
                                     
                                     <div>
                                         <label for="billing_email" class="block text-gray-700 font-medium mb-2">Email Address</label>
-                                        <input type="email" id="billing_email" name="billing_email" value="{{ old('billing_email','nothing@nothing.com') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                        <input type="email" id="billing_email" name="billing_email" value="{{ old('billing_email') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
                                         @error('billing_email')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                         @enderror
@@ -211,7 +211,7 @@
                                 
                                 <div class="mb-6">
                                     <label for="billing_phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
-                                    <input type="tel" id="billing_phone" placeholder="Enter your phone number" name="billing_phone" value="{{ old('billing_phone','') }}" class="w-full ps-10 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent transition duration-200">
+                                    <input type="tel" id="billing_phone" placeholder="Enter your phone number" name="billing_phone" value="{{ old('billing_phone') }}" class="w-full ps-10 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent transition duration-200">
                                     @error('billing_phone')
                                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
@@ -219,7 +219,7 @@
                                 
                                 <div class="mb-6">
                                     <label for="billing_address" class="block text-gray-700 font-medium mb-2">Billing Address</label>
-                                    <input type="text" id="billing_address" name="billing_address" value="{{ old('billing_address','Lalghti Bhopal (M.P)') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                    <input type="text" id="billing_address" name="billing_address" value="{{ old('billing_address') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
                                     @error('billing_address')
                                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
@@ -228,7 +228,7 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                     <div>
                                         <label for="billing_city" class="block text-gray-700 font-medium mb-2">City</label>
-                                        <input type="text" id="billing_city" name="billing_city" value="{{ old('billing_city','Bhopal') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                        <input type="text" id="billing_city" name="billing_city" value="{{ old('billing_city') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
                                         @error('billing_city')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                         @enderror
@@ -236,7 +236,7 @@
                                     
                                     <div>
                                         <label for="billing_postal_code" class="block text-gray-700 font-medium mb-2">Postal Code</label>
-                                        <input type="text" id="billing_postal_code" name="billing_postal_code" value="{{ old('billing_postal_code','462030') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                        <input type="text" id="billing_postal_code" name="billing_postal_code" value="{{ old('billing_postal_code') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
                                         @error('billing_postal_code')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                         @enderror
@@ -246,7 +246,7 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                     <div>
                                         <label for="billing_state" class="block text-gray-700 font-medium mb-2">State/Province</label>
-                                        <input type="text" id="billing_state" name="billing_state" value="{{ old('billing_state','Madhya Pradesh') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                        <input type="text" id="billing_state" name="billing_state" value="{{ old('billing_state') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
                                         @error('billing_state')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                         @enderror
@@ -254,7 +254,7 @@
                                     
                                     <div>
                                         <label for="billing_country" class="block text-gray-700 font-medium mb-2">Country</label>
-                                        <input type="text" id="billing_country" name="billing_country" value="{{ old('billing_country', 'India') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                        <input type="text" id="billing_country" name="billing_country" value="{{ old('billing_country') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
                                         @error('billing_country')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                         @enderror
@@ -311,7 +311,7 @@
                                         <p class="text-gray-500 text-sm">Qty: {{ $item->quantity }}</p>
                                     </div>
                                 </div>
-                                <span class="font-semibold">${{ number_format($item->price * $item->quantity, 2) }}</span>
+                                <span class="font-semibold">CAD ${{ number_format($item->price * $item->quantity, 2) }}</span>
                             </div>
                             @endforeach
                         </div>
@@ -319,16 +319,16 @@
                         <div class="space-y-3 mb-6">
                             <div class="flex justify-between">
                                 <span class="text-gray-600">Subtotal</span>
-                                <span class="font-semibold">${{ number_format($cart->total, 2) }}</span>
+                                <span class="font-semibold">CAD ${{ number_format($cart->total, 2) }}</span>
                             </div>
                             <div class="flex justify-between">
                                 <span class="text-gray-600">Shipping</span>
-                                <span class="font-semibold">$0.00</span>
+                                <span class="font-semibold">CAD $0.00</span>
                             </div>
                             <div class="border-t pt-3 mt-3">
                                 <div class="flex justify-between">
                                     <span class="text-lg font-bold">Total</span>
-                                    <span class="text-lg font-bold">${{ number_format($cart->total, 2) }}</span>
+                                    <span class="text-lg font-bold">CAD ${{ number_format($cart->total, 2) }}</span>
                                 </div>
                             </div>
                         </div>

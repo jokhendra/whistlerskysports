@@ -125,7 +125,7 @@
                                     <div class="text-sm text-gray-900">{{ ucfirst($product->category) }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">${{ number_format($product->price, 2) }}</div>
+                                    <div class="text-sm text-gray-900">CAD ${{ number_format($product->price, 2) }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <form action="{{ route('admin.products.update-stock', $product->id) }}" method="POST" class="flex items-center space-x-2">

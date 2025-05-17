@@ -45,7 +45,7 @@
                                 </div>
                                 <div>
                                     <h4 class="text-sm font-medium text-gray-500">Price</h4>
-                                    <p class="text-base text-gray-900">${{ number_format($product->price, 2) }}</p>
+                                    <p class="text-base text-gray-900">CAD ${{ number_format($product->price, 2) }}</p>
                                 </div>
                                 <div>
                                     <h4 class="text-sm font-medium text-gray-500">Stock</h4>

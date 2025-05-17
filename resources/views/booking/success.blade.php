@@ -35,7 +35,7 @@
                     </div>
                     <div>
                         <p class="text-sm text-gray-500">Total Amount</p>
-                        <p class="text-base font-medium text-gray-900">${{ number_format($booking->total_amount, 2) }}</p>
+                        <p class="text-base font-medium text-gray-900">CAD ${{ number_format($booking->total_amount, 2) }}</p>
                     </div>
                     <div>
                         <p class="text-sm text-gray-500">Payment Status</p>

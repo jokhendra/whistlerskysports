@@ -129,7 +129,7 @@
                                             <div class="text-xs text-gray-400">{{ $order->email }}</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            ${{ number_format($order->total, 2) }}
+                                            CAD ${{ number_format($order->total, 2) }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm">
                                             @if($order->status == 'pending')

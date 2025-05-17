@@ -300,7 +300,7 @@
                             
                             <div>
                                 <h4 class="text-xs font-semibold uppercase text-gray-500 tracking-wider">Total Payment</h4>
-                                <p class="mt-1 text-lg font-semibold text-gray-900">${{ number_format($booking->total_amount, 2) }}</p>
+                                <p class="mt-1 text-lg font-semibold text-gray-900">CAD ${{ number_format($booking->total_amount, 2) }}</p>
                                 <!-- <p class="text-sm text-gray-500">
                                     <a href="{{ route('admin.bookings.export', ['id' => $booking->id]) }}" class="inline-flex items-center text-blue-600 hover:text-blue-800">
                                         <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -661,7 +661,7 @@
                 <div class="px-4 py-5 sm:p-6">
                     <div class="flex items-center justify-center bg-indigo-50 rounded-lg p-6 mb-6">
                         <div class="text-center">
-                            <span class="text-3xl font-bold text-indigo-700">${{ number_format($booking->total_amount, 2) }}</span>
+                            <span class="text-3xl font-bold text-indigo-700">CAD ${{ number_format($booking->total_amount, 2) }}</span>
                             <p class="text-sm text-indigo-600 mt-1">Total Amount</p>
                         </div>
                     </div>

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('order_id')->nullable();
             $table->string('payment_id')->nullable();
             $table->decimal('amount', 10, 2);
-            $table->string('currency', 3)->default('USD');
+            $table->string('currency', 3)->default('CAD');
             $table->string('status');
             $table->boolean('is_refunded')->default(false);
             $table->string('payer_email')->nullable();
@@ -34,6 +34,10 @@ return new class extends Migration
             $table->index('order_id');
             $table->index('status');
             $table->index('provider');
+        });
+
+        Schema::table('payments', function (Blueprint $table) {
+            $table->string('currency', 3)->default('CAD')->change();
         });
     }
 

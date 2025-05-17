@@ -492,12 +492,13 @@ class CartController extends Controller
                 
                 $paypalOrder = $paypalService->createOrder(
                     $order->total, // Total including shipping
-                    'USD',
+                    'CAD',
                     $returnUrl,
                     $cancelUrl,
                     $order->order_number,
                     'Order from Whistler Sky Sports - ' . $order->order_number,
-                    $shippingDetails
+                    $shippingDetails,
+                    $order->shipping_cost // Pass the actual order shipping cost
                 );
                 
                 if (!$paypalOrder) {

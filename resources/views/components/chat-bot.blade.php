@@ -200,7 +200,7 @@
 @endpush
 
 @push('scripts')
-<script src="https://www.paypal.com/sdk/js?client-id={{ config('paypal.sandbox.client_id') }}&currency=USD"></script>
+<script src="https://www.paypal.com/sdk/js?client-id={{ config('paypal.sandbox.client_id') }}&currency=CAD"></script>
 <script>
 document.addEventListener('alpine:init', () => {
     Alpine.data('chatBot', () => ({

@@ -43,14 +43,14 @@
                         </svg>
                     </div>
                     <div class="ml-4">
-                        <h3 class="text-lg font-medium text-gray-900">${{ number_format($stats['monthly_revenue'], 2) }}</h3>
+                        <h3 class="text-lg font-medium text-gray-900">CAD ${{ number_format($stats['monthly_revenue'], 2) }}</h3>
                         <p class="text-sm text-gray-500">Monthly Revenue</p>
                     </div>
                 </div>
                 <div class="mt-4">
                     <div class="flex items-center justify-between">
                         <span class="text-sm font-medium text-green-600">
-                            ${{ number_format($stats['yearly_revenue'] / 12, 2) }} avg
+                            CAD ${{ number_format($stats['yearly_revenue'] / 12, 2) }} avg
                         </span>
                         <span class="text-sm text-gray-500">Per Month</span>
                     </div>
@@ -191,36 +191,54 @@
                 </div>
                 <div class="divide-y divide-gray-200">
                     @forelse($stats['recent_bookings'] as $booking)
-                        <div class="p-6">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0">
-                                        <span class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                                            <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                            </svg>
-                                        </span>
+                        <a href="{{ route('admin.bookings.show', $booking->id) }}" class="block hover:bg-gray-50">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0">
+                                            <span class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                                <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <div class="ml-4">
+                                            <h4 class="text-sm font-medium text-gray-900">
+                                                {{ $booking->name ?? 'Guest User' }}
+                                            </h4>
+                                            <p class="text-sm text-gray-500">
+                                                {{ $booking->created_at->format('M d, Y H:i') }}
+                                            </p>
+                                            <div class="mt-1 flex flex-wrap gap-2">
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
+                                                    {{ ucfirst($booking->package) }}
+                                                </span>
+                                                @if($booking->flying_time)
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-100 text-indigo-800">
+                                                    Flight: {{ \Carbon\Carbon::parse($booking->flying_time)->format('M d, Y') }}
+                                                </span>
+                                                @endif
+                                                @if($booking->sunrise_flight)
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-orange-100 text-orange-800">
+                                                    Sunrise
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="ml-4">
-                                        <h4 class="text-sm font-medium text-gray-900">
-                                            {{ $booking->name ?? 'Guest User' }}
-                                        </h4>
-                                        <p class="text-sm text-gray-500">
-                                            {{ $booking->created_at->format('M d, Y H:i') }}
-                                        </p>
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                                            {{ $booking->status === 'confirmed' ? 'bg-green-100 text-green-800' : 
+                                               ($booking->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 
+                                               'bg-red-100 text-red-800') }}">
+                                            {{ ucfirst($booking->status) }}
+                                        </span>
+                                        <p class="mt-1 text-sm text-gray-500">CAD ${{ number_format($booking->total_amount, 2) }}</p>
+                                        <p class="mt-1 text-xs text-gray-400">Payment: {{ ucfirst($booking->payment_status) }}</p>
                                     </div>
                                 </div>
-                                <div class="ml-4">
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                        {{ $booking->status === 'confirmed' ? 'bg-green-100 text-green-800' : 
-                                           ($booking->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 
-                                           'bg-red-100 text-red-800') }}">
-                                        {{ ucfirst($booking->status) }}
-                                    </span>
-                                    <p class="mt-1 text-sm text-gray-500">${{ number_format($booking->total_amount, 2) }}</p>
-                                </div>
                             </div>
-                        </div>
+                        </a>
                     @empty
                         <div class="p-6 text-center text-gray-500">
                             No recent bookings
@@ -242,19 +260,37 @@
                 <div class="divide-y divide-gray-200">
                     @forelse($stats['recent_contacts'] as $contact)
                         <div class="p-6">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0">
-                                    <span class="h-10 w-10 rounded-full bg-yellow-100 flex items-center justify-center">
-                                        <svg class="h-6 w-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                        </svg>
-                                    </span>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0">
+                                        <span class="h-10 w-10 rounded-full bg-yellow-100 flex items-center justify-center">
+                                            <svg class="h-6 w-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-sm font-medium text-gray-900">{{ $contact->name }}</h4>
+                                        <p class="text-sm text-gray-500">{{ $contact->email }}</p>
+                                        @if($contact->phone)
+                                            <p class="text-xs text-gray-500">{{ $contact->phone }}</p>
+                                        @endif
+                                        @if($contact->subject)
+                                            <p class="mt-1 text-sm font-medium">{{ $contact->subject }}</p>
+                                        @endif
+                                        <p class="mt-1 text-sm text-gray-500">{{ Str::limit($contact->message, 120) }}</p>
+                                        <p class="mt-1 text-xs text-gray-400">{{ $contact->created_at->format('M d, Y H:i') }}</p>
+                                    </div>
                                 </div>
-                                <div class="ml-4">
-                                    <h4 class="text-sm font-medium text-gray-900">{{ $contact->name }}</h4>
-                                    <p class="text-sm text-gray-500">{{ $contact->email }}</p>
-                                    <p class="mt-1 text-sm text-gray-500">{{ Str::limit($contact->message, 100) }}</p>
-                                    <p class="mt-1 text-xs text-gray-400">{{ $contact->created_at->format('M d, Y H:i') }}</p>
+                                <div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $contact->replied ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
+                                        {{ $contact->replied ? 'Replied' : 'Pending' }}
+                                    </span>
+                                    <div class="mt-2">
+                                        <a href="{{ route('admin.contacts.show', $contact->id) }}" class="inline-flex items-center px-3 py-1 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150">
+                                            View Details
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

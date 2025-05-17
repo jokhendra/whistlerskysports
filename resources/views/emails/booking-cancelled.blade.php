@@ -88,7 +88,7 @@
                 <p><strong>Package:</strong> {{ ucfirst($booking->package) }}</p>
                 <p><strong>Flight Type:</strong> {{ $booking->sunrise_flight ? 'Sunrise Flight' : 'Regular Flight' }}</p>
                 <p><strong>Original Flight Date:</strong> {{ $booking->preferred_dates->format('F d, Y') }}</p>
-                <p><strong>Total Amount:</strong> ${{ number_format($booking->total_amount, 2) }}</p>
+                <p><strong>Total Amount:</strong> CAD ${{ number_format($booking->total_amount, 2) }}</p>
             </div>
             
             <div class="info-box">

@@ -123,35 +123,35 @@
                             {{-- Base Package Price --}}
                             <div class="flex justify-between items-center">
                                 <span class="text-gray-600">Base Package ({{ ucfirst(e($booking['package'])) }})</span>
-                                <span class="font-medium">USD ${{ number_format($totalAmount - ($booking['video_package'] ? 90 : 0) - ($booking['deluxe_package'] ? 120 : 0) - ($booking['merch_package'] * 40) - ($booking['sunrise_flight'] === 'yes' ? 99 : 0), 2) }}</span>
+                                <span class="font-medium">CAD ${{ number_format($totalAmount - ($booking['video_package'] ? 90 : 0) - ($booking['deluxe_package'] ? 120 : 0) - ($booking['merch_package'] * 40) - ($booking['sunrise_flight'] === 'yes' ? 99 : 0), 2) }}</span>
                             </div>
 
                             {{-- Additional Services Prices --}}
                             @if($booking['video_package'])
                                 <div class="flex justify-between items-center text-green-600">
                                     <span>Video Package</span>
-                                    <span class="font-medium">USD $90.00</span>
+                                    <span class="font-medium">CAD $90.00</span>
                                 </div>
                             @endif
 
                             @if($booking['deluxe_package'])
                                 <div class="flex justify-between items-center text-green-600">
                                     <span>Deluxe Package</span>
-                                    <span class="font-medium">USD $120.00</span>
+                                    <span class="font-medium">CAD $120.00</span>
                                 </div>
                             @endif
 
                             @if($booking['merch_package'])
                                 <div class="flex justify-between items-center text-green-600">
                                     <span>Merchandise ({{ e($booking['merch_package']) }} items)</span>
-                                    <span class="font-medium">USD ${{ number_format($booking['merch_package'] * 40, 2) }}</span>
+                                    <span class="font-medium">CAD ${{ number_format($booking['merch_package'] * 40, 2) }}</span>
                                 </div>
                             @endif
 
                             @if($booking['sunrise_flight'] === 'yes')
                                 <div class="flex justify-between items-center text-green-600">
                                     <span>Sunrise Flight Option</span>
-                                    <span class="font-medium">USD $99.00</span>
+                                    <span class="font-medium">CAD $99.00</span>
                                 </div>
                             @endif
 
@@ -159,7 +159,7 @@
                             <div class="border-t border-gray-200 my-4"></div>
                             <div class="flex justify-between items-center text-lg font-bold">
                                 <span>Total Amount</span>
-                                <span class="text-blue-600">USD ${{ number_format($totalAmount, 2) }}</span>
+                                <span class="text-blue-600">CAD ${{ number_format($totalAmount, 2) }}</span>
                             </div>
 
                             {{-- Payment Process Steps --}}
@@ -269,7 +269,7 @@
 
 @push('scripts')
 {{-- PayPal SDK Integration --}}
-<script src="https://www.sandbox.paypal.com/sdk/js?client-id={{ e(config('paypal.sandbox.client_id')) }}&currency=USD"></script>
+<script src="https://www.sandbox.paypal.com/sdk/js?client-id={{ e(config('paypal.sandbox.client_id')) }}&currency=CAD"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -324,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     },
                     body: JSON.stringify({
                         amount: totalAmount,
-                        currency: 'USD',
+                        currency: 'CAD',
                         orderId: isOrderId ? null : orderId,
                     })
                 })
@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         purchase_units: [{
                             amount: {
                                 value: totalAmount,
-                                currency_code: "USD"
+                                currency_code: "CAD"
                             },
                             reference_id: data.booking_id
                         }]

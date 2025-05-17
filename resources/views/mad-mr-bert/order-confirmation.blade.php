@@ -100,15 +100,15 @@
                                 <p class="mb-1"><span class="font-medium">Items:</span> {{ $orderInfo['items_count'] ?? 0 }}</p>
                                 <p class="mb-1">
                                     <span class="font-medium">Subtotal:</span> 
-                                    <span>${{ number_format($orderInfo['subtotal'] ?? 0, 2) }}</span>
+                                    <span>CAD ${{ number_format($orderInfo['subtotal'] ?? 0, 2) }}</span>
                                 </p>
                                 <p class="mb-1">
                                     <span class="font-medium">Shipping:</span> 
-                                    <span>${{ number_format($orderInfo['shipping_cost'] ?? 0.00, 2) }}</span>
+                                    <span>CAD ${{ number_format($orderInfo['shipping_cost'] ?? 0.00, 2) }}</span>
                                 </p>
                                 <p class="mt-2 font-bold">
                                     <span>Total:</span> 
-                                    <span class="text-[rgb(241,97,98)]">${{ number_format($orderInfo['total'] ?? 0, 2) }}</span>
+                                    <span class="text-[rgb(241,97,98)]">CAD ${{ number_format($orderInfo['total'] ?? 0, 2) }}</span>
                                 </p>
                             </div>
                         </div>
@@ -135,9 +135,9 @@
                                         @if(is_array($item))
                                         <tr class="border-b">
                                             <td class="px-4 py-3">{{ $item['product_name'] ?? 'Product' }}</td>
-                                            <td class="px-4 py-3 text-center">${{ number_format($item['price'] ?? 0, 2) }}</td>
+                                            <td class="px-4 py-3 text-center">CAD ${{ number_format($item['price'] ?? 0, 2) }}</td>
                                             <td class="px-4 py-3 text-center">{{ $item['quantity'] ?? 1 }}</td>
-                                            <td class="px-4 py-3 text-right font-medium">${{ number_format($item['total'] ?? $item['subtotal'] ?? 0, 2) }}</td>
+                                            <td class="px-4 py-3 text-right font-medium">CAD ${{ number_format($item['total'] ?? $item['subtotal'] ?? 0, 2) }}</td>
                                         </tr>
                                         @endif
                                     @endforeach
@@ -150,7 +150,7 @@
                             <tfoot class="bg-gray-50">
                                 <tr>
                                     <td colspan="3" class="px-4 py-3 text-right font-bold">Grand Total:</td>
-                                    <td class="px-4 py-3 text-right font-bold">${{ number_format($orderInfo['total'] ?? 0, 2) }}</td>
+                                    <td class="px-4 py-3 text-right font-bold">CAD ${{ number_format($orderInfo['total'] ?? 0, 2) }}</td>
                                 </tr>
                             </tfoot>
                         </table>
