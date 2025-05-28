@@ -415,10 +415,10 @@
         </div>
         
         <div class="flex flex-col md:flex-row gap-4 justify-center">
-            <a href="{{ route('login') }}" class="flex-1 px-6 py-3 bg-[rgb(241,97,98)] text-white rounded-lg hover:bg-[rgb(200,60,60)] transition-all duration-300 shadow-md hover:shadow-lg text-center font-semibold">
+            <a href="{{ route('login', ['redirect' => url()->current()]) }}" class="flex-1 px-6 py-3 bg-[rgb(241,97,98)] text-white rounded-lg hover:bg-[rgb(200,60,60)] transition-all duration-300 shadow-md hover:shadow-lg text-center font-semibold">
                 Login
             </a>
-            <a href="{{ route('register') }}" class="flex-1 px-6 py-3 border-2 border-[rgb(241,97,98)] text-[rgb(241,97,98)] rounded-lg hover:bg-[rgb(241,97,98)] hover:text-white transition-all duration-300 text-center font-semibold">
+            <a href="{{ route('register', ['redirect' => url()->current()]) }}" class="flex-1 px-6 py-3 border-2 border-[rgb(241,97,98)] text-[rgb(241,97,98)] rounded-lg hover:bg-[rgb(241,97,98)] hover:text-white transition-all duration-300 text-center font-semibold">
                 Register
             </a>
         </div>
@@ -992,5 +992,36 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+
+<!-- Image Preview Modal -->
+<div id="image-preview-modal" class="fixed inset-0 z-50 hidden overflow-auto bg-black bg-opacity-80 flex items-center justify-center transition-opacity duration-300">
+    <div id="modal-image-container" class="relative max-w-4xl mx-auto transition-all duration-300 transform scale-95 opacity-0">
+        <!-- Close button -->
+        <button id="close-image-modal" class="absolute -top-10 right-0 text-white hover:text-gray-300 transition-colors z-10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        
+        <!-- Navigation buttons -->
+        <button id="prev-image" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 rounded-full p-2 text-white hover:bg-opacity-70 transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+        
+        <button id="next-image" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 rounded-full p-2 text-white hover:bg-opacity-70 transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+        
+        <!-- Main image -->
+        <img id="modal-image" src="" alt="Product preview" class="max-h-[70vh] mx-auto rounded shadow-2xl transition-all duration-300 transform" style="opacity: 0; transform: scale(0.95);">
+        
+        <!-- Thumbnails -->
+        <div id="modal-thumbnails" class="flex justify-center mt-4 gap-2 flex-wrap"></div>
+    </div>
+</div>
 
 @endsection

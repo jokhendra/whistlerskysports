@@ -73,9 +73,9 @@
             <div class="bg-white/40 rounded-2xl overflow-hidden">
                 <div class="p-8 text-center">
                     <h2 class="text-3xl font-bold mb-2">Open Cockpit Weight Shift Trike - Learn to Fly like a Bird</h2>
-                    <div class="text-4xl font-bold text-[#204fb4] mb-2">CAD $229</div>
+                    <div class="text-4xl font-bold text-[#204fb4] mb-2">CAD $70</div>
                     <p class="text-gray-600 mb-4">per person</p>
-                    <p class="text-xl text-gray-700 mb-6">30 Minute Lesson</p>
+                    <p class="text-xl text-gray-700 mb-6">15 Minute Lesson</p>
                     <p class="text-lg text-gray-600 mb-8">Spread your wings and reach out to the sky!</p>
                     <a href="{{ route('booking') }}" class="inline-block bg-[#204fb4] text-[#fcdb3f] font-bold py-3 px-8 rounded-full hover:bg-[#204fb4] transition duration-300 transform hover:scale-105">
                         RESERVE
@@ -87,9 +87,9 @@
             <div class="bg-white/40 rounded-2xl overflow-hidden">
                 <div class="p-8 text-center">
                     <h2 class="text-3xl font-bold mb-2">Fixed Wing Advanced Ultralight - Lesson for the Nuanced </h2>
-                    <div class="text-4xl font-bold text-[#204fb4] mb-2">CAD $199</div>
+                    <div class="text-4xl font-bold text-[#204fb4] mb-2">CAD $60</div>
                     <p class="text-gray-600 mb-4">per person</p>
-                    <p class="text-xl text-gray-700 mb-6">30 Minute Lesson</p>
+                    <p class="text-xl text-gray-700 mb-6">15 Minute Lesson</p>
                     <p class="text-lg text-gray-600 mb-8">Master the art of mountain flying with our comprehensive course!</p>
                     <a href="{{ route('booking') }}" class="inline-block bg-[#204fb4] text-[#fcdb3f] font-bold py-3 px-8 rounded-full hover:bg-[#204fb4] transition duration-300 transform hover:scale-105">
                         RESERVE

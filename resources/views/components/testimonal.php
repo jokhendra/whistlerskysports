@@ -12,9 +12,6 @@
     <!-- Testimonials Grid -->
     <div x-data="{ 
       activeTestimonial: null,
-      currentPage: 0,
-      autoplayInterval: null,
-      autoplayDelay: 5000,
       testimonials: [
         {
           id: 1,
@@ -233,27 +230,14 @@
           address: 'Whistler, BC, Canada'
         }
       ],
+      positionedTestimonials: {
+        adventure: [],
+        professional: [],
+        photography: []
+      },
       init() {
-        this.startAutoplay();
         this.loadGoogleMaps();
-      },
-      startAutoplay() {
-        this.autoplayInterval = setInterval(() => {
-          this.nextPage();
-        }, this.autoplayDelay);
-      },
-      stopAutoplay() {
-        clearInterval(this.autoplayInterval);
-      },
-      nextPage() {
-        this.currentPage = (this.currentPage + 1) % Math.ceil(this.testimonials.length / 3);
-      },
-      prevPage() {
-        this.currentPage = (this.currentPage - 1 + Math.ceil(this.testimonials.length / 3)) % Math.ceil(this.testimonials.length / 3);
-      },
-      get visibleTestimonials() {
-        const start = this.currentPage * 3;
-        return this.testimonials.slice(start, start + 3);
+        this.positionTestimonials();
       },
       loadGoogleMaps() {
         if (typeof google === 'undefined') {
@@ -263,66 +247,184 @@
           script.defer = true;
           document.head.appendChild(script);
         }
+      },
+      positionTestimonials() {
+        // Position adventure testimonials with padding
+        this.positionedTestimonials.adventure = this.positionItems(
+          this.testimonials.filter(t => 
+            (t.profession.includes('Adventure') || 
+            t.profession.includes('Tourism') || 
+            t.profession.includes('Weekend')) && 
+            t.id !== 1 // Exclude one user from Adventure category
+          ),
+          500, 500, 80, 80, 40 // Added 40px padding
+        );
+        
+        // Position professional testimonials with padding
+        this.positionedTestimonials.professional = this.positionItems(
+          this.testimonials.filter(t => 
+            (t.profession.includes('Professional') || 
+            t.profession.includes('Pilot') || 
+            t.profession.includes('Instructor') || 
+            t.profession.includes('Competition') || 
+            t.profession.includes('Flight School')) && 
+            t.id !== 2 // Exclude one user from Professional category
+          ),
+          500, 500, 80, 80, 40 // Added 40px padding
+        );
+        
+        // Position photography testimonials with padding
+        this.positionedTestimonials.photography = this.positionItems(
+          this.testimonials.filter(t => 
+            t.profession.includes('Photography') || 
+            t.profession.includes('Nature') || 
+            t.profession.includes('Mountain') ||
+            t.id === 1 || // Include the user from Adventure category
+            t.id === 2    // Include the user from Professional category
+          ),
+          500, 500, 80, 80, 40 // Added 40px padding
+        );
+      },
+      positionItems(items, containerWidth, containerHeight, itemWidth, itemHeight, padding = 20) {
+        const positioned = [];
+        const maxAttempts = 100;
+        const paddedWidth = containerWidth - padding * 2;
+        const paddedHeight = containerHeight - padding * 2;
+        
+        for (const item of items) {
+          let attempts = 0;
+          let positionFound = false;
+          let x, y;
+          
+          while (attempts < maxAttempts && !positionFound) {
+            attempts++;
+            
+            // Generate random position within padded area
+            x = padding + Math.random() * (paddedWidth - itemWidth);
+            y = padding + Math.random() * (paddedHeight - itemHeight);
+            
+            // Check for collisions with existing items
+            let collision = false;
+            for (const existing of positioned) {
+              if (
+                x < existing.x + itemWidth &&
+                x + itemWidth > existing.x &&
+                y < existing.y + itemHeight &&
+                y + itemHeight > existing.y
+              ) {
+                collision = true;
+                break;
+              }
+            }
+            
+            if (!collision) {
+              positionFound = true;
+            }
+          }
+          
+          if (positionFound) {
+            positioned.push({
+              ...item,
+              x,
+              y
+            });
+          } else {
+            // If we can't find a non-colliding position, place it anyway within padded area
+            positioned.push({
+              ...item,
+              x: padding + Math.random() * (paddedWidth - itemWidth),
+              y: padding + Math.random() * (paddedHeight - itemHeight)
+            });
+          }
+        }
+        
+        return positioned;
       }
     }" 
-    @mouseover="stopAutoplay" 
-    @mouseleave="startAutoplay"
-    class="relative max-w-5xl mx-auto"
+    class="relative w-full"
     >
-      <!-- Navigation Buttons -->
-      <button 
-        @click="prevPage"
-        class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 bg-white p-3 rounded-full shadow-lg hover:bg-gray-50 focus:outline-none z-10 transition duration-300 hover:scale-110"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-
-      <button 
-        @click="nextPage"
-        class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 bg-white p-3 rounded-full shadow-lg hover:bg-gray-50 focus:outline-none z-10 transition duration-300 hover:scale-110"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-
-      <!-- Testimonials Grid with Transition -->
-      <div 
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-hidden"
-        x-transition:enter="transition ease-out duration-500"
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100"
-        x-transition:leave="transition ease-in duration-300"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
-      >
-        <template x-for="testimonial in visibleTestimonials" :key="testimonial.id">
-          <div 
-            @click="activeTestimonial = testimonial; stopAutoplay();"
-            class="bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl p-4"
-          >
-            <div class="flex flex-col items-center text-center">
-              <img :src="testimonial.image" :alt="testimonial.name" class="w-20 h-20 rounded-full border-4 border-white shadow-lg mb-3">
-              <div>
-                <h3 class="font-bold text-gray-800 text-base mb-1" x-text="testimonial.name"></h3>
-                <p class="text-sm text-gray-600" x-text="testimonial.profession"></p>
-              </div>
+      <!-- Testimonials Row with Color Blur Effects -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+        <!-- Blue Blur Column -->
+        <div class="relative w-full">
+          <div class="absolute inset-0 bg-blue-100 rounded-2xl blur-xl opacity-70"></div>
+          <div class="relative rounded-2xl p-6 h-[600px] overflow-hidden">
+            <div class="relative h-[500px] w-full">
+              <template x-for="testimonial in positionedTestimonials.adventure" :key="testimonial.id">
+                <div 
+                  @click="activeTestimonial = testimonial"
+                  class="cursor-pointer transform transition-all duration-500 hover:scale-110 absolute group"
+                  :style="'left: ' + testimonial.x + 'px; top: ' + testimonial.y + 'px; z-index: ' + Math.floor(Math.random() * 10) + ';'"
+                >
+                  <div class="relative">
+                    <div class="absolute inset-0 bg-blue-400 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                    <img :src="testimonial.image" :alt="testimonial.name" class="w-20 h-20 rounded-full border-4 border-white shadow-lg transition-all duration-300 group-hover:border-blue-300 group-hover:shadow-xl group-hover:shadow-blue-200">
+                    <div class="absolute -bottom-1 -right-1 bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </template>
             </div>
           </div>
-        </template>
-      </div>
+        </div>
 
-      <!-- Page Indicators -->
-      <div class="flex justify-center mt-8 space-x-2">
-        <template x-for="(_, index) in Array.from({ length: Math.ceil(testimonials.length / 3) })" :key="index">
-          <button 
-            @click="currentPage = index"
-            :class="{'bg-amber-500': currentPage === index, 'bg-gray-300': currentPage !== index}"
-            class="w-3 h-3 rounded-full transition-all duration-300 hover:bg-amber-400"
-          ></button>
-        </template>
+        <!-- Red Blur Column -->
+        <div class="relative w-full">
+          <div class="absolute inset-0 bg-red-100 rounded-2xl blur-xl opacity-70"></div>
+          <div class="relative rounded-2xl p-6 h-[600px] overflow-hidden">
+            <div class="relative h-[500px] w-full">
+              <template x-for="testimonial in positionedTestimonials.professional" :key="testimonial.id">
+                <div 
+                  @click="activeTestimonial = testimonial"
+                  class="cursor-pointer transform transition-all duration-500 hover:scale-110 absolute group"
+                  :style="'left: ' + testimonial.x + 'px; top: ' + testimonial.y + 'px; z-index: ' + Math.floor(Math.random() * 10) + ';'"
+                >
+                  <div class="relative">
+                    <div class="absolute inset-0 bg-red-400 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                    <img :src="testimonial.image" :alt="testimonial.name" class="w-20 h-20 rounded-full border-4 border-white shadow-lg transition-all duration-300 group-hover:border-red-300 group-hover:shadow-xl group-hover:shadow-red-200">
+                    <div class="absolute -bottom-1 -right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+        </div>
+
+        <!-- Yellow Blur Column -->
+        <div class="relative w-full">
+          <div class="absolute inset-0 bg-amber-100 rounded-2xl blur-xl opacity-70"></div>
+          <div class="relative rounded-2xl p-6 h-[600px] overflow-hidden">
+            <div class="relative h-[500px] w-full">
+              <template x-for="testimonial in positionedTestimonials.photography" :key="testimonial.id">
+                <div 
+                  @click="activeTestimonial = testimonial"
+                  class="cursor-pointer transform transition-all duration-500 hover:scale-110 absolute group"
+                  :style="'left: ' + testimonial.x + 'px; top: ' + testimonial.y + 'px; z-index: ' + Math.floor(Math.random() * 10) + ';'"
+                >
+                  <div class="relative">
+                    <div class="absolute inset-0 bg-amber-400 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                    <img :src="testimonial.image" :alt="testimonial.name" class="w-20 h-20 rounded-full border-4 border-white shadow-lg transition-all duration-300 group-hover:border-amber-300 group-hover:shadow-xl group-hover:shadow-amber-200">
+                    <div class="absolute -bottom-1 -right-1 bg-amber-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Testimonial Modal -->
@@ -438,8 +540,5 @@
         </div>
       </div>
     </div>
-
-    
   </div>
 </div>
-

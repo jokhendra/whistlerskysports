@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\LocationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -489,4 +490,15 @@ Route::prefix('admin')->name('admin.')->middleware('web')->group(function () {
             Route::patch('/{blogPost}/toggle-published', [App\Http\Controllers\Admin\BlogPostController::class, 'togglePublished'])->name('toggle-published');
         });
     });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Location API Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('api/location')->group(function () {
+    Route::get('/countries', [LocationController::class, 'getCountries'])->name('api.location.countries');
+    Route::get('/states', [LocationController::class, 'getStates'])->name('api.location.states');
+    Route::get('/cities', [LocationController::class, 'getCities'])->name('api.location.cities');
 });

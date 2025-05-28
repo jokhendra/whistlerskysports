@@ -247,7 +247,7 @@ class BookingController extends Controller
         ];
         
             // Generate PDF from view
-        $pdf = PDF::loadView('pdfs.waiver', $data);
+        $pdf = app('dompdf.wrapper')->loadView('pdfs.waiver', $data);
         
             // Generate a unique filename
         $fileName = 'waiver_' . str_replace(' ', '_', $request->name) . '_' . time() . '.pdf';

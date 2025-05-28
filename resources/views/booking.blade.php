@@ -225,27 +225,27 @@
                             <div class="space-y-4">
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Full Name *</label>
-                                    <input type="text" name="name" id="name" value="John Doe" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                    <input type="text" name="name" id="name" value="" placeholder=" John Smith" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                 </div>
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Email Address *</label>
-                                    <input type="email" name="email" id="email" value="whistlerskysports@gmail.com" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                    <input type="email" name="email" id="email" value="" placeholder="john.smith@example.com" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                 </div>
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Primary Phone *</label>
-                                    <input type="tel" name="primary_phone" id="primary_phone" value="+12162881303" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                    <input type="tel" name="primary_phone" id="primary_phone" value="" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                 </div>
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Date of Birth *</label>
-                                    <input type="date" name="date_of_birth" id="date_of_birth" value="1990-01-01" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                    <input type="date" name="date_of_birth" id="date_of_birth" value="" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                 </div>
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Weight (lbs) *</label>
-                                    <input type="number" name="weight" id="weight" value="150" required min="0" max="245" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Enter your weight in pounds">
+                                    <input type="number" name="weight" id="weight" value="" required min="0" max="245" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Enter your weight in pounds">
                                     <p class="text-xs text-gray-500 mt-1">Maximum weight limit: 245 lbs</p>
                                 </div>
 
@@ -282,7 +282,7 @@
 
                                 <div class="relative">
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Local Contact (During Stay) *</label>
-                                    <input type="tel" name="local_phone" id="local_phone" value="+12162881303" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                    <input type="tel" name="local_phone" id="local_phone" value="" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                 </div>
                             </div>
                         </div>
@@ -300,7 +300,7 @@
                                     <select name="package" id="package" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                         <option value="">Choose your adventure</option>
                                         <option value="intro">Open Cockpit Weight Shift Trike - CAD $229 (30 min)</option>
-                                        <option value="basic" selected>Fixed Wing Advanced Ultralight - CAD $199 (30 min)</option>
+                                        <option value="basic">Fixed Wing Advanced Ultralight - CAD $199 (30 min)</option>
                                     </select>
                                 </div>
 
@@ -328,7 +328,7 @@
                                     <select name="sunrise_flight" id="sunrise_flight" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                         <option value="">Select preference</option>
                                         <option value="yes">Yes - Sunrise Flight (CAD $99)</option>
-                                        <option value="no" selected>No - Regular Time</option>
+                                        <option value="no">No - Regular Time</option>
                                     </select>
                                 </div>
                             </div>

@@ -108,7 +108,7 @@
                         </button>
                         
                         <!-- Cancellation Reason Modal -->
-                        <div x-show="showCancellationForm" class="fixed inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                        <div x-show="showCancellationForm" class="fixed inset-0 overflow-y-auto z-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">
                             <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                                 <!-- Background overlay -->
                                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
@@ -116,32 +116,32 @@
                                 <!-- Modal panel -->
                                 <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                        <div class="sm:flex sm:items-start">
-                                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                                        <div class="flex items-start">
+                                            <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
                                                 <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                                 </svg>
                                             </div>
-                                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                            <div class="ml-4 mt-0">
+                                                <h3 class="text-xl font-medium text-gray-900">
                                                     Cancel Booking
                                                 </h3>
-                                                <div class="mt-4">
-                                                    <p class="text-sm text-gray-500 mb-4">
-                                                        Are you sure you want to cancel this booking? This action will send a cancellation email to the customer.
-                                                    </p>
-                                                    
-                                                    <div class="mb-4">
-                                                        <label for="cancellation_reason" class="block text-sm font-medium text-gray-700 mb-1">Cancellation Reason</label>
-                                                        <textarea 
-                                                            id="cancellation_reason" 
-                                                            name="cancellation_reason" 
-                                                            rows="3"
-                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 resize-none"
-                                                            placeholder="Please provide a reason for the cancellation (optional)"></textarea>
-                                                        <p class="mt-1 text-xs text-gray-500">This reason will be included in the cancellation email sent to the customer.</p>
-                                                    </div>
-                                                </div>
+                                                <p class="text-sm text-gray-500 mt-1">
+                                                    Are you sure you want to cancel this booking? This action will send a cancellation email to the customer.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mt-5">
+                                            <div class="mt-4">
+                                                <label for="cancellation_reason" class="block text-md font-medium text-gray-700 mb-1">Cancellation Reason</label>
+                                                <textarea 
+                                                    id="cancellation_reason" 
+                                                    name="cancellation_reason" 
+                                                    rows="3"
+                                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 resize-none"
+                                                    placeholder="Please provide a reason for the cancellation (optional)"></textarea>
+                                                <p class="mt-1 text-xs text-gray-500">This reason will be included in the cancellation email sent to the customer.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -172,7 +172,7 @@
                         </button>
                         
                         <!-- Postpone Modal -->
-                        <div x-show="showPostponeForm" class="fixed inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                        <div x-show="showPostponeForm" class="fixed inset-0 overflow-y-auto z-50" aria-labelledby="modal-title" role="dialog" aria-modal="true">
                             <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                                 <!-- Background overlay -->
                                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
@@ -180,53 +180,55 @@
                                 <!-- Modal panel -->
                                 <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                        <div class="sm:flex sm:items-start">
-                                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100 sm:mx-0 sm:h-10 sm:w-10">
+                                        <div class="flex items-start">
+                                            <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100">
                                                 <svg class="h-6 w-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                 </svg>
                                             </div>
-                                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                            <div class="ml-4 mt-0">
+                                                <h3 class="text-xl font-medium text-gray-900">
                                                     Postpone Flight
                                                 </h3>
+                                                <p class="text-sm text-gray-500 mt-1">
+                                                    Please select a new date and time for this flight. A notification email will be sent to the customer.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mt-5">
+                                            <div class="mb-4">
+                                                <p class="text-md font-medium text-gray-700">Current Flight Date and Time:</p>
+                                                <p class="text-lg font-semibold text-gray-900 mb-4">
+                                                    {{ \Carbon\Carbon::parse($booking->flying_time)->format('F d, Y g:i A') }}
+                                                </p>
+                                                
                                                 <div class="mt-4">
-                                                    <p class="text-sm text-gray-500 mb-4">
-                                                        Please select a new date and time for this flight. A notification email will be sent to the customer.
-                                                    </p>
-                                                    
-                                                    <div class="mb-4">
-                                                        <p class="text-sm font-medium text-gray-700 mb-1">Current Flight Date and Time:</p>
-                                                        <p class="text-sm text-gray-500 mb-4">
-                                                            {{ \Carbon\Carbon::parse($booking->flying_time)->format('F d, Y g:i A') }}
-                                                        </p>
-                                                        
-                                                        <label for="flying_time" class="block text-sm font-medium text-gray-700 mb-1">New Flight Date and Time</label>
-                                                        <input type="datetime-local" 
-                                                               id="flying_time" 
-                                                               name="flying_time" 
-                                                               value="{{ old('flying_time', $booking->flying_time ? date('Y-m-d\TH:i', strtotime($booking->flying_time . '+1 day')) : date('Y-m-d\TH:i', strtotime('+1 day'))) }}" 
-                                                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                                                               required>
-                                                        <p class="mt-1 text-xs text-gray-500">Select the new date and time for the flight.</p>
-                                                    </div>
-                                                    
-                                                    <div class="mb-4">
-                                                        <label for="postponement_reason" class="block text-sm font-medium text-gray-700 mb-1">Reason for Postponement</label>
-                                                        <textarea 
-                                                            id="postponement_reason" 
-                                                            name="postponement_reason" 
-                                                            rows="3"
-                                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500 resize-none"
-                                                            placeholder="Please provide a reason for the postponement (optional)"></textarea>
-                                                        <p class="mt-1 text-xs text-gray-500">This reason will be included in the notification email sent to the customer.</p>
-                                                    </div>
-                                                    
-                                                    @if($errors->has('flying_time'))
-                                                        <p class="mt-2 text-sm text-red-600">{{ $errors->first('flying_time') }}</p>
-                                                    @endif
+                                                    <label for="flying_time" class="block text-md font-medium text-gray-700 mb-1">New Flight Date and Time</label>
+                                                    <input type="datetime-local" 
+                                                           id="flying_time" 
+                                                           name="flying_time" 
+                                                           value="{{ old('flying_time', $booking->flying_time ? date('Y-m-d\TH:i', strtotime($booking->flying_time . '+1 day')) : date('Y-m-d\TH:i', strtotime('+1 day'))) }}" 
+                                                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                                           required>
+                                                    <p class="mt-1 text-xs text-gray-500">Select the new date and time for the flight.</p>
                                                 </div>
                                             </div>
+                                            
+                                            <div class="mt-5">
+                                                <label for="postponement_reason" class="block text-md font-medium text-gray-700 mb-1">Reason for Postponement</label>
+                                                <textarea 
+                                                    id="postponement_reason" 
+                                                    name="postponement_reason" 
+                                                    rows="3"
+                                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500 resize-none"
+                                                    placeholder="Please provide a reason for the postponement (optional)"></textarea>
+                                                <p class="mt-1 text-xs text-gray-500">This reason will be included in the notification email sent to the customer.</p>
+                                            </div>
+                                            
+                                            @if($errors->has('flying_time'))
+                                                <p class="mt-2 text-sm text-red-600">{{ $errors->first('flying_time') }}</p>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
@@ -670,7 +672,7 @@
                         <li class="py-3 flex justify-between items-center">
                             <div class="flex items-center">
                                 <svg class="h-5 w-5 mr-3 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                                 </svg>
                                 <span class="text-gray-700">Order ID</span>
                             </div>

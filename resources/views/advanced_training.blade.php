@@ -369,7 +369,7 @@
                      class="h-full w-full object-cover">
               </div>
               <div>
-                <h3 class="text-xl font-bold">John Doe</h3>
+                <h3 class="text-xl font-bold">John Smith</h3>
                 <p class="text-gray-700">Advanced Power Hang Glider Pilot</p>
               </div>
             </div>

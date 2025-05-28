@@ -114,7 +114,7 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                 <div>
                                     <label for="name" class="block text-gray-700 font-medium mb-2">Full Name</label>
-                                    <input type="text" id="name" name="name" value="{{ old('name') }}" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                    <input type="text" id="name" name="name" placeholder="John Smith" value="{{ old('name') }}" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
                                     @error('name')
                                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
@@ -122,7 +122,7 @@
                                 
                                 <div>
                                     <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
-                                    <input type="email" id="email" name="email" value="{{ old('email') }}" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                    <input type="email" id="email" name="email" placeholder="john.smith@example.com" value="{{ old('email') }}" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
                                     @error('email')
                                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
@@ -139,16 +139,39 @@
                             
                             <div class="mb-6">
                                 <label for="address" class="block text-gray-700 font-medium mb-2">Shipping Address</label>
-                                <input type="text" id="address" name="address" value="{{ old('address') }}" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                <input type="text" id="address" name="address" value="{{ old('address') }}" placeholder="Address Line 1" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
                                 @error('address')
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="country" class="block text-gray-700 font-medium mb-2">Country</label>
+                                    <select id="country" name="country" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                        <option value="">Select Country</option>
+                                    </select>
+                                    @error('country')
+                                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div>
+                                    <label for="state" class="block text-gray-700 font-medium mb-2">State/Province</label>
+                                    <select id="state" name="state" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent" disabled>
+                                        <option value="">Select State/Province</option>
+                                    </select>
+                                    @error('state')
+                                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                 <div>
                                     <label for="city" class="block text-gray-700 font-medium mb-2">City</label>
-                                    <input type="text" id="city" name="city" value="{{ old('city') }}" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                    <select id="city" name="city" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent" disabled>
+                                        <option value="">Select City</option>
+                                    </select>
                                     @error('city')
                                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
@@ -163,23 +186,6 @@
                                 </div>
                             </div>
                             
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                                <div>
-                                    <label for="state" class="block text-gray-700 font-medium mb-2">State/Province</label>
-                                    <input type="text" id="state" name="state" value="{{ old('state') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
-                                    @error('state')
-                                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                
-                                <div>
-                                    <label for="country" class="block text-gray-700 font-medium mb-2">Country</label>
-                                    <input type="text" id="country" name="country" value="{{ old('country') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
-                                    @error('country')
-                                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
                             
                             <h2 class="text-2xl font-bold text-gray-900 mb-6 mt-10">Billing Information</h2>
                             
@@ -224,11 +230,36 @@
                                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
                                 </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                  
+                                    <div>
+                                        <label for="billing_country" class="block text-gray-700 font-medium mb-2">Country</label>
+                                        <select id="billing_country" name="billing_country" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                            <option value="">Select Country</option>
+                                        </select>
+                                        @error('billing_country')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div>
+                                        <label for="billing_state" class="block text-gray-700 font-medium mb-2">State/Province</label>
+                                        <select id="billing_state" name="billing_state" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent" disabled>
+                                            <option value="">Select State/Province</option>
+                                        </select>
+                                        @error('billing_state')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    
+                                </div>
                                 
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                     <div>
                                         <label for="billing_city" class="block text-gray-700 font-medium mb-2">City</label>
-                                        <input type="text" id="billing_city" name="billing_city" value="{{ old('billing_city') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
+                                        <select id="billing_city" name="billing_city" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent" disabled>
+                                            <option value="">Select City</option>
+                                        </select>
                                         @error('billing_city')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                         @enderror
@@ -242,24 +273,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                                    <div>
-                                        <label for="billing_state" class="block text-gray-700 font-medium mb-2">State/Province</label>
-                                        <input type="text" id="billing_state" name="billing_state" value="{{ old('billing_state') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
-                                        @error('billing_state')
-                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                    
-                                    <div>
-                                        <label for="billing_country" class="block text-gray-700 font-medium mb-2">Country</label>
-                                        <input type="text" id="billing_country" name="billing_country" value="{{ old('billing_country') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(241,97,98)] focus:border-transparent">
-                                        @error('billing_country')
-                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
+                    
                             </div>
                             
                             <h2 class="text-2xl font-bold text-gray-900 mb-6 mt-10">Payment Method</h2>
@@ -503,4 +517,251 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   </script>
+@endpush
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize same_as_shipping checkbox functionality
+        const sameAsShippingCheckbox = document.getElementById('same_as_shipping');
+        const billingAddressForm = document.getElementById('billing_address_form');
+        
+        sameAsShippingCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                billingAddressForm.classList.add('hidden');
+            } else {
+                billingAddressForm.classList.remove('hidden');
+            }
+        });
+        
+        // Initialize location dropdowns
+        initLocationDropdowns();
+        
+        // Function to initialize location dropdowns
+        function initLocationDropdowns() {
+            // Shipping address dropdowns
+            const countryDropdown = document.getElementById('country');
+            const stateDropdown = document.getElementById('state');
+            const cityDropdown = document.getElementById('city');
+            
+            // Billing address dropdowns
+            const billingCountryDropdown = document.getElementById('billing_country');
+            const billingStateDropdown = document.getElementById('billing_state');
+            const billingCityDropdown = document.getElementById('billing_city');
+            
+            // Load countries for both shipping and billing
+            fetchCountries(countryDropdown);
+            fetchCountries(billingCountryDropdown);
+            
+            // Add event listeners for shipping address
+            countryDropdown.addEventListener('change', function() {
+                resetDropdown(stateDropdown, 'Select State/Province');
+                resetDropdown(cityDropdown, 'Select City');
+                
+                if (this.value) {
+                    stateDropdown.disabled = false;
+                    fetchStates(this.value, stateDropdown);
+                } else {
+                    stateDropdown.disabled = true;
+                    cityDropdown.disabled = true;
+                }
+                
+                // If same as shipping is checked, copy values to billing
+                if (sameAsShippingCheckbox.checked) {
+                    billingCountryDropdown.value = this.value;
+                    billingCountryDropdown.dispatchEvent(new Event('change'));
+                }
+            });
+            
+            stateDropdown.addEventListener('change', function() {
+                resetDropdown(cityDropdown, 'Select City');
+                
+                if (this.value) {
+                    cityDropdown.disabled = false;
+                    fetchCities(countryDropdown.value, this.value, cityDropdown);
+                } else {
+                    cityDropdown.disabled = true;
+                }
+                
+                // If same as shipping is checked, copy values to billing
+                if (sameAsShippingCheckbox.checked) {
+                    billingStateDropdown.value = this.value;
+                    billingStateDropdown.dispatchEvent(new Event('change'));
+                }
+            });
+            
+            cityDropdown.addEventListener('change', function() {
+                // If same as shipping is checked, copy values to billing
+                if (sameAsShippingCheckbox.checked && this.value) {
+                    billingCityDropdown.value = this.value;
+                }
+            });
+            
+            // Add event listeners for billing address
+            billingCountryDropdown.addEventListener('change', function() {
+                resetDropdown(billingStateDropdown, 'Select State/Province');
+                resetDropdown(billingCityDropdown, 'Select City');
+                
+                if (this.value) {
+                    billingStateDropdown.disabled = false;
+                    fetchStates(this.value, billingStateDropdown);
+                } else {
+                    billingStateDropdown.disabled = true;
+                    billingCityDropdown.disabled = true;
+                }
+            });
+            
+            billingStateDropdown.addEventListener('change', function() {
+                resetDropdown(billingCityDropdown, 'Select City');
+                
+                if (this.value) {
+                    billingCityDropdown.disabled = false;
+                    fetchCities(billingCountryDropdown.value, this.value, billingCityDropdown);
+                } else {
+                    billingCityDropdown.disabled = true;
+                }
+            });
+            
+            // Add event listener to the same as shipping checkbox
+            sameAsShippingCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    // Copy values from shipping to billing
+                    billingCountryDropdown.value = countryDropdown.value;
+                    billingCountryDropdown.dispatchEvent(new Event('change'));
+                    
+                    // Give time for states to load
+                    setTimeout(() => {
+                        billingStateDropdown.value = stateDropdown.value;
+                        billingStateDropdown.dispatchEvent(new Event('change'));
+                        
+                        // Give time for cities to load
+                        setTimeout(() => {
+                            billingCityDropdown.value = cityDropdown.value;
+                        }, 300);
+                    }, 300);
+                }
+            });
+        }
+        
+        // Function to fetch countries from API
+        function fetchCountries(dropdownElement) {
+            showLoading(dropdownElement);
+            fetch("{{ route('api.location.countries') }}")
+                .then(response => response.json())
+                .then(data => {
+                    populateDropdown(dropdownElement, data);
+                    hideLoading(dropdownElement);
+                    
+                    // If there's old input, try to select it
+                    @if(old('country'))
+                    if (dropdownElement.id === 'country') {
+                        dropdownElement.value = "{{ old('country') }}";
+                        dropdownElement.dispatchEvent(new Event('change'));
+                    }
+                    @endif
+                    
+                    @if(old('billing_country'))
+                    if (dropdownElement.id === 'billing_country') {
+                        dropdownElement.value = "{{ old('billing_country') }}";
+                        dropdownElement.dispatchEvent(new Event('change'));
+                    }
+                    @endif
+                })
+                .catch(error => {
+                    console.error('Error fetching countries:', error);
+                    hideLoading(dropdownElement);
+                });
+        }
+        
+        // Function to fetch states from API
+        function fetchStates(country, dropdownElement) {
+            showLoading(dropdownElement);
+            fetch(`{{ route('api.location.states') }}?country=${country}`)
+                .then(response => response.json())
+                .then(data => {
+                    populateDropdown(dropdownElement, data);
+                    hideLoading(dropdownElement);
+                    
+                    // If there's old input, try to select it
+                    @if(old('state'))
+                    if (dropdownElement.id === 'state') {
+                        dropdownElement.value = "{{ old('state') }}";
+                        dropdownElement.dispatchEvent(new Event('change'));
+                    }
+                    @endif
+                    
+                    @if(old('billing_state'))
+                    if (dropdownElement.id === 'billing_state') {
+                        dropdownElement.value = "{{ old('billing_state') }}";
+                        dropdownElement.dispatchEvent(new Event('change'));
+                    }
+                    @endif
+                })
+                .catch(error => {
+                    console.error('Error fetching states:', error);
+                    hideLoading(dropdownElement);
+                });
+        }
+        
+        // Function to fetch cities from API
+        function fetchCities(country, state, dropdownElement) {
+            showLoading(dropdownElement);
+            fetch(`{{ route('api.location.cities') }}?country=${country}&state=${state}`)
+                .then(response => response.json())
+                .then(data => {
+                    populateDropdown(dropdownElement, data);
+                    hideLoading(dropdownElement);
+                    
+                    // If there's old input, try to select it
+                    @if(old('city'))
+                    if (dropdownElement.id === 'city') {
+                        dropdownElement.value = "{{ old('city') }}";
+                    }
+                    @endif
+                    
+                    @if(old('billing_city'))
+                    if (dropdownElement.id === 'billing_city') {
+                        dropdownElement.value = "{{ old('billing_city') }}";
+                    }
+                    @endif
+                })
+                .catch(error => {
+                    console.error('Error fetching cities:', error);
+                    hideLoading(dropdownElement);
+                });
+        }
+        
+        // Function to populate a dropdown with options
+        function populateDropdown(dropdownElement, data) {
+            // Keep the first option (placeholder)
+            const firstOption = dropdownElement.options[0];
+            dropdownElement.innerHTML = '';
+            dropdownElement.appendChild(firstOption);
+            
+            // Add new options
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.id;
+                option.textContent = item.name;
+                dropdownElement.appendChild(option);
+            });
+        }
+        
+        // Function to reset a dropdown
+        function resetDropdown(dropdownElement, placeholderText) {
+            dropdownElement.innerHTML = `<option value="">${placeholderText}</option>`;
+        }
+        
+        // Loading indicator functions
+        function showLoading(element) {
+            element.classList.add('opacity-50');
+            element.classList.add('cursor-wait');
+        }
+        
+        function hideLoading(element) {
+            element.classList.remove('opacity-50');
+            element.classList.remove('cursor-wait');
+        }
+    });
+</script>
 @endpush 

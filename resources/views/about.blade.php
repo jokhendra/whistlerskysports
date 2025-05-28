@@ -313,9 +313,9 @@
     <div class="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
       <div class="flex flex-col md:flex-row items-center gap-8">
         <div class="md:w-1/3">
-          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ishan Tewari" class="rounded-full w-48 h-48 object-cover mx-auto shadow-lg team-image">
+          <img src="{{ asset('images/logo/ishan-tiwari.jpeg') }}" alt="Ishan Tewari" class="rounded-full w-48 h-48 object-cover mx-auto shadow-lg team-image">
           <h3 class="text-xl font-bold text-gray-800 text-center mt-4">Ishan Tewari</h3>
-          <p class="text-accent text-center">Chief Flight Instructor</p>
+          <p class="text-accent text-center">Meet our Chief flight instructor</p>
         </div>
         <div class="md:w-2/3">
           <p class="text-gray-600 mb-4">
