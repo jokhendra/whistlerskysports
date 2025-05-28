@@ -36,8 +36,8 @@ class BookingController extends Controller
      */
     private const PRICES = [
         'packages' => [
-            'intro' => 70,
-            'basic' => 60
+            'intro' => 140,
+            'basic' => 120
         ],
         'video_package' => 90,
         'deluxe_package' => 120,
