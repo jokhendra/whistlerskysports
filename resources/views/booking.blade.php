@@ -299,8 +299,8 @@
                                     <label class="text-sm font-medium text-gray-700 mb-1 block">Select Package *</label>
                                     <select name="package" id="package" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                         <option value="">Choose your adventure</option>
-                                        <option value="intro">Open Cockpit Weight Shift Trike - CAD $229 (30 min)</option>
-                                        <option value="basic">Fixed Wing Advanced Ultralight - CAD $199 (30 min)</option>
+                                        <option value="intro">Open Cockpit Weight Shift Trike - CAD $70 (15 min)</option>
+                                        <option value="basic">Fixed Wing Advanced Ultralight - CAD $60 (15 min)</option>
                                     </select>
                                 </div>
 
@@ -1388,8 +1388,8 @@
                 merch_package: 40,
                 sunrise_flight: 99,
                 packages: {
-                    'intro': 229,
-                    'basic': 199
+                    'intro': 70,
+                    'basic': 60
                 }
             });
 
