@@ -32,6 +32,13 @@ class Kernel extends ConsoleKernel
                 ->everyFifteenMinutes()
                 ->withoutOverlapping()
                 ->appendOutputTo(storage_path('logs/scheduler.log'));
+                
+        // Generate sitemap weekly
+        $schedule->command('sitemap:generate')
+                ->weekly()
+                ->sundays()
+                ->at('01:00')
+                ->appendOutputTo(storage_path('logs/sitemap.log'));
     }
 
     /**

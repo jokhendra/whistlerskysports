@@ -50,6 +50,7 @@ class Kernel extends HttpKernel
             ShareErrorsFromSession::class,
             \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
             SubstituteBindings::class,
+            \App\Http\Middleware\SeoMiddleware::class,
         ],
 
         'api' => [

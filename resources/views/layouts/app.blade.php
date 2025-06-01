@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $settings['site_name'] ?? 'WhistlerSkySports' }}</title>
+    
+    {{-- SEO Component - renders title, meta tags, and structured data --}}
+    <x-seo :meta="$meta ?? []" :structuredData="$structuredData ?? null" />
+    
     <link rel="icon" href="{{ asset('images/logo/Whistler-Sky-Sports_Lettermark-White.png') }}" type="image/png">
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="{{ $settings['meta_description'] ?? 'Whistler Sky Sports - Experience the thrill of flight with our ultralight aircraft training and tours in Whistler, BC.' }}">
-    <meta name="keywords" content="{{ $settings['meta_keywords'] ?? 'ultralight aircraft, flight training, Whistler, aviation, sky sports, flying lessons, aircraft tours' }}">
+    
     <!-- Preload background image -->
     <link rel="preload" href="{{ asset('images/Background/Whistler-Sky-Sports_Sky-Background.png') }}" as="image" media="(min-width: 768px)" fetchpriority="high" importance="high">
     <!-- Google Fonts - Roboto Slab -->

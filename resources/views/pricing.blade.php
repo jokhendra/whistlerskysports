@@ -70,44 +70,50 @@
         <!-- Lesson Packages Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto mb-20">
             <!-- 30 Minute Lesson Package -->
-            <div class="bg-white/40 rounded-2xl overflow-hidden">
-                <div class="p-8 text-center">
+            <div class="bg-white/40 rounded-2xl overflow-hidden h-full flex flex-col">
+                <div class="p-8 text-center flex-grow flex flex-col">
                     <h2 class="text-3xl font-bold mb-2">Open Cockpit Weight Shift Trike - Learn to Fly like a Bird</h2>
                     <div class="text-4xl font-bold text-[#204fb4] mb-2">CAD $140</div>
                     <p class="text-gray-600 mb-4">per person</p>
                     <p class="text-xl text-gray-700 mb-6">15 Minute Lesson</p>
                     <p class="text-lg text-gray-600 mb-8">Spread your wings and reach out to the sky!</p>
-                    <a href="{{ route('booking') }}" class="inline-block bg-[#204fb4] text-[#fcdb3f] font-bold py-3 px-8 rounded-full hover:bg-[#204fb4] transition duration-300 transform hover:scale-105">
-                        RESERVE
-                    </a>
+                    <div class="mt-auto">
+                        <a href="{{ route('booking') }}" class="inline-block bg-[#204fb4] text-[#fcdb3f] font-bold py-3 px-8 rounded-full hover:bg-[#204fb4] transition duration-300 transform hover:scale-105">
+                            RESERVE
+                        </a>
+                    </div>
                 </div>
             </div>
 
             <!-- Mountain Flying Course Package -->
-            <div class="bg-white/40 rounded-2xl overflow-hidden">
-                <div class="p-8 text-center">
+            <div class="bg-white/40 rounded-2xl overflow-hidden h-full flex flex-col">
+                <div class="p-8 text-center flex-grow flex flex-col">
                     <h2 class="text-3xl font-bold mb-2">Fixed Wing Advanced Ultralight - Lesson for the Nuanced </h2>
                     <div class="text-4xl font-bold text-[#204fb4] mb-2">CAD $120</div>
                     <p class="text-gray-600 mb-4">per person</p>
                     <p class="text-xl text-gray-700 mb-6">15 Minute Lesson</p>
                     <p class="text-lg text-gray-600 mb-8">Master the art of mountain flying with our comprehensive course!</p>
-                    <a href="{{ route('booking') }}" class="inline-block bg-[#204fb4] text-[#fcdb3f] font-bold py-3 px-8 rounded-full hover:bg-[#204fb4] transition duration-300 transform hover:scale-105">
-                        RESERVE
-                    </a>
+                    <div class="mt-auto">
+                        <a href="{{ route('booking') }}" class="inline-block bg-[#204fb4] text-[#fcdb3f] font-bold py-3 px-8 rounded-full hover:bg-[#204fb4] transition duration-300 transform hover:scale-105">
+                            RESERVE
+                        </a>
+                    </div>
                 </div>
             </div>
             
             <!-- Comprehensive Flight Training Programs -->
-            <div class="bg-white/40 rounded-2xl overflow-hidden">
-                <div class="p-8 text-center">
+            <div class="bg-white/40 rounded-2xl overflow-hidden h-full flex flex-col">
+                <div class="p-8 text-center flex-grow flex flex-col">
                     <h2 class="text-3xl font-bold mb-2">Comprehensive Flight Training Programs</h2>
                     <!-- <div class="text-4xl font-bold text-purple-600 mb-2">From USD$3,995</div> -->
                     <p class="text-gray-600 mb-4">complete program</p>
                     <p class="text-xl text-gray-700 mb-6">Transport Canada Approved</p>
                     <p class="text-lg text-gray-600 mb-8">From Basic Ultralight to Recreational Pilot Permit - structured programs designed to take you from beginner to certified pilot.</p>
-                    <a href="#comprehensive-programs" class="inline-block bg-[#204fb4] text-[#fcdb3f] font-bold py-3 px-8 rounded-full hover:bg-[#204fb4] transition duration-300 transform hover:scale-105 smooth-scroll">
-                        LEARN MORE
-                    </a>
+                    <div class="mt-auto">
+                        <a href="#comprehensive-programs" class="inline-block bg-[#204fb4] text-[#fcdb3f] font-bold py-3 px-8 rounded-full hover:bg-[#204fb4] transition duration-300 transform hover:scale-105 smooth-scroll">
+                            LEARN MORE
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

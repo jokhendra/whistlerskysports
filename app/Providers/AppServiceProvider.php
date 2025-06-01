@@ -15,10 +15,15 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         // Force HTTPS in production but use HTTP for local development
-        if (env('APP_ENV') === 'local') {
+        if (env('APP_ENV') === 'local' || str_contains(request()->getHost(), 'localhost') || str_contains(request()->getHost(), '127.0.0.1')) {
             URL::forceScheme('http');
         } else {
             URL::forceScheme('https');
+        }
+
+        // Set application URL for asset generation in CLI commands
+        if (php_sapi_name() === 'cli' && env('APP_ENV') === 'production') {
+            config(['app.url' => 'https://whistlerskysports.ca']);
         }
     }
 

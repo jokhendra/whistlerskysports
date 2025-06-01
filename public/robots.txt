@@ -6,10 +6,12 @@ Allow: /contact
 Allow: /gallery
 Allow: /sitemap.xml
 
+# Disallow admin routes
 Disallow: /admin/
-Disallow: /login
-Disallow: /register
-Disallow: /password/
+Disallow: /admin/*
+
+# Disallow api routes
 Disallow: /api/
 
+# Production sitemap
 Sitemap: https://whistlerskysports.ca/sitemap.xml
