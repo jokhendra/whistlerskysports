@@ -125,7 +125,7 @@ class SeoService
             case 'home':
                 $structuredData = [
                     '@context' => 'https://schema.org',
-                    '@type' => 'TouristAttraction',
+                    '@type' => ['TouristAttraction','LocalBusiness'],
                     'name' => 'WhistlerSkySports',
                     'description' => 'Power hang gliding adventures in Whistler, BC',
                     'address' => [

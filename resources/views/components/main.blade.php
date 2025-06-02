@@ -341,28 +341,47 @@
 </style>
 @endpush
 
-<div class="w-full">
-<div class="w-[99.8vw] h-screen header-logo-bg overflow-x-hidden mt-16 flex items-center justify-center">
+<!-- Page-specific SEO Meta Tags -->
+@push('meta')
+<meta name="description" content="Experience the thrill of power hang gliding in Whistler with certified pilots. Soar over the stunning Canadian Rockies and book your adventure with Whistler Sky Sports today.">
+<meta name="keywords" content="whistler sky sports, power hang gliding whistler, flight adventure whistler, canadian rockies flying, ultralight aircraft, whistler aviation">
+<!-- Open Graph Tags -->
+<meta property="og:title" content="Whistler Sky Sports - Experience the Freedom of Flight in the Canadian Rockies">
+<meta property="og:description" content="Book your power hang gliding adventure with Whistler Sky Sports. Certified pilots, top-notch equipment, and breathtaking views of the Canadian Rockies.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="{{ asset('images/hero-section.png') }}">
+<!-- Twitter Card Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Whistler Sky Sports - Power Hang Gliding Adventures">
+<meta name="twitter:description" content="Soar over pristine lakes, majestic mountains, and lush forests with Whistler Sky Sports power hang gliding adventures.">
+<meta name="twitter:image" content="{{ asset('images/hero-section.png') }}">
+@endpush
+
+<main class="w-full" itemscope itemtype="https://schema.org/LocalBusiness">
+<header class="w-[99.8vw] h-screen header-logo-bg overflow-x-hidden mt-16 flex items-center justify-center">
     <div class="container mx-auto px-4 relative z-10">
-        <img src="{{ asset('images/logo/Whistler-Sky-Sports_Full-Black.png') }}" alt="Whistler Sky Sports Logo" class="w-3/4 max-w-4xl mx-auto object-contain animate-fadeIn">
+        <img src="{{ asset('images/logo/Whistler-Sky-Sports_Full-Black.png') }}" 
+             alt="Whistler Sky Sports Logo - Power Hang Gliding Adventures in British Columbia" 
+             class="w-3/4 max-w-4xl mx-auto object-contain animate-fadeIn"
+             itemprop="logo">
         <div class="text-center mt-8">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-black drop-shadow-lg">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-black drop-shadow-lg" itemprop="name">
                 Experience the Freedom of Flight
             </h1>
-            <p class="text-xl md:text-2xl text-black mt-4 max-w-3xl mx-auto">
+            <p class="text-xl md:text-2xl text-black mt-4 max-w-3xl mx-auto" itemprop="description">
                 The premier destination for aviation adventures in Whistler
             </p>
         </div>
     </div>
-</div>
+</header>
   <div class="w-full">
     <!-- Hero Section -->
-    <div class="py-8 sm:py-12 relative overflow-hidden w-full">
+    <section class="py-8 sm:py-12 relative overflow-hidden w-full" aria-labelledby="welcome-heading">
       <div class="mountain-bg"></div>
       <div class="clouds"></div>
       <div class="relative z-10 w-full">
         <div class="welcome-container w-full">
-          <h1 class="welcome-text text-3xl sm:text-4xl md:text-5xl lg:text-6xl">Welcome to <span class="company-name">WhistlerSkySports</span></h1>
+          <h2 id="welcome-heading" class="welcome-text text-3xl sm:text-4xl md:text-5xl lg:text-6xl">Welcome to <span class="company-name" itemprop="brand">WhistlerSkySports</span></h2>
           <div class="welcome-underline"></div>
         </div>
         <div class="w-full max-w-7xl mx-auto mt-6 sm:mt-10">
@@ -374,39 +393,41 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Features Section -->
-    <div class="py-8 sm:py-12 w-full">
-      <h2 class="text-2xl sm:text-3xl font-bold text-center text-amber-400 mb-8 sm:mb-12">Why Choose WhistlerSkySports?</h2>
+    <section class="py-8 sm:py-12 w-full" aria-labelledby="features-heading">
+      <h2 id="features-heading" class="text-2xl sm:text-3xl font-bold text-center text-amber-400 mb-8 sm:mb-12">Why Choose WhistlerSkySports?</h2>
       
       <!-- First Feature -->
       <div class="feature-section flex flex-col md:flex-row items-center mb-8 sm:mb-12 w-full">
         <div class="w-full md:w-1/2 feature-image">
           <img src="{{ asset('images/image000000 2.JPG') }}"
-               alt="Experienced Pilots" 
-               class="w-full h-[300px] sm:h-[400px] object-cover"/>
+               alt="Experienced Power Hang Glider Pilots at Whistler Sky Sports with safety briefing" 
+               class="w-full h-[300px] sm:h-[400px] object-cover"
+               loading="lazy"/>
         </div>
-        <div class="w-full md:w-1/2 h-auto sm:h-[400px] px-4 sm:px-8 flex items-center p-4 sm:p-6 feature-content bg-[#f8f8f8]">
+        <article class="w-full md:w-1/2 h-auto sm:h-[400px] px-4 sm:px-8 flex items-center p-4 sm:p-6 feature-content bg-[#f8f8f8]">
           <div>
             <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Experienced Pilots</h3>
             <p class="text-base sm:text-lg text-gray-700 leading-relaxed">Our certified pilots have thousands of flight hours and know the Canadian Rockies like the back of their hand. With years of experience in power hang gliding, they ensure your safety while providing an unforgettable adventure.</p>
           </div>
-        </div>
+        </article>
       </div>
 
       <!-- Second Feature -->
       <div class="feature-section flex flex-col-reverse md:flex-row items-center mb-8 sm:mb-12 w-full">
-        <div class="w-full md:w-1/2 h-auto sm:h-[400px] px-4 sm:px-8 flex items-center p-4 sm:p-6 feature-content bg-[#f8f8f8]">
+        <article class="w-full md:w-1/2 h-auto sm:h-[400px] px-4 sm:px-8 flex items-center p-4 sm:p-6 feature-content bg-[#f8f8f8]">
           <div>
             <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Top-Notch Equipment</h3>
             <p class="text-base sm:text-lg text-gray-700 leading-relaxed">We use only the latest power hang gliders with rigorous safety inspections before every flight. Our equipment is maintained to the highest standards, ensuring your safety and comfort throughout your journey.</p>
           </div>
-        </div>
+        </article>
         <div class="w-full md:w-1/2 feature-image">
           <img src="{{ asset('images/ecupment.jpg') }}" 
-               alt="Top-Notch Equipment" 
-               class="w-full h-[300px] sm:h-[400px] object-cover"/>
+               alt="Ultra-modern Power Hang Glider Equipment at Whistler Sky Sports facility" 
+               class="w-full h-[300px] sm:h-[400px] object-cover"
+               loading="lazy"/>
         </div>
       </div>
 
@@ -414,39 +435,100 @@
       <div class="feature-section flex flex-col md:flex-row items-center w-full">
         <div class="w-full md:w-1/2 feature-image">
           <img src="{{ asset('images/Airport.jpg') }}" 
-               alt="Breathtaking Views" 
-               class="w-full h-[300px] sm:h-[400px] object-cover"/>
+               alt="Scenic Whistler Airport view with mountain backdrop for Power Hang Gliding flights" 
+               class="w-full h-[300px] sm:h-[400px] object-cover"
+               loading="lazy"/>
         </div>
-        <div class="w-full md:w-1/2 h-auto sm:h-[400px] px-4 sm:px-8 flex items-center p-4 sm:p-6 feature-content bg-[#f8f8f8]">
+        <article class="w-full md:w-1/2 h-auto sm:h-[400px] px-4 sm:px-8 flex items-center p-4 sm:p-6 feature-content bg-[#f8f8f8]">
           <div>
             <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Breathtaking Views</h3>
             <p class="text-base sm:text-lg text-gray-700 leading-relaxed">Soar over pristine lakes, majestic mountains, and lush forests that only Canada can offer. Experience the stunning beauty of the Canadian Rockies from a unique perspective that few get to witness.</p>
           </div>
-        </div>
+        </article>
       </div>
-    </div>
+    </section>
 
   @include('components.showcase')
 
 
     <!-- Call to Action Section -->
-    <div class="relative h-64 sm:h-80 md:h-96 overflow-hidden mb-8 sm:mb-12 w-full mt-12">
-      <img src="{{ asset('images/hero-section.png') }}" alt="Hang gliding over mountains" class="w-full h-full object-cover">
+    <section class="relative h-64 sm:h-80 md:h-96 overflow-hidden mb-8 sm:mb-12 w-full mt-12" aria-labelledby="cta-heading">
+      <img src="{{ asset('images/hero-section.png') }}" 
+           alt="Hang gliding adventure over stunning Rocky Mountains near Whistler, Canada" 
+           class="w-full h-full object-cover"
+           loading="lazy">
       <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent flex items-center">
         <div class="text-white p-4 sm:p-8 max-w-7xl mx-auto w-full">
-          <h2 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Soar Above the Rockies</h2>
+          <h2 id="cta-heading" class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Soar Above the Rockies</h2>
           <p class="text-lg sm:text-xl mb-4 sm:mb-6">Book your adventure today and experience WhistlerSkySports from a whole new perspective</p>
-          <a href="/booking" class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition duration-300 relative group inline-block text-sm sm:text-base">
+          <a href="/booking" 
+             class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition duration-300 relative group inline-block text-sm sm:text-base"
+             aria-label="Book your flight adventure now"
+             itemprop="makesOffer">
             <span class="animate-text-on-hover">Book Your Million Dollar Smile</span>
-            <svg class="absolute inset-0 w-full h-full">
+            <svg class="absolute inset-0 w-full h-full" aria-hidden="true">
               <rect class="border-animation" x="0" y="0" width="100%" height="100%" fill="none" stroke="#1e40af" stroke-width="2"/>
             </svg>
           </a>
         </div>
       </div>
-    </div>
+    </section>
   </div>
-</div>
+</main>
+
+<!-- Schema.org structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Whistler Sky Sports",
+  "description": "The premier destination for power hang gliding adventures in Whistler, British Columbia. Experience the freedom of flight with our certified pilots and top-notch equipment while enjoying breathtaking views of the Canadian Rockies.",
+  "image": "{{ asset('images/logo/Whistler-Sky-Sports_Full-Black.png') }}",
+  "url": "{{ url('/') }}",
+  "telephone": "+1234567890",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Whistler Municipal Airport",
+    "addressLocality": "Whistler",
+    "addressRegion": "BC",
+    "postalCode": "V8E 0A3",
+    "addressCountry": "CA"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "50.1386",
+    "longitude": "-122.9494"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "opens": "08:00",
+    "closes": "18:00"
+  },
+  "sameAs": [
+    "https://www.facebook.com/whistlerskysports",
+    "https://www.instagram.com/whistlerskysports",
+    "https://twitter.com/whistlersky"
+  ],
+  "priceRange": "$$$",
+  "offers": {
+    "@type": "Offer",
+    "name": "Power Hang Glider Flight Experience",
+    "description": "Soar above the majestic Canadian Rockies with our certified pilots",
+    "priceCurrency": "CAD",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {

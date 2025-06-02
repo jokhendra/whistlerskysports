@@ -1,5 +1,23 @@
 @extends('layouts.app')
 
+@section('meta_tags')
+<meta name="description" content="Book your power hang gliding adventure with Whistler Sky Sports. Fill out our easy booking form to reserve your flight experience over the stunning Canadian Rockies.">
+<meta name="keywords" content="power hang gliding, flight booking, Whistler Sky Sports, aviation adventure, Canadian Rockies, ultralight aircraft, flight experience, Whistler activities">
+<link rel="canonical" href="{{ url()->current() }}">
+<!-- Open Graph Tags -->
+<meta property="og:title" content="Book Your Sky Adventure | Whistler Sky Sports">
+<meta property="og:description" content="Reserve your unforgettable power hang gliding experience over the majestic landscapes of Whistler, British Columbia.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ url()->current() }}">
+<meta property="og:image" content="{{ asset('images/hero-section.png') }}">
+<!-- Twitter Card Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Book Your Power Hang Gliding Adventure | Whistler Sky Sports">
+<meta name="twitter:description" content="Soar above pristine lakes, majestic mountains, and lush forests with Whistler Sky Sports power hang gliding adventures.">
+@endsection
+
+@section('title', 'Book Your Sky Adventure | Whistler Sky Sports')
+
 @push('styles')
     <!-- Add required CSS libraries -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
@@ -182,7 +200,7 @@
             </p>
         </div>
         <!-- Main Booking Form -->
-        <div class="max-w-5xl mx-auto">
+        <div class="max-w-5xl mx-auto" itemscope itemtype="https://schema.org/ReservationPackage">
             <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
                 <!-- Form Header -->
                 <div class="bg-[#204fb4] p-8 relative overflow-hidden">
@@ -195,11 +213,11 @@
                 </div>
 
                 <!-- Booking Form -->
-                <form action="{{ route('booking.preview') }}" method="POST" class="p-8" id="bookingForm">
+                <form action="{{ route('booking.preview') }}" method="POST" class="p-8" id="bookingForm" itemscope itemtype="https://schema.org/ReservationForm" aria-label="Flight booking request form">
                     @csrf
                     
                     @if ($errors->any())
-                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert" aria-live="assertive">
                             <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -216,41 +234,40 @@
 
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         <!-- Personal Information -->
-                        <div class="space-y-6">
+                        <section class="space-y-6" aria-labelledby="personal-details-heading">
                             <div class="flex items-center space-x-3 mb-6">
-                                
-                                <h3 class="text-xl font-bold text-gray-800">Personal Details</h3>
+                                <h3 id="personal-details-heading" class="text-xl font-bold text-gray-800">Personal Details</h3>
                             </div>
 
                             <div class="space-y-4">
                                 <div class="relative">
-                                    <label class="text-sm font-medium text-gray-700 mb-1 block">Full Name *</label>
-                                    <input type="text" name="name" id="name" value="" placeholder=" John Smith" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                    <label for="name" class="text-sm font-medium text-gray-700 mb-1 block">Full Name *</label>
+                                    <input type="text" name="name" id="name" value="" placeholder=" John Smith" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" itemprop="requiredFeature">
                                 </div>
 
                                 <div class="relative">
-                                    <label class="text-sm font-medium text-gray-700 mb-1 block">Email Address *</label>
-                                    <input type="email" name="email" id="email" value="" placeholder="john.smith@example.com" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                    <label for="email" class="text-sm font-medium text-gray-700 mb-1 block">Email Address *</label>
+                                    <input type="email" name="email" id="email" value="" placeholder="john.smith@example.com" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" itemprop="email">
                                 </div>
 
                                 <div class="relative">
-                                    <label class="text-sm font-medium text-gray-700 mb-1 block">Primary Phone *</label>
-                                    <input type="tel" name="primary_phone" id="primary_phone" value="" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                    <label for="primary_phone" class="text-sm font-medium text-gray-700 mb-1 block">Primary Phone *</label>
+                                    <input type="tel" name="primary_phone" id="primary_phone" value="" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" itemprop="telephone">
                                 </div>
 
                                 <div class="relative">
-                                    <label class="text-sm font-medium text-gray-700 mb-1 block">Date of Birth *</label>
+                                    <label for="date_of_birth" class="text-sm font-medium text-gray-700 mb-1 block">Date of Birth *</label>
                                     <input type="date" name="date_of_birth" id="date_of_birth" value="" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                 </div>
 
                                 <div class="relative">
-                                    <label class="text-sm font-medium text-gray-700 mb-1 block">Weight (lbs) *</label>
+                                    <label for="weight" class="text-sm font-medium text-gray-700 mb-1 block">Weight (lbs) *</label>
                                     <input type="number" name="weight" id="weight" value="" required min="0" max="245" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Enter your weight in pounds">
                                     <p class="text-xs text-gray-500 mt-1">Maximum weight limit: 245 lbs</p>
                                 </div>
 
                                 <div class="relative">
-                                    <label class="text-sm font-medium text-gray-700 mb-1 block">Time Zone *</label>
+                                    <label for="timezone" class="text-sm font-medium text-gray-700 mb-1 block">Time Zone *</label>
                                     <select name="timezone" id="timezone" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                         <option value="">Select your time zone</option>
                                         <optgroup label="North America">
@@ -281,23 +298,22 @@
                                 </div>
 
                                 <div class="relative">
-                                    <label class="text-sm font-medium text-gray-700 mb-1 block">Local Contact (During Stay) *</label>
+                                    <label for="local_phone" class="text-sm font-medium text-gray-700 mb-1 block">Local Contact (During Stay) *</label>
                                     <input type="tel" name="local_phone" id="local_phone" value="" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                 </div>
                             </div>
-                        </div>
+                        </section>
 
                         <!-- Flight Details -->
-                        <div class="space-y-6">
+                        <section class="space-y-6" aria-labelledby="flight-details-heading" itemprop="reservationFor" itemscope itemtype="https://schema.org/Flight">
                             <div class="flex items-center space-x-3 mb-6">
-                                
-                                <h3 class="text-xl font-bold text-gray-800">Flight Details</h3>
+                                <h3 id="flight-details-heading" class="text-xl font-bold text-gray-800">Flight Details</h3>
                             </div>
 
                             <div class="space-y-4">
                                 <div class="relative">
-                                    <label class="text-sm font-medium text-gray-700 mb-1 block">Select Package *</label>
-                                    <select name="package" id="package" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                    <label for="package" class="text-sm font-medium text-gray-700 mb-1 block">Select Package *</label>
+                                    <select name="package" id="package" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" itemprop="identifier">
                                         <option value="">Choose your adventure</option>
                                         <option value="intro">Open Cockpit Weight Shift Trike - CAD $140 (15 min)</option>
                                         <option value="basic">Fixed Wing Advanced Ultralight - CAD $120 (15 min)</option>
@@ -305,26 +321,27 @@
                                 </div>
 
                                 <div class="relative">
-                                    <label class="text-sm font-medium text-gray-700 mb-1 block">Participant Details *</label>
+                                    <label for="flyer_details" class="text-sm font-medium text-gray-700 mb-1 block">Participant Details *</label>
                                     <textarea name="flyer_details" id="flyer_details" required rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="List each participant's name and weight"></textarea>
                                 </div>
 
                                 <div class="relative">
-                                    <label class="text-sm font-medium text-gray-700 mb-1 block">Under 18 Participants</label>
-                                    <textarea name="underage_flyers" rows="2" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="List names of participants under 18"></textarea>
+                                    <label for="underage_flyers" class="text-sm font-medium text-gray-700 mb-1 block">Under 18 Participants</label>
+                                    <textarea name="underage_flyers" id="underage_flyers" rows="2" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="List names of participants under 18"></textarea>
                                 </div>
 
                                 <div class="relative">
-                                    <label class="text-sm font-medium text-gray-700 mb-1 block">Preferred Dates *</label>
+                                    <label for="preferred_dates" class="text-sm font-medium text-gray-700 mb-1 block">Preferred Dates *</label>
                                     <input type="date" 
                                            name="preferred_dates" 
                                            id="preferred_dates" 
                                            required 
-                                           class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
+                                           class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200"
+                                           itemprop="startTime">
                                 </div>
 
                                 <div class="relative">
-                                    <label class="text-sm font-medium text-gray-700 mb-1 block">Sunrise Flight Option *</label>
+                                    <label for="sunrise_flight" class="text-sm font-medium text-gray-700 mb-1 block">Sunrise Flight Option *</label>
                                     <select name="sunrise_flight" id="sunrise_flight" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
                                         <option value="">Select preference</option>
                                         <option value="yes">Yes - Sunrise Flight (CAD $99)</option>
@@ -332,16 +349,16 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </section>
                     </div>
 
                     <!-- Memory Packages Section -->
-                    <div class="mt-12">
+                    <section class="mt-12" aria-labelledby="memory-packages-heading">
                         <div class="bg-gradient-to-r from-[#204fb4] to-blue-600 rounded-xl p-6 mb-8 relative overflow-hidden">
                             <div class="absolute inset-0 bg-[#fcdb3f]/5"></div>
                             <div class="relative z-10">
-                                <h3 class="text-2xl font-bold text-white flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <h3 id="memory-packages-heading" class="text-2xl font-bold text-white flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
                                     Capture Your Adventure
@@ -350,21 +367,22 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                             <!-- Video Package -->
                             <div class="bg-white rounded-xl border border-gray-100 p-6 hover:border-[#204fb4]/20 transition-all duration-300">
                                 <div class="flex justify-between items-start">
                                     <div>
                                         <div class="flex items-center mb-3">
                                             <div class="bg-[#204fb4]/10 p-2 rounded-lg mr-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#204fb4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#204fb4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                                                 </svg>
                                             </div>
                                             <h4 class="text-xl font-bold text-gray-800">Video Package</h4>
                                         </div>
                                         <p class="text-gray-600 ml-11 mb-2">Professional flight video with audio</p>
-                                        <p class="text-[#204fb4] font-bold text-xl ml-11">CAD $90</p>
+                                        <p class="text-[#204fb4] font-bold text-xl ml-11" itemprop="price">CAD $90</p>
+                                        <meta itemprop="priceCurrency" content="CAD">
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" name="video_package" id="video_package" class="sr-only peer" onchange="updateTotalPrice()">
@@ -379,14 +397,15 @@
                                     <div>
                                         <div class="flex items-center mb-3">
                                             <div class="bg-[#204fb4]/10 p-2 rounded-lg mr-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#204fb4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#204fb4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                                                 </svg>
                                             </div>
                                             <h4 class="text-xl font-bold text-gray-800">Deluxe Package</h4>
                                         </div>
                                         <p class="text-gray-600 ml-11 mb-2">Video + WhistlerSkySports Gear</p>
-                                        <p class="text-[#204fb4] font-bold text-xl ml-11">CAD $120</p>
+                                        <p class="text-[#204fb4] font-bold text-xl ml-11" itemprop="price">CAD $120</p>
+                                        <meta itemprop="priceCurrency" content="CAD">
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" name="deluxe_package" id="deluxe_package" class="sr-only peer" onchange="updateTotalPrice()">
@@ -400,7 +419,7 @@
                                 <div class="flex flex-col">
                                     <div class="flex items-center mb-3">
                                         <div class="bg-[#204fb4]/10 p-2 rounded-lg mr-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#204fb4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#204fb4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                                             </svg>
                                         </div>
@@ -408,16 +427,17 @@
                                     </div>
                                     <p class="text-gray-600 ml-11 mb-2">WhistlerSkySports Gear Pack</p>
                                     <div class="flex justify-between items-center mt-2">
-                                        <p class="text-[#204fb4] font-bold text-xl ml-11">CAD $40</p>
+                                        <p class="text-[#204fb4] font-bold text-xl ml-11" itemprop="price">CAD $40</p>
+                                        <meta itemprop="priceCurrency" content="CAD">
                                         <div class="flex items-center gap-1">
-                                            <button type="button" onclick="updateQuantity('merch_package', -1)" class="w-6 h-6 flex items-center justify-center rounded-md bg-gray-100 hover:bg-gray-200 text-gray-600">
-                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <button type="button" onclick="updateQuantity('merch_package', -1)" class="w-6 h-6 flex items-center justify-center rounded-md bg-gray-100 hover:bg-gray-200 text-gray-600" aria-label="Decrease merchandise quantity">
+                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
                                                 </svg>
                                             </button>
-                                            <input type="number" id="merch_package" name="merch_package" class="w-8 text-center text-sm border-gray-200 rounded-md" value="0" min="0" readonly onchange="updateTotalPrice()">
-                                            <button type="button" onclick="updateQuantity('merch_package', 1)" class="w-6 h-6 flex items-center justify-center rounded-md bg-[#204fb4]/10 hover:bg-[#204fb4]/20 text-[#204fb4]">
-                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <input type="number" id="merch_package" name="merch_package" class="w-8 text-center text-sm border-gray-200 rounded-md" value="0" min="0" readonly onchange="updateTotalPrice()" aria-label="Merchandise quantity">
+                                            <button type="button" onclick="updateQuantity('merch_package', 1)" class="w-6 h-6 flex items-center justify-center rounded-md bg-[#204fb4]/10 hover:bg-[#204fb4]/20 text-[#204fb4]" aria-label="Increase merchandise quantity">
+                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                                                 </svg>
                                             </button>
@@ -428,11 +448,11 @@
                         </div>
 
                         <!-- Total Section -->
-                        <div class="mt-8 bg-gradient-to-r from-[#204fb4]/5 to-blue-50 p-6 rounded-xl border border-[#204fb4]/10">
+                        <div class="mt-8 bg-gradient-to-r from-[#204fb4]/5 to-blue-50 p-6 rounded-xl border border-[#204fb4]/10" itemprop="totalPrice">
                             <div class="flex justify-between items-center">
                                 <div class="flex items-center">
                                     <div class="bg-[#204fb4]/10 p-2 rounded-lg mr-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#204fb4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#204fb4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                         </svg>
                                     </div>
@@ -444,54 +464,53 @@
                                 <p class="text-2xl font-bold text-[#204fb4]" id="total_price">CAD $0</p>
                             </div>
                         </div>
-                    </div>
+                    </section>
 
                     <!-- Additional Information -->
-                    <div class="mt-12 space-y-6">
+                    <section class="mt-12 space-y-6" aria-labelledby="additional-details-heading">
                         <div class="flex items-center space-x-3 mb-6">
-                            
-                            <h3 class="text-xl font-bold text-gray-800">Additional Details</h3>
+                            <h3 id="additional-details-heading" class="text-xl font-bold text-gray-800">Additional Details</h3>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="relative">
-                                <label class="text-sm font-medium text-gray-700 mb-1 block">Accommodation Details</label>
-                                <input type="text" name="accommodation" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Hotel name or address">
+                                <label for="accommodation" class="text-sm font-medium text-gray-700 mb-1 block">Accommodation Details</label>
+                                <input type="text" name="accommodation" id="accommodation" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Hotel name or address">
                             </div>
 
                             <div class="relative">
-                                <label class="text-sm font-medium text-gray-700 mb-1 block">Special Occasion?</label>
-                                <input type="text" name="special_event" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Tell us if you're celebrating">
+                                <label for="special_event" class="text-sm font-medium text-gray-700 mb-1 block">Special Occasion?</label>
+                                <input type="text" name="special_event" id="special_event" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Tell us if you're celebrating">
                             </div>
                         </div>
 
                         <div class="relative">
-                            <label class="text-sm font-medium text-gray-700 mb-1 block">Additional Notes</label>
-                            <textarea name="additional_info" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Any other details we should know"></textarea>
+                            <label for="additional_info" class="text-sm font-medium text-gray-700 mb-1 block">Additional Notes</label>
+                            <textarea name="additional_info" id="additional_info" rows="3" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200" placeholder="Any other details we should know"></textarea>
                         </div>
 
                         <!-- Terms and Waiver -->
                         <div class="space-y-4">
                             <div class="flex items-start p-4 bg-[#204fb4]/5 rounded-xl">
                                 <input type="checkbox" id="waiver_checkbox" name="waiver" class="mt-1 h-4 w-4 text-[#204fb4] focus:ring-[#204fb4]/20 border-gray-300 rounded" disabled>
-                                <label class="ml-3 text-sm text-gray-700">
+                                <label for="waiver_checkbox" class="ml-3 text-sm text-gray-700">
                                     I accept the <span id="waiver_link_container" class="hidden"><a href="#" id="waiver_link" class="text-[#204fb4] hover:text-blue-700 underline" onclick="openWaiverModal(event)">liability waiver</a></span><span id="waiver_link_placeholder" class="text-gray-400 italic">(Complete all required fields to view waiver)</span> and understand the risks involved.
                                 </label>
                             </div>
 
                             <div class="flex items-start p-4 bg-[#204fb4]/5 rounded-xl">
-                                <input type="checkbox" name="terms" required class="mt-1 h-4 w-4 text-[#204fb4] focus:ring-[#204fb4]/20 border-gray-300 rounded" checked>
-                                <label class="ml-3 text-sm text-gray-700">
+                                <input type="checkbox" name="terms" id="terms" required class="mt-1 h-4 w-4 text-[#204fb4] focus:ring-[#204fb4]/20 border-gray-300 rounded" checked>
+                                <label for="terms" class="ml-3 text-sm text-gray-700">
                                     I agree to the <a href="{{ route('terms') }}" target="_blank" class="text-[#204fb4] hover:text-blue-700 underline">terms and conditions</a>.
                                 </label>
                             </div>
                         </div>
-                    </div>
+                    </section>
 
                     <!-- Submit Button -->
                     <div class="mt-12">
                         <button type="submit" class="w-full bg-gradient-to-r from-[#204fb4] to-blue-600 text-[#fcdb3f] font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#204fb4] focus:ring-offset-2 flex items-center justify-center space-x-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Submit Booking Request</span>
@@ -504,12 +523,12 @@
 </div>
 
 <!-- Waiver Modal -->
-<div id="waiverModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+<div id="waiverModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden" role="dialog" aria-labelledby="waiver-title" aria-modal="true">
     <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col">
         <div class="bg-[#204fb4] p-4 flex justify-between items-center">
-            <h3 class="text-xl font-bold text-white">Liability Waiver</h3>
-            <button id="closeWaiverModal" class="text-white hover:text-gray-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <h3 id="waiver-title" class="text-xl font-bold text-white">Liability Waiver</h3>
+            <button id="closeWaiverModal" class="text-white hover:text-gray-200" aria-label="Close waiver dialog">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
@@ -894,6 +913,60 @@
         </div>
     </div>
 </div>
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Whistler Sky Sports Flight Booking",
+  "description": "Book your power hang gliding adventure with Whistler Sky Sports and experience the thrill of flying over the stunning Canadian Rockies in British Columbia.",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Whistler Sky Sports",
+    "image": "{{ asset('images/logo/Whistler-Sky-Sports_Full-Black.png') }}",
+    "telephone": "+12162881303",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Whistler",
+      "addressRegion": "BC",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": {
+    "@type": "Place",
+    "name": "Whistler, British Columbia",
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "50.1163",
+      "longitude": "-122.9574"
+    }
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "highPrice": "259",
+    "lowPrice": "120",
+    "priceCurrency": "CAD",
+    "offerCount": "4",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Open Cockpit Weight Shift Trike",
+        "price": "140",
+        "priceCurrency": "CAD",
+        "description": "15 minute power hang gliding experience in an open cockpit trike"
+      },
+      {
+        "@type": "Offer",
+        "name": "Fixed Wing Advanced Ultralight",
+        "price": "120",
+        "priceCurrency": "CAD",
+        "description": "15 minute flying experience in a fixed wing advanced ultralight aircraft"
+      }
+    ]
+  }
+}
+</script>
 @endsection
 
 @push('scripts')

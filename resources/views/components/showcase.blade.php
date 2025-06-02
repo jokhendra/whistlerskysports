@@ -1,4 +1,3 @@
-
 @push('styles')
 <style>
 /* Base styles with better performance */
@@ -397,7 +396,8 @@ html {
   </div>
 </div> -->
 
-<div class="relative h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[750px]">
+<section class="relative h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[750px]" aria-label="Whistler Sky Sports Image Showcase">
+  <h2 class="sr-only">Whistler Sky Sports Experience Gallery</h2>
   <!-- Gradient Overlay Layer -->
   <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/80 z-[5]"></div>
 
@@ -409,19 +409,20 @@ html {
           effects: ['fade', 'cube', 'coverflow', 'flip', 'tiles'],
           swiper: null,
           slides: [
-            { type: 'image', src: '{{ asset('images/Aircreation_Skypper15.jpeg') }}', alt: 'Power Hang Glider Flight' },
-            { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7017 2.jpg') }}', alt: 'Power Hang Glider Adventure' },
-            { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7016 2.jpg') }}', alt: 'Power Hang Glider Experience' },
-            { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7013.jpg') }}', alt: 'Power Hang Glider Scenery' },
-            { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7010.jpg') }}', alt: 'Power Hang Glider Action' },
-            { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7009.jpg') }}', alt: 'Power Hang Glider Adventure' },
-            { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7007.jpg') }}', alt: 'Power Hang Glider Experience' },
-            { type: 'image', src: '{{ asset('images/image000001.JPG') }}', alt: 'Power Hang Glider View' },
-            { type: 'image', src: '{{ asset('images/image000000.JPG') }}', alt: 'Power Hang Glider Scenery' }
+            { type: 'image', src: '{{ asset('images/Aircreation_Skypper15.jpeg') }}', alt: 'Whistler Sky Sports Power Hang Glider Flight over British Columbia mountains' },
+            { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7017 2.jpg') }}', alt: 'Ultralight Power Hang Glider Adventure at Whistler Sky Sports with mountain view' },
+            { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7016 2.jpg') }}', alt: 'Scenic Power Hang Glider Experience with Whistler Sky Sports over Pemberton valley' },
+            { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7013.jpg') }}', alt: 'Breathtaking mountain view from Power Hang Glider at Whistler Sky Sports' },
+            { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7010.jpg') }}', alt: 'Power Hang Glider flying over Whistler landscape - adventure aerial experience' },
+            { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7009.jpg') }}', alt: 'Whistler Sky Sports instructor with student preparing for Power Hang Glider adventure' },
+            { type: 'image', src: '{{ asset('images/AnyConv.com__IMG_7007.jpg') }}', alt: 'Learning to fly a Power Hang Glider with Whistler Sky Sports in BC' },
+            { type: 'image', src: '{{ asset('images/image000001.JPG') }}', alt: 'Panoramic view from Power Hang Glider cockpit with Whistler Sky Sports' },
+            { type: 'image', src: '{{ asset('images/image000000.JPG') }}', alt: 'Whistler Sky Sports Power Hang Glider training experience in British Columbia' }
           ],
           init() {
             this.$nextTick(() => {
               this.initSwiper();
+              this.preloadImages();
             });
             setInterval(() => {
               const currentIndex = this.effects.indexOf(this.activeEffect);
@@ -429,6 +430,21 @@ html {
               this.activeEffect = this.effects[nextIndex];
               this.initSwiper();
             }, 10000);
+          },
+          preloadImages() {
+            // Preload the first image immediately, then load the rest with delay
+            if (this.slides[0]) {
+              const img = new Image();
+              img.src = this.slides[0].src;
+            }
+            
+            // Preload remaining images with delay
+            setTimeout(() => {
+              for (let i = 1; i < this.slides.length; i++) {
+                const img = new Image();
+                img.src = this.slides[i].src;
+              }
+            }, 1000);
           },
           initSwiper() {
             const options = {
@@ -463,6 +479,16 @@ html {
               pagination: {
                 el: '.swiper-pagination',
                 clickable: true
+              },
+              navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
+              },
+              a11y: {
+                prevSlideMessage: 'Previous slide',
+                nextSlideMessage: 'Next slide',
+                firstSlideMessage: 'This is the first slide',
+                lastSlideMessage: 'This is the last slide'
               },
               on: {
                 slideChange: () => {
@@ -522,24 +548,55 @@ html {
           }
         }"
         class="relative w-full mx-auto overflow-hidden h-full"
+        aria-roledescription="carousel"
       >
-        <div class="swiper-container h-full">
+        <div class="swiper-container h-full" role="region" aria-label="Whistler Sky Sports photo gallery">
           <div class="swiper-wrapper">
-          <template x-for="(slide, index) in slides" :key="index">
-              <div class="swiper-slide">
+            <template x-for="(slide, index) in slides" :key="index">
+              <div class="swiper-slide" role="group" aria-label="slide" :aria-label="`Slide ${index + 1} of ${slides.length}`">
                 <img 
-                  :src="slide.src" 
+                  :src="index < 3 ? slide.src : ''" 
+                  :data-src="index >= 3 ? slide.src : ''"
                   :alt="slide.alt" 
-                  class="object-cover w-full h-full"
+                  class="object-cover w-full h-full swiper-lazy"
                   loading="lazy"
-                  onerror="this.onerror=null; this.src='{{ asset('images/pwg1.jpg') }}'; this.alt='Power Hang Glider placeholder';"
+                  :data-srcset="slide.src + ' 1200w, ' + slide.src + ' 800w, ' + slide.src + ' 400w'"
+                  sizes="(min-width: 1200px) 1200px, (min-width: 768px) 800px, 400px"
+                  onerror="this.onerror=null; this.src='{{ asset('images/pwg1.jpg') }}'; this.alt='Power Hang Glider flight with Whistler Sky Sports - image placeholder';"
                 >
-        </div>
+                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+              </div>
             </template>
           </div>
-          <div class="swiper-pagination"></div>
+          <div class="swiper-pagination" role="group" aria-label="Pagination controls"></div>
+          <div class="swiper-button-next" aria-label="Next slide"></div>
+          <div class="swiper-button-prev" aria-label="Previous slide"></div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
+
+<!-- Schema.org structured data for image carousel -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ImageGallery",
+  "name": "Whistler Sky Sports Flight Experience Gallery",
+  "description": "View our gallery of ultralight aircraft flying experiences over the stunning landscapes of Whistler and Pemberton, British Columbia",
+  "about": {
+    "@type": "Thing",
+    "name": "Power Hang Glider Flight Experience"
+  },
+  "image": [
+    "{{ asset('images/Aircreation_Skypper15.jpeg') }}",
+    "{{ asset('images/AnyConv.com__IMG_7017 2.jpg') }}",
+    "{{ asset('images/AnyConv.com__IMG_7016 2.jpg') }}"
+  ],
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Whistler Sky Sports",
+    "url": "https://whistlerskysports.ca/"
+  }
+}
+</script>

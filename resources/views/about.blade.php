@@ -69,7 +69,7 @@
 <section class="bg-gradient-to-b from-blue-900 to-blue-700 py-16 lg:mt-24 md:mt-24 mt-16">
     <div class="container mx-auto px-4">
       <div class="flex flex-col items-center text-center">
-        <h1 class="text-5xl font-bold text-white mb-6">About Whistler Sky Sports</h1>
+        <h1 class="text-5xl font-bold text-white mb-6">About Whistler Sky Sports - Flight School & Adventure</h1>
         <div class="w-24 h-1 bg-[#fcdb3f] mb-8"></div>
         <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-white/20">
             <div class="relative">
@@ -80,10 +80,10 @@
                     </p>
                     <p class="text-sm text-blue-200">- Leonardo da Vinci</p>
                     <p class="mt-6">
-                        At Whistler Sky Sports, we teach you how to trespass mankind's most ancestral fear - which is the fear of falling. The oldest dream of mankind is to fly and we help you achieve your dream!
+                        At Whistler Sky Sports, we teach you how to overcome mankind's most ancestral fear - which is the fear of falling. The oldest dream of mankind is to fly and we help you achieve your dream!
                     </p>
                     <p class="mt-4">
-                        This fear dates back to our existence as monkeys, who were afraid of predators below the trees and therefore unwilling to take the leap of faith. Taking that first leap requires immense courage. Today, flying represents humanity's triumph over that biggest fear. When we dare to overcome our fears and take bold steps forward, we unlock extraordinary possibilities.
+                        This fear dates back to our existence as primates, who were afraid of predators below the trees and therefore unwilling to take the leap of faith. Taking that first leap requires immense courage. Today, flying represents humanity's triumph over that biggest fear. When we dare to overcome our fears and take bold steps forward, we unlock extraordinary possibilities.
                     </p>
                     <p class="mt-4">
                         Here at Whistler Sky Sports, we are here to hold your hand and make you fall in love with the skies in the most affordable way. Not to forget; you are amidst the most beautiful landscape views in the entire world.
@@ -103,10 +103,10 @@
   <div class="container mx-auto px-4">
     <div class="flex flex-col md:flex-row items-center gap-12">
       <div class="md:w-1/2">
-        <img src="{{ asset('images/fixed_wings/IMG_7849.JPG') }}" alt="Open Cockpit Ultralight Aircraft" class="rounded-lg shadow-lg w-full h-[400px] object-cover team-image">
+        <img src="{{ asset('images/fixed_wings/IMG_7849.JPG') }}" alt="Whistler Sky Sports Open Cockpit Ultralight Aircraft Flying in Mountains" class="rounded-lg shadow-lg w-full h-[400px] object-cover team-image" loading="lazy">
       </div>
       <div class="md:w-1/2">
-        <h2 class="text-3xl font-bold text-gray-800 mb-6">Our Mission</h2>
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Our Mission at Whistler Sky Sports</h2>
         <p class="text-gray-600 mb-4">
           We don't take our fellow aviators on joy rides – we teach them how to dance confidently in those skies and give them a taste and then the skills. If you're the adrenaline seeker, we'll share an unforgettable experience in an open cockpit weight shift trike. If you'd rather take things slow, we have a closed cockpit plane but with very sensitive controls.
         </p>
@@ -114,7 +114,7 @@
           Getting your private pilot's license could be very expensive these days. You open your doors towards the most affordable flying with Whistler Sky Sports. With your "Quick Learner's" package, an aspiring pilot can complete their Ultralight permit in as low as 10 hours and Instructor ratings in around 22 hours. In as low as 2-3 months you can learn how to spread your wings and master the art of flying; weather permitting.
         </p>
         <p class="text-gray-600">
-          Our greatest eternal desire as mankind is to have wings and fly like a bird. You would love the adrenaline rush you will get by learning these challenging skills in the Whistler's challenging terrains surrounded by one of the most beautiful and peaceful bird's eyeview of the Canadian rockies. We promise your comfort and an experience you will remember for the rest of your life.
+          Our greatest eternal desire as mankind is to have wings and fly like a bird. You would love the adrenaline rush you will get by learning these challenging skills in Whistler's challenging terrains surrounded by one of the most beautiful and peaceful bird's eye view of the Canadian Rockies. We promise your comfort and an experience you will remember for the rest of your life.
         </p>
       </div>
     </div>
@@ -125,7 +125,7 @@
 <section class="bg-gray-100 py-16">
   <div class="container mx-auto px-4">
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Core Values</h2>
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Core Values at Whistler Sky Sports</h2>
       <p class="text-gray-600 max-w-2xl mx-auto">
         Our Core Values of safety, transparency, and excellence define our company culture, rooted in unwavering integrity and authenticity.
       </p>
@@ -135,11 +135,11 @@
       <!-- Value 1 -->
       <div class="bg-white p-8 rounded-lg shadow-md text-center value-card">
         <div class="bg-amber-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 value-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-gray-800 mb-2">Safety</h3>
+        <h3 class="text-xl font-bold text-gray-800 mb-2">Safety First</h3>
         <p class="text-gray-600">
           We prioritize rigorous pre-flight inspections and maintenance, never cutting corners, and cancel flights if weather, aircraft, or health conditions aren't perfect.
         </p>
@@ -148,7 +148,7 @@
       <!-- Value 2 -->
       <div class="bg-white p-8 rounded-lg shadow-md text-center value-card">
         <div class="bg-amber-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 value-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
           </svg>
@@ -162,7 +162,7 @@
       <!-- Value 3 -->
       <div class="bg-white p-8 rounded-lg shadow-md text-center value-card">
         <div class="bg-amber-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 value-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
           </svg>
         </div>
@@ -179,7 +179,7 @@
 <section class="py-16 bg-amber-50">
   <div class="container mx-auto px-4">
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Fleet</h2>
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Whistler Sky Sports Aircraft Fleet</h2>
       <p class="text-gray-600 max-w-2xl mx-auto">
         Experience the thrill of flight with our carefully selected aircraft, designed for both performance and safety.
       </p>
@@ -188,7 +188,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <!-- Aircraft 1 -->
       <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <img src="{{ asset('images/microlite/Skypper 2.jpeg') }}" alt="DTA Combo Trike" class="w-full h-64 object-cover">
+        <img src="{{ asset('images/microlite/Skypper 2.jpeg') }}" alt="DTA Combo Trike Ultralight Aircraft at Whistler Sky Sports" class="w-full h-64 object-cover" loading="lazy">
         <div class="p-6">
           <h3 class="text-xl font-bold text-gray-800 mb-2">DTA Combo Trike</h3>
           <p class="text-gray-600 mb-4">
@@ -198,16 +198,16 @@
             Dizier's innovative designs have stood the test of time, with the iconic "Voyageur" model earning global acclaim. Notable adventures include:
           </p>
           <ul class="list-disc list-inside text-gray-600 space-y-2">
-            <li><a href="http://www.trikeexpeditions.com" target="_blank" class="text-blue-600 hover:text-blue-800 underline">Olivier Aubert's worldwide expeditions</a></li>
-            <li><a href="http://odile-rablat.com" target="_blank" class="text-blue-600 hover:text-blue-800 underline">Odile Rablat's dual crossings of Canada</a></li>
-            <li><a href="http://trike-globetrotter.com" target="_blank" class="text-blue-600 hover:text-blue-800 underline">Andreas Zmuda and Doreen Kroeber's global circumnavigation</a></li>
+            <li><a href="http://www.trikeexpeditions.com" target="_blank" rel="noopener" class="text-blue-600 hover:text-blue-800 underline">Olivier Aubert's worldwide expeditions</a></li>
+            <li><a href="http://odile-rablat.com" target="_blank" rel="noopener" class="text-blue-600 hover:text-blue-800 underline">Odile Rablat's dual crossings of Canada</a></li>
+            <li><a href="http://trike-globetrotter.com" target="_blank" rel="noopener" class="text-blue-600 hover:text-blue-800 underline">Andreas Zmuda and Doreen Kroeber's global circumnavigation</a></li>
           </ul>
         </div>
       </div>
       
       <!-- Aircraft 2 -->
       <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <img src="{{ asset('images/fixed_wings/IMG_7850.JPG') }}" alt="RANS S6 Coyote II" class="w-full h-64 object-cover">
+        <img src="{{ asset('images/fixed_wings/IMG_7850.JPG') }}" alt="RANS S6 Coyote II Fixed-Wing Aircraft at Whistler Sky Sports" class="w-full h-64 object-cover" loading="lazy">
         <div class="p-6">
           <h3 class="text-xl font-bold text-gray-800 mb-2">RANS S6 Coyote II</h3>
           <p class="text-gray-600">
@@ -223,7 +223,7 @@
 <section class="bg-gray-100 py-16">
   <div class="container mx-auto px-4">
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Training Programs</h2>
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Flight Training Programs at Whistler Sky Sports</h2>
       <p class="text-gray-600 max-w-2xl mx-auto">
         Our training programs are designed to inspire and equip students, whether you're an aviation enthusiast, a recreational pilot, or someone seeking an affordable way to earn your wings.
       </p>
@@ -233,7 +233,7 @@
             <!-- 30 Minute Lesson Package -->
             <div class="bg-white/40 rounded-2xl overflow-hidden program-card h-full flex flex-col">
                 <div class="p-8 text-center flex-grow flex flex-col">
-                    <h2 class="text-3xl font-bold mb-2">Open Cockpit Weight Shift Trike - Learn to Fly like a Bird</h2>
+                    <h3 class="text-3xl font-bold mb-2">Open Cockpit Weight Shift Trike - Learn to Fly like a Bird</h3>
                     <div class="text-4xl font-bold text-[#204fb4] mb-2">CAD$140</div>
                     <p class="text-gray-600 mb-4">per person</p>
                     <p class="text-xl text-gray-700 mb-6">15 Minute Lesson</p>
@@ -249,7 +249,7 @@
             <!-- Mountain Flying Course Package -->
             <div class="bg-white/40 rounded-2xl overflow-hidden program-card h-full flex flex-col">
                 <div class="p-8 text-center flex-grow flex flex-col">
-                    <h2 class="text-3xl font-bold mb-2">Fixed Wing Advanced Ultralight - Lesson for the Nuanced </h2>
+                    <h3 class="text-3xl font-bold mb-2">Fixed Wing Advanced Ultralight - Lesson for the Nuanced</h3>
                     <div class="text-4xl font-bold text-[#204fb4] mb-2">CAD$120</div>
                     <p class="text-gray-600 mb-4">per person</p>
                     <p class="text-xl text-gray-700 mb-6">15 Minute Lesson</p>
@@ -265,7 +265,7 @@
             <!-- Comprehensive Flight Training Programs -->
             <div class="bg-white/40 rounded-2xl overflow-hidden program-card h-full flex flex-col">
                 <div class="p-8 text-center flex-grow flex flex-col">
-                    <h2 class="text-3xl font-bold mb-2">Comprehensive Flight Training Programs</h2>
+                    <h3 class="text-3xl font-bold mb-2">Comprehensive Flight Training Programs</h3>
                     <!-- <div class="text-4xl font-bold text-purple-600 mb-2">From CA$3,995</div> -->
                     <p class="text-gray-600 mb-4">complete program</p>
                     <p class="text-xl text-gray-700 mb-6">Transport Canada Approved</p>
@@ -286,7 +286,7 @@
   <div class="container mx-auto px-4">
     <div class="flex flex-col md:flex-row items-center gap-12">
       <div class="md:w-1/2">
-        <h2 class="text-3xl font-bold text-gray-800 mb-6">Our Location</h2>
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Whistler Sky Sports Location - Pemberton Airport</h2>
         <p class="text-gray-600 mb-4">
           Pemberton's stunning terrain and favorable weather provide the perfect backdrop for mastering the art of flight. Mountain flying at Pemberton may seem like a perfect scenic experience, but be mindful that it is not merely a joyride—it's a flight lesson.
         </p>
@@ -300,7 +300,7 @@
         </div>
       </div>
       <div class="md:w-1/2">
-        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Pemberton Airport" class="rounded-lg shadow-lg w-full h-auto object-cover team-image">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Pemberton Airport and Mountains - Whistler Sky Sports Flying Location" class="rounded-lg shadow-lg w-full h-auto object-cover team-image" loading="lazy">
       </div>
     </div>
   </div>
@@ -310,18 +310,18 @@
 <section class="bg-gray-100 py-16">
   <div class="container mx-auto px-4">
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Commitment</h2>
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Commitment to Excellence</h2>
       <p class="text-gray-600 max-w-3xl mx-auto">
-        I am proud of Whistler Sky Sports because I believe in maintaining 100% transparency, honesty, and integrity in everything we do. This approach ensures you'll never have regrets.
+        We are proud of Whistler Sky Sports because we believe in maintaining 100% transparency, honesty, and integrity in everything we do. This approach ensures you'll never have regrets.
       </p>
     </div>
     
     <div class="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
       <div class="flex flex-col md:flex-row items-center gap-8">
         <div class="md:w-1/3">
-          <img src="{{ asset('images/logo/ishan-tiwari.jpeg') }}" alt="Ishan Tewari" class="rounded-full w-48 h-48 object-cover mx-auto shadow-lg team-image">
+          <img src="{{ asset('images/logo/ishan-tiwari.jpeg') }}" alt="Ishan Tewari - Chief Flight Instructor at Whistler Sky Sports" class="rounded-full w-48 h-48 object-cover mx-auto shadow-lg team-image" loading="lazy">
           <h3 class="text-xl font-bold text-gray-800 text-center mt-4">Ishan Tewari</h3>
-          <p class="text-accent text-center">Meet our Chief flight instructor</p>
+          <p class="text-accent text-center">Meet our Chief Flight Instructor</p>
         </div>
         <div class="md:w-2/3">
           <p class="text-gray-600 mb-4">
@@ -331,7 +331,7 @@
             Even when life gets busy, we never cut corners with pre-flight inspections or maintenance. If something isn't right—whether it's the weather, the aircraft, or your health—we cancel the flight. Situational awareness is your best friend.
           </p>
           <p class="text-gray-600">
-            At WSS, we're more than a flight school—we're a community of dreamers and doers united by a love for aviation. Join us as we take flight, blending adventure with excellence, and discover why the skies are calling your name.
+            At Whistler Sky Sports, we're more than a flight school—we're a community of dreamers and doers united by a love for aviation. Join us as we take flight, blending adventure with excellence, and discover why the skies are calling your name.
           </p>
         </div>
       </div>
@@ -342,7 +342,7 @@
 <!-- CTA Section -->
 <section class="py-16 bg-accent">
   <div class="container mx-auto px-4 text-center">
-    <h2 class="text-3xl font-bold text-primary mb-6">Ready to Take Flight?</h2>
+    <h2 class="text-3xl font-bold text-primary mb-6">Ready to Take Flight with Whistler Sky Sports?</h2>
     <p class="text-primary text-xl mb-8 max-w-2xl mx-auto">
       Join us at Whistler Sky Sports and discover the thrill of flying in one of the most beautiful regions in the world.
     </p>
@@ -351,4 +351,41 @@
     </a>
   </div>
 </section>
+
+<!-- Schema.org structured data for flight school -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Whistler Sky Sports",
+  "description": "Flight school and ultralight aircraft training in Whistler area, offering open cockpit and fixed-wing flight experiences.",
+  "image": "{{ asset('images/logo/Whistler-Sky-Sports_Full-Black.png') }}",
+  "url": "https://whistlerskysports.ca/about",
+  "telephone": "+12505555555",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Pemberton Airport",
+    "addressLocality": "Pemberton",
+    "addressRegion": "BC",
+    "postalCode": "V0N 2L0",
+    "addressCountry": "CA"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 50.3043,
+    "longitude": -122.7384
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "opens": "09:00",
+    "closes": "18:00"
+  },
+  "sameAs": [
+    "https://www.facebook.com/whistlerskysports",
+    "https://www.instagram.com/whistlerskysports"
+  ],
+  "priceRange": "$$"
+}
+</script>
 @endsection

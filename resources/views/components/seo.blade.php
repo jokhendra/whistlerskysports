@@ -18,6 +18,8 @@ if (!str_contains($meta['title'], $settings['site_name'] ?? 'WhistlerSkySports')
 @endphp
 
 {{-- Basic Meta Tags --}}
+<meta name="robots" content="{{ $meta['robots'] ?? 'index,follow' }}">
+<meta name="author" content="{{ $settings['site_name'] ?? 'WhistlerSkySports' }}">
 <title>{{ $meta['title'] }}</title>
 <meta name="description" content="{{ $meta['description'] }}">
 <meta name="keywords" content="{{ $meta['keywords'] }}">
@@ -42,4 +44,28 @@ if (!str_contains($meta['title'], $settings['site_name'] ?? 'WhistlerSkySports')
 <script type="application/ld+json">
 {!! json_encode($structuredData, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
 </script>
+@endif
+
+{{-- BreadcrumbList structured data to boost SEO --}}
+@if(url()->current() !== url('/'))
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "{{ url('/') }}"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "{{ $meta['title'] }}",
+                    "item": "{{ $meta['canonical'] }}"
+                }
+            ]
+        }
+    </script>
 @endif 
