@@ -357,11 +357,12 @@ Route::post('/review', [ReviewController::class, 'store'])->name('reviews.store'
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('admin')->name('admin.')->middleware('web')->group(function () {
+Route::prefix(env('ADMIN_PATH', 'dashboard-93jf8K2o'))->name('admin.')->middleware('web')->group(function () {
     // Guest routes (no auth required)
     Route::middleware('guest')->group(function () {
         Route::get('login', [App\Http\Controllers\Admin\AuthController::class, 'showLoginForm'])->name('login');
-        Route::post('login', [App\Http\Controllers\Admin\AuthController::class, 'login']);
+        Route::post('login', [App\Http\Controllers\Admin\AuthController::class, 'login'])
+            ->middleware('throttle:5,1');
     });
     
     // Protected admin routes
