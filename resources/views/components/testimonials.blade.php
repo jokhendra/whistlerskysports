@@ -1,8 +1,8 @@
-<div class="bg-sky-50 py-16">
+<div class="bg-gradient-to-b from-sky-50 to-white py-24">
   <div class="container mx-auto px-4">
     <!-- Testimonials Header -->
-    <div class="flex flex-col items-center justify-center mb-12 text-center">
-      <h1 class="text-4xl font-bold text-sky-800 mb-4">What Our Flyers Say</h1>
+    <div class="flex flex-col items-center justify-center mb-16 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-sky-800 mb-4">What Our Flyers Say</h1>
       <div class="w-24 h-1 bg-amber-500 mb-6"></div>
       <p class="text-lg text-gray-600 max-w-2xl">
         Hear from our community of passionate Flyers who have experienced the thrill and freedom on our ultralight aircraft.
@@ -57,204 +57,214 @@
     })->all();
     @endphp
 
-    <!-- Testimonials Grid -->
+    <!-- Modern Testimonials Carousel -->
     <div 
       x-data="{ 
         activeTestimonial: null,
         testimonials: {{ json_encode($testimonials) }},
-        positionedTestimonials: {
-          adventure: [],
-          professional: [],
-          photography: []
-        },
+        currentSlide: 0,
+        totalSlides: {{ count($testimonials) }},
+        slidesToShow: 3,
+        autoplayInterval: null,
+        
         init() {
-          this.loadGoogleMaps();
-          this.positionTestimonials();
+          this.updateSlidesToShow();
+          this.startAutoplay();
+          window.addEventListener('resize', () => this.updateSlidesToShow());
         },
-        loadGoogleMaps() {
-          if (typeof google === 'undefined') {
-            const script = document.createElement('script');
-            script.src = `https://maps.googleapis.com/maps/api/js?key={{ config('services.google.maps_key', '') }}`;
-            script.async = true;
-            script.defer = true;
-            document.head.appendChild(script);
+        
+        updateSlidesToShow() {
+          if (window.innerWidth < 640) {
+            this.slidesToShow = 1;
+          } else if (window.innerWidth < 1024) {
+            this.slidesToShow = 2;
+          } else {
+            this.slidesToShow = 3;
           }
         },
-        positionTestimonials() {
-          // Split testimonials into three even groups based on index
-          const total = this.testimonials.length;
-          const allTestimonials = [...this.testimonials];
-          
-          // Shuffle the array to randomize distribution
-          for (let i = allTestimonials.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [allTestimonials[i], allTestimonials[j]] = [allTestimonials[j], allTestimonials[i]];
+        
+        startAutoplay() {
+          if (this.testimonials.length > this.slidesToShow) {
+            this.autoplayInterval = setInterval(() => {
+              this.nextSlide();
+            }, 5000);
           }
-          
-          // Calculate the size for each container, ensuring at least some items in each
-          const third = Math.max(1, Math.floor(total / 3));
-          
-          // Position adventure testimonials (first third)
-          this.positionedTestimonials.adventure = this.positionItems(
-            allTestimonials.slice(0, third),
-            500, 500, 80, 80, 40
-          );
-          
-          // Position professional testimonials (second third)
-          this.positionedTestimonials.professional = this.positionItems(
-            allTestimonials.slice(third, third * 2),
-            500, 500, 80, 80, 40
-          );
-          
-          // Position photography testimonials (final third + any remainder)
-          this.positionedTestimonials.photography = this.positionItems(
-            allTestimonials.slice(third * 2),
-            500, 500, 80, 80, 40
-          );
         },
-        positionItems(items, containerWidth, containerHeight, itemWidth, itemHeight, padding = 20) {
-          const positioned = [];
-          const maxAttempts = 100;
-          const paddedWidth = containerWidth - padding * 2;
-          const paddedHeight = containerHeight - padding * 2;
-          
-          for (const item of items) {
-            let attempts = 0;
-            let positionFound = false;
-            let x, y;
-            
-            while (attempts < maxAttempts && !positionFound) {
-              attempts++;
-              
-              x = padding + Math.random() * (paddedWidth - itemWidth);
-              y = padding + Math.random() * (paddedHeight - itemHeight);
-              
-              let collision = false;
-              for (const existing of positioned) {
-                if (
-                  x < existing.x + itemWidth &&
-                  x + itemWidth > existing.x &&
-                  y < existing.y + itemHeight &&
-                  y + itemHeight > existing.y
-                ) {
-                  collision = true;
-                  break;
-                }
-              }
-              
-              if (!collision) {
-                positionFound = true;
-              }
-            }
-            
-            if (positionFound) {
-              positioned.push({
-                ...item,
-                x,
-                y
-              });
-            } else {
-              positioned.push({
-                ...item,
-                x: padding + Math.random() * (paddedWidth - itemWidth),
-                y: padding + Math.random() * (paddedHeight - itemHeight)
-              });
-            }
+        
+        stopAutoplay() {
+          if (this.autoplayInterval) {
+            clearInterval(this.autoplayInterval);
           }
+        },
+        
+        nextSlide() {
+          if (this.testimonials.length <= this.slidesToShow) return;
           
-          return positioned;
+          this.currentSlide = (this.currentSlide + 1) % (this.testimonials.length - this.slidesToShow + 1);
+        },
+        
+        prevSlide() {
+          if (this.testimonials.length <= this.slidesToShow) return;
+          
+          this.currentSlide = this.currentSlide === 0 
+            ? this.testimonials.length - this.slidesToShow 
+            : this.currentSlide - 1;
+        },
+        
+        isVisible(index) {
+          return index >= this.currentSlide && index < this.currentSlide + this.slidesToShow;
         }
       }" 
-      class="relative w-full"
+      @mouseover="stopAutoplay()"
+      @mouseleave="startAutoplay()"
+      class="relative w-full max-w-7xl mx-auto"
     >
       @if(count($testimonials) > 0)
-        <!-- Testimonials Row with Color Blur Effects -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
-          <!-- Blue Blur Column -->
-          <div class="relative w-full">
-            <div class="absolute inset-0 bg-blue-100 rounded-2xl blur-xl opacity-70"></div>
-            <div class="relative rounded-2xl p-6 h-[600px] overflow-hidden">
-              <div class="relative h-[500px] w-full">
-                <template x-for="testimonial in positionedTestimonials.adventure" :key="testimonial.id">
+        <!-- Testimonial Carousel -->
+        <div class="relative overflow-hidden">
+          <div class="relative">
+            <!-- Cards Container with transform transition -->
+            <div 
+              class="flex transition-transform duration-500 ease-in-out"
+              :style="`transform: translateX(-${currentSlide * (100 / slidesToShow)}%)`"
+            >
+              <template x-for="(testimonial, index) in testimonials" :key="testimonial.id">
+                <div 
+                  class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-4 transition-opacity duration-500" 
+                  :class="{ 'opacity-100': isVisible(index), 'opacity-0': !isVisible(index) }"
+                >
+                  <!-- Testimonial Card -->
                   <div 
                     @click="activeTestimonial = testimonial"
-                    class="cursor-pointer transform transition-all duration-500 hover:scale-110 absolute group"
-                    :style="'left: ' + testimonial.x + 'px; top: ' + testimonial.y + 'px; z-index: ' + Math.floor(Math.random() * 10) + ';'"
+                    class="group cursor-pointer bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden h-full"
                   >
-                    <div class="relative">
-                      <div class="flex items-center justify-center w-10 h-10 bg-blue-100 rounded-full border-2 border-white shadow-md group-hover:shadow-xl group-hover:border-blue-300 transition-all duration-300">
-                        <span class="text-xl">📍</span>
+                    <!-- Top Decoration Bar - Color based on index -->
+                    <div 
+                      :class="{
+                        'bg-sky-500': index % 3 === 0,
+                        'bg-amber-500': index % 3 === 1,
+                        'bg-red-400': index % 3 === 2
+                      }"
+                      class="h-2 w-full"
+                    ></div>
+                    
+                    <div class="p-8">
+                      <!-- Quote Icon -->
+                      <div :class="{
+                          'text-sky-300': index % 3 === 0,
+                          'text-amber-300': index % 3 === 1,
+                          'text-red-300': index % 3 === 2
+                        }"
+                        class="mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/>
+                        </svg>
                       </div>
-                      <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-white text-gray-800 rounded-lg px-2 py-1 text-xs font-semibold shadow-md opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap">
-                        <span x-text="testimonial.name"></span>
+
+                      <!-- Rating Stars -->
+                      <div class="flex mb-4">
+                        <template x-for="i in 5" :key="i">
+                          <svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            class="h-5 w-5" 
+                            :class="i <= testimonial.rating ? 'text-amber-400' : 'text-gray-200'"
+                            viewBox="0 0 20 20" 
+                            fill="currentColor"
+                          >
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                        </template>
+                      </div>
+                      
+                      <!-- Review Text with Truncation -->
+                      <p class="text-gray-600 mb-6 line-clamp-3" x-text="testimonial.review"></p>
+                      
+                      <div class="mt-auto flex items-center pt-4 border-t border-gray-100">
+                        <img :src="testimonial.image" :alt="testimonial.name" class="w-12 h-12 rounded-full border-2 border-white shadow object-contain">
+                        <div class="ml-4">
+                          <h4 class="font-semibold text-gray-800" x-text="testimonial.name"></h4>
+                          <p class="text-xs text-gray-500" x-text="testimonial.profession"></p>
+                        </div>
+                      </div>
+                      
+                      <!-- Read More Button -->
+                      <div class="mt-4 text-center">
+                        <span 
+                          :class="{
+                            'text-sky-600 hover:text-sky-700': index % 3 === 0,
+                            'text-amber-600 hover:text-amber-700': index % 3 === 1,
+                            'text-red-600 hover:text-red-700': index % 3 === 2
+                          }" 
+                          class="inline-block text-sm font-semibold"
+                        >
+                          Read Full Review
+                        </span>
                       </div>
                     </div>
                   </div>
-                </template>
-              </div>
+                </div>
+              </template>
             </div>
           </div>
-
-          <!-- Red Blur Column -->
-          <div class="relative w-full">
-            <div class="absolute inset-0 bg-red-100 rounded-2xl blur-xl opacity-70"></div>
-            <div class="relative rounded-2xl p-6 h-[600px] overflow-hidden">
-              <div class="relative h-[500px] w-full">
-                <template x-for="testimonial in positionedTestimonials.professional" :key="testimonial.id">
-                  <div 
-                    @click="activeTestimonial = testimonial"
-                    class="cursor-pointer transform transition-all duration-500 hover:scale-110 absolute group"
-                    :style="'left: ' + testimonial.x + 'px; top: ' + testimonial.y + 'px; z-index: ' + Math.floor(Math.random() * 10) + ';'"
-                  >
-                    <div class="relative">
-                      <div class="flex items-center justify-center w-10 h-10 bg-red-100 rounded-full border-2 border-white shadow-md group-hover:shadow-xl group-hover:border-red-300 transition-all duration-300">
-                        <span class="text-xl">📍</span>
-                      </div>
-                      <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-white text-gray-800 rounded-lg px-2 py-1 text-xs font-semibold shadow-md opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap">
-                        <span x-text="testimonial.name"></span>
-                      </div>
-                    </div>
-                  </div>
+          
+          <!-- Navigation Controls -->
+          <div class="flex justify-center items-center mt-10 space-x-4">
+            <template x-if="testimonials.length > slidesToShow">
+              <!-- Prev Button -->
+              <button 
+                @click.prevent="prevSlide()" 
+                class="p-2 rounded-full bg-sky-100 text-sky-700 hover:bg-sky-200 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all duration-200"
+                :disabled="currentSlide === 0"
+                :class="{ 'opacity-50 cursor-not-allowed': currentSlide === 0 }"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              
+              <!-- Slide Indicators -->
+              <div class="flex space-x-2">
+                <template x-for="(_, index) in Array.from({ length: testimonials.length - slidesToShow + 1 })" :key="index">
+                  <button 
+                    @click="currentSlide = index" 
+                    class="w-3 h-3 rounded-full transition-all duration-200"
+                    :class="currentSlide === index ? 'bg-sky-600' : 'bg-gray-300 hover:bg-gray-400'"
+                  ></button>
                 </template>
               </div>
-            </div>
-          </div>
-
-          <!-- Yellow Blur Column -->
-          <div class="relative w-full">
-            <div class="absolute inset-0 bg-amber-100 rounded-2xl blur-xl opacity-70"></div>
-            <div class="relative rounded-2xl p-6 h-[600px] overflow-hidden">
-              <div class="relative h-[500px] w-full">
-                <template x-for="testimonial in positionedTestimonials.photography" :key="testimonial.id">
-                  <div 
-                    @click="activeTestimonial = testimonial"
-                    class="cursor-pointer transform transition-all duration-500 hover:scale-110 absolute group"
-                    :style="'left: ' + testimonial.x + 'px; top: ' + testimonial.y + 'px; z-index: ' + Math.floor(Math.random() * 10) + ';'"
-                  >
-                    <div class="relative">
-                      <div class="flex items-center justify-center w-10 h-10 bg-amber-100 rounded-full border-2 border-white shadow-md group-hover:shadow-xl group-hover:border-amber-300 transition-all duration-300">
-                        <span class="text-xl">📍</span>
-                      </div>
-                      <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-white text-gray-800 rounded-lg px-2 py-1 text-xs font-semibold shadow-md opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap">
-                        <span x-text="testimonial.name"></span>
-                      </div>
-                    </div>
-                  </div>
-                </template>
-              </div>
-            </div>
+              
+              <!-- Next Button -->
+              <button 
+                @click.prevent="nextSlide()" 
+                class="p-2 rounded-full bg-sky-100 text-sky-700 hover:bg-sky-200 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all duration-200"
+                :disabled="currentSlide >= testimonials.length - slidesToShow"
+                :class="{ 'opacity-50 cursor-not-allowed': currentSlide >= testimonials.length - slidesToShow }"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </template>
           </div>
         </div>
       @else
         <!-- Empty State Message - Show when no approved reviews -->
-        <div class="text-center py-10">
-          <h3 class="text-xl text-gray-600">No reviews available yet.</h3>
-          <p class="mt-2">Be the first to share your flying experience!</p>
-          <a href="{{ route('reviews.index') }}" class="mt-4 inline-block bg-sky-600 text-white px-6 py-2 rounded hover:bg-sky-700 transition">Submit a Review</a>
+        <div class="bg-white rounded-xl shadow-lg p-10 text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-sky-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <h3 class="text-xl text-gray-700 font-semibold mb-2">No reviews available yet</h3>
+          <p class="text-gray-500 mb-6">Be the first to share your amazing flying experience!</p>
+          <a href="{{ route('reviews.index') }}" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-colors duration-200">
+            Submit a Review
+            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
         </div>
       @endif
 
-      <!-- Testimonial Modal -->
+      <!-- Enhanced Testimonial Detail Modal -->
       <div
         x-show="activeTestimonial !== null"
         x-cloak
@@ -269,7 +279,7 @@
       >
         <!-- Modal Backdrop -->
         <div 
-          class="fixed inset-0 bg-black/50 backdrop-blur-sm" 
+          class="fixed inset-0 bg-black/60 backdrop-blur-sm" 
           @click="activeTestimonial = null"
           x-transition:enter="transition ease-out duration-300"
           x-transition:enter-start="opacity-0"
@@ -282,45 +292,47 @@
         <!-- Modal Content -->
         <div class="relative min-h-screen flex items-center justify-center p-4">
           <div
-            class="relative bg-white rounded-3xl shadow-2xl max-w-lg w-full mx-auto"
-            x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100"
-            x-transition:leave="transition ease-in duration-300"
-            x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0"
+            class="relative bg-white rounded-3xl shadow-2xl max-w-2xl w-full mx-auto overflow-hidden"
+            x-transition:enter="transition ease-out duration-300 transform"
+            x-transition:enter-start="opacity-0 scale-95"
+            x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-300 transform"
+            x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-95"
             @click.away="activeTestimonial = null"
           >
-            <!-- Speech Bubble Pointer -->
-            <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-white transform rotate-45"></div>
-
-            <!-- Modal Body -->
-            <div class="p-8 relative">
-              <!-- Close Button -->
+            <!-- Modal Header with Background Image -->
+            <div class="h-32 bg-gradient-to-r from-sky-500 to-indigo-600 relative">
+              <div class="absolute inset-0 opacity-20" :style="`background-image: url('${activeTestimonial?.coverImage}'); background-size: cover; background-position: center;`"></div>
               <button 
                 @click="activeTestimonial = null"
-                class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 focus:outline-none"
+                class="absolute top-4 right-4 text-white bg-black/20 hover:bg-black/30 p-2 rounded-full focus:outline-none transition-all duration-200"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
+            </div>
 
+            <!-- User Profile Image (Overlapping Header) -->
+            <div class="relative z-20 flex justify-center -mt-16">
+              <img :src="activeTestimonial?.image" :alt="activeTestimonial?.name" class="w-28 h-28 rounded-full border-4 border-white shadow-xl object-contain">
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-8 pt-4">
               <!-- User Info -->
-              <div class="flex items-center space-x-4 mb-6">
-                <img :src="activeTestimonial?.image" :alt="activeTestimonial?.name" class="w-16 h-16 rounded-full border-4 border-white shadow-lg object-cover">
-                <div>
-                  <h3 class="text-xl font-bold text-gray-800" x-text="activeTestimonial?.name"></h3>
-                  <p class="text-sm text-gray-600" x-text="activeTestimonial?.profession"></p>
-                </div>
+              <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800" x-text="activeTestimonial?.name"></h3>
+                <p class="text-sm text-gray-600" x-text="activeTestimonial?.profession"></p>
               </div>
 
               <!-- Rating Stars -->
-              <div class="flex mb-4">
+              <div class="flex justify-center mb-6">
                 <template x-for="i in 5" :key="i">
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
-                    class="h-5 w-5" 
+                    class="h-6 w-6" 
                     :class="i <= activeTestimonial?.rating ? 'text-amber-400' : 'text-gray-300'"
                     viewBox="0 0 20 20" 
                     fill="currentColor"
@@ -330,30 +342,46 @@
                 </template>
               </div>
 
+              <!-- Quote Icon -->
+              <div class="text-sky-300 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/>
+                </svg>
+              </div>
+
               <!-- Review Text -->
-              <p class="text-gray-600 text-base leading-relaxed mb-6" x-text="activeTestimonial?.review"></p>
+              <p class="text-gray-600 text-lg leading-relaxed mb-8 italic text-center px-4" x-text="activeTestimonial?.review"></p>
 
               <!-- Product Info -->
-              <div class="text-sm text-sky-700 font-semibold mb-6">
+              <div class="text-sm text-sky-700 font-semibold text-center mb-6">
                 Flying the <span x-text="activeTestimonial?.product"></span>
               </div>
 
+              <!-- Location -->
+              <div class="flex items-center justify-center text-sm text-gray-500 mb-8">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span x-text="activeTestimonial?.address"></span>
+              </div>
+
               <!-- Media Upload (if available) -->
-              <div class="mt-6">
-                <template x-if="activeTestimonial?.media_upload">
-                  <div>
-                    <h4 class="text-lg font-semibold text-gray-800 mb-3">Media Shared</h4>
-                    <div class="relative h-64 rounded-lg overflow-hidden">
-                      <img 
-                        :src="activeTestimonial?.media_upload" 
-                        class="w-full h-full object-cover rounded-lg"
-                        alt="User uploaded media"
-                        x-on:error="$event.target.style.display = 'none'"
-                      />
+              <template x-if="activeTestimonial?.media_upload">
+                <div class="mt-6">
+                  <div class="relative rounded-xl overflow-hidden shadow-md">
+                    <img 
+                      :src="activeTestimonial?.media_upload" 
+                      class="w-full h-64 object-cover"
+                      alt="User shared media"
+                      x-on:error="$event.target.style.display = 'none'"
+                    />
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                      <span class="text-white text-sm font-medium">Shared by <span x-text="activeTestimonial?.name"></span></span>
                     </div>
                   </div>
-                </template>
-              </div>
+                </div>
+              </template>
             </div>
           </div>
         </div>
