@@ -59,6 +59,7 @@ class ContactController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'phone' => $request->input('phone'),
+            'status' => 'pending',
             'subject' => $request->input('subject'),
             'message' => $request->input('message'),
             'consent' => $request->has('consent')

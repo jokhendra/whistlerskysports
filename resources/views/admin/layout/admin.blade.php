@@ -104,7 +104,7 @@
                     </div>
 
                 <!-- Training Section -->
-                <div x-data="{ open: {{ request()->routeIs('admin.training.*') ? 'true' : 'false' }} }" class="mb-2">
+                <!-- <div x-data="{ open: {{ request()->routeIs('admin.training.*') ? 'true' : 'false' }} }" class="mb-2">
                     <button @click="open = !open" 
                             class="w-full flex items-center text-gray-700 rounded-lg hover:bg-gray-100 {{ request()->routeIs('admin.training.*') ? 'bg-blue-50 text-blue-700' : '' }}"
                             :class="{'px-4 py-3': !sidebarCollapsed, 'px-2 py-3 justify-center': sidebarCollapsed}">
@@ -130,7 +130,7 @@
                             Certification Programs
                         </a>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Products Section -->
                 <div x-data="{ open: {{ request()->routeIs('admin.products.*') ? 'true' : 'false' }} }" class="mb-2">
@@ -147,10 +147,10 @@
                     </button>
                     <div x-show="open" x-collapse class="pl-4 mt-2" x-show="!sidebarCollapsed">
                         <!-- Hang Gliders Section -->
-                        <a href="{{ route('admin.products.hang-glider') }}" 
+                        <!-- <a href="{{ route('admin.products.hang-glider') }}" 
                            class="flex items-center py-2 text-sm {{ request()->routeIs('admin.products.hang-glider') ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
                             Hang Gliders
-                        </a>
+                        </a> -->
                         
                         <!-- Merchandise Management Section -->
                         <div class="py-1">

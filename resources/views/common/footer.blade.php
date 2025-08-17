@@ -63,8 +63,8 @@
               <h4 class="text-lg font-semibold text-white mb-1">Location</h4>
               <address class="text-blue-100 not-italic" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
                 <span itemprop="streetAddress">{{ $settings['address'] ?? '123 Street Name' }}</span>, 
-                <span itemprop="addressLocality">{{ $settings['city'] ?? 'Whistler' }}</span>, 
-                <span itemprop="addressRegion">{{ $settings['province'] ?? 'BC' }}</span>
+                <!-- <span itemprop="addressLocality">{{ $settings['city'] ?? 'Whistler' }}</span>, 
+                <span itemprop="addressRegion">{{ $settings['province'] ?? 'BC' }}</span> -->
               </address>
             </div>
           </div>

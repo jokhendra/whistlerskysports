@@ -151,7 +151,7 @@
 <div id="edit-category-modal" class="fixed inset-0 bg-gray-500 bg-opacity-75 hidden" aria-modal="true">
     <div class="flex items-center justify-center min-h-screen">
         <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
-            <form id="edit-category-form" method="POST">
+            <form id="edit-category-form" action="" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="px-6 py-4">
@@ -201,7 +201,9 @@ function editCategory(id, name, description) {
     const nameInput = document.getElementById('edit-name');
     const descriptionInput = document.getElementById('edit-description');
     
-    form.action = `/admin/gallery/categories/${id}`;
+    // set form action to the admin categories update route for the selected id
+    const adminPath = '{{ env("ADMIN_PATH", "dashboard-93jf8K2o") }}';
+    form.action = `/${adminPath}/gallery/categories/${id}`;
     nameInput.value = name;
     descriptionInput.value = description;
     document.getElementById('edit-category-modal').classList.remove('hidden');

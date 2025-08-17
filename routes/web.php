@@ -437,7 +437,7 @@ Route::prefix(env('ADMIN_PATH', 'dashboard-93jf8K2o'))->name('admin.')->middlewa
         Route::prefix('contacts')->name('contacts.')->group(function () {
             Route::get('/', [App\Http\Controllers\Admin\AdminContactController::class, 'index'])->name('index');
             Route::get('/{contact}', [App\Http\Controllers\Admin\AdminContactController::class, 'show'])->name('show');
-            Route::put('/{contact}/status', [App\Http\Controllers\Admin\AdminContactController::class, 'updateStatus'])->name('update-status');
+            Route::match(['put','patch'], '/{contact}/status', [App\Http\Controllers\Admin\AdminContactController::class, 'updateStatus'])->name('update-status');
             Route::delete('/{contact}', [App\Http\Controllers\Admin\AdminContactController::class, 'destroy'])->name('destroy');
             Route::get('/export/csv', [App\Http\Controllers\Admin\AdminContactController::class, 'export'])->name('export');
         });

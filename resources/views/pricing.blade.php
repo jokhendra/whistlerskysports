@@ -92,7 +92,7 @@
                     <div class="text-4xl font-bold text-[#204fb4] mb-2">CAD $120</div>
                     <p class="text-gray-600 mb-4">per person</p>
                     <p class="text-xl text-gray-700 mb-6">15 Minute Lesson</p>
-                    <p class="text-lg text-gray-600 mb-8">Master the art of mountain flying with our comprehensive course!</p>
+                    <p class="text-lg text-gray-600 mb-8">Get a taste of flying the beautiful coastal mountains!</p>
                     <div class="mt-auto">
                         <a href="{{ route('booking') }}" class="inline-block bg-[#204fb4] text-[#fcdb3f] font-bold py-3 px-8 rounded-full hover:bg-[#204fb4] transition duration-300 transform hover:scale-105">
                             RESERVE
@@ -108,7 +108,7 @@
                     <!-- <div class="text-4xl font-bold text-purple-600 mb-2">From USD$3,995</div> -->
                     <p class="text-gray-600 mb-4">complete program</p>
                     <p class="text-xl text-gray-700 mb-6">Transport Canada Approved</p>
-                    <p class="text-lg text-gray-600 mb-8">From Basic Ultralight to Recreational Pilot Permit - structured programs designed to take you from beginner to certified pilot.</p>
+                    <p class="text-lg text-gray-600 mb-8">From Basic to Advanced Ultralight Pilot Permit - structured programs designed to take you from beginner to certified pilot.</p>
                     <div class="mt-auto">
                         <a href="#comprehensive-programs" class="inline-block bg-[#204fb4] text-[#fcdb3f] font-bold py-3 px-8 rounded-full hover:bg-[#204fb4] transition duration-300 transform hover:scale-105 smooth-scroll">
                             LEARN MORE
@@ -132,7 +132,7 @@
                     <p class="text-gray-600 text-sm mb-6">
                         High definition video of your entire flight with cockpit audio capturing all the excitement and information during your flight.
                     </p>
-                    <div class="text-2xl font-bold text-[#204fb4]">CAD $90</div>
+                    <div class="text-2xl font-bold text-[#204fb4]">CAD $99</div>
                 </div>
             </div>
 
@@ -141,9 +141,9 @@
                 <div class="p-6 text-center">
                     <h3 class="text-xl font-bold text-gray-800 mb-4">Deluxe</h3>
                     <p class="text-gray-600 text-sm mb-6">
-                        Photos, Video and a WhistlerSkySports Cap or shirt and Keyring
+                    Photos, Video and a Whistler Sky Sports Cap, T-shirt and Jute Bag with our proud embroidered School logo.
                     </p>
-                    <div class="text-2xl font-bold text-[#204fb4]">CAD $120</div>
+                    <div class="text-2xl font-bold text-[#204fb4]">CAD $159</div>
                 </div>
             </div>
 
@@ -152,9 +152,9 @@
                 <div class="p-6 text-center">
                     <h3 class="text-xl font-bold text-gray-800 mb-4">Merchandise</h3>
                     <p class="text-gray-600 text-sm mb-6">
-                        WhistlerSkySports Cap or shirt and Keyring
+                    WhistlerSkySports Cap, T-shirt and Jute Bag with our proud embroidered School logo.
                     </p>
-                    <div class="text-2xl font-bold text-[#204fb4]">CAD $40</div>
+                    <div class="text-2xl font-bold text-[#204fb4]">CAD $99</div>
                 </div>
             </div>
         </div>

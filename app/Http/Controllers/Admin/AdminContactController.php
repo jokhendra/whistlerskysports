@@ -23,6 +23,7 @@ class AdminContactController extends Controller
             $query->where(function($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
                   ->orWhere('email', 'like', "%{$search}%")
+                  ->orWhere('phone', 'like', "%{$search}%")
                   ->orWhere('subject', 'like', "%{$search}%")
                   ->orWhere('message', 'like', "%{$search}%");
             });
@@ -37,18 +38,17 @@ class AdminContactController extends Controller
         }
 
         // Apply status filter if provided
-        // if ($status = $request->input('status')) {
-        //     $query->where('status', $status);
-        // }
+        if ($status = $request->input('status')) {
+            $query->where('status', $status);
+        }
 
         $contacts = $query->latest()->paginate(10)->withQueryString();
 
         // Get statistics
         $stats = [
             'total' => Contact::count(),
-            // 'unread' => Contact::where('status', 'unread')->count(),
-            'unread' => 0,
-            'today' => Contact::whereDate('created_at', today())->count(),
+            'unread' => Contact::where('status', 'unread')->count(),
+            'today' => Contact::whereDate('created_at', now()->setTimezone(config('app.timezone'))->toDateString())->count(),
         ];
 
         return view('admin.contacts.index', compact('contacts', 'stats'));
@@ -80,7 +80,7 @@ class AdminContactController extends Controller
     public function updateStatus(Request $request, Contact $contact)
     {
         $request->validate([
-            'status' => 'required|in:read,unread,archived'
+            'status' => 'required|in:pending,unread,read,in_progress,responded,closed,archived'
         ]);
 
         $contact->update(['status' => $request->status]);
@@ -129,6 +129,7 @@ class AdminContactController extends Controller
             'ID',
             'Name',
             'Email',
+            'Phone',
             'Subject',
             'Message',
             'Status',
@@ -144,6 +145,7 @@ class AdminContactController extends Controller
                     $contact->id,
                     $contact->name,
                     $contact->email,
+                    $contact->phone,
                     $contact->subject,
                     $contact->message,
                     $contact->status,

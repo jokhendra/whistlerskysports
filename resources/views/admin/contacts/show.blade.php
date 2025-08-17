@@ -19,38 +19,26 @@
                     </div>
                 </div>
                 <div class="mt-5 flex sm:mt-0 sm:ml-4">
-                    <span class="relative z-0 inline-flex shadow-sm rounded-md">
-                        <form action="{{ route('admin.contacts.update-status', $contact) }}" 
-                              method="POST" 
-                              class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
-                            @csrf
-                            @method('PATCH')
-                            <input type="hidden" 
-                                   name="status" 
-                                   value="{{ $contact->status === 'unread' ? 'read' : 'unread' }}">
-                            <button type="submit">
-                                {{ $contact->status === 'unread' ? 'Mark as Read' : 'Mark as Unread' }}
-                            </button>
-                        </form>
+                    <form action="{{ route('admin.contacts.update-status', $contact) }}" method="POST" class="mr-3">
+                        @csrf
+                        @method('PATCH')
+                        <label for="status" class="sr-only">Status</label>
+                        <select name="status" id="status" class="rounded-md border-gray-300 text-sm">
+                            @foreach(['pending','unread','read','in_progress','responded','closed','archived'] as $s)
+                                <option value="{{ $s }}" {{ $contact->status === $s ? 'selected' : '' }}>{{ ucfirst(str_replace('_', ' ', $s)) }}</option>
+                            @endforeach
+                        </select>
+                        <button type="submit" class="ml-2 inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">Update</button>
+                    </form>
 
-                        <form action="{{ route('admin.contacts.update-status', $contact) }}" 
-                              method="POST" 
-                              class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
-                            @csrf
-                            @method('PATCH')
-                            <input type="hidden" name="status" value="archived">
-                            <button type="submit">Archive</button>
-                        </form>
-
-                        <form action="{{ route('admin.contacts.destroy', $contact) }}" 
-                              method="POST" 
-                              class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-red-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
-                              onsubmit="return confirm('Are you sure you want to delete this contact?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Delete</button>
-                        </form>
-                    </span>
+                    <form action="{{ route('admin.contacts.destroy', $contact) }}" 
+                          method="POST" 
+                          class="-ml-px relative inline-flex items-center px-4 py-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-red-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500"
+                          onsubmit="return confirm('Are you sure you want to delete this contact?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Delete</button>
+                    </form>
 
                     <a href="{{ route('admin.contacts.index') }}" 
                        class="ml-3 inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
@@ -91,6 +79,18 @@
                     </div>
                     <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="text-sm font-medium text-gray-500">
+                            Phone
+                        </dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            @if($contact->phone)
+                                <a href="tel:{{ $contact->phone }}" class="text-blue-600 hover:text-blue-900">{{ $contact->phone }}</a>
+                            @else
+                                <span class="text-gray-400">—</span>
+                            @endif
+                        </dd>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
                             Subject
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
@@ -102,10 +102,18 @@
                             Status
                         </dt>
                         <dd class="mt-1 sm:mt-0 sm:col-span-2">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                {{ $contact->status === 'unread' ? 'bg-yellow-100 text-yellow-800' : 
-                                   ($contact->status === 'read' ? 'bg-green-100 text-green-800' : 
-                                   'bg-gray-100 text-gray-800') }}">
+                            @php
+                                $statusClasses = [
+                                    'pending' => 'bg-gray-100 text-gray-800',
+                                    'unread' => 'bg-yellow-100 text-yellow-800',
+                                    'read' => 'bg-green-100 text-green-800',
+                                    'in_progress' => 'bg-indigo-100 text-indigo-800',
+                                    'responded' => 'bg-blue-100 text-blue-800',
+                                    'closed' => 'bg-red-100 text-red-800',
+                                    'archived' => 'bg-gray-100 text-gray-800',
+                                ];
+                            @endphp
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $statusClasses[$contact->status] ?? 'bg-gray-100 text-gray-800' }}">
                                 {{ ucfirst($contact->status) }}
                             </span>
                         </dd>

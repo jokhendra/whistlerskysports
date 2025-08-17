@@ -79,8 +79,12 @@
                                     id="status" 
                                     class="block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
                                 <option value="">All Status</option>
+                                <option value="pending" {{ request('status') === 'pending' ? 'selected' : '' }}>Pending</option>
                                 <option value="unread" {{ request('status') === 'unread' ? 'selected' : '' }}>Unread</option>
                                 <option value="read" {{ request('status') === 'read' ? 'selected' : '' }}>Read</option>
+                                <option value="in_progress" {{ request('status') === 'in_progress' ? 'selected' : '' }}>In Progress</option>
+                                <option value="responded" {{ request('status') === 'responded' ? 'selected' : '' }}>Responded</option>
+                                <option value="closed" {{ request('status') === 'closed' ? 'selected' : '' }}>Closed</option>
                                 <option value="archived" {{ request('status') === 'archived' ? 'selected' : '' }}>Archived</option>
                             </select>
                         </div>
@@ -140,6 +144,9 @@
                                 Message
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Phone
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Status
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -175,6 +182,15 @@
                                 <td class="px-6 py-4">
                                     <div class="text-sm text-gray-900 font-medium">{{ $contact->subject }}</div>
                                     <div class="text-sm text-gray-500">{{ Str::limit($contact->message, 100) }}</div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="text-sm text-gray-900">
+                                        @if($contact->phone)
+                                            <a href="tel:{{ $contact->phone }}" class="text-blue-600 hover:text-blue-900">{{ $contact->phone }}</a>
+                                        @else
+                                            <span class="text-gray-400">—</span>
+                                        @endif
+                                    </div>
                                 </td>
                                 <td class="px-6 py-4">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium

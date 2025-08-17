@@ -123,28 +123,28 @@
                             {{-- Base Package Price --}}
                             <div class="flex justify-between items-center">
                                 <span class="text-gray-600">Base Package ({{ ucfirst(e($booking['package'])) }})</span>
-                                <span class="font-medium">CAD ${{ number_format($totalAmount - ($booking['video_package'] ? 90 : 0) - ($booking['deluxe_package'] ? 120 : 0) - ($booking['merch_package'] * 40) - ($booking['sunrise_flight'] === 'yes' ? 99 : 0), 2) }}</span>
+                                <span class="font-medium">CAD ${{ number_format($totalAmount - ($booking['video_package'] ? 99 : 0) - ($booking['deluxe_package'] ? 159 : 0) - ($booking['merch_package'] * 99) - ($booking['sunrise_flight'] === 'yes' ? 99 : 0), 2) }}</span>
                             </div>
 
                             {{-- Additional Services Prices --}}
                             @if($booking['video_package'])
                                 <div class="flex justify-between items-center text-green-600">
                                     <span>Video Package</span>
-                                    <span class="font-medium">CAD $90.00</span>
+                                    <span class="font-medium">CAD $99.00</span>
                                 </div>
                             @endif
 
                             @if($booking['deluxe_package'])
                                 <div class="flex justify-between items-center text-green-600">
                                     <span>Deluxe Package</span>
-                                    <span class="font-medium">CAD $120.00</span>
+                                    <span class="font-medium">CAD $159.00</span>
                                 </div>
                             @endif
 
                             @if($booking['merch_package'])
                                 <div class="flex justify-between items-center text-green-600">
                                     <span>Merchandise ({{ e($booking['merch_package']) }} items)</span>
-                                    <span class="font-medium">CAD ${{ number_format($booking['merch_package'] * 40, 2) }}</span>
+                                    <span class="font-medium">CAD ${{ number_format($booking['merch_package'] * 99, 2) }}</span>
                                 </div>
                             @endif
 

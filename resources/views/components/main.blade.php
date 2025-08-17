@@ -10,7 +10,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(180deg, #005CBB 0%, #004a96 50%, #003b7a 100%);
+    background: linear-gradient(180deg,rgb(32, 92, 153) 0%,rgb(27, 95, 163) 50%,rgb(45, 74, 105) 100%);
     z-index: 0;
 }
 
@@ -360,6 +360,7 @@
 <main class="w-full" itemscope itemtype="https://schema.org/LocalBusiness">
 <header class="w-[99.8vw] h-screen header-logo-bg overflow-x-hidden mt-16 flex items-center justify-center">
     <div class="container mx-auto px-4 relative z-10">
+        
         <img src="{{ asset('images/logo/Whistler-Sky-Sports_Full-Black.png') }}" 
              alt="Whistler Sky Sports Logo - Power Hang Gliding Adventures in British Columbia" 
              class="w-3/4 max-w-4xl mx-auto object-contain animate-fadeIn"
@@ -371,6 +372,17 @@
             <p class="text-xl md:text-2xl text-black mt-4 max-w-3xl mx-auto" itemprop="description">
                 The premier destination for aviation adventures in Whistler
             </p>
+        </div>
+        <!-- Book Now button -->
+        <div class="z-50 mt-8 flex justify-center">
+            <a href="/booking"
+               class="relative inline-flex items-center gap-3 px-5 py-3 md:px-6 md:py-3 text-sm md:text-base font-semibold text-white rounded-full shadow-lg bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 transform hover:-translate-y-0.5 transition-all duration-200"
+               aria-label="Book Now">
+                <svg class="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10l1.5 1 3-1 7 3 4 1 1 1"></path>
+                </svg>
+                <span class="relative">Book Now</span>
+            </a>
         </div>
     </div>
 </header>

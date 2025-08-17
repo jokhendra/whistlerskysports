@@ -50,7 +50,7 @@ class AdminPromotionalEmailController extends Controller
         if ($fromDate = $request->input('from_date')) {
             $query->whereDate('scheduled_at', '>=', $fromDate);
         }
-        if ($toDate = $request->input('to_date')) {
+        if ($toDate = $request  ->input('to_date')) {
             $query->whereDate('scheduled_at', '<=', $toDate);
         }
 
@@ -104,7 +104,7 @@ class AdminPromotionalEmailController extends Controller
      * Show the specified promotional email.
      *
      * @param PromotionalEmail $promotionalEmail
-     * @return \Illuminate\View\View
+     * @return \Illuminate\View\View    
      */
     public function show(PromotionalEmail $promotionalEmail)
     {
@@ -198,7 +198,8 @@ class AdminPromotionalEmailController extends Controller
                 case 'all':
                     $contactEmails = \App\Models\Contact::whereNotNull('email')->pluck('email')->toArray();
                     $bookingEmails = \App\Models\Booking::whereNotNull('email')->pluck('email')->toArray();
-                    $recipientEmails = array_unique(array_merge($contactEmails, $bookingEmails));
+                    $reviewEmails = \App\Models\Review::whereNotNull('email')->pluck('email')->toArray();
+                    $recipientEmails = array_unique(array_merge($contactEmails, $bookingEmails, $reviewEmails));
                     break;
                     
                 case 'subscribers':

@@ -65,61 +65,46 @@
               </svg>
             </button>
             <div class="faq-answer px-6 text-gray-600">
-              <p>To schedule a test flight, please fill out our contact form with your preferred dates and times. Our team will get back to you within 24 hours to confirm your appointment. Test flights are available for qualified pilots with proper certification.</p>
+              <p>To schedule an introductory flight lesson, please fill out our contact form and our team will get back to you within 24 hours to confirm your appointment.</p>
             </div>
           </div>
           
           <!-- FAQ Item 2 -->
           <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <button class="faq-button flex justify-between items-center w-full px-6 py-4 text-lg font-medium text-left text-blue-800 focus:outline-none">
-              <span>What training is required to fly a power hang glider?</span>
+              <span>What training is required to fly an ultralight?</span>
               <svg class="faq-icon h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
             <div class="faq-answer px-6 text-gray-600">
-              <p>Power hang gliding requires proper training and certification. We offer comprehensive training programs for beginners through advanced pilots. Our basic training course includes ground school and a minimum of 10 flight hours with a certified instructor.</p>
-            </div>
-          </div>
-          
-          <!-- FAQ Item 3 -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <button class="faq-button flex justify-between items-center w-full px-6 py-4 text-lg font-medium text-left text-blue-800 focus:outline-none">
-              <span>Do you offer financing options for your gliders?</span>
-              <svg class="faq-icon h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div class="faq-answer px-6 text-gray-600">
-              <p>Yes, we offer several financing options to help make your dream of flying a reality. We partner with trusted financial institutions to provide competitive rates and flexible payment plans. Contact our sales team for more information about current financing promotions.</p>
+              <p>An ultralight has two categories of aircraft; Basic and Advanced ultralight. You need proper training and certification to fly an ultralight in Canada. In particular, one needs a minimum of 20 hours of ground school and a minimum of 10 hours of flying experience with at least two hours being solo and 5 hours with a Transport Canada certified flight instructor. You need a Category 4 medical, self declaration to start the process.</p>
             </div>
           </div>
           
           <!-- FAQ Item 4 -->
           <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <button class="faq-button flex justify-between items-center w-full px-6 py-4 text-lg font-medium text-left text-blue-800 focus:outline-none">
-              <span>What maintenance is required for power hang gliders?</span>
+              <span>What maintenance is required on an Ultralight aircraft?</span>
               <svg class="faq-icon h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-            <div class="faq-answer px-6 text-gray-600">
-              <p>Regular maintenance is essential for safe flying. Our power hang gliders require engine maintenance every 50-100 hours of flight time, and sail inspections annually. We provide comprehensive maintenance manuals and offer service packages to keep your aircraft in optimal condition.</p>
+              <div class="faq-answer px-6 text-gray-600">
+                <p>Regular maintenance is essential for safe flying. Our Ultralight aircraft require engine maintenance every 25/50/100 hours of flight time, and preflight and post flight checks are required to be undertaken. At Wss, we believe in planned preventive maintenance rather than breakdown maintenance. Speak to our instructor to know more about how to take care of your ultralight.</p>
             </div>
           </div>
 
           <!-- FAQ Item 5 -->
           <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <button class="faq-button flex justify-between items-center w-full px-6 py-4 text-lg font-medium text-left text-blue-800 focus:outline-none">
-              <span>Is it OK if I have a beer/joint to help me relax before the jump?</span>
+              <span>Is it OK if I have a beer/joint before introductory flight lesson?</span>
               <svg class="faq-icon h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
             <div class="faq-answer px-6 text-gray-600">
-              <p>Absolutely NOT. You cannot have any alcohol, cannabis or illegal substances in your system when you jump. Please do not consume any of these the day of your jump or you will not be allowed to board the plane.
-
-Whistler Skydiving reserves the right to refuse service to any passenger that may compromise safety. The use of drugs or alcohol prior to a skydive is not permitted and will result in cancellation no refund will be given.</p>
+              <p>Absolutely NOT. You cannot have any alcohol, cannabis or illegal substances in your system at least 12 hours prior to your flight lessons. It dangerously impairs your ability to maneuver or learn to fly and we strictly do not allow any such use.  Please do not consume any of these the day of your flight or you will not be allowed to board the plane. Whistler Sky Sports reserves the right to refuse service to any passenger that may compromise safety. The use of drugs or alcohol prior to a flight is not permitted and will result in cancellation and no refund will be given.</p>
             </div>
           </div>
           
@@ -127,13 +112,13 @@ Whistler Skydiving reserves the right to refuse service to any passenger that ma
           
           <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <button class="faq-button flex justify-between items-center w-full px-6 py-4 text-lg font-medium text-left text-blue-800 focus:outline-none">
-              <span>Can I use my own camera on the jump?</span>
+              <span>Can I use my own camera on the flight?</span>
               <svg class="faq-icon h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
             <div class="faq-answer px-6 text-gray-600">
-              <p>For your safety and for those below, cameras are only permitted to be carried in flight by licensed/experienced jumpers. We offer options where we can take pictures/video for you during your skydive.</p>
+              <p>For your safety and for those below, cameras are only permitted to be carried in flight by the certified flight instructor. We offer options where we can take pictures/video for you during your flight. You must not carry any loose items in your pocket or unsecured foot wear. Mobile phones and cameras are strictly prohibited by students especially as it distracts the student from the flight lesson itself.</p>
             </div>
           </div>
 
@@ -159,7 +144,7 @@ Whistler Skydiving reserves the right to refuse service to any passenger that ma
               </svg>
             </button>
             <div class="faq-answer px-6 text-gray-600">
-              <p>Bookings are strongly recommended, we have a limited number of spaces each day. Up to datea vailability is displayed on our website.</p>
+              <p>Bookings are strongly recommended, we have a limited number of spaces each day depending upon weather.</p>
             </div>
           </div>
 
@@ -199,11 +184,7 @@ Whistler Skydiving reserves the right to refuse service to any passenger that ma
               </svg>
             </button>
             <div class="faq-answer px-6 text-gray-600">
-              <p>Cancellations are acceptable and will be refunded if made with a minimum of 48 hours notice prior to <strong>jump day</strong> . 
-Cancellations made with less time than the notice period will be subject to penalty(50% of booking).
-<strong>No refunds will be given for cancellations made in flight.</strong>
-Alcohol and drugs are not permitted on site, any consumption on the day of the jump prior to departure will result in a refusal to board and treated as a cancellation. <strong>No refund will be given.</strong>
-Refunds will be made in the same method of payment and at the same location of payment.</p>
+              <p>Cancellations are acceptable and will be refunded if made with a minimum of 48 hours notice prior to Flight lesson. Cancellations made with less time than the notice period will be subject to penalty (50% of booking). <strong>No refunds will be given for cancellations made in flight.</strong> Alcohol and drugs are not permitted on site; any consumption on the day of the flight prior to departure will result in a refusal to board and be treated as a cancellation. <strong>No refund will be given.</strong> Refunds will be made in the same method of payment and at the same location of payment.</p>
             </div>
           </div>
 
@@ -231,9 +212,8 @@ Refunds will be made in the same method of payment and at the same location of p
             <div class="faq-answer px-6 text-gray-600">
               <p>Sunscreen & Sunglasses</p>
               <p>Snacks</p>
-              <p>Camera</p>
               <p>Valid ID (Passport, Driver's License, etc.)</p>
-              <p>VA Voucher</p>
+              <p>Booking Email Confirmation</p>
             </div>
           </div>
 

@@ -39,9 +39,9 @@ class BookingController extends Controller
             'intro' => 140,
             'basic' => 120
         ],
-        'video_package' => 90,
-        'deluxe_package' => 120,
-        'merch_package' => 40,
+        'video_package' => 99,
+        'deluxe_package' => 159,
+        'merch_package' => 99,
         'sunrise_flight' => 99
     ];
 

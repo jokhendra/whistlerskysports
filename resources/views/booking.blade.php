@@ -381,7 +381,7 @@
                                             <h4 class="text-xl font-bold text-gray-800">Video Package</h4>
                                         </div>
                                         <p class="text-gray-600 ml-11 mb-2">Professional flight video with audio</p>
-                                        <p class="text-[#204fb4] font-bold text-xl ml-11" itemprop="price">CAD $90</p>
+                                        <p class="text-[#204fb4] font-bold text-xl ml-11" itemprop="price">CAD $99</p>
                                         <meta itemprop="priceCurrency" content="CAD">
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
@@ -404,7 +404,7 @@
                                             <h4 class="text-xl font-bold text-gray-800">Deluxe Package</h4>
                                         </div>
                                         <p class="text-gray-600 ml-11 mb-2">Video + WhistlerSkySports Gear</p>
-                                        <p class="text-[#204fb4] font-bold text-xl ml-11" itemprop="price">CAD $120</p>
+                                        <p class="text-[#204fb4] font-bold text-xl ml-11" itemprop="price">CAD $159</p>
                                         <meta itemprop="priceCurrency" content="CAD">
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
@@ -427,7 +427,7 @@
                                     </div>
                                     <p class="text-gray-600 ml-11 mb-2">WhistlerSkySports Gear Pack</p>
                                     <div class="flex justify-between items-center mt-2">
-                                        <p class="text-[#204fb4] font-bold text-xl ml-11" itemprop="price">CAD $40</p>
+                                        <p class="text-[#204fb4] font-bold text-xl ml-11" itemprop="price">CAD $99</p>
                                         <meta itemprop="priceCurrency" content="CAD">
                                         <div class="flex items-center gap-1">
                                             <button type="button" onclick="updateQuantity('merch_package', -1)" class="w-6 h-6 flex items-center justify-center rounded-md bg-gray-100 hover:bg-gray-200 text-gray-600" aria-label="Decrease merchandise quantity">
@@ -1456,9 +1456,9 @@
         function initializePackagePricing() {
             // Fixed prices that cannot be modified
             const prices = Object.freeze({
-                video_package: 90,
-                deluxe_package: 120,
-                merch_package: 40,
+                video_package: 99,
+                deluxe_package: 159,
+                merch_package: 99,
                 sunrise_flight: 99,
                 packages: {
                     'intro': 140,

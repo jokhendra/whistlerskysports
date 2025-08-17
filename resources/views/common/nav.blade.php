@@ -61,16 +61,16 @@
                 
                 <!-- Learn To Fly Dropdown -->
                 <li class="relative group" role="none">
-                    <button type="button" 
-                            class="flex items-center px-3 py-2 ml-2 text-base md:text-lg font-medium text-[#0F1B2A] bg-[#FED600] rounded-full hover:bg-[#b78b4d] hover:text-gray-200 transform hover:scale-102 transition-all duration-300 shadow-md hover:shadow-xl relative overflow-hidden group whitespace-nowrap"
+                    <a href="/booking"
+                            class="flex items-center cursor-pointer px-3 py-2 ml-2 text-base md:text-lg font-medium text-[#fddbd3] bg-[#ce1719] rounded-full hover:bg-[#b78b4d] hover:text-gray-200 transform hover:scale-102 transition-all duration-300 shadow-md hover:shadow-xl relative overflow-hidden group whitespace-nowrap"
                             aria-haspopup="true" aria-expanded="false" aria-label="Learn to Fly options" role="menuitem">
-                        <span class="relative z-10">Learn To Fly</span>
-                        <svg class="w-4 h-4 ml-1 relative z-10" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <span class="relative z-10">Book Now</span>
+                        <!-- <svg class="w-4 h-4 ml-1 relative z-10" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                        </svg>
+                        </svg> -->
                         <div class="absolute inset-0 bg-[#c05300] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-                    </button>
-                    <div class="hidden group-hover:block absolute right-0 w-56 lg:w-64 xl:w-72 bg-white rounded-lg shadow-lg border border-gray-200 mt-1 overflow-hidden transition-opacity duration-200" role="menu">
+                    </a>
+                    <!-- <div class="hidden group-hover:block absolute right-0 w-56 lg:w-64 xl:w-72 bg-white rounded-lg shadow-lg border border-gray-200 mt-1 overflow-hidden transition-opacity duration-200" role="menu">
                         <ul class="py-1" role="none">
                             <li role="none">
                                 <a href="/booking?type=microlight" 
@@ -103,7 +103,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </li>
 
                 <!-- MAD Mr Bert -->
