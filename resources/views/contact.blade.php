@@ -148,7 +148,7 @@
   <div class="relative h-[300px] sm:h-[400px] md:h-[500px] bg-blue-700 overflow-hidden py-8 sm:py-12 md:py-16 lg:mt-24 md:mt-24 mt-16">
     <div class="absolute inset-0 z-0">
       <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.639290621064!2d-122.08401492392031!3d37.4219998326378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fba02425dad8f%3A0x29cdf01a44fc687f!2sGoogle%20Building%2040!5e0!3m2!1sen!2sus!4v1649285324079!5m2!1sen!2sus" 
+        src="https://www.google.com/maps?q=50.3034166,-122.7394097&hl=en&z=17&output=embed" 
         width="100%" 
         height="100%" 
         style="border:0;" 
@@ -291,8 +291,8 @@
                 </div>
                 <div class="ml-4">
                   <h3 class="text-lg font-medium text-gray-900">Our Location</h3>
-                  <p class="mt-1 text-gray-600">{{ $settings['address'] ?? '123 Skyway Drive, Mountain View, CA 94043, USA' }}</p>
-                  <a href="https://maps.google.com/search?q={{ urlencode($settings['address'] ?? '123 Skyway Drive, Mountain View, CA 94043, USA') }}" target="_blank" class="inline-block mt-2 text-blue-600 hover:text-blue-800 font-medium text-sm">Get Directions →</a>
+                  <p class="mt-1 text-gray-600">{{ $settings['address'] ?? 'Pemberton Airport, Pemberton, BC, Canada' }}</p>
+                  <a href="https://maps.google.com/search?q={{ urlencode($settings['address'] ?? 'Pemberton Airport, Pemberton, BC, Canada') }}" target="_blank" class="inline-block mt-2 text-blue-600 hover:text-blue-800 font-medium text-sm">Get Directions →</a>
                 </div>
               </div>
             </div>
