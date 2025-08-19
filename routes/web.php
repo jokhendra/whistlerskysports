@@ -396,6 +396,13 @@ Route::prefix(env('ADMIN_PATH', 'dashboard-93jf8K2o'))->name('admin.')->middlewa
             Route::post('/', [App\Http\Controllers\Admin\SettingsController::class, 'update'])->name('update');
         });
 
+        // Admin profile
+        Route::prefix('profile')->name('profile.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('edit');
+            Route::post('/', [App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('update');
+            Route::post('/password', [App\Http\Controllers\Admin\ProfileController::class, 'updatePassword'])->name('password');
+        });
+
         // Gallery Management Routes
         Route::prefix('gallery')->name('gallery.')->group(function () {
             Route::get('/', [GalleryController::class, 'index'])->name('index');

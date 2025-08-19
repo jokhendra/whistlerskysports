@@ -411,7 +411,7 @@
                                      aria-orientation="vertical" 
                                      aria-labelledby="user-menu">
                                     <div class="py-1" role="none">
-                                        <a href="{{ route('admin.settings.index') }}" 
+                                        <a href="{{ route('admin.profile.edit') }}" 
                                            class="group flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {{ request()->routeIs('admin.settings.*') ? 'bg-gray-100' : '' }}" 
                                            role="menuitem">
                                             <svg class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
