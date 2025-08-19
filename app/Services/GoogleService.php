@@ -16,6 +16,7 @@ use Google\Service\Sheets\TextFormat;
 use Google\Service\Sheets\Color;
 use Illuminate\Support\Facades\Log;
 use App\Models\Booking;
+use App\Models\Setting;
 
 /**
  * Class GoogleService
@@ -60,9 +61,24 @@ class GoogleService
             ]);
             $this->client->setAccessType('offline');
             
-            // Get configuration values
+            // Get configuration values from config, but allow admin-overrides stored in the settings table
             $this->calendarId = config('services.google.calendar_id');
             $this->spreadsheetId = config('services.google.spreadsheet_id');
+
+            // Override from database settings if available
+            try {
+                $dbCalendar = Setting::where('key', 'google_calendar_id')->first();
+                if ($dbCalendar && $dbCalendar->value) {
+                    $this->calendarId = $dbCalendar->value;
+                }
+
+                $dbSheet = Setting::where('key', 'google_spreadsheet_id')->first();
+                if ($dbSheet && $dbSheet->value) {
+                    $this->spreadsheetId = $dbSheet->value;
+                }
+            } catch (\Exception $e) {
+                Log::warning('Unable to read Google IDs from settings table: ' . $e->getMessage());
+            }
             
             // Initialize Google services
             $this->calendarService = new Calendar($this->client);

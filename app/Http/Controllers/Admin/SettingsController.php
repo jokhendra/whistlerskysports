@@ -34,6 +34,8 @@ class SettingsController extends Controller
             'pinterest_url' => 'nullable|url',
             'meta_description' => 'nullable|string',
             'meta_keywords' => 'nullable|string',
+            'google_calendar_id' => 'nullable|string',
+            'google_spreadsheet_id' => 'nullable|string',
         ]);
 
         foreach ($request->except(['_token', 'site_logo']) as $key => $value) {
@@ -85,6 +87,8 @@ class SettingsController extends Controller
             'pinterest_url' => '',
             'meta_description' => '',
             'meta_keywords' => '',
+            'google_calendar_id' => '',
+            'google_spreadsheet_id' => '',
         ];
         
         foreach ($defaultSettings as $key => $value) {

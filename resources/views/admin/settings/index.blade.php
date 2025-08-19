@@ -126,6 +126,42 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Google Settings -->
+                    <div class="pt-6">
+                        <h3 class="text-lg font-medium leading-6 text-gray-900">Google Settings</h3>
+                        <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
+                            <div>
+                                <label for="google_calendar_id" class="block text-sm font-medium text-gray-700">
+                                    Google Calendar ID
+                                    <span class="ml-2 text-gray-400" title="The Calendar ID is found in Google Calendar settings; share the calendar with the service account email and give edit permissions.">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="inline h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z" />
+                                        </svg>
+                                    </span>
+                                </label>
+                                <input type="text" name="google_calendar_id" id="google_calendar_id"
+                                       class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200"
+                                       value="{{ $settings['google_calendar_id'] ?? '' }}">
+                                <p class="mt-2 text-sm text-gray-500">Find the calendar ID in Google Calendar &gt; Settings and sharing &gt; Integrate calendar. Share the calendar with your service account email and give "Make changes to events" permission. See <code>GOOGLE_API_SETUP.md</code> for full steps.</p>
+                            </div>
+
+                            <div>
+                                <label for="google_spreadsheet_id" class="block text-sm font-medium text-gray-700">
+                                    Google Spreadsheet ID
+                                    <span class="ml-2 text-gray-400" title="The Spreadsheet ID is the long ID in the sheet URL between '/d/' and '/edit'. Share the sheet with the service account email as an editor.">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="inline h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z" />
+                                        </svg>
+                                    </span>
+                                </label>
+                                <input type="text" name="google_spreadsheet_id" id="google_spreadsheet_id"
+                                       class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200"
+                                       value="{{ $settings['google_spreadsheet_id'] ?? '' }}">
+                                <p class="mt-2 text-sm text-gray-500">The spreadsheet ID is the part of the URL between <code>/d/</code> and <code>/edit</code>. Share the sheet with the service account email (from your JSON key) and grant Editor access. See <code>GOOGLE_API_SETUP.md</code> for details.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mt-6 flex justify-end">
