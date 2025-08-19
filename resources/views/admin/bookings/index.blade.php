@@ -122,13 +122,21 @@
                         </div>
                     </div>
                 </div>
-                <a href="#" class="inline-flex items-center px-4 py-2 bg-white rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <a href="{{ $googleCalendarId ? 'https://calendar.google.com/calendar/u/0?cid=' . urlencode($googleCalendarId) : '#' }}"
+                   target="{{ $googleCalendarId ? '_blank' : '_self' }}"
+                   rel="{{ $googleCalendarId ? 'noopener noreferrer' : '' }}"
+                   class="inline-flex items-center px-4 py-2 bg-white rounded-md shadow-sm text-sm font-medium text-gray-700 {{ $googleCalendarId ? 'hover:bg-gray-50' : 'opacity-50 cursor-not-allowed' }} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                   title="{{ $googleCalendarId ? 'Open Google Calendar' : 'Google Calendar ID not configured. Set it in Settings.' }}">
                     <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                     Calendar View
                 </a>
-                <a href="#" class="inline-flex items-center px-4 py-2 bg-white rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <a href="{{ $googleSpreadsheetId ? 'https://docs.google.com/spreadsheets/d/' . $googleSpreadsheetId : '#' }}"
+                   target="{{ $googleSpreadsheetId ? '_blank' : '_self' }}"
+                   rel="{{ $googleSpreadsheetId ? 'noopener noreferrer' : '' }}"
+                   class="inline-flex items-center px-4 py-2 bg-white rounded-md shadow-sm text-sm font-medium text-gray-700 {{ $googleSpreadsheetId ? 'hover:bg-gray-50' : 'opacity-50 cursor-not-allowed' }} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                   title="{{ $googleSpreadsheetId ? 'Open Google Spreadsheet' : 'Google Spreadsheet ID not configured. Set it in Settings.' }}">
                     <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>

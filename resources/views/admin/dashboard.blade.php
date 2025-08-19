@@ -27,7 +27,7 @@
                 <div class="mt-4">
                     <div class="flex items-center justify-between">
                         <span class="text-sm font-medium text-green-600">
-                            +{{ $stats['recent_bookings']->count() }} new
+                            +{{ $stats['recent_bookings_24h_count'] }} new
                         </span>
                         <span class="text-sm text-gray-500">Last 24h</span>
                     </div>
@@ -50,7 +50,7 @@
                 <div class="mt-4">
                     <div class="flex items-center justify-between">
                         <span class="text-sm font-medium text-green-600">
-                            CAD ${{ number_format($stats['yearly_revenue'] / 12, 2) }} avg
+                            CAD ${{ number_format($stats['monthly_avg'], 2) }} avg
                         </span>
                         <span class="text-sm text-gray-500">Per Month</span>
                     </div>
@@ -234,7 +234,7 @@
                                             {{ ucfirst($booking->status) }}
                                         </span>
                                         <p class="mt-1 text-sm text-gray-500">CAD ${{ number_format($booking->total_amount, 2) }}</p>
-                                        <p class="mt-1 text-xs text-gray-400">Payment: {{ ucfirst($booking->payment_status) }}</p>
+                                        <p class="mt-1 text-xs text-gray-400">Payment: {{ ucfirst(optional($booking->payments->first())->status ?? $booking->status) }}</p>
                                     </div>
                                 </div>
                             </div>

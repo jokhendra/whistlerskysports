@@ -369,6 +369,10 @@ Route::prefix(env('ADMIN_PATH', 'dashboard-93jf8K2o'))->name('admin.')->middlewa
     Route::middleware('auth:admin')->group(function () {
         Route::post('logout', [App\Http\Controllers\Admin\AuthController::class, 'logout'])->name('logout');
         Route::get('dashboard', [App\Http\Controllers\Admin\AdminController::class, 'dashboard'])->name('dashboard');
+        // Admin Users
+        Route::get('users', [App\Http\Controllers\Admin\AdminController::class, 'users'])->name('users');
+        Route::get('users/{user}', [App\Http\Controllers\Admin\AdminController::class, 'showUser'])->name('users.show');
+        Route::patch('users/{user}/status', [App\Http\Controllers\Admin\AdminController::class, 'updateUserStatus'])->name('users.update-status');
         
         // Bookings routes
         Route::prefix('bookings')->name('bookings.')->group(function () {

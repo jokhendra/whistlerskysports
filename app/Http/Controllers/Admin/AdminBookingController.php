@@ -110,7 +110,12 @@ class AdminBookingController extends Controller
             ? round(($stats['confirmed_bookings'] / $stats['total_bookings']) * 100, 1)
             : 0;
 
-        return view('admin.bookings.index', compact('bookings', 'filter', 'stats'));
+        // Load google ids from settings so the view can link to Calendar/Sheet
+        $settings = \App\Models\Setting::all()->pluck('value', 'key')->toArray();
+        $googleCalendarId = $settings['google_calendar_id'] ?? null;
+        $googleSpreadsheetId = $settings['google_spreadsheet_id'] ?? null;
+
+        return view('admin.bookings.index', compact('bookings', 'filter', 'stats', 'googleCalendarId', 'googleSpreadsheetId'));
     }
 
     /**

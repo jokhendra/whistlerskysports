@@ -52,7 +52,7 @@
                         <!-- Navigation Links - Added overflow-y-auto to make scrollable -->
             <nav class="mt-6 flex-1 overflow-y-auto" :class="{'px-3': !sidebarCollapsed, 'px-2': sidebarCollapsed}">
                 <!-- Dashboard -->
-                            <a href="{{ route('admin.dashboard') }}" 
+                <a href="{{ route('admin.dashboard') }}" 
                    class="flex items-center mb-2 text-gray-700 rounded-lg hover:bg-gray-100 {{ request()->routeIs('admin.dashboard') ? 'bg-blue-50 text-blue-700' : '' }}"
                    :class="{'px-4 py-3': !sidebarCollapsed, 'px-2 py-3 justify-center': sidebarCollapsed}">
                     <svg class="w-5 h-5" :class="{'mr-3': !sidebarCollapsed}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -104,33 +104,7 @@
                     </div>
 
                 <!-- Training Section -->
-                <!-- <div x-data="{ open: {{ request()->routeIs('admin.training.*') ? 'true' : 'false' }} }" class="mb-2">
-                    <button @click="open = !open" 
-                            class="w-full flex items-center text-gray-700 rounded-lg hover:bg-gray-100 {{ request()->routeIs('admin.training.*') ? 'bg-blue-50 text-blue-700' : '' }}"
-                            :class="{'px-4 py-3': !sidebarCollapsed, 'px-2 py-3 justify-center': sidebarCollapsed}">
-                        <svg class="w-5 h-5" :class="{'mr-3': !sidebarCollapsed}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                        </svg>
-                        <span x-show="!sidebarCollapsed" class="flex-1 text-left">Training</span>
-                        <svg x-show="!sidebarCollapsed" class="w-4 h-4 ml-2" :class="{'transform rotate-180': open}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div x-show="open" x-collapse class="pl-4 mt-2" x-show="!sidebarCollapsed">
-                        <a href="{{ route('admin.training.beginner') }}" 
-                           class="flex items-center py-2 text-sm {{ request()->routeIs('admin.training.beginner') ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
-                            Beginner Training
-                        </a>
-                        <a href="{{ route('admin.training.advanced') }}" 
-                           class="flex items-center py-2 text-sm {{ request()->routeIs('admin.training.advanced') ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
-                            Advanced Training
-                        </a>
-                        <a href="{{ route('admin.training.certification') }}" 
-                           class="flex items-center py-2 text-sm {{ request()->routeIs('admin.training.certification') ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
-                            Certification Programs
-                        </a>
-                    </div>
-                </div> -->
+                
 
                 <!-- Products Section -->
                 <div x-data="{ open: {{ request()->routeIs('admin.products.*') ? 'true' : 'false' }} }" class="mb-2">
@@ -196,6 +170,60 @@
                     </div>
                 </div>
 
+                <!-- Orders Management -->
+                <div x-data="{ open: {{ request()->routeIs('admin.orders.*') ? 'true' : 'false' }} }" class="mb-2">
+                    <button @click="open = !open" 
+                            class="w-full flex items-center text-gray-700 rounded-lg hover:bg-gray-100 {{ request()->routeIs('admin.orders.*') ? 'bg-blue-50 text-blue-700' : '' }}"
+                            :class="{'px-4 py-3': !sidebarCollapsed, 'px-2 py-3 justify-center': sidebarCollapsed}">
+                        <svg class="w-5 h-5" :class="{'mr-3': !sidebarCollapsed}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                        <span x-show="!sidebarCollapsed" class="flex-1 text-left">Orders</span>
+                        <svg x-show="!sidebarCollapsed" class="w-4 h-4 ml-2" :class="{'transform rotate-180': open}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div x-show="open" x-collapse class="pl-4 mt-2" x-show="!sidebarCollapsed">
+                        <a href="{{ route('admin.orders.index') }}" 
+                           class="flex items-center py-2 text-sm {{ request()->routeIs('admin.orders.index') && !request()->filled('status') ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
+                            <span class="w-2 h-2 mr-3 rounded-full bg-gray-500"></span>
+                            All Orders
+                        </a>
+                        <a href="{{ route('admin.orders.index', ['status' => 'pending']) }}" 
+                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.orders.index', ['status' => 'pending']) ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
+                            <span class="w-2 h-2 mr-3 rounded-full bg-yellow-500"></span>
+                            Pending
+                        </a>
+                        <a href="{{ route('admin.orders.index', ['status' => 'processing']) }}" 
+                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.orders.index', ['status' => 'processing']) ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
+                            <span class="w-2 h-2 mr-3 rounded-full bg-blue-500"></span>
+                            Processing
+                        </a>
+                        <a href="{{ route('admin.orders.index', ['status' => 'shipped']) }}" 
+                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.orders.index', ['status' => 'shipped']) ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
+                            <span class="w-2 h-2 mr-3 rounded-full bg-purple-500"></span>
+                            Shipped
+                        </a>
+                        <a href="{{ route('admin.orders.index', ['status' => 'completed']) }}" 
+                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.orders.index', ['status' => 'completed']) ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
+                            <span class="w-2 h-2 mr-3 rounded-full bg-green-500"></span>
+                            Completed
+                        </a>
+                        <a href="{{ route('admin.orders.index', ['status' => 'cancelled']) }}" 
+                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.orders.index', ['status' => 'cancelled']) ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
+                            <span class="w-2 h-2 mr-3 rounded-full bg-red-500"></span>
+                            Cancelled
+                        </a>
+                        <a href="{{ route('admin.orders.export') }}" 
+                           class="flex items-center py-2 text-sm text-gray-600 hover:text-gray-900">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            Export Orders
+                        </a>
+                    </div>
+                </div>
+
                 <!-- Gallery Management -->
                 <div x-data="{ open: {{ request()->routeIs('admin.gallery.*') ? 'true' : 'false' }} }" class="mb-2">
                     <button @click="open = !open" 
@@ -257,7 +285,7 @@
                     </div>
                 </div>
 
-                <!-- Other Navigation Items -->
+                <!-- Contacts -->
                 <a href="{{ route('admin.contacts.index') }}"
                    class="flex items-center mb-2 text-gray-700 rounded-lg hover:bg-gray-100 {{ request()->routeIs('admin.contacts.*') ? 'bg-blue-50 text-blue-700' : '' }}"
                    :class="{'px-4 py-3': !sidebarCollapsed, 'px-2 py-3 justify-center': sidebarCollapsed}">
@@ -267,6 +295,17 @@
                     <span x-show="!sidebarCollapsed">Contacts</span>
                 </a>
 
+                <!-- Users -->
+                <a href="{{ route('admin.users') }}"
+                   class="flex items-center mb-2 text-gray-700 rounded-lg hover:bg-gray-100 {{ request()->routeIs('admin.users') ? 'bg-blue-50 text-blue-700' : '' }}"
+                   :class="{'px-4 py-3': !sidebarCollapsed, 'px-2 py-3 justify-center': sidebarCollapsed}">
+                    <svg class="w-5 h-5" :class="{'mr-3': !sidebarCollapsed}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <span x-show="!sidebarCollapsed">Users</span>
+                </a>
+
+                <!-- Reviews -->
                 <a href="{{ route('admin.reviews.index') }}"
                    class="flex items-center mb-2 text-gray-700 rounded-lg hover:bg-gray-100 {{ request()->routeIs('admin.reviews.*') ? 'bg-blue-50 text-blue-700' : '' }}"
                    :class="{'px-4 py-3': !sidebarCollapsed, 'px-2 py-3 justify-center': sidebarCollapsed}">
@@ -276,6 +315,7 @@
                     <span x-show="!sidebarCollapsed">Reviews</span>
                 </a>
 
+                <!-- Promotional Emails -->
                 <a href="{{ route('admin.promotional-emails.index') }}"
                    class="flex items-center mb-2 text-gray-700 rounded-lg hover:bg-gray-100 {{ request()->routeIs('admin.promotional-emails.*') ? 'bg-blue-50 text-blue-700' : '' }}"
                    :class="{'px-4 py-3': !sidebarCollapsed, 'px-2 py-3 justify-center': sidebarCollapsed}">
@@ -285,60 +325,6 @@
                     <span x-show="!sidebarCollapsed">Promotional Emails</span>
                 </a>
 
-                <!-- Orders Management -->
-                <div x-data="{ open: {{ request()->routeIs('admin.orders.*') ? 'true' : 'false' }} }" class="mb-2">
-                    <button @click="open = !open" 
-                            class="w-full flex items-center text-gray-700 rounded-lg hover:bg-gray-100 {{ request()->routeIs('admin.orders.*') ? 'bg-blue-50 text-blue-700' : '' }}"
-                            :class="{'px-4 py-3': !sidebarCollapsed, 'px-2 py-3 justify-center': sidebarCollapsed}">
-                        <svg class="w-5 h-5" :class="{'mr-3': !sidebarCollapsed}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                        </svg>
-                        <span x-show="!sidebarCollapsed" class="flex-1 text-left">Orders</span>
-                        <svg x-show="!sidebarCollapsed" class="w-4 h-4 ml-2" :class="{'transform rotate-180': open}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </button>
-                    <div x-show="open" x-collapse class="pl-4 mt-2" x-show="!sidebarCollapsed">
-                        <a href="{{ route('admin.orders.index') }}" 
-                           class="flex items-center py-2 text-sm {{ request()->routeIs('admin.orders.index') && !request()->filled('status') ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
-                            <span class="w-2 h-2 mr-3 rounded-full bg-gray-500"></span>
-                            All Orders
-                        </a>
-                        <a href="{{ route('admin.orders.index', ['status' => 'pending']) }}" 
-                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.orders.index', ['status' => 'pending']) ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
-                            <span class="w-2 h-2 mr-3 rounded-full bg-yellow-500"></span>
-                            Pending
-                        </a>
-                        <a href="{{ route('admin.orders.index', ['status' => 'processing']) }}" 
-                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.orders.index', ['status' => 'processing']) ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
-                            <span class="w-2 h-2 mr-3 rounded-full bg-blue-500"></span>
-                            Processing
-                        </a>
-                        <a href="{{ route('admin.orders.index', ['status' => 'shipped']) }}" 
-                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.orders.index', ['status' => 'shipped']) ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
-                            <span class="w-2 h-2 mr-3 rounded-full bg-purple-500"></span>
-                            Shipped
-                        </a>
-                        <a href="{{ route('admin.orders.index', ['status' => 'completed']) }}" 
-                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.orders.index', ['status' => 'completed']) ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
-                            <span class="w-2 h-2 mr-3 rounded-full bg-green-500"></span>
-                            Completed
-                        </a>
-                        <a href="{{ route('admin.orders.index', ['status' => 'cancelled']) }}" 
-                           class="flex items-center py-2 text-sm {{ request()->fullUrl() == route('admin.orders.index', ['status' => 'cancelled']) ? 'text-blue-700' : 'text-gray-600' }} hover:text-gray-900">
-                            <span class="w-2 h-2 mr-3 rounded-full bg-red-500"></span>
-                            Cancelled
-                        </a>
-                        <a href="{{ route('admin.orders.export') }}" 
-                           class="flex items-center py-2 text-sm text-gray-600 hover:text-gray-900">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
-                            Export Orders
-                        </a>
-                    </div>
-                </div>
-
                 <!-- Settings -->
                 <a href="{{ route('admin.settings.index') }}"
                    class="flex items-center mb-2 text-gray-700 rounded-lg hover:bg-gray-100 {{ request()->routeIs('admin.settings.*') ? 'bg-blue-50 text-blue-700' : '' }}"
@@ -347,7 +333,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                     </svg>
-                    <span x-show="!sidebarCollapsed">Settings</span>
+                    <span x-show="!sidebarCollapsed">Site Settings</span>
                 </a>
             </nav>
         </div>

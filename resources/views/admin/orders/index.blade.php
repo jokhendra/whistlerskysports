@@ -24,42 +24,56 @@
         <form method="GET" action="{{ route('admin.orders.index') }}" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
                 <label for="order_number" class="block text-sm font-medium text-gray-700 mb-1">Order Number</label>
-                <input type="text" name="order_number" id="order_number" value="{{ request('order_number') }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <input type="text" name="order_number" id="order_number" value="{{ request('order_number') }}" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200 text-gray-900 placeholder-gray-500">
             </div>
             
             <div>
                 <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                <select name="status" id="status" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    <option value="">All Statuses</option>
-                    @foreach($statuses as $value => $label)
-                        <option value="{{ $value }}" {{ request('status') == $value ? 'selected' : '' }}>{{ $label }}</option>
-                    @endforeach
-                </select>
+                <div class="relative">
+                    <select name="status" id="status" class="appearance-none w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200 bg-white pr-10 cursor-pointer hover:border-[#204fb4]/50">
+                        <option value="">All Statuses</option>
+                        @foreach($statuses as $value => $label)
+                            <option value="{{ $value }}" {{ request('status') == $value ? 'selected' : '' }}>{{ $label }}</option>
+                        @endforeach
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-gray-500">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                </div>
             </div>
             
             <div>
                 <label for="payment_status" class="block text-sm font-medium text-gray-700 mb-1">Payment Status</label>
-                <select name="payment_status" id="payment_status" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    <option value="">All Payment Statuses</option>
-                    @foreach($paymentStatuses as $value => $label)
-                        <option value="{{ $value }}" {{ request('payment_status') == $value ? 'selected' : '' }}>{{ $label }}</option>
-                    @endforeach
-                </select>
+                <div class="relative">
+                    <select name="payment_status" id="payment_status" class="appearance-none w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200 bg-white pr-10 cursor-pointer hover:border-[#204fb4]/50">
+                        <option value="">All Payment Statuses</option>
+                        @foreach($paymentStatuses as $value => $label)
+                            <option value="{{ $value }}" {{ request('payment_status') == $value ? 'selected' : '' }}>{{ $label }}</option>
+                        @endforeach
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-gray-500">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                </div>
             </div>
             
             <div>
                 <label for="date_from" class="block text-sm font-medium text-gray-700 mb-1">Date From</label>
-                <input type="date" name="date_from" id="date_from" value="{{ request('date_from') }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <input type="date" name="date_from" id="date_from" value="{{ request('date_from') }}" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
             </div>
             
             <div>
                 <label for="date_to" class="block text-sm font-medium text-gray-700 mb-1">Date To</label>
-                <input type="date" name="date_to" id="date_to" value="{{ request('date_to') }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <input type="date" name="date_to" id="date_to" value="{{ request('date_to') }}" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200">
             </div>
             
             <div>
                 <label for="customer" class="block text-sm font-medium text-gray-700 mb-1">Customer (Name/Email)</label>
-                <input type="text" name="customer" id="customer" value="{{ request('customer') }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <input type="text" name="customer" id="customer" value="{{ request('customer') }}" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#204fb4] focus:ring focus:ring-[#204fb4]/20 transition-all duration-200 text-gray-900 placeholder-gray-500">
             </div>
             
             <div class="col-span-1 md:col-span-2 lg:col-span-3 flex items-end justify-end space-x-2">

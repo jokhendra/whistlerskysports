@@ -56,10 +56,25 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
+        // Check if user exists and is active
+        $user = User::where('email', $request->email)->first();
+        if ($user && $user->status == 0) {
+            return back()->withErrors([
+                'email' => 'Your account has been disabled. Please contact support.'
+            ]);
+        }
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            Log::info('User logged in: ' . Auth::user()->email);
-            
+
+            // Update last login info
+            $user = Auth::user();
+            $user->last_login_at = now();
+            $user->last_login_ip = $request->ip();
+            $user->save();
+
+            Log::info('User logged in: ' . $user->email . ' from ' . $user->last_login_ip);
+
             // Handle redirect if provided
             $redirect = $request->input('redirect');
             if ($redirect) {
